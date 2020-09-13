@@ -9,6 +9,7 @@ public abstract class Usuario {
     private String email;
     private String endereco;
     private String telefone;
+    private boolean logado;
     protected Integer pontuacao;
     protected Integer quantPontuacao;
     private List<String> feed;
@@ -34,6 +35,17 @@ public abstract class Usuario {
         return endereco;
     }
 
+    public boolean isLogado() {
+        return logado;
+    }
+
+    public void logar() {
+        this.logado = true;
+    }
+
+    public void sair() {
+        this.logado = false;
+    }
 
     public List<String> getFeed() {
         return feed;
