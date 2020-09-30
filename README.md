@@ -17,7 +17,11 @@ O padrão utilizado para nomear branches será o snake_case, e todas as branches
 nome do repositorio que derivou, seguido por uma breve descrição do que será feito na branch
 e se necessário algum identificador a mais, como o nome de quem está trabalhando na branch, um número, etc
 
-Exs: master_conexao_banco_java_fajan  master_front  master_front_telas_cadastro  master_front_telas_cadastro_2
+Exs:  
+master_conexao_banco_java_fajan  
+master_front  
+master_front_telas_cadastro  
+master_front_telas_cadastro_2
 
 Para trabalhar principalmente no front vamos usar as branches, para que não ocorra conflitos  
 Para criar uma branch existe 2 formas:
