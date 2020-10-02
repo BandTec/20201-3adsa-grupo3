@@ -39,5 +39,5 @@ Para criar uma branch existe 2 formas:
 #### Merge  
 
 Para fazer o merge pelo terminal/bash deve-se executar os comandos:  
-  git checkout master <- Troca para a branch master
+  git checkout master <- Troca para a branch master  
   git merge nome_da_branch <- Funde a branch mencionada com a master
