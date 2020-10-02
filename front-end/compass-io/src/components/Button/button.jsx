@@ -1,8 +1,8 @@
 import React from 'react';
 import './button.css';
 
-export default function Button() {
+export default function Button(props) {
   return (
-    <button className='button'>Clique aqui</button>
+    <button className='button'>{props.text}</button>
   );
 };
