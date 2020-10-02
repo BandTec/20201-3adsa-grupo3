@@ -11,7 +11,9 @@ Padrão para os commits -> Exs:
 "(documentacao) Protótipos de telas finalizado"  
 "(front-end) Tela de cadastro atualizada e comecei a fazer a tela do feed"
 
-### Criação de branches
+### Branches
+
+#### Criação  
 
 O padrão utilizado para nomear branches será o snake_case, e todas as branches deverão começar com
 nome do repositorio que derivou, seguido por uma breve descrição do que será feito na branch
@@ -33,3 +35,9 @@ Para criar uma branch existe 2 formas:
   
 - Pelo github  
   Clique onde está escrito "master", digite o nome da sua nova branch e clique em "Create branch: nome_da_branch from 'branch_pai'"
+  
+#### Merge  
+
+Para fazer o merge pelo terminal/bash deve-se executar os comandos:  
+  git checkout master <- Troca para a branch master
+  git merge nome_da_branch <- Funde a branch mencionada com a master
