@@ -1,6 +1,6 @@
-# Compass.io
+# Compass.io  
 
-- Organização do repositório
+### Organização do repositório
 
 Nomes de pastas -> "kebab-case"  
 Nomes de arquivos -> "PascalCase.ext"
@@ -11,7 +11,7 @@ Padrão para os commits -> Exs:
 "(documentacao) Protótipos de telas finalizado"  
 "(front-end) Tela de cadastro atualizada e comecei a fazer a tela do feed"
 
-- Criação de branches
+### Criação de branches
 
 O padrão utilizado para nomear branches será o snake_case, e todas as branches deverão começar com
 nome do repositorio que derivou, seguido por uma breve descrição do que será feito na branch
@@ -26,10 +26,10 @@ master_front_telas_cadastro_2
 Para trabalhar principalmente no front vamos usar as branches, para que não ocorra conflitos  
 Para criar uma branch existe 2 formas:
 
--- Pelo terminal/bash  
+- Pelo terminal/bash  
   git branch nome_da_branch <- Cria a branch  
   git switch nome_da_branch <- Muda a branch do seu repositório local  
   git push --set-upstream origin nome_da_branch <- Envia sua branch para o repositório remoto, assim todos do time terão acesso  
   
--- Pelo github  
+- Pelo github  
   Clique onde está escrito "master", digite o nome da sua nova branch e clique em "Create branch: nome_da_branch from 'branch_pai'"
