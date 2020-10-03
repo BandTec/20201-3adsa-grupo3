@@ -1,0 +1,15 @@
+.input-label{
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+input{
+    margin-top: 0.8rem;
+    text-align: center;
+    border: none;
+    width: 90%;
+    font-size: 2rem;
+    border-bottom: 2px solid #9A9A9A;
+
+}
