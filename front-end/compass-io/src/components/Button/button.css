@@ -1,7 +1,10 @@
 .button {
-    background-color: blueviolet;
+    background-color: #1975FF; 
     font-family: tahoma;
     font-weight: bold;
-    width: 10vw;
-    height: 10vh;
+    color: #fff;
+    border-radius: 0.5rem;
+    width: 15rem;
+    height: 4rem;
+    font-size: 2rem;
 }

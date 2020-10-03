@@ -1,0 +1,64 @@
+.container{
+    width: 100%;
+    display: flex;
+}
+
+.container > .loginImage{
+    width: 50%;
+    height: 500px;
+}
+
+.container > .loginImage, .childrenImage{
+    filter: brightness(0.8); 
+}
+
+.textImage{
+    color: #fff;
+    font-weight: 700;
+    font-size: 3.5rem;
+    position: absolute;
+    width: 50%;
+    margin-left: 1rem;
+    top: 30rem;
+}
+
+.yellowWord{
+    color: #FFB219;
+}
+
+.blueWord{
+    color: #1975FF
+}
+
+.container > .loginForm{
+    width: 50%;
+    height: 30rem;
+    background-color: #FCFCFC;
+    border-radius: 1rem;
+    border: 1px solid #000;
+} 
+
+.center{
+    text-align: center
+}
+
+.title{
+    margin-top: 1rem;
+}
+
+.inputLogin{
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+.buttonEnter{
+    margin: 2rem auto 0 auto;
+}
+
+.formFooter{
+    margin-top: 1.5rem;
+}
