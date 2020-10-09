@@ -3,10 +3,7 @@ idUsuarioFisico INT PRIMARY KEY,
 email VARCHAR(90),
 nome VARCHAR(80),
 senha VARCHAR(45),
-idEndereco INT,
 telefone VARCHAR(15),
-pontuacaoTotal INT,
-qtdPontuacao INT,
 dataNascimento DATE,
 CPF VARCHAR(14),
 sexo CHAR(1)
@@ -17,10 +14,7 @@ idUsuarioJuridico INT PRIMARY KEY ,
 nomeONG VARCHAR(90),
 email VARCHAR(80),
 senha VARCHAR(45),
-idEndereco INT,
 telefone VARCHAR(15),
-pontuacaoTotal INT,
-qtdPontuacao INT,
 CNPJ VARCHAR(14),
 causa VARCHAR(256),
 descricaoOng VARCHAR(256)
@@ -33,7 +27,6 @@ descricaoVaga VARCHAR(256),
 causa VARCHAR(256),
 dataInicio DATE,
 dataFim DATE,
-idEndereco INT,
 descricaoCompleta VARCHAR(500),
 areaAtuacao VARCHAR(100),
 descricaoArea VARCHAR(256),
@@ -42,11 +35,6 @@ descricaoRequisitos VARCHAR(256)
 
 CREATE TABLE usuarioFisicoVaga(
 	fkIdUsuarioFisico INT,
-	fkIdvaga INT
-);
-
-CREATE TABLE usuarioJuridicoVaga(
-	fkIdUsuarioJuridico INT,
 	fkIdvaga INT
 );
 
@@ -68,7 +56,7 @@ CEP VARCHAR(8),
 bairro VARCHAR(45),
 estado VARCHAR(45),
 cidade VARCHAR(45),
-fkIdUsuario INT NOT NULL
+fkIdUsuarioVaga INT NOT NULL
 );
 
 
