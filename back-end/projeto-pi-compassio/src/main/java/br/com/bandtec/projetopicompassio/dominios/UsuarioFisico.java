@@ -10,7 +10,7 @@ public class UsuarioFisico {
 
     @Id
     private Integer idUsuarioFisico;
-    @Column(length = 90, nullable = false)
+    @Column(length = 90, nullable = false, unique = true)
     private String email;
     @Column(length = 80, nullable = false)
     private String nome;
@@ -23,6 +23,16 @@ public class UsuarioFisico {
     @Column(length = 14, nullable = false)
     private String cpf;
     private Boolean sexo;
+    @Column(nullable = false)
+    private Boolean logado;
+
+    public Boolean getLogado() {
+        return logado;
+    }
+
+    public void setLogado(Boolean logado) {
+        this.logado = logado;
+    }
 
     public Integer getIdUsuarioFisico() {
         return idUsuarioFisico;

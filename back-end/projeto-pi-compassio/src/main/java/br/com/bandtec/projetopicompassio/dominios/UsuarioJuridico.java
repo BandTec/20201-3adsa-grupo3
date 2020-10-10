@@ -11,7 +11,7 @@ public class UsuarioJuridico {
     private Integer idUsuarioJuridico;
     @Column(length = 90, nullable = false)
     private String nomeOng;
-    @Column(length = 80, nullable = false)
+    @Column(length = 80, nullable = false, unique = true)
     private String email;
     @Column(length = 45, nullable = false)
     private String senha;
@@ -23,6 +23,16 @@ public class UsuarioJuridico {
     private String causa;
     @Column(length = 256, nullable = false)
     private String descricaoOng;
+    @Column(nullable = false)
+    private Boolean logado;
+
+    public Boolean getLogado() {
+        return logado;
+    }
+
+    public void setLogado(Boolean logado) {
+        this.logado = logado;
+    }
 
     public Integer getIdUsuarioJuridico() {
         return idUsuarioJuridico;
