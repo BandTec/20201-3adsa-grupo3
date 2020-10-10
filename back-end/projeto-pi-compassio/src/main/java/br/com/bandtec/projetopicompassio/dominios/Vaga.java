@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Vaga {
@@ -117,5 +118,13 @@ public class Vaga {
 
     public void setDescricaoRequisitos(String descricaoRequisitos) {
         this.descricaoRequisitos = descricaoRequisitos;
+    }
+
+    public Boolean estaAtiva(){
+        Date dataAtual = Date.valueOf(LocalDate.now());
+        if (dataFim.compareTo(dataAtual) > 0){
+            return true;
+        }
+        return false;
     }
 }
