@@ -1,13 +1,11 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
-
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
-import br.com.bandtec.projetopicompassio.utils.Arquivo;
+import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -24,12 +22,7 @@ public class ArquivoController {
         vaga.setDataFim(Date.valueOf(LocalDate.now()));
         lista.adiciona(vaga);
 
-        Arquivo.exportar1(lista,"nomedoarquivo.txt", "Qualquerumqueseja");
-        Arquivo.importar1("nomedoarquivo.txt");
-
-
-
+        ArquivoHandler.exportar1(lista,"nomedoarquivo.txt", "Qualquerumqueseja");
+        ArquivoHandler.importar1("nomedoarquivo.txt");
     }
-
-
 }

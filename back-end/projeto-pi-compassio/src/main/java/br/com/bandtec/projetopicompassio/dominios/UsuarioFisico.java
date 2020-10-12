@@ -1,5 +1,7 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
+import br.com.bandtec.projetopicompassio.utils.Converter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

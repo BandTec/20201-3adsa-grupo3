@@ -1,5 +1,7 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
+import br.com.bandtec.projetopicompassio.utils.Converter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -120,11 +122,19 @@ public class Vaga {
         this.descricaoRequisitos = descricaoRequisitos;
     }
 
-    public Boolean estaAtiva(){
+    public boolean estaAtiva(){
         Date dataAtual = Date.valueOf(LocalDate.now());
-        if (dataFim.compareTo(dataAtual) > 0){
+        if (dataFim.compareTo(dataAtual) > 0)
             return true;
-        }
         return false;
+    }
+
+    public String getMinimalInfo() {
+        return String.format(
+                "%s%040s%d",
+                Converter.DateToString(this.dataInicio, "ddMMyyyy"),
+                this.titulo,
+                this.estaAtiva() == true ? 1 : 0
+        );
     }
 }
