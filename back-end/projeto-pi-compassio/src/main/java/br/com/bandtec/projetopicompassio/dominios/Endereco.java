@@ -7,10 +7,11 @@ public class Endereco {
 
     //Atributos
     @Id
+    @Column(name = "id_endereco")
     private Integer idEndereco;
     @Column(nullable = false)
     private String logradouro;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "numero_endereco")
     private Integer numeroEndereco;
     @Column(nullable = false)
     private String complemento;

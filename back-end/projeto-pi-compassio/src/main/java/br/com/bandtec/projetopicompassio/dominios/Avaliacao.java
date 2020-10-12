@@ -1,23 +1,24 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Avaliacao {
 
     //Atributos
     @Id
+    @Column(name = "id_avaliacao")
     private Integer idAvaliacao;
     @Column(nullable = false)
     private Integer pontuacao;
     @Column(length = 500, nullable = false)
     private String relatorio;
-    @Column(nullable = false)
-    private Integer fkIdUsuarioFisico;
-    @Column(nullable = false)
-    private Integer fkIdUsuarioJuridico;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "fk_usuario_fisico")
+    private UsuarioFisico fkIdUsuarioFisico;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "fk_usuario_juridico")
+    private UsuarioJuridico fkIdUsuarioJuridico;
 
     //Métodos
 
@@ -45,19 +46,19 @@ public class Avaliacao {
         this.relatorio = relatorio;
     }
 
-    public Integer getFkIdUsuarioFisico() {
+    public UsuarioFisico getFkIdUsuarioFisico() {
         return fkIdUsuarioFisico;
     }
 
-    public void setFkIdUsuarioFisico(Integer fkIdUsuarioFisico) {
+    public void setFkIdUsuarioFisico(UsuarioFisico fkIdUsuarioFisico) {
         this.fkIdUsuarioFisico = fkIdUsuarioFisico;
     }
 
-    public Integer getFkIdUsuarioJuridico() {
+    public UsuarioJuridico getFkIdUsuarioJuridico() {
         return fkIdUsuarioJuridico;
     }
 
-    public void setFkIdUsuarioJuridico(Integer fkIdUsuarioJuridico) {
+    public void setFkIdUsuarioJuridico(UsuarioJuridico fkIdUsuarioJuridico) {
         this.fkIdUsuarioJuridico = fkIdUsuarioJuridico;
     }
 }

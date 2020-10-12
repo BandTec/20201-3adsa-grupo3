@@ -1,42 +1,43 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 public class Vaga {
 
     @Id
+    @Column(name = "id_vaga")
     private Integer idVaga;
     @Column(length = 256, nullable = false)
     private String titulo;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_vaga")
     private String descricaoVaga;
     @Column(length = 50, nullable = false)
     private String causa;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "data_inicio")
     private Date dataInicio;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "data_fim")
     private Date dataFim;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_completa")
     private String descricaoCompleta;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, name = "area_atuacao")
     private String areaAtuacao;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_area")
     private String descricaoArea;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_requisitos")
     private String descricaoRequisitos;
     @Column(nullable = false)
-    private Integer fkIdUsuarioJuridico;
+    @OneToOne
+    @JoinColumn(nullable = false, name = "fk_endereco")
+    private Endereco fkEndereco;
 
-    public Integer getFkIdUsuarioJuridico() {
-        return fkIdUsuarioJuridico;
+    public Endereco getFkEndereco() {
+        return fkEndereco;
     }
 
-    public void setFkIdUsuarioJuridico(Integer fkIdUsuarioJuridico) {
-        this.fkIdUsuarioJuridico = fkIdUsuarioJuridico;
+    public void setFkEndereco(Endereco fkEndereco) {
+        this.fkEndereco = fkEndereco;
     }
 
     public Integer getIdVaga() {

@@ -1,31 +1,31 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class UsuarioFisicoVaga {
 
     @Id
-    @Column(nullable = false)
-    private Integer fkIdUsuarioFisico;
-    @Column(nullable = false)
-    private Integer fkIdVaga;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "fk_usuario_fisico")
+    private UsuarioFisico fkIdUsuarioFisico;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "fk_vaga")
+    private Vaga fkIdVaga;
 
-    public Integer getFkIdUsuarioFisico() {
+    public UsuarioFisico getFkIdUsuarioFisico() {
         return fkIdUsuarioFisico;
     }
 
-    public void setFkIdUsuarioFisico(Integer fkIdUsuarioFisico) {
+    public void setFkIdUsuarioFisico(UsuarioFisico fkIdUsuarioFisico) {
         this.fkIdUsuarioFisico = fkIdUsuarioFisico;
     }
 
-    public Integer getFkIdVaga() {
+    public Vaga getFkIdVaga() {
         return fkIdVaga;
     }
 
-    public void setFkIdVaga(Integer fkIdVaga) {
+    public void setFkIdVaga(Vaga fkIdVaga) {
         this.fkIdVaga = fkIdVaga;
     }
 }

@@ -1,15 +1,14 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class UsuarioJuridico {
 
     @Id
+    @Column(name = "id_usuario_juridico")
     private Integer idUsuarioJuridico;
-    @Column(length = 90, nullable = false)
+    @Column(length = 90, nullable = false, name = "nome_ong")
     private String nomeOng;
     @Column(length = 80, nullable = false)
     private String email;
@@ -21,8 +20,19 @@ public class UsuarioJuridico {
     private String cnpj;
     @Column(length = 50, nullable = false)
     private String causa;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_ong")
     private String descricaoOng;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "fk_endereco")
+    private Endereco fkEndereco;
+
+    public Endereco getFkEndereco() {
+        return fkEndereco;
+    }
+
+    public void setFkEndereco(Endereco fkEndereco) {
+        this.fkEndereco = fkEndereco;
+    }
 
     public Integer getIdUsuarioJuridico() {
         return idUsuarioJuridico;
