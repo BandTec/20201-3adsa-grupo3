@@ -52,4 +52,20 @@ public class AvaliacaoController {
         repository.save(atualizacao);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/fisico/{id}")
+    public ResponseEntity getPontosFisico (@PathVariable int id){
+        if (repository.notaDoUsuarioFisico(id).isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(repository.notaDoUsuarioFisico(id));
+    }
+
+    @GetMapping("/juridico/{id}")
+    public ResponseEntity getPontosJuridico (@PathVariable int id){
+        if (repository.notaDoUsuarioJuridico(id).isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(repository.notaDoUsuarioJuridico(id));
+    }
 }
