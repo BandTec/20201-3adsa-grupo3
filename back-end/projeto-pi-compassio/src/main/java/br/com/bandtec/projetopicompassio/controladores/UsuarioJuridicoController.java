@@ -1,5 +1,6 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
+import br.com.bandtec.projetopicompassio.dominios.Auth;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class UsuarioJuridicoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable Integer id){
+    public ResponseEntity deletar(@PathVariable int id){
         if (repository.existsById(id)){
             repository.deleteById(id);
             return ResponseEntity.ok().build();
@@ -59,5 +60,33 @@ public class UsuarioJuridicoController {
         atualizacao.setIdUsuarioJuridico(id);
         repository.save(atualizacao);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/auth")
+    public ResponseEntity autenticar(@RequestBody Auth authentic){
+        if (repository.pesquisaEmailESenha(authentic.getEmail(), authentic.getSenha()).isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        UsuarioJuridico atual = repository.pesquisaEmailESenha(authentic.getEmail(), authentic.getSenha()).get(0);
+        atual.setLogado(true);
+        repository.save(atual);
+        return ResponseEntity.ok(atual);
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity logout(@PathVariable int id){
+
+        UsuarioJuridico userPesquisa = new UsuarioJuridico();
+
+        userPesquisa.setIdUsuarioJuridico(id);
+
+        UsuarioJuridico user = repository.findAll(Example.of(userPesquisa)).get(0);
+
+        if (user.getLogado() == true){
+            user.setLogado(false);
+            repository.save(user);
+            return ResponseEntity.ok(user);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
