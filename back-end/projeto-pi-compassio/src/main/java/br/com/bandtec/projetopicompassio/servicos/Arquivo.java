@@ -1,7 +1,6 @@
-package br.com.bandtec.projetopicompassio.dominios.arquivos;
+package br.com.bandtec.projetopicompassio.servicos;
 
-import br.com.bandtec.projetopicompassio.dominios.Vaga;
-import br.com.bandtec.projetopicompassio.utils.ListaObj;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public abstract class Arquivo {
 
@@ -10,4 +9,6 @@ public abstract class Arquivo {
     public abstract String getTextoParaExportar();
 
     public abstract void exportar(String nomeDoArquivo, boolean append) throws Exception;
+
+    public abstract void desserializar(String linha);
 }

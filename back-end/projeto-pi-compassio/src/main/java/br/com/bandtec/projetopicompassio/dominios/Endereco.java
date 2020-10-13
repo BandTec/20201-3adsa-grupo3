@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 public class Endereco {
 
-    //Atributos
     @Id
     private Integer idEndereco;
     @Column(nullable = false)
@@ -22,8 +21,6 @@ public class Endereco {
     private String estado;
     @Column(length = 45, nullable = false)
     private String cidade;
-
-    //Métodos
 
     public Integer getIdEndereco() {
         return idEndereco;

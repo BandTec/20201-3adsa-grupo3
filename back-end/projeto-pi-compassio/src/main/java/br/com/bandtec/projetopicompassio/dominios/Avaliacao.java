@@ -7,7 +7,6 @@ import javax.persistence.Id;
 @Entity
 public class Avaliacao {
 
-    //Atributos
     @Id
     private Integer idAvaliacao;
     @Column(nullable = false)
@@ -18,8 +17,6 @@ public class Avaliacao {
     private Integer fkIdUsuarioFisico;
     @Column(nullable = false)
     private Integer fkIdUsuarioJuridico;
-
-    //Métodos
 
     public Integer getIdAvaliacao() {
         return idAvaliacao;

@@ -1,9 +1,11 @@
-package br.com.bandtec.projetopicompassio.dominios.arquivos;
+package br.com.bandtec.projetopicompassio.servicos;
 
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
+
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Arquivo01 extends Arquivo {
@@ -15,6 +17,10 @@ public class Arquivo01 extends Arquivo {
         super.idArquivo = TiposDeArquivo.ARQUIVO_01.getIdArquivo();
         this.nomeDaOng = nomeDaOng;
         this.vagas = vagas;
+    }
+
+    public Arquivo01() {
+        super.idArquivo = TiposDeArquivo.ARQUIVO_01.getIdArquivo();
     }
 
     public String getTextoParaExportar() {
@@ -49,5 +55,28 @@ public class Arquivo01 extends Arquivo {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    public void importar(String nomeDoArquivo) throws Exception {
+        try {
+            String arquivo = ArquivoHandler.importar(nomeDoArquivo);
+
+            String tipoDeArquivo = arquivo.substring(0, 1);
+            if (tipoDeArquivo.equals(idArquivo)) {
+
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public void desserializar(String linha) {
+        String dataInicio = linha.substring(0, 7);
+        String titulo = linha.substring(8, 47);
+        String estaAtivo = linha.substring(48);
+        Vaga vaga = new Vaga();
+        vaga.setTitulo(titulo);
+        vaga.setDataInicio(Date.valueOf(dataInicio));
+        return Vaga;
     }
 }

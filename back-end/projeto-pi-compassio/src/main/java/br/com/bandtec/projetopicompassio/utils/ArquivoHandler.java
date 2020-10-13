@@ -1,5 +1,8 @@
 package br.com.bandtec.projetopicompassio.utils;
 
+import br.com.bandtec.projetopicompassio.servicos.Arquivo;
+import br.com.bandtec.projetopicompassio.servicos.TiposDeArquivo;
+
 import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -7,7 +10,7 @@ import java.util.Scanner;
 public class ArquivoHandler {
 
     public static void exportar(String nomeDoArquivo, String registro, boolean append) throws Exception {
-        BufferedWriter saida = null;
+        BufferedWriter saida;
 
         if (!nomeDoArquivo.endsWith(".txt"))
             nomeDoArquivo += ".txt";
@@ -21,43 +24,28 @@ public class ArquivoHandler {
         }
     }
 
-    public static void importar2(String nomeArquivo){
-        FileReader arquivo = null;
-        Scanner entrada = null;
-        boolean crashed = false;
+    public static String importar(String nomeArquivo) throws Exception {
+        Scanner leitor;
 
         try {
-            arquivo = new FileReader(nomeArquivo);
-            entrada = new Scanner(arquivo).useDelimiter("\\r\\n");
-        } catch (FileNotFoundException erro) {
-            System.err.println("Arquivo não encontrado");
-            System.exit(1);
-        }
+            leitor = new Scanner(new FileReader(nomeArquivo)).useDelimiter("\\r\\n");
+            Arquivo arquivo;
+            String tipoDoArquivo = leitor.next().substring(0, 1);
 
-        try {
-            entrada.nextLine();
-            while (entrada.hasNext()) {
-                Integer dataInicio = entrada.nextInt();
-                String titulo = entrada.next().substring(8,47);
-                Integer ativo = entrada.nextInt();
-                System.out.printf("%s%s%s\n",dataInicio,titulo,ativo);
+            switch (tipoDoArquivo) {
+                case TiposDeArquivo.ARQUIVO_01.getIdArquivo():
+                    break;
+                case TiposDeArquivo.ARQUIVO_02.getIdArquivo():
+                    break;
+                default:
+                    break;
             }
-        } catch (NoSuchElementException erro) {
-            System.err.println("Arquivo com problemas.");
-            crashed = true;
-        } catch (IllegalStateException erro) {
-            System.err.println("Erro na leitura do arquivo.");
-            crashed = true;
-        } finally {
-            entrada.close();
-            try {
-                arquivo.close();
-            } catch (IOException erro) {
-                System.err.println("Erro ao fechar arquivo.");
-                crashed = true;
+
+            while (leitor.hasNext()) {
+
             }
-            if (crashed)
-                System.exit(1);
+        } catch (Exception ex) {
+            throw ex;
         }
     }
 

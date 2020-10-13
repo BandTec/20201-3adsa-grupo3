@@ -4,34 +4,38 @@ import br.com.bandtec.projetopicompassio.utils.Converter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.sql.Date;
 
 @Entity
 public class UsuarioFisicoVaga {
 
-    @Id
-    @Column(nullable = false)
-    private Integer fkIdUsuarioFisico;
-    @Column(nullable = false)
-    private Integer fkIdVaga;
+    @ManyToOne
+    @JoinColumn(name = "fk_usuario_fisico", nullable = false)
+    private UsuarioFisico fkUsuarioFisico;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_vaga", nullable = false)
+    private Vaga fkVaga;
+
     @Column(nullable = false)
     private Date dataCadastro;
 
-    public Integer getFkIdUsuarioFisico() {
-        return fkIdUsuarioFisico;
+    public UsuarioFisico getFkUsuarioFisico() {
+        return fkUsuarioFisico;
     }
 
-    public void setFkIdUsuarioFisico(Integer fkIdUsuarioFisico) {
-        this.fkIdUsuarioFisico = fkIdUsuarioFisico;
+    public void setFkUsuarioFisico(UsuarioFisico fkUsuarioFisico) {
+        this.fkUsuarioFisico = fkUsuarioFisico;
     }
 
-    public Integer getFkIdVaga() {
-        return fkIdVaga;
+    public Vaga getFkVaga() {
+        return fkVaga;
     }
 
-    public void setFkIdVaga(Integer fkIdVaga) {
-        this.fkIdVaga = fkIdVaga;
+    public void setFkVaga(Vaga fkVaga) {
+        this.fkVaga = fkVaga;
     }
 
     public Date getDataCadastro() {
@@ -42,11 +46,17 @@ public class UsuarioFisicoVaga {
         this.dataCadastro = dataCadastro;
     }
 
-   /* public String getMinimalInfo() {
+    /*
+    public String getMinimalInfo() {
         return String.format(
                 "%s%040s%040s%s%030s%s%d",
                 Converter.DateToString(this.dataCadastro, "ddMMyyyy"),
-                this.fkIdUsuarioFisico
+                this.fkUsuarioFisico.getNome(),
+                this.fkUsuarioFisico.getEmail(),
+                Converter.DateToString(this.fkUsuarioFisico.getDataNascimento(), "ddMMyyyy"),
+                this.fkUsuarioFisico.getEndereco().getCidade(),
+                this.fkUsuarioFisico.getEndereco().getEstado(),
+                //participou ou só se candidatou?
         );
     }
     */

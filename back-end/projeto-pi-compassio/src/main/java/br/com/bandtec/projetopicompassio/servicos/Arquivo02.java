@@ -1,7 +1,6 @@
-package br.com.bandtec.projetopicompassio.dominios.arquivos;
+package br.com.bandtec.projetopicompassio.servicos;
 
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
-import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
@@ -43,7 +42,7 @@ public class Arquivo02 extends Arquivo {
 
     public void exportar(String nomeDoArquivo, boolean append) throws Exception {
         String nomeDoArquivoDefault =
-                Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy") + "Arquivo01Vagas.txt";
+                Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy") + "Arquivo02Voluntarios.txt";
         if (nomeDoArquivo == null)
             nomeDoArquivo = nomeDoArquivoDefault;
 

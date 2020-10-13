@@ -1,4 +1,4 @@
-package br.com.bandtec.projetopicompassio.dominios.arquivos;
+package br.com.bandtec.projetopicompassio.servicos;
 
 public enum TiposDeArquivo {
 
