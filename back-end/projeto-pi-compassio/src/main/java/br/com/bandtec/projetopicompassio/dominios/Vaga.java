@@ -1,14 +1,8 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-<<<<<<< HEAD
 import br.com.bandtec.projetopicompassio.utils.Converter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-=======
 import javax.persistence.*;
->>>>>>> 9ddf970675f0639958ae50ce00fe4a42af2fc0bc
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -120,7 +114,14 @@ public class Vaga {
         this.descricaoRequisitos = descricaoRequisitos;
     }
 
-<<<<<<< HEAD
+    public Endereco getFkIdEndereco() {
+        return fkIdEndereco;
+    }
+
+    public void setFkIdEndereco(Endereco fkIdEndereco) {
+        this.fkIdEndereco = fkIdEndereco;
+    }
+
     public boolean estaAtiva(){
         Date dataAtual = Date.valueOf(LocalDate.now());
         if (dataFim.compareTo(dataAtual) > 0)
@@ -135,13 +136,5 @@ public class Vaga {
                 this.titulo,
                 this.estaAtiva() == true ? 1 : 0
         );
-=======
-    public Endereco getFkIdEndereco() {
-        return fkIdEndereco;
-    }
-
-    public void setFkIdEndereco(Endereco fkIdEndereco) {
-        this.fkIdEndereco = fkIdEndereco;
->>>>>>> 9ddf970675f0639958ae50ce00fe4a42af2fc0bc
     }
 }
