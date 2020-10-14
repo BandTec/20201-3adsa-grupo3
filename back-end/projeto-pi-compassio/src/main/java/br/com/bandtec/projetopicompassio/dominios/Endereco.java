@@ -6,10 +6,11 @@ import javax.persistence.*;
 public class Endereco {
 
     @Id
+    @Column(name = "id_endereco")
     private Integer idEndereco;
     @Column(nullable = false)
     private String logradouro;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "numero_endereco")
     private Integer numeroEndereco;
     @Column(nullable = false)
     private String complemento;
@@ -17,7 +18,7 @@ public class Endereco {
     private String cep;
     @Column(length = 45, nullable = false)
     private String bairro;
-    @Column(length = 45, nullable = false)
+    @Column(length = 2, nullable = false)
     private String estado;
     @Column(length = 45, nullable = false)
     private String cidade;

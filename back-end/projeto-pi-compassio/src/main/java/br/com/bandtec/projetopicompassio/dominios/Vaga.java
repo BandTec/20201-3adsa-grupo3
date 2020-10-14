@@ -1,10 +1,14 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
+<<<<<<< HEAD
 import br.com.bandtec.projetopicompassio.utils.Converter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+=======
+import javax.persistence.*;
+>>>>>>> 9ddf970675f0639958ae50ce00fe4a42af2fc0bc
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -12,35 +16,29 @@ import java.time.LocalDate;
 public class Vaga {
 
     @Id
+    @Column(name = "id_vaga")
     private Integer idVaga;
     @Column(length = 256, nullable = false)
     private String titulo;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_vaga")
     private String descricaoVaga;
     @Column(length = 50, nullable = false)
     private String causa;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "data_inicio")
     private Date dataInicio;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "data_fim")
     private Date dataFim;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_completa")
     private String descricaoCompleta;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, name = "area_atuacao")
     private String areaAtuacao;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_area")
     private String descricaoArea;
-    @Column(length = 256, nullable = false)
+    @Column(length = 256, nullable = false, name = "descricao_requisitos")
     private String descricaoRequisitos;
-    @Column(nullable = false)
-    private Integer fkIdUsuarioJuridico;
-
-    public Integer getFkIdUsuarioJuridico() {
-        return fkIdUsuarioJuridico;
-    }
-
-    public void setFkIdUsuarioJuridico(Integer fkIdUsuarioJuridico) {
-        this.fkIdUsuarioJuridico = fkIdUsuarioJuridico;
-    }
+    @OneToOne
+    @JoinColumn(nullable = false, name = "fk_endereco")
+    private Endereco fkIdEndereco;
 
     public Integer getIdVaga() {
         return idVaga;
@@ -122,6 +120,7 @@ public class Vaga {
         this.descricaoRequisitos = descricaoRequisitos;
     }
 
+<<<<<<< HEAD
     public boolean estaAtiva(){
         Date dataAtual = Date.valueOf(LocalDate.now());
         if (dataFim.compareTo(dataAtual) > 0)
@@ -136,5 +135,13 @@ public class Vaga {
                 this.titulo,
                 this.estaAtiva() == true ? 1 : 0
         );
+=======
+    public Endereco getFkIdEndereco() {
+        return fkIdEndereco;
+    }
+
+    public void setFkIdEndereco(Endereco fkIdEndereco) {
+        this.fkIdEndereco = fkIdEndereco;
+>>>>>>> 9ddf970675f0639958ae50ce00fe4a42af2fc0bc
     }
 }

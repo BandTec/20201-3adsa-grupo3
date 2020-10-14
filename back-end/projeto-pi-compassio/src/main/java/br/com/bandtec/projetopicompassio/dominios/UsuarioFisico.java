@@ -1,14 +1,13 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 public class UsuarioFisico {
 
     @Id
+    @Column(name = "id_usuario_fisico")
     private Integer idUsuarioFisico;
     @Column(length = 90, nullable = false, unique = true)
     private String email;
@@ -18,13 +17,16 @@ public class UsuarioFisico {
     private String senha;
     @Column(length = 15, nullable = false)
     private String telefone;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "data_nascimento")
     private Date dataNascimento;
     @Column(length = 14, nullable = false)
     private String cpf;
     private Boolean sexo;
     @Column(nullable = false)
     private Boolean logado;
+    @OneToOne
+    @JoinColumn(nullable = false, name = "fk_endereco")
+    private Endereco fkEndereco;
 
     public Boolean getLogado() {
         return logado;
@@ -96,5 +98,13 @@ public class UsuarioFisico {
 
     public void setSexo(Boolean sexo) {
         this.sexo = sexo;
+    }
+
+    public Endereco getFkEndereco() {
+        return fkEndereco;
+    }
+
+    public void setFkEndereco(Endereco fkEndereco) {
+        this.fkEndereco = fkEndereco;
     }
 }
