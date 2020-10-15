@@ -9,18 +9,22 @@ public class Avaliacao {
     @Id
     @Column(name = "id_avaliacao")
     private Integer idAvaliacao;
+
     @Column(nullable = false)
     private Integer pontuacao;
+
     @Column(length = 500, nullable = false)
     private String relatorio;
+
     @Id
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_usaurio_fisico")
-    private UsuarioFisico fkIdUsuarioFisico;
+    private UsuarioFisico fkUsuarioFisico;
+
     @Id
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_usuario_juridico")
-    private UsuarioJuridico fkIdUsuarioJuridico;
+    private UsuarioJuridico fkUsuarioJuridico;
 
     public Integer getIdAvaliacao() {
         return idAvaliacao;
@@ -46,19 +50,19 @@ public class Avaliacao {
         this.relatorio = relatorio;
     }
 
-    public UsuarioFisico getFkIdUsuarioFisico() {
-        return fkIdUsuarioFisico;
+    public UsuarioFisico getFkUsuarioFisico() {
+        return fkUsuarioFisico;
     }
 
-    public void setFkIdUsuarioFisico(UsuarioFisico fkIdUsuarioFisico) {
-        this.fkIdUsuarioFisico = fkIdUsuarioFisico;
+    public void setFkUsuarioFisico(UsuarioFisico fkUsuarioFisico) {
+        this.fkUsuarioFisico = fkUsuarioFisico;
     }
 
-    public UsuarioJuridico getFkIdUsuarioJuridico() {
-        return fkIdUsuarioJuridico;
+    public UsuarioJuridico getFkUsuarioJuridico() {
+        return fkUsuarioJuridico;
     }
 
-    public void setFkIdUsuarioJuridico(UsuarioJuridico fkIdUsuarioJuridico) {
-        this.fkIdUsuarioJuridico = fkIdUsuarioJuridico;
+    public void setFkUsuarioJuridico(UsuarioJuridico fkUsuarioJuridico) {
+        this.fkUsuarioJuridico = fkUsuarioJuridico;
     }
 }

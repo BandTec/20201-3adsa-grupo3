@@ -9,21 +9,31 @@ public class UsuarioFisico {
     @Id
     @Column(name = "id_usuario_fisico")
     private Integer idUsuarioFisico;
+
     @Column(length = 90, nullable = false, unique = true)
     private String email;
+
     @Column(length = 80, nullable = false)
     private String nome;
+
     @Column(length = 45, nullable = false)
     private String senha;
+
     @Column(length = 15, nullable = false)
     private String telefone;
+
     @Column(nullable = false, name = "data_nascimento")
     private Date dataNascimento;
+
     @Column(length = 14, nullable = false)
     private String cpf;
+
+    @Column(name = "sexo")
     private Boolean sexo;
+
     @Column(nullable = false)
     private Boolean logado;
+
     @OneToOne
     @JoinColumn(nullable = false, name = "fk_endereco")
     private Endereco fkEndereco;

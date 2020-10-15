@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class UsuarioFisicoVagaId implements Serializable {
 
-    private UsuarioFisico fkIdUsuarioFisico;
-    private Vaga fkIdVaga;
+    private UsuarioFisico fkUsuarioFisico;
+    private Vaga fkVaga;
 
-    public UsuarioFisicoVagaId(UsuarioFisico fkIdUsuarioFisico, Vaga fkIdVaga) {
-        this.fkIdUsuarioFisico = fkIdUsuarioFisico;
-        this.fkIdVaga = fkIdVaga;
+    public UsuarioFisicoVagaId(UsuarioFisico fkUsuarioFisico, Vaga fkVaga) {
+        this.fkUsuarioFisico = fkUsuarioFisico;
+        this.fkVaga = fkVaga;
     }
 }

@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class AvaliacaoId implements Serializable {
 
     private Integer idAvaliacao;
-    private UsuarioFisico fkIdUsuarioFisico;
-    private UsuarioJuridico fkIdUsuarioJuridico;
+    private UsuarioFisico fkUsuarioFisico;
+    private UsuarioJuridico fkUsuarioJuridico;
 
-    public AvaliacaoId(Integer idAvaliacao, UsuarioFisico fkIdUsuarioFisico, UsuarioJuridico fkIdUsuarioJuridico) {
+    public AvaliacaoId(Integer idAvaliacao, UsuarioFisico fkUsuarioFisico, UsuarioJuridico fkUsuarioJuridico) {
         this.idAvaliacao = idAvaliacao;
-        this.fkIdUsuarioFisico = fkIdUsuarioFisico;
-        this.fkIdUsuarioJuridico = fkIdUsuarioJuridico;
+        this.fkUsuarioFisico = fkUsuarioFisico;
+        this.fkUsuarioJuridico = fkUsuarioJuridico;
     }
 }

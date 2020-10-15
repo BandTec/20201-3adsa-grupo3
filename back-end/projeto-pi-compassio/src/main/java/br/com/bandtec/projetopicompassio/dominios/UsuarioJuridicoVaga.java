@@ -9,25 +9,26 @@ public class UsuarioJuridicoVaga {
     @Id
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_usuario_juridico")
-    private UsuarioJuridico fkIdUsuarioJuridico;
+    private UsuarioJuridico fkUsuarioJuridico;
+
     @Id
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_vaga")
-    private Vaga fkIdVaga;
+    private Vaga fkVaga;
 
-    public UsuarioJuridico getFkIdUsuarioJuridico() {
-        return fkIdUsuarioJuridico;
+    public UsuarioJuridico getFkUsuarioJuridico() {
+        return fkUsuarioJuridico;
     }
 
-    public void setFkIdUsuarioJuridico(UsuarioJuridico fkIdUsuarioJuridico) {
-        this.fkIdUsuarioJuridico = fkIdUsuarioJuridico;
+    public void setFkUsuarioJuridico(UsuarioJuridico fkUsuarioJuridico) {
+        this.fkUsuarioJuridico = fkUsuarioJuridico;
     }
 
-    public Vaga getFkIdVaga() {
-        return fkIdVaga;
+    public Vaga getFkVaga() {
+        return fkVaga;
     }
 
-    public void setFkIdVaga(Vaga fkIdVaga) {
-        this.fkIdVaga = fkIdVaga;
+    public void setFkVaga(Vaga fkVaga) {
+        this.fkVaga = fkVaga;
     }
 }
