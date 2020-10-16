@@ -4,7 +4,7 @@ public enum TiposDeArquivo {
 
     ARQUIVO_01("01"), ARQUIVO_02("02");
 
-    private String idArquivo;
+    private final String idArquivo;
 
     TiposDeArquivo(String valorId) {
         this.idArquivo = valorId;

@@ -1,11 +1,16 @@
 package br.com.bandtec.projetopicompassio.servicos;
 
+import br.com.bandtec.projetopicompassio.dominios.Endereco;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
+import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
+
+import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Arquivo02 extends Arquivo {
 
@@ -53,7 +58,41 @@ public class Arquivo02 extends Arquivo {
         }
     }
 
-    public void desserializar(String linha) {
-        
+    public void desserializar(List<String> linhas) {
+        String nomeDaVaga = null;
+        for (int i = 0; i < linhas.size() - 1; i++) {
+            if (i == 0) {
+                nomeDaVaga = linhas.get(i).substring(2, 41).trim();
+                nomeDaOng = linhas.get(i).substring(42, 71).trim();
+            } else {
+                String dataDaInscricao = linhas.get(i).substring(0, 7);
+                String nomeDoVoluntario = linhas.get(i).substring(8, 48).trim();
+                String emailDoVoluntario = linhas.get(i).substring(49, 89).trim();
+                String dataDeNascimento = linhas.get(i).substring(90, 98);
+                String cidade = linhas.get(i).substring(99, 129).trim();
+                String uf = linhas.get(i).substring(130, 131);
+                //String participou = linhas.get(i).substring(131, 132);
+
+                Vaga vaga = new Vaga();
+                vaga.setTitulo(nomeDaVaga);
+
+                Endereco enderecoDoVoluntario = new Endereco();
+                enderecoDoVoluntario.setCidade(cidade);
+                enderecoDoVoluntario.setEstado(uf);
+
+                UsuarioFisico voluntario = new UsuarioFisico();
+                voluntario.setNome(nomeDoVoluntario);
+                voluntario.setEmail(emailDoVoluntario);
+                voluntario.setDataNascimento(Date.valueOf(dataDeNascimento));
+                voluntario.setFkEndereco(enderecoDoVoluntario);
+
+                UsuarioFisicoVaga voluntarioDeUmaVaga = new UsuarioFisicoVaga();
+                voluntarioDeUmaVaga.setDataInscricao(Date.valueOf(dataDaInscricao));
+                voluntarioDeUmaVaga.setFkUsuarioFisico(voluntario);
+                voluntarioDeUmaVaga.setFkVaga(vaga);
+
+                voluntariosDeUmaVaga.adiciona(voluntarioDeUmaVaga);
+            }
+        }
     }
 }

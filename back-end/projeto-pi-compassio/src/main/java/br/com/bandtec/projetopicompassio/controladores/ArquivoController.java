@@ -1,28 +1,28 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
-import br.com.bandtec.projetopicompassio.dominios.Vaga;
-import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
-import br.com.bandtec.projetopicompassio.utils.ListaObj;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import java.sql.Date;
-import java.time.LocalDate;
+import br.com.bandtec.projetopicompassio.servicos.Arquivo;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/arquivos")
 public class ArquivoController {
 
-    @GetMapping
-    public void cadastrarArquivo(){
-        ListaObj<Vaga> lista = new ListaObj<>(2);
-        Vaga vaga = new Vaga();
-        vaga.setTitulo("Qualquer merda só pra ver o arquivo escrevendo");
-        vaga.setDataInicio(Date.valueOf(LocalDate.now()));
-        vaga.setDataFim(Date.valueOf(LocalDate.now()));
-        lista.adiciona(vaga);
-
-        ArquivoHandler.exportar1(lista,"nomedoarquivo.txt", "Qualquerumqueseja");
-        ArquivoHandler.importar1("nomedoarquivo.txt");
+    @PostMapping("/idArquivo")
+    public ResponseEntity baixar(
+            @PathVariable String idArquivo,
+            @RequestParam String nomeDoArquivo,
+            @RequestParam String nomeDaVaga
+    ) {
+        try {
+            Arquivo arquivo = Arquivo.getModeloDoArquivoById(idArquivo);
+            //Passar parametros para baixar o arquivo
+            //Alterar os tipos para as novas DTOs
+            //Criar consultas nos repositorys
+            arquivo.exportar(nomeDoArquivo, true);
+            return ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex);
+        }
     }
 }

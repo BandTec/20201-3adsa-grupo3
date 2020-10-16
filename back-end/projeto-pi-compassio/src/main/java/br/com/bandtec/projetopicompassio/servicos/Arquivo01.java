@@ -7,6 +7,7 @@ import br.com.bandtec.projetopicompassio.utils.ListaObj;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Arquivo01 extends Arquivo {
 
@@ -57,26 +58,20 @@ public class Arquivo01 extends Arquivo {
         }
     }
 
-    public void importar(String nomeDoArquivo) throws Exception {
-        try {
-            String arquivo = ArquivoHandler.importar(nomeDoArquivo);
+    public void desserializar(List<String> linhas) {
+        for (int i = 0; i < linhas.size() - 1; i++) {
+            if (i == 0)
+                nomeDaOng = linhas.get(i).substring(2, 31).trim();
+            else {
+                String dataInicio = linhas.get(i).substring(0, 7);
+                String titulo = linhas.get(i).substring(8, 47).trim();
 
-            String tipoDeArquivo = arquivo.substring(0, 1);
-            if (tipoDeArquivo.equals(idArquivo)) {
+                Vaga vaga = new Vaga();
+                vaga.setTitulo(titulo);
+                vaga.setDataInicio(Date.valueOf(dataInicio));
 
+                vagas.adiciona(vaga);
             }
-        } catch (Exception ex) {
-            throw ex;
         }
-    }
-
-    public void desserializar(String linha) {
-        String dataInicio = linha.substring(0, 7);
-        String titulo = linha.substring(8, 47);
-        String estaAtivo = linha.substring(48);
-        Vaga vaga = new Vaga();
-        vaga.setTitulo(titulo);
-        vaga.setDataInicio(Date.valueOf(dataInicio));
-        return Vaga;
     }
 }
