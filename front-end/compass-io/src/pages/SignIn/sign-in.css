@@ -47,7 +47,7 @@
 }
 
 .inputLogin{
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     margin-left: 1rem;
 }
 
@@ -61,4 +61,12 @@
 
 .formFooter{
     margin-top: 1.5rem;
+}
+
+#btnEnter{
+    width:10rem;
+    font-weight: 600;
+    height: 3rem;
+    font-size: 1.0rem;
+    background: #1975FF
 }
