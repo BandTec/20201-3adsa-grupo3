@@ -44,17 +44,4 @@ public class UsuarioFisicoVaga {
     public void setDataInscricao(Date dataInscricao) {
         this.dataInscricao = dataInscricao;
     }
-
-    public String getMinimalInfo() {
-        return String.format(
-                "%s%040s%040s%s%030s%s%d",
-                Converter.DateToString(this.dataInscricao, "ddMMyyyy"),
-                this.fkUsuarioFisico.getNome(),
-                this.fkUsuarioFisico.getEmail(),
-                Converter.DateToString(this.fkUsuarioFisico.getDataNascimento(), "ddMMyyyy"),
-                this.fkUsuarioFisico.getFkEndereco().getCidade(),
-                this.fkUsuarioFisico.getFkEndereco().getEstado()
-                //participou ou só se candidatou?
-        );
-    }
 }

@@ -1,5 +1,8 @@
 package br.com.bandtec.projetopicompassio.utils;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 public class ListaObj <T> {
 
     private T[] vetor;
@@ -66,4 +69,11 @@ public class ListaObj <T> {
         numeroDeElementos = 0;
     }
 
+    public static ListaObj<?> convert(List<?> lista) {
+        ListaObj<Object> listaObj = new ListaObj<>(lista.size());
+        for (Object obj : lista) {
+            listaObj.adiciona(obj);
+        }
+        return listaObj;
+    }
 }

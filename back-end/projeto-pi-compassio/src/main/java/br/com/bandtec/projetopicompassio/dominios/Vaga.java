@@ -44,6 +44,10 @@ public class Vaga {
     @JoinColumn(nullable = false, name = "fk_endereco")
     private Endereco fkEndereco;
 
+    @ManyToOne
+    @Column(nullable = false, name = "fk_usuario_juridico")
+    private UsuarioJuridico fkUsuarioJuridico;
+
     public Integer getIdVaga() {
         return idVaga;
     }
@@ -132,19 +136,18 @@ public class Vaga {
         this.fkEndereco = fkEndereco;
     }
 
+    public UsuarioJuridico getFkUsuarioJuridico() {
+        return fkUsuarioJuridico;
+    }
+
+    public void setFkUsuarioJuridico(UsuarioJuridico fkUsuarioJuridico) {
+        this.fkUsuarioJuridico = fkUsuarioJuridico;
+    }
+
     public boolean estaAtiva(){
         Date dataAtual = Date.valueOf(LocalDate.now());
         if (dataFim.compareTo(dataAtual) > 0)
             return true;
         return false;
-    }
-
-    public String getMinimalInfo() {
-        return String.format(
-                "%s%040s%d",
-                Converter.DateToString(this.dataInicio, "ddMMyyyy"),
-                this.titulo,
-                this.estaAtiva() == true ? 1 : 0
-        );
     }
 }

@@ -1,12 +1,8 @@
 package br.com.bandtec.projetopicompassio.utils;
 
-import br.com.bandtec.projetopicompassio.servicos.Arquivo;
-import br.com.bandtec.projetopicompassio.servicos.TiposDeArquivo;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ArquivoHandler {

@@ -1,6 +1,7 @@
-package br.com.bandtec.projetopicompassio.servicos;
+package br.com.bandtec.projetopicompassio.arquivos;
 
-import br.com.bandtec.projetopicompassio.dominios.Vaga;
+import br.com.bandtec.projetopicompassio.dto.VagaDTO;
+import br.com.bandtec.projetopicompassio.dto.VagasDeUmaOngDTO;
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
@@ -9,19 +10,23 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Arquivo01 extends Arquivo {
+public class Arquivo01 implements IArquivo {
 
-    private String nomeDaOng;
-    private ListaObj<Vaga> vagas;
+    private String idArquivo;
+    private VagasDeUmaOngDTO vagasDeUmaOng;
 
-    public Arquivo01(String nomeDaOng, ListaObj<Vaga> vagas) {
-        super.idArquivo = TiposDeArquivo.ARQUIVO_01.getIdArquivo();
-        this.nomeDaOng = nomeDaOng;
-        this.vagas = vagas;
+    public Arquivo01(String nomeDaOng, VagasDeUmaOngDTO vagas) {
+        this.idArquivo = Modelos.ARQUIVO_01.getIdArquivo();
+        this.vagasDeUmaOng = vagasDeUmaOng;
     }
 
     public Arquivo01() {
-        super.idArquivo = TiposDeArquivo.ARQUIVO_01.getIdArquivo();
+        this.idArquivo = Modelos.ARQUIVO_01.getIdArquivo();
+    }
+
+    @Override
+    public void setObject(Object obj) {
+        vagasDeUmaOng = (VagasDeUmaOngDTO) obj;
     }
 
     public String getTextoParaExportar() {
@@ -29,13 +34,14 @@ public class Arquivo01 extends Arquivo {
 
         //Escrevendo Header
         String dataAtual = Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy");
-        registro.append(String.format("%s%030s%s\n", idArquivo, nomeDaOng, dataAtual));
+        registro.append(String.format("%s%030s%s\n", idArquivo, vagasDeUmaOng.getNomeDaOng(), dataAtual));
 
         //Escrevendo Body
         int totalRegistros = 0;
+        ListaObj<VagaDTO> vagas = vagasDeUmaOng.getVagas();
         for (int i = 0; i < vagas.getTamanho(); i++) {
-            Vaga vaga = vagas.getElemento(i);
-            registro.append(vaga.getMinimalInfo() + "\n");
+            VagaDTO vaga = vagas.getElemento(i);
+            registro.append(vaga.toString() + "\n");
             totalRegistros ++;
         }
 
@@ -58,20 +64,26 @@ public class Arquivo01 extends Arquivo {
         }
     }
 
+    //Lê as linhas do arquivo lido e preenche os atributos com os dados
     public void desserializar(List<String> linhas) {
+        String nomeDaOng = null;
+        ListaObj<VagaDTO> vagas = new ListaObj<>(linhas.size() - 2);
         for (int i = 0; i < linhas.size() - 1; i++) {
+            //Se for a primeira linha, quer dizer que é o Header
             if (i == 0)
                 nomeDaOng = linhas.get(i).substring(2, 31).trim();
             else {
+                //Parseia os dados de acordo com o arquivo de layout
                 String dataInicio = linhas.get(i).substring(0, 7);
                 String titulo = linhas.get(i).substring(8, 47).trim();
 
-                Vaga vaga = new Vaga();
-                vaga.setTitulo(titulo);
-                vaga.setDataInicio(Date.valueOf(dataInicio));
+                //Instancia o objeto vaga para salvar no atributo
+                //vagasDeUmaOng
+                VagaDTO vaga = new VagaDTO(titulo, Date.valueOf(dataInicio));
 
                 vagas.adiciona(vaga);
             }
         }
+        vagasDeUmaOng = new VagasDeUmaOngDTO(nomeDaOng, vagas);
     }
 }

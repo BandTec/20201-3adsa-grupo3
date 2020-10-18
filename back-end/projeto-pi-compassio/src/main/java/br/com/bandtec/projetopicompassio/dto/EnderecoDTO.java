@@ -1,11 +1,11 @@
-package br.com.bandtec.projetopicompassio.dto.outputs;
+package br.com.bandtec.projetopicompassio.dto;
 
-public class EnderecoDTO_Output {
+public class EnderecoDTO {
 
     private String cidade;
     private String estado;
 
-    public EnderecoDTO_Output(String cidade, String estado) {
+    public EnderecoDTO(String cidade, String estado) {
         this.cidade = cidade;
         this.estado = estado;
     }
