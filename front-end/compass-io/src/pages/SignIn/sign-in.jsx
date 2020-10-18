@@ -19,7 +19,7 @@ export default function SignIn() {
 
       <div className="container">
         <span className="loginImage">
-            <Image width="600" className="childrenImage" height="480" src={loginImage} />
+            <Image width="600" className="childrenImage" height="495" src={loginImage} />
         </span>
 
         <span className="textImage">Fazendo a diferença conforme o seu <br/>
