@@ -18,14 +18,15 @@ export default function SignIn() {
 
 
       <div className="container">
-        <span className="loginImage">
+        <span className="loginImagePart">
+          <span className="loginImage">
             <Image width="600" className="childrenImage" height="495" src={loginImage} />
-        </span>
-
-        <span className="textImage">Fazendo a diferença conforme o seu <br/>
+          </span>
+          <span className="textImage">
+            Fazendo a diferença conforme o seu <br/>
             <span className="yellowWord">perfil</span>.
+          </span>
         </span>
-
 
         <span className="loginForm">
           <div className="center title">

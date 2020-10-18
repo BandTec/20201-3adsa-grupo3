@@ -3,23 +3,31 @@
     display: flex;
 }
 
-.container > .loginImage{
+.container > .loginImagePart{
     width: 50%;
     height: 500px;
+    background-color: #1975FF;
+    z-index: 0;
 }
 
-.container > .loginImage, .childrenImage{
-    filter: brightness(0.8); 
+
+.container > .loginImagePart > .loginImage{
+    height: 70%;
+    width: 40%;
+    background-color: #fff;
+    z-index: 1;
+    position: absolute;
 }
 
-.textImage{
+.container > .loginImagePart > .textImage{
+    position: absolute;
+    z-index: 2;
     color: #fff;
     font-weight: 700;
     font-size: 3.5rem;
-    position: absolute;
     width: 50%;
     margin-left: 1rem;
-    top: 20rem;
+    top: 30rem;
 }
 
 .yellowWord{
