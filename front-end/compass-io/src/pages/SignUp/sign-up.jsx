@@ -11,8 +11,8 @@ export default function SignUp() {
     <div>
         <Navbar />
         <LabelWelcome labelText="Preencha o formulário para realizar o cadastro"/>
-        <SignUpVolunteer />
-        {/*<SignUpOng/>*/}
+        {/*<SignUpVolunteer />*/}
+        <SignUpOng/>
       </div>
   );
 };
