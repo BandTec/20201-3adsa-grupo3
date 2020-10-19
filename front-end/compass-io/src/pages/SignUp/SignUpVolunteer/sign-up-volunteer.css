@@ -27,31 +27,27 @@
 }
 
 .blueWord{
-    color: blue;
-}
-
-.blueWord{
     color: #1975FF
 }
 
 .container > .formVolunteer{
     display: block;
-    margin-left: 4.5%;
+    margin-left: 5.8%;
 }
 
 .container > .formVolunteer > .signupVForm{
     margin-left: 10%;
-    width: 108%;
+    width: 28rem;
     height: 35rem;
     background-color: #FCFCFC;
     border-radius: 1rem;
     border: 1px solid #000;
 } 
 
-.container > .formVolunteer > .infContaForm{
+.container > .formVolunteer > .infContaVForm{
     margin-top: 2%;
     margin-left: 10%;
-    width: 108%;
+    width: 28rem;
     height: 24rem;
     background-color: #FCFCFC;
     border-radius: 1rem;
