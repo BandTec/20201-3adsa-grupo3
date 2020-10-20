@@ -34,19 +34,19 @@ public class Arquivo01 implements IArquivo {
 
         //Escrevendo Header
         String dataAtual = Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy");
-        registro.append(String.format("%s%030s%s\n", idArquivo, vagasDeUmaOng.getNomeDaOng(), dataAtual));
+        registro.append(String.format("%s%-30s%s%n", idArquivo, vagasDeUmaOng.getNomeDaOng(), dataAtual));
 
         //Escrevendo Body
         int totalRegistros = 0;
         ListaObj<VagaDTO> vagas = vagasDeUmaOng.getVagas();
-        for (int i = 0; i < vagas.getTamanho(); i++) {
+        for (int i = 0;  i < vagas.getTamanho(); i++) {
             VagaDTO vaga = vagas.getElemento(i);
             registro.append(vaga.toString() + "\n");
             totalRegistros ++;
         }
 
         //Escrevendo Trailer
-        registro.append(String.format("%05d\r\n", totalRegistros));
+        registro.append(String.format("%-5d\r\n", totalRegistros));
 
         return registro.toString();
     }

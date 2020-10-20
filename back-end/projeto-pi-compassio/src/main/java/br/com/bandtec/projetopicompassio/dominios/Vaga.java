@@ -3,7 +3,7 @@ package br.com.bandtec.projetopicompassio.dominios;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 
 @Entity
@@ -23,9 +23,11 @@ public class Vaga {
     private String causa;
 
     @Column(nullable = false, name = "data_inicio")
+    @Temporal(value = TemporalType.DATE)
     private Date dataInicio;
 
     @Column(nullable = false, name = "data_fim")
+    @Temporal(value = TemporalType.DATE)
     private Date dataFim;
 
     @Column(length = 256, nullable = false, name = "descricao_completa")
@@ -45,8 +47,9 @@ public class Vaga {
     private Endereco fkEndereco;
 
     @ManyToOne
-    @Column(nullable = false, name = "fk_usuario_juridico")
+    @JoinColumn(nullable = false, name = "fk_usuario_juridico")
     private UsuarioJuridico fkUsuarioJuridico;
+
 
     public Integer getIdVaga() {
         return idVaga;
@@ -145,7 +148,7 @@ public class Vaga {
     }
 
     public boolean estaAtiva(){
-        Date dataAtual = Date.valueOf(LocalDate.now());
+        Date dataAtual = new Date(System.currentTimeMillis());
         if (dataFim.compareTo(dataAtual) > 0)
             return true;
         return false;

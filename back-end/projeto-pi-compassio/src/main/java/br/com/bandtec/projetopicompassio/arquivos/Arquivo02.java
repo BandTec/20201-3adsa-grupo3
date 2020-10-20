@@ -39,7 +39,7 @@ public class Arquivo02 implements IArquivo {
         String dataAtual = Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy");
         String tituloDaVaga = voluntariosDeUmaVaga.getNomeVaga();
         String nomeDaOng = voluntariosDeUmaVaga.getNomeOng();
-        registro.append(String.format("%s%040s%030s%s\n", idArquivo, tituloDaVaga, nomeDaOng, dataAtual));
+        registro.append(String.format("%s%- 40s%-30s%s\n", idArquivo, tituloDaVaga, nomeDaOng, dataAtual));
 
         //Escrevendo Body
         int totalRegistros = 0;

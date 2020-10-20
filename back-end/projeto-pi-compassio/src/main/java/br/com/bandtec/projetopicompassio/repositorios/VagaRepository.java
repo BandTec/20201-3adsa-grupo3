@@ -1,5 +1,6 @@
 package br.com.bandtec.projetopicompassio.repositorios;
 
+import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.dto.VagaDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,9 +10,11 @@ import java.util.List;
 
 public interface VagaRepository extends JpaRepository<Vaga, Integer> {
 
-    @Query(value =
-            "SELECT v FROM Vaga v WHERE v.fkUsuarioJuridico_id = " +
-                    "(SELECT u.id FROM UsuarioJuridico u WHERE u.nome LIKE ?1)")
+    /*@Query(value =
+            "SELECT new br.com.bandtec.projetopicompassio.dto.VagaDTO(v.titulo, v.dataInicio) FROM Vaga v WHERE fkUsuarioJuridico = " +
+            "(SELECT u FROM UsuarioJuridico u WHERE u.nomeOng LIKE 'Teto Brasil')")
     List<VagaDTO> findAllVagasSimplesByNomeDaOng(String nomeDaOng);
-
+*/
+    @Query(value = "SELECT new br.com.bandtec.projetopicompassio.dto.VagaDTO(v.titulo, v.dataInicio) FROM Vaga v WHERE v.fkUsuarioJuridico LIKE ?1")
+    List<VagaDTO> findAllVagasSimplesByUsuarioJuridico(UsuarioJuridico usuarioJuridico);
 }

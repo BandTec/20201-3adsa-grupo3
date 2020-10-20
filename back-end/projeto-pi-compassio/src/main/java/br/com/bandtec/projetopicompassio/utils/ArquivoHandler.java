@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ArquivoHandler {
+public class    ArquivoHandler {
 
     public static void exportar(String nomeDoArquivo, String registro, boolean append) throws Exception {
         BufferedWriter saida;

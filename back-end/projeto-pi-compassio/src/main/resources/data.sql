@@ -9,3 +9,6 @@ INSERT INTO avaliacao (id_avaliacao, pontuacao, relatorio, fk_usaurio_fisico, fk
 INSERT INTO avaliacao (id_avaliacao, pontuacao, relatorio, fk_usaurio_fisico, fk_usuario_juridico) VALUES (3, 3, 'foi +-', 1, 1);
 INSERT INTO avaliacao (id_avaliacao, pontuacao, relatorio, fk_usaurio_fisico, fk_usuario_juridico) VALUES (4, 2, 'foi ruim', 1, 1);
 INSERT INTO avaliacao (id_avaliacao, pontuacao, relatorio, fk_usaurio_fisico, fk_usuario_juridico) VALUES (5, 1, 'foi péssimo', 1, 1);
+
+INSERT INTO vaga (id_vaga, titulo, descricao_vaga, causa, data_inicio, data_fim, descricao_completa, area_atuacao, descricao_area, descricao_requisitos, fk_endereco, fk_usuario_juridico)
+VALUES(1, 'a', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1);

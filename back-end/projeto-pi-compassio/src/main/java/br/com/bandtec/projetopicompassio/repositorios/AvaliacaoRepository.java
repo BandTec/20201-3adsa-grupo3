@@ -9,8 +9,8 @@ import java.util.List;
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Integer> {
 
     @Query("SELECT AVG(pontuacao) FROM Avaliacao WHERE fkIdUsuarioFisico = ?1")
-    List<Avaliacao> notaDoUsuarioFisico(Integer id);
+    Double notaDoUsuarioFisico(Integer id);
 
     @Query("SELECT AVG(pontuacao) FROM Avaliacao WHERE fkIdUsuarioJuridico = ?1")
-    List<Avaliacao> notaDoUsuarioJuridico(Integer id);
+    Double notaDoUsuarioJuridico(Integer id);
 }

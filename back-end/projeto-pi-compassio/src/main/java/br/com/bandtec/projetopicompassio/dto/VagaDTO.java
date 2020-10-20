@@ -2,16 +2,27 @@ package br.com.bandtec.projetopicompassio.dto;
 
 import br.com.bandtec.projetopicompassio.utils.Converter;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class VagaDTO {
+public class VagaDTO implements Serializable {
 
     private String titulo;
     private Date dataInicio;
 
     public VagaDTO(String titulo, Date dataInicio) {
         this.titulo = titulo;
+        this.dataInicio = dataInicio;
+    }
+
+    public VagaDTO(){}
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
 
@@ -25,9 +36,11 @@ public class VagaDTO {
 
     @Override
     public String toString() {
+        SimpleDateFormat formatador = new SimpleDateFormat("dd-MM-yyyy");
+
         return String.format(
-                "%s%040s%d",
-                Converter.DateToString(this.dataInicio, "ddMMyyyy"),
+                "%s%-40s%d",
+                formatador.format(this.dataInicio),
                 this.titulo
         );
     }

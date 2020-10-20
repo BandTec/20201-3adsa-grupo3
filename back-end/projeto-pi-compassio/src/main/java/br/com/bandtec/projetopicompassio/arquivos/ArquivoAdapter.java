@@ -7,7 +7,8 @@ public class ArquivoAdapter {
 
     public static IArquivo getModeloDoArquivoById(String id) throws Exception {
         try {
-            return (IArquivo) Class.forName("br.com.bandtec.projetopicompassio.servicos.Arquivo" + id).newInstance();
+            String nome = "br.com.bandtec.projetopicompassio.arquivos.Arquivo" + id;
+            return (IArquivo) Class.forName(nome).newInstance();
         } catch (Exception ex) {
             throw new Exception("Id inválido - " + ex);
         }
@@ -30,7 +31,7 @@ public class ArquivoAdapter {
             arquivo.desserializar(linhas);
             return arquivo;
         } catch (Exception ex) {
-            throw ex;
+        throw ex;
         }
     }
 }

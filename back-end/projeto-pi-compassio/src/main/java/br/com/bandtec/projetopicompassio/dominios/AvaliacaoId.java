@@ -13,4 +13,6 @@ public class AvaliacaoId implements Serializable {
         this.fkUsuarioFisico = fkUsuarioFisico;
         this.fkUsuarioJuridico = fkUsuarioJuridico;
     }
+
+    public AvaliacaoId(){}
 }

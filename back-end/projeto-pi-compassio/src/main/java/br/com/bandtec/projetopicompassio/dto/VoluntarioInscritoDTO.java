@@ -2,15 +2,28 @@ package br.com.bandtec.projetopicompassio.dto;
 
 import br.com.bandtec.projetopicompassio.utils.Converter;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Formatter;
 
-public class VoluntarioInscritoDTO {
+public class VoluntarioInscritoDTO implements Serializable {
 
     private UsuarioFisicoDTO voluntario;
     private Date dataInscricao;
 
     public VoluntarioInscritoDTO(UsuarioFisicoDTO voluntario, Date dataInscricao) {
         this.voluntario = voluntario;
+        this.dataInscricao = dataInscricao;
+    }
+
+    public VoluntarioInscritoDTO(){}
+
+    public void setVoluntario(UsuarioFisicoDTO voluntario) {
+        this.voluntario = voluntario;
+    }
+
+    public void setDataInscricao(Date dataInscricao) {
         this.dataInscricao = dataInscricao;
     }
 
@@ -22,14 +35,17 @@ public class VoluntarioInscritoDTO {
         return dataInscricao;
     }
 
+
+
     @Override
     public String toString() {
+        SimpleDateFormat formatador = new SimpleDateFormat("dd-MM-yyyy");
         return String.format(
-                "%s%040s%040s%s%030s%s%d",
+                "%s%-40s%-40s%s%-30s%s%d",
                 Converter.DateToString(this.dataInscricao, "ddMMyyyy"),
                 this.voluntario.getNome(),
                 this.voluntario.getEmail(),
-                Converter.DateToString(this.voluntario.getDataNascimento(), "ddMMyyyy"),
+                formatador.format(this.voluntario.getDataNascimento()),
                 this.voluntario.getEndereco().getCidade(),
                 this.voluntario.getEndereco().getEstado()
         );

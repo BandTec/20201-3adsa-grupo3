@@ -55,7 +55,7 @@ public class AvaliacaoController {
 
     @GetMapping("/fisico/{id}")
     public ResponseEntity getPontosFisico (@PathVariable int id){
-        if (repository.notaDoUsuarioFisico(id).isEmpty()){
+        if (repository.notaDoUsuarioFisico(id).equals(null)){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(repository.notaDoUsuarioFisico(id));
@@ -63,7 +63,7 @@ public class AvaliacaoController {
 
     @GetMapping("/juridico/{id}")
     public ResponseEntity getPontosJuridico (@PathVariable int id){
-        if (repository.notaDoUsuarioJuridico(id).isEmpty()){
+        if (repository.notaDoUsuarioJuridico(id).equals(null)){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(repository.notaDoUsuarioJuridico(id));
