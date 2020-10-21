@@ -11,10 +11,10 @@ import java.util.List;
 
 public interface UsuarioFisicoRepository extends JpaRepository<UsuarioFisico, Integer> {
 
-    /*@Query(value =
+    @Query(value =
             "SELECT v FROM UsuarioFisico v WHERE v.idUsuarioFisico = " +
                    "(SELECT u.fkUsuarioFisico.idUsuarioFisico FROM UsuarioFisicoVaga u) AND" +
                    "(SELECT t.fkVaga.idVaga FROM UsuarioFisicoVaga t) = " +
                    "(SELECT s.idVaga FROM Vaga s WHERE s.titulo LIKE ?1")
     List<VoluntarioInscritoDTO> findAllVoluntariosSimplesInscritos(String nomeDaVaga);
-*/}
+}

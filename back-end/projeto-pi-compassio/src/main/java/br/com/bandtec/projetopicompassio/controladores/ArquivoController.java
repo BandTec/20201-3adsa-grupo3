@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -33,46 +35,91 @@ public class ArquivoController {
     @Autowired
     private UsuarioFisicoRepository voluntarioRepository;
 
-    @PostMapping("/baixar")
-    public HttpEntity baixar(
-            @RequestParam(required = true) String idArquivo,
-            @RequestParam(required = true) String nomeDoArquivo,
-            @RequestParam(required = true) String nomeDaOng,
-            @RequestParam(required = false) String nomeDaVaga
+    @GetMapping(value = "/arquivo01", produces = {"application/octet-stream"})
+    @ResponseBody
+    public HttpEntity baixarArquivo01(
+            @RequestParam String idArquivo,
+            @RequestParam String nomeDoArquivo,
+            @RequestParam String nomeDaOng,
+            @RequestParam boolean isCsv
     ) {
         try {
             IArquivo arquivo = ArquivoAdapter.getModeloDoArquivoById(idArquivo);
 
-            if (arquivo instanceof Arquivo01) {
-                List<UsuarioJuridico> meiota = usuarioJuridicoRepository.findAllUsuarioJuridicoByNomeOng(nomeDaOng);
-                List<VagaDTO> meiotaPlus = vagaRepository.findAllVagasSimplesByUsuarioJuridico(meiota.get(0));
-                ListaObj<VagaDTO> vagasObj = (ListaObj<VagaDTO>) ListaObj.convert(meiotaPlus);
-                VagasDeUmaOngDTO vagasDeUmaOng = new VagasDeUmaOngDTO(nomeDaOng, vagasObj);
-                arquivo.setObject(vagasDeUmaOng);
+            ArquivoContext.setArquivo(arquivo);
+
+            try {
+                ArquivoContext.exportar(nomeDoArquivo, false);
+            } catch (IOException ioEx) {
+                return ResponseEntity.status(500).body("Erro ao gerar o arquivo");
             }
 
-            /*else if (arquivo instanceof Arquivo02) {
-                List<VoluntarioInscritoDTO> voluntarios =
-                        voluntarioRepository.findAllVoluntariosSimplesInscritos(nomeDaVaga);
-                ListaObj<VoluntarioInscritoDTO> voluntariosObj =
-                        (ListaObj<VoluntarioInscritoDTO>) ListaObj.convert(voluntarios);
-                VoluntariosDeUmaVagaDTO voluntariosDaVaga =
-                        new VoluntariosDeUmaVagaDTO(nomeDaOng, nomeDaVaga, voluntariosObj);
-                arquivo.setObject(voluntariosDaVaga);
-            }*/
-
-            ArquivoContext.setArquivo(arquivo);
-            ArquivoContext.exportar(nomeDoArquivo, false);
-
-                byte[] arq = new FileInputStream(nomeDoArquivo).readAllBytes();
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.add("Content-Disposition", "attachment; filename=".concat(nomeDoArquivo));
-
-                HttpEntity<byte[]> entity = new HttpEntity(arq, headers);
-                return entity;
+            String nomeDoArquivoGerado = isCsv ? nomeDoArquivo.concat(".csv") : nomeDoArquivo.concat(".txt");
+            return this.getArquivo(nomeDoArquivoGerado);
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex);
         }
+    }
+
+    @GetMapping(value = "/arquivo02", produces = {"application/octet-stream"})
+    @ResponseBody
+    public HttpEntity baixarArquivo02(
+            @RequestParam String idArquivo,
+            @RequestParam String nomeDoArquivo,
+            @RequestParam String nomeDaOng,
+            @RequestParam String nomeDaVaga,
+            @RequestParam boolean isCsv
+
+    ) {
+        try {
+            IArquivo arquivo = ArquivoAdapter.getModeloDoArquivoById(idArquivo);
+
+            ArquivoContext.setArquivo(arquivo);
+
+            try {
+                ArquivoContext.exportar(nomeDoArquivo, false);
+            } catch (IOException ioEx) {
+                return ResponseEntity.status(500).body("Erro ao gerar o arquivo");
+            }
+
+            String nomeDoArquivoGerado = isCsv ? nomeDoArquivo.concat(".csv") : nomeDoArquivo.concat(".txt");
+            return this.getArquivo(nomeDoArquivoGerado);
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex);
+        }
+    }
+
+    /*private void configurarArquivo(IArquivo arquivo) {
+        if (arquivo instanceof Arquivo01) {
+            List<UsuarioJuridico> ong = usuarioJuridicoRepository.findAllUsuarioJuridicoByNomeOng(nomeDaOng);
+            List<VagaDTO> vagasDaOng = vagaRepository.findAllVagasSimplesByUsuarioJuridico(ong.get(0));
+            ListaObj<VagaDTO> vagasObj = (ListaObj<VagaDTO>) ListaObj.convert(vagasDaOng);
+            VagasDeUmaOngDTO vagasDeUmaOng = new VagasDeUmaOngDTO(nomeDaOng, vagasObj);
+            arquivo.setObject(vagasDeUmaOng);
+        } else if (arquivo instanceof Arquivo02) {
+            List<VoluntarioInscritoDTO> voluntarios =
+                    voluntarioRepository.findAllVoluntariosSimplesInscritos(nomeDaVaga);
+            ListaObj<VoluntarioInscritoDTO> voluntariosObj =
+                    (ListaObj<VoluntarioInscritoDTO>) ListaObj.convert(voluntarios);
+            VoluntariosDeUmaVagaDTO voluntariosDaVaga =
+                    new VoluntariosDeUmaVagaDTO(nomeDaOng, nomeDaVaga, voluntariosObj);
+            arquivo.setObject(voluntariosDaVaga);
+        }
+    }*/
+
+    private HttpEntity getArquivo(String nomeDoArquivo) {
+        byte[] arq;
+        try {
+            arq = new FileInputStream(nomeDoArquivo).readAllBytes();
+        } catch (FileNotFoundException fEx) {
+            return ResponseEntity.status(500).body("O arquivo não foi encontrado");
+        } catch (IOException ioEx) {
+            return ResponseEntity.status(500).body("Erro na leitura do arquivo");
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=".concat(nomeDoArquivo));
+
+        HttpEntity<byte[]> entity = new HttpEntity(arq, headers);
+        return entity;
     }
 }

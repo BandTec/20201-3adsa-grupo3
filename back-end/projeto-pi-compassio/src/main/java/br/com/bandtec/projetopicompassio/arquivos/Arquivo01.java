@@ -6,6 +6,7 @@ import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 
+import java.lang.reflect.Type;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
