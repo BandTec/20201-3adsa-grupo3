@@ -7,36 +7,34 @@ import java.util.Scanner;
 
 public class    ArquivoHandler {
 
-    public static void exportar(String nomeDoArquivo, String registro, boolean append) throws Exception {
+    public static void exportar(String nomeDoArquivo, String registro, boolean append, boolean isCsv) throws IOException {
         BufferedWriter saida;
 
-        if (!nomeDoArquivo.endsWith(".txt"))
+        if (isCsv) {
+            if (!nomeDoArquivo.endsWith(".csv"))
+                nomeDoArquivo += ".csv";
+        } else if (!nomeDoArquivo.endsWith(".txt")) {
             nomeDoArquivo += ".txt";
-
-        try {
-            saida = new BufferedWriter(new FileWriter(nomeDoArquivo, append));
-            saida.write(registro);
-            saida.close();
-        } catch (Exception ex) {
-            throw ex;
         }
+
+        saida = new BufferedWriter(new FileWriter(nomeDoArquivo, append));
+        saida.write(registro);
+        saida.close();
     }
 
-    public static List<String> importar(String nomeDoArquivo) throws Exception {
-        try {
-            if (!nomeDoArquivo.endsWith(".txt"))
-                nomeDoArquivo += ".txt";
+    public static ListaObj<String> importar(String nomeDoArquivo) throws FileNotFoundException {
+        FileReader arquivo = new FileReader(nomeDoArquivo);
+        Scanner leitor;
 
-            FileReader arquivo = new FileReader(nomeDoArquivo);
-            Scanner leitor = new Scanner(arquivo).useDelimiter("\\n | \\r\\n");
+        if (nomeDoArquivo.endsWith(".txt"))
+            leitor = new Scanner(arquivo).useDelimiter(";");
+        else
+            leitor = new Scanner(arquivo).useDelimiter("\\n | \\r\\n");
 
-            List<String> linhas = new ArrayList();
-            while (leitor.hasNext()) {
-                linhas.add(leitor.next());
-            }
-            return linhas;
-        } catch (Exception ex) {
-            throw ex;
+        List<String> linhas = new ArrayList();
+        while (leitor.hasNext()) {
+            linhas.add(leitor.next());
         }
+        return (ListaObj<String>) ListaObj.convert(linhas);
     }
 }

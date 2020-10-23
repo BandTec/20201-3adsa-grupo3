@@ -1,13 +1,13 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
 import br.com.bandtec.projetopicompassio.arquivos.*;
+import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
-import br.com.bandtec.projetopicompassio.dto.VagaDTO;
-import br.com.bandtec.projetopicompassio.dto.VagasDeUmaOngDTO;
-import br.com.bandtec.projetopicompassio.dto.VoluntarioInscritoDTO;
-import br.com.bandtec.projetopicompassio.dto.VoluntariosDeUmaVagaDTO;
+import br.com.bandtec.projetopicompassio.dominios.Vaga;
+import br.com.bandtec.projetopicompassio.dto.*;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoRepository;
+import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoVagaRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.VagaRepository;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
@@ -35,79 +35,101 @@ public class ArquivoController {
     @Autowired
     private UsuarioFisicoRepository voluntarioRepository;
 
+    @Autowired
+    private UsuarioFisicoVagaRepository voluntarioDaVagaRepository;
+
+    private String idArquivo;
+    private String nomeDoArquivo;
+    private String nomeDaOng;
+    private String nomeDaVaga;
+    private boolean isCsv;
+
     @GetMapping(value = "/arquivo01", produces = {"application/octet-stream"})
     @ResponseBody
     public HttpEntity baixarArquivo01(
-            @RequestParam String idArquivo,
             @RequestParam String nomeDoArquivo,
             @RequestParam String nomeDaOng,
             @RequestParam boolean isCsv
     ) {
-        try {
-            IArquivo arquivo = ArquivoAdapter.getModeloDoArquivoById(idArquivo);
-
-            ArquivoContext.setArquivo(arquivo);
-
-            try {
-                ArquivoContext.exportar(nomeDoArquivo, false);
-            } catch (IOException ioEx) {
-                return ResponseEntity.status(500).body("Erro ao gerar o arquivo");
-            }
-
-            String nomeDoArquivoGerado = isCsv ? nomeDoArquivo.concat(".csv") : nomeDoArquivo.concat(".txt");
-            return this.getArquivo(nomeDoArquivoGerado);
-        } catch (Exception ex) {
-            return ResponseEntity.status(500).body(ex);
-        }
+        setVariables("01", nomeDoArquivo, nomeDaOng, null, isCsv);
+        return getArquivo();
     }
 
     @GetMapping(value = "/arquivo02", produces = {"application/octet-stream"})
     @ResponseBody
     public HttpEntity baixarArquivo02(
-            @RequestParam String idArquivo,
             @RequestParam String nomeDoArquivo,
             @RequestParam String nomeDaOng,
             @RequestParam String nomeDaVaga,
             @RequestParam boolean isCsv
 
     ) {
+        setVariables("02", nomeDoArquivo, nomeDaOng, nomeDaVaga, isCsv);
+        return getArquivo();
+    }
+
+    private void setVariables(String idArquivo, String nomeDoArquivo, String nomeOng, String nomeVaga, boolean isCsv) {
+        this.idArquivo = idArquivo;
+        this.nomeDoArquivo = nomeDoArquivo;
+        this.nomeDaOng = nomeOng;
+        this.nomeDaVaga = nomeVaga;
+        this.isCsv = isCsv;
+    }
+
+    private HttpEntity getArquivo() {
         try {
             IArquivo arquivo = ArquivoAdapter.getModeloDoArquivoById(idArquivo);
-
+            configurarArquivo(arquivo);
             ArquivoContext.setArquivo(arquivo);
 
             try {
-                ArquivoContext.exportar(nomeDoArquivo, false);
+                ArquivoContext.exportar(nomeDoArquivo, false, isCsv);
             } catch (IOException ioEx) {
                 return ResponseEntity.status(500).body("Erro ao gerar o arquivo");
             }
 
             String nomeDoArquivoGerado = isCsv ? nomeDoArquivo.concat(".csv") : nomeDoArquivo.concat(".txt");
-            return this.getArquivo(nomeDoArquivoGerado);
+            return this.buildResponseWithFile(nomeDoArquivoGerado);
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex);
         }
     }
 
-    /*private void configurarArquivo(IArquivo arquivo) {
+    private void configurarArquivo(IArquivo arquivo) {
         if (arquivo instanceof Arquivo01) {
-            List<UsuarioJuridico> ong = usuarioJuridicoRepository.findAllUsuarioJuridicoByNomeOng(nomeDaOng);
-            List<VagaDTO> vagasDaOng = vagaRepository.findAllVagasSimplesByUsuarioJuridico(ong.get(0));
+            UsuarioJuridico ong = usuarioJuridicoRepository.findUsuarioJuridicoByNomeOng(nomeDaOng);
+            List<VagaDTO> vagasDaOng = vagaRepository.findAllVagasSimplesByUsuarioJuridico(ong);
             ListaObj<VagaDTO> vagasObj = (ListaObj<VagaDTO>) ListaObj.convert(vagasDaOng);
             VagasDeUmaOngDTO vagasDeUmaOng = new VagasDeUmaOngDTO(nomeDaOng, vagasObj);
             arquivo.setObject(vagasDeUmaOng);
         } else if (arquivo instanceof Arquivo02) {
-            List<VoluntarioInscritoDTO> voluntarios =
-                    voluntarioRepository.findAllVoluntariosSimplesInscritos(nomeDaVaga);
-            ListaObj<VoluntarioInscritoDTO> voluntariosObj =
-                    (ListaObj<VoluntarioInscritoDTO>) ListaObj.convert(voluntarios);
-            VoluntariosDeUmaVagaDTO voluntariosDaVaga =
-                    new VoluntariosDeUmaVagaDTO(nomeDaOng, nomeDaVaga, voluntariosObj);
+            UsuarioJuridico ong = usuarioJuridicoRepository.findUsuarioJuridicoByNomeOng(nomeDaOng);
+            Vaga vaga = vagaRepository.findIdVagaByTituloAndFkUsuarioJuridico(nomeDaVaga, ong);
+            List<UsuarioFisicoVaga> voluntariosDeUmaVaga = voluntarioDaVagaRepository.findAllUsuarioFisicoVagaByFkVaga(vaga);
+
+            ListaObj<VoluntarioInscritoDTO> voluntariosObj = new ListaObj<>(voluntariosDeUmaVaga.size());
+            for (UsuarioFisicoVaga voluntario : voluntariosDeUmaVaga) {
+                voluntariosObj.adiciona(
+                    new VoluntarioInscritoDTO(
+                        new UsuarioFisicoDTO(
+                            voluntario.getFkUsuarioFisico().getNome(),
+                            voluntario.getFkUsuarioFisico().getEmail(),
+                            voluntario.getFkUsuarioFisico().getDataNascimento(),
+                            new EnderecoDTO(
+                                voluntario.getFkUsuarioFisico().getFkEndereco().getCidade(),
+                                voluntario.getFkUsuarioFisico().getFkEndereco().getEstado()
+                            )
+                        ),
+                        voluntario.getDataInscricao()
+                    )
+                );
+            }
+            VoluntariosDeUmaVagaDTO voluntariosDaVaga = new VoluntariosDeUmaVagaDTO(nomeDaOng, nomeDaVaga, voluntariosObj);
             arquivo.setObject(voluntariosDaVaga);
         }
-    }*/
+    }
 
-    private HttpEntity getArquivo(String nomeDoArquivo) {
+    private HttpEntity buildResponseWithFile(String nomeDoArquivo) {
         byte[] arq;
         try {
             arq = new FileInputStream(nomeDoArquivo).readAllBytes();

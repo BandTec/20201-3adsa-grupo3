@@ -39,7 +39,7 @@ public class VagaDTO implements Serializable {
         SimpleDateFormat formatador = new SimpleDateFormat("dd-MM-yyyy");
 
         return String.format(
-                "%s%-40s%d",
+                "%s%-40s",
                 formatador.format(this.dataInicio),
                 this.titulo
         );

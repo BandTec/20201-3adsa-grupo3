@@ -11,4 +11,8 @@ public class UsuarioFisicoVagaId implements Serializable {
         this.fkUsuarioFisico = fkUsuarioFisico;
         this.fkVaga = fkVaga;
     }
+
+    public UsuarioFisicoVagaId() {
+
+    }
 }

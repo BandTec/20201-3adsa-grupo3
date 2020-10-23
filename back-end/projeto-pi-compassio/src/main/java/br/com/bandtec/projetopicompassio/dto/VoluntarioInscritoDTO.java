@@ -41,7 +41,7 @@ public class VoluntarioInscritoDTO implements Serializable {
     public String toString() {
         SimpleDateFormat formatador = new SimpleDateFormat("dd-MM-yyyy");
         return String.format(
-                "%s%-40s%-40s%s%-30s%s%d",
+                "%s%-40s%-40s%s%-30s%s",
                 Converter.DateToString(this.dataInscricao, "ddMMyyyy"),
                 this.voluntario.getNome(),
                 this.voluntario.getEmail(),

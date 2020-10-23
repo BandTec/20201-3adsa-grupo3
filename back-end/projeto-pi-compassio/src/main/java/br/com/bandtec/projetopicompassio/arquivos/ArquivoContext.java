@@ -1,6 +1,6 @@
 package br.com.bandtec.projetopicompassio.arquivos;
 
-import java.util.List;
+import br.com.bandtec.projetopicompassio.utils.ListaObj;
 
 public class ArquivoContext {
 
@@ -10,11 +10,11 @@ public class ArquivoContext {
         arquivo = novoArquivo;
     }
 
-    public static void exportar(String nomeDoArquivo, boolean append) throws Exception {
-        arquivo.exportar(nomeDoArquivo, append);
+    public static void exportar(String nomeDoArquivo, boolean append, boolean isCsv) throws Exception {
+        arquivo.exportar(nomeDoArquivo, append, isCsv);
     }
 
-    public static void desserializar(List<String> linhas) {
+    public static void desserializar(ListaObj<String> linhas) {
         arquivo.desserializar(linhas);
     }
 }

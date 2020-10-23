@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface UsuarioJuridicoRepository extends JpaRepository<UsuarioJuridico, Integer> {
 
-    @Query("select a from UsuarioJuridico a where a. email = ?1 and a. senha = ?2")
+    @Query("select a from UsuarioJuridico a where a.email = ?1 and a.senha = ?2")
     List<UsuarioJuridico> pesquisaEmailESenha(String email, String senha);
 
-    List<UsuarioJuridico> findAllUsuarioJuridicoByNomeOng(String nomeOng);
+    UsuarioJuridico findUsuarioJuridicoByNomeOng(String nomeOng);
 }

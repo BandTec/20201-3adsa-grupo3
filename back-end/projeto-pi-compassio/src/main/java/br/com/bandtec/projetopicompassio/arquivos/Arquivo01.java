@@ -6,10 +6,9 @@ import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 
-import java.lang.reflect.Type;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 public class Arquivo01 implements IArquivo {
 
@@ -30,7 +29,14 @@ public class Arquivo01 implements IArquivo {
         vagasDeUmaOng = (VagasDeUmaOngDTO) obj;
     }
 
-    public String getTextoParaExportar() {
+    public String getTextoParaExportar(boolean isCsv) {
+        if (isCsv)
+            return getTextoCsv();
+        else
+            return getTextoTxt();
+    }
+
+    private String getTextoTxt() {
         StringBuilder registro = new StringBuilder();
 
         //Escrevendo Header
@@ -52,31 +58,47 @@ public class Arquivo01 implements IArquivo {
         return registro.toString();
     }
 
-    public void exportar(String nomeDoArquivo, boolean append) throws Exception {
+    private String getTextoCsv() {
+        StringBuilder registro = new StringBuilder();
+
+        //Escrevendo Header
+        registro.append("DataInicio;");
+        registro.append("Titulo;");
+        registro.append("\r\n");
+
+        //Escrevendo Body
+        ListaObj<VagaDTO> vagas = vagasDeUmaOng.getVagas();
+        for (int i = 0; i < vagas.getTamanho(); i++) {
+            VagaDTO vaga = vagas.getElemento(i);
+            registro.append(vaga.getDataInicio()+";");
+            registro.append(vaga.getTitulo()+";");
+            registro.append("\r\n");
+        }
+
+        return registro.toString();
+    }
+
+    public void exportar(String nomeDoArquivo, boolean append, boolean isCsv) throws IOException {
         String nomeDoArquivoDefault =
                 Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy") + "Arquivo01Vagas.txt";
         if (nomeDoArquivo == null)
             nomeDoArquivo = nomeDoArquivoDefault;
 
-        try {
-            ArquivoHandler.exportar(nomeDoArquivo, getTextoParaExportar(), append);
-        } catch (Exception ex) {
-            throw ex;
-        }
+        ArquivoHandler.exportar(nomeDoArquivo, getTextoParaExportar(isCsv), append, isCsv);
     }
 
     //Lê as linhas do arquivo lido e preenche os atributos com os dados
-    public void desserializar(List<String> linhas) {
+    public void desserializar(ListaObj<String> linhas) {
         String nomeDaOng = null;
-        ListaObj<VagaDTO> vagas = new ListaObj<>(linhas.size() - 2);
-        for (int i = 0; i < linhas.size() - 1; i++) {
+        ListaObj<VagaDTO> vagas = new ListaObj<>(linhas.getTamanho() - 2);
+        for (int i = 0; i < linhas.getTamanho() - 1; i++) {
             //Se for a primeira linha, quer dizer que é o Header
             if (i == 0)
-                nomeDaOng = linhas.get(i).substring(2, 31).trim();
+                nomeDaOng = linhas.getElemento(i).substring(2, 31).trim();
             else {
                 //Parseia os dados de acordo com o arquivo de layout
-                String dataInicio = linhas.get(i).substring(0, 7);
-                String titulo = linhas.get(i).substring(8, 47).trim();
+                String dataInicio = linhas.getElemento(i).substring(0, 7);
+                String titulo = linhas.getElemento(i).substring(8, 47).trim();
 
                 //Instancia o objeto vaga para salvar no atributo
                 //vagasDeUmaOng
