@@ -4,6 +4,7 @@ import br.com.bandtec.projetopicompassio.dto.*;
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
+import org.springframework.data.convert.Jsr310Converters;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -45,7 +46,7 @@ public class Arquivo02 implements IArquivo {
         StringBuilder registro = new StringBuilder();
 
         //Escrevendo Header
-        String dataAtual = Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy");
+        String dataAtual = Converter.LocalDateToString(LocalDate.now(), "dd-MM-yyyy");
         String tituloDaVaga = voluntariosDeUmaVaga.getNomeVaga();
         String nomeDaOng = voluntariosDeUmaVaga.getNomeOng();
         registro.append(String.format("%s%-40s%-30s%s\n", idArquivo, tituloDaVaga, nomeDaOng, dataAtual));
@@ -97,7 +98,7 @@ public class Arquivo02 implements IArquivo {
     @Override
     public void exportar(String nomeDoArquivo, boolean append, boolean isCsv) throws IOException {
         String nomeDoArquivoDefault =
-                Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy") + "Arquivo02Voluntarios.txt";
+                Converter.LocalDateToString(LocalDate.now(), "dd-MM-yyyy") + "Arquivo02Voluntarios.txt";
         if (nomeDoArquivo == null)
             nomeDoArquivo = nomeDoArquivoDefault;
 
@@ -117,12 +118,21 @@ public class Arquivo02 implements IArquivo {
                 nomeDaOng = linhas.getElemento(i).substring(42, 71).trim();
             } else {
                 //Parseia os dados de acordo com o arquivo de layout
-                String dataDaInscricao = linhas.getElemento(i).substring(0, 7);
-                String nomeDoVoluntario = linhas.getElemento(i).substring(8, 48).trim();
-                String emailDoVoluntario = linhas.getElemento(i).substring(49, 89).trim();
-                String dataDeNascimento = linhas.getElemento(i).substring(90, 98);
-                String cidade = linhas.getElemento(i).substring(99, 129).trim();
-                String uf = linhas.getElemento(i).substring(130, 131);
+                String dia = linhas.getElemento(i).substring(0, 2);
+                String mes = linhas.getElemento(i).substring(3, 5);
+                String ano = linhas.getElemento(i).substring(6, 10);
+                String dataDaInscricao = ano+"-"+mes+"-"+dia;
+                String nomeDoVoluntario = linhas.getElemento(i).substring(10, 50).trim();
+                String emailDoVoluntario = linhas.getElemento(i).substring(50, 90).trim();
+                dia = linhas.getElemento(i).substring(90, 92);
+                mes = linhas.getElemento(i).substring(93, 95);
+                ano = linhas.getElemento(i).substring(96, 100);
+                String dataDeNascimento = ano+"-"+mes+"-"+dia;
+                String cidade = linhas.getElemento(i).substring(100, 130).trim();
+                String uf = linhas.getElemento(i).substring(130, 132);
+
+                LocalDate localDateInicio = Jsr310Converters.StringToLocalDateConverter.INSTANCE.convert(dataDaInscricao);
+                java.util.Date finalDateInicio = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(localDateInicio);
 
                 //Instancia os objetos para salvar no atributo
                 //voluntariosDeUmaOng
@@ -137,7 +147,7 @@ public class Arquivo02 implements IArquivo {
 
                 VoluntarioInscritoDTO voluntario = new VoluntarioInscritoDTO(
                         usuarioFisico,
-                        Date.valueOf(dataDaInscricao)
+                        finalDateInicio
                 );
 
                 voluntarios.adiciona(voluntario);

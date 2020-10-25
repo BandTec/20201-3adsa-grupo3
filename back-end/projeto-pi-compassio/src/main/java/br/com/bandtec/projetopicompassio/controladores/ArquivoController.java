@@ -1,7 +1,6 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
 import br.com.bandtec.projetopicompassio.arquivos.*;
-import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
@@ -10,10 +9,8 @@ import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoVagaRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.VagaRepository;
-import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.ReadableByteChannel;
 import java.util.List;
-import java.util.Scanner;
 
 @RestController
 @RequestMapping("/arquivos")
@@ -33,13 +27,10 @@ public class ArquivoController {
 
     @Autowired
     private VagaRepository vagaRepository;
-
     @Autowired
     private UsuarioJuridicoRepository usuarioJuridicoRepository;
-
     @Autowired
     private UsuarioFisicoRepository voluntarioRepository;
-
     @Autowired
     private UsuarioFisicoVagaRepository voluntarioDaVagaRepository;
 
@@ -73,7 +64,6 @@ public class ArquivoController {
             @RequestParam String nomeDaOng,
             @RequestParam String nomeDaVaga,
             @RequestParam boolean isCsv
-
     ) {
         setVariables("02", nomeDoArquivo, nomeDaOng, nomeDaVaga, isCsv);
         return getArquivo();

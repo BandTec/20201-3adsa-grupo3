@@ -1,6 +1,7 @@
 package br.com.bandtec.projetopicompassio.utils;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,16 +67,16 @@ public class ListaObj <T> {
             return vetor[indice];
     }
 
-    public void limpa() {
-        numeroDeElementos = 0;
+    public List<T> getAll() {
+        List<T> objetos = new ArrayList();
+        for (T obj : vetor) {
+            objetos.add(obj);
+        }
+        return objetos;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (T elemento : vetor)
-            stringBuilder.append(elemento+"\n");
-        return stringBuilder.toString();
+    public void limpa() {
+        numeroDeElementos = 0;
     }
 
     public static ListaObj<?> convert(List<?> lista) {

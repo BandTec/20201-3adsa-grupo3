@@ -32,7 +32,7 @@ public class Arquivo01 implements IArquivo {
 
     @Override
     public Object getObject() {
-        return vagasDeUmaOng.toString();
+        return vagasDeUmaOng;
     }
 
     public String getTextoParaExportar(boolean isCsv) {
@@ -46,7 +46,7 @@ public class Arquivo01 implements IArquivo {
         StringBuilder registro = new StringBuilder();
 
         //Escrevendo Header
-        String dataAtual = Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy");
+        String dataAtual = Converter.LocalDateToString(LocalDate.now(), "dd-MM-yyyy");
         registro.append(String.format("%s%-30s%s\n", idArquivo, vagasDeUmaOng.getNomeDaOng(), dataAtual));
 
         //Escrevendo Body
@@ -87,7 +87,7 @@ public class Arquivo01 implements IArquivo {
 
     public void exportar(String nomeDoArquivo, boolean append, boolean isCsv) throws IOException {
         String nomeDoArquivoDefault =
-                Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy") + "Arquivo01Vagas.txt";
+                Converter.LocalDateToString(LocalDate.now(), "dd-MM-yyyy") + "Arquivo01Vagas.txt";
         if (nomeDoArquivo == null)
             nomeDoArquivo = nomeDoArquivoDefault;
 
