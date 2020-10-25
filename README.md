@@ -35,7 +35,20 @@ Para criar uma branch existe 2 formas:
   
 - Pelo github  
   Clique onde está escrito "master", digite o nome da sua nova branch e clique em "Create branch: nome_da_branch from 'branch_pai'"
+
+### Atualizando sua branch de trabalho
+Todos os dias, antes de iniciar seus trabalhos, é recomendado atualizar a branch "principal" (podendo esta ser a master ou alguma outra).
   
+Para isso, recomenda-se fazer o seguinte passo-a-passo:  
+  `git checkout branch_principal`  
+  `git fetch --all; git pull`  
+  `git reset --hard origin/branch_principal`  
+  `git checkout sua_branch_de_trabalho`  
+  `git rebase branch_principal`  
+  `git push origin +HEAD`  
+  
+ Esses comandos não necessariamente vão atualizar 100% sua branch, além de poder dar conflitos em alguns casos. Caso tenha qualquer problema com esses comandos, cancele ou aborte eles e avise os demais membros do grupo.
+
 ### Merge  
 
 **Antes de fazer o merge, os membros do time deverão ser avisados**

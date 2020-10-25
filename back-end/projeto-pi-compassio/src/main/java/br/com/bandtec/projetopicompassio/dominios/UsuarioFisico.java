@@ -1,7 +1,7 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class UsuarioFisico {
@@ -31,12 +31,12 @@ public class UsuarioFisico {
     @Column(name = "sexo")
     private Boolean sexo;
 
-    @Column(nullable = false)
-    private Boolean logado;
-
     @OneToOne
     @JoinColumn(nullable = false, name = "fk_endereco")
     private Endereco fkEndereco;
+
+    @Column(nullable = false)
+    private Boolean logado;
 
     public Boolean getLogado() {
         return logado;

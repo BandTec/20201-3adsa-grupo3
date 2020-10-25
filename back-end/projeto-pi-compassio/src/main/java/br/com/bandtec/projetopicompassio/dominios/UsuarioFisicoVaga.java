@@ -1,8 +1,7 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import br.com.bandtec.projetopicompassio.utils.Converter;
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @IdClass(UsuarioFisicoVagaId.class)

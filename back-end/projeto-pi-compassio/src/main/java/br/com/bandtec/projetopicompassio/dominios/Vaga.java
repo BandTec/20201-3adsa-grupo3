@@ -1,10 +1,7 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import br.com.bandtec.projetopicompassio.utils.Converter;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.time.LocalDate;
 
 @Entity
 public class Vaga {
@@ -49,7 +46,6 @@ public class Vaga {
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_usuario_juridico")
     private UsuarioJuridico fkUsuarioJuridico;
-
 
     public Integer getIdVaga() {
         return idVaga;

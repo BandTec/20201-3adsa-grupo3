@@ -1,0 +1,149 @@
+.container{
+    width: 100%;
+    display: flex;
+}
+
+.container > .loginImage{
+    width: 50%;
+    height: 500px;
+}
+
+.container > .loginImage, .childrenImage{
+    filter: brightness(0.8); 
+}
+
+.textImageOng{
+    color: #fff;
+    font-weight: 700;
+    font-size: 3.5rem;
+    position: absolute;
+    width: 50%;
+    margin-left: 2.5rem;
+    top: 53rem;
+}
+
+.label-title{
+    font-size: 2.1rem;
+    font-weight: 700;
+}
+
+.yellowWord{
+    color: #FFB219;
+}
+
+.blueWord{
+    color: blue;
+}
+
+.blueWord{
+    color: #1975FF
+}
+
+.container > .formOng{
+    display: block;
+    margin-left: 6.1%;
+}
+
+
+.container > .formOng > .loginForm{
+    margin-left: 5%;
+    width: 91.2%;
+    height: 53rem;
+    background-color: #FCFCFC;
+    border-radius: 1rem;
+    border: 1px solid #000;
+} 
+
+.inputBairro{
+    display: flex;
+    margin-top: 1rem;
+    margin-left: 1rem
+
+}
+
+.inputCep{
+    display: flex;
+    margin-top: 1rem;
+    margin-left: 1rem
+
+}
+
+.inputSenha{
+    display: flex;
+    margin-top: 1rem;
+    margin-left: 1rem
+}
+
+#btnAdd{
+    margin-top: 6.5%;
+    background: #1975FF
+}
+
+.comboBox{
+    margin-top: 3%;
+}
+
+
+.container > .formOng > .infContaForm{
+    margin-top: 2%;
+    margin-left: 5%;
+    width: 91.2%;
+    height: 24rem;
+    background-color: #FCFCFC;
+    border-radius: 1rem;
+    border: 1px solid #000;
+} 
+
+.formOng > .checkboxOng{
+    margin-left: 7%;
+}
+
+.center{
+    text-align: center
+}
+
+.title{
+    margin-top: 1rem;
+}
+
+.inputInfPessoal{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+
+.bold{
+    font-weight: 700;
+}
+
+.buttonEnter{
+    margin: 2rem auto 0 auto;
+}
+
+.formFooter{
+    margin-top: 1.5rem;
+}
+
+
+#btnVoltarOng{
+    margin-left: 10%;
+    margin-right: 2rem;
+    width:10rem;
+    font-weight: 600;
+    height: 3rem;
+    color: black;
+    font-size: 1.0rem;
+    border: black;
+    border-radius: 0.5rem;
+    background: #E0DDDD
+}
+
+#btnCadastrarOng{
+    margin-left: 2%;
+    width:10rem;
+    font-weight: 600;
+    height: 3rem;
+    font-size: 1.0rem;
+    border-radius: 0.5rem;
+    background: #1975FF
+}

@@ -41,3 +41,25 @@
 #entrar {
     color: white;
 }
+
+#entrar:hover{
+    background-size: auto;
+    background-color: #FFB219;
+}
+
+a{
+    background-size: auto;
+    text-decoration: none;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.3rem;
+}
+
+a:hover{
+    background-color:#0084FE;
+    color: #fff;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 0.3rem;
+    transition: 0.5s;
+}

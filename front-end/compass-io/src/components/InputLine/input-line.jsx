@@ -1,12 +1,11 @@
 import React from 'react';
 import './input-line.css';
+import TextField from '@material-ui/core/TextField';
 
 export default function InputLine(props) {
   return(
-      <div>
-          <label className="input-label">{props.title}</label>
-          <br/>
-            <input type="text" type={props.type} placeholder={props.placeholder}/>
-      </div>
+    <div>
+          <TextField id="inputLine" type={props.type} label={props.title} placeholder={props.placeholder} fullWidth/>
+    </div>
   );
 }

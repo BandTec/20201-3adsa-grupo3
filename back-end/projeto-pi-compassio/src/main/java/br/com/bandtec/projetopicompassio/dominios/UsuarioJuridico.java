@@ -30,12 +30,12 @@ public class UsuarioJuridico {
     @Column(length = 256, nullable = false, name = "descricao_ong")
     private String descricaoOng;
 
-    @Column(nullable = false)
-    private Boolean logado;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(nullable = false, name = "fk_endereco")
     private Endereco fkEndereco;
+
+    @Column(nullable = false)
+    private Boolean logado;
 
     public Boolean getLogado() {
         return logado;

@@ -4,7 +4,7 @@ import LabelWelcome from '../../components/LabelWelcome/label-welcome';
 import InputLine from "../../components/InputLine/input-line";
 import LabelTitleForm from "../../components/LabelTitleForm/label-title-form";
 import Image from '../../components/Image/image';
-import Button from '../../components/Button/button';
+import Button from '@material-ui/core/Button'
 
 import './sign-in.css';
 import loginImage from '../../assets/images/children-smile.jpg'
@@ -19,7 +19,7 @@ export default function SignIn() {
 
       <div className="container">
         <span className="loginImage">
-            <Image width="600" className="childrenImage" height="480" src={loginImage} />
+            <Image width="600" className="childrenImage" height="495" src={loginImage} />
         </span>
 
         <span className="textImage">Fazendo a diferença conforme o seu <br/>
@@ -41,7 +41,7 @@ export default function SignIn() {
           </div>
 
           <div className="buttonEnter center">
-            <Button text="Entrar" />
+            <Button id="btnEnter" variant="contained" color="primary">Entrar</Button>
           </div>
 
           <div className="blueWord formFooter">
@@ -52,6 +52,8 @@ export default function SignIn() {
 
           </div>
         </span>
+
+    
       </div>
     </section>
   );

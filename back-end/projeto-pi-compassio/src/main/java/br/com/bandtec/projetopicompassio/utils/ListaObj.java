@@ -1,8 +1,6 @@
 package br.com.bandtec.projetopicompassio.utils;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ListaObj <T> {

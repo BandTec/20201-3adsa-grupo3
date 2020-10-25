@@ -1,0 +1,108 @@
+.container{
+    width: 100%;
+    display: flex;
+}
+
+.container > .loginImage{
+    width: 50%;
+    height: 500px;
+}
+
+.container > .loginImage, .childrenImage{
+    filter: brightness(0.8); 
+}
+
+.textImage{
+    color: #fff;
+    font-weight: 700;
+    font-size: 3.5rem;
+    position: absolute;
+    width: 50%;
+    margin-left: 4rem;
+    top: 54rem;
+}
+
+.yellowWord{
+    color: #FFB219;
+}
+
+.blueWord{
+    color: #1975FF
+}
+
+.container > .formVolunteer{
+    display: block;
+    margin-left: 5.8%;
+}
+
+.container > .formVolunteer > .signupVForm{
+    margin-left: 10%;
+    width: 28rem;
+    height: 35rem;
+    background-color: #FCFCFC;
+    border-radius: 1rem;
+    border: 1px solid #000;
+} 
+
+.container > .formVolunteer > .infContaVForm{
+    margin-top: 2%;
+    margin-left: 10%;
+    width: 28rem;
+    height: 24rem;
+    background-color: #FCFCFC;
+    border-radius: 1rem;
+    border: 1px solid #000;
+} 
+
+.formVolunteer > .checkbox{
+    margin-left: 11%;
+}
+
+.center{
+    text-align: center
+}
+
+.title{
+    margin-top: 1rem;
+}
+
+.inputInfPessoal{
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+.buttonEnter{
+    margin: 2rem auto 0 auto;
+}
+
+.formFooter{
+    margin-top: 1.5rem;
+}
+
+
+#btnVoltar{
+    margin-left: 13%;
+    margin-right: 2rem;
+    width:10rem;
+    font-weight: 600;
+    height: 3rem;
+    color: black;
+    font-size: 1.0rem;
+    border: black;
+    border-radius: 0.5rem;
+    background: #E0DDDD
+}
+
+#btnCadastrar{
+    margin-left: 2%;
+    width:10rem;
+    font-weight: 600;
+    height: 3rem;
+    font-size: 1.0rem;
+    border-radius: 0.5rem;
+    background: #1975FF
+}
