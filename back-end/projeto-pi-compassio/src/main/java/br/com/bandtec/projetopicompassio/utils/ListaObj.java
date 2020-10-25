@@ -1,6 +1,7 @@
 package br.com.bandtec.projetopicompassio.utils;
 
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 
 public class ListaObj <T> {
@@ -67,6 +68,14 @@ public class ListaObj <T> {
 
     public void limpa() {
         numeroDeElementos = 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (T elemento : vetor)
+            stringBuilder.append(elemento+"\n");
+        return stringBuilder.toString();
     }
 
     public static ListaObj<?> convert(List<?> lista) {

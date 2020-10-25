@@ -31,4 +31,10 @@ public class VagasDeUmaOngDTO implements Serializable {
     public ListaObj<VagaDTO> getVagas() {
         return vagas;
     }
+
+    @Override
+    public String toString() {
+        return nomeDaOng + "\n" +
+               vagas.toString();
+    }
 }

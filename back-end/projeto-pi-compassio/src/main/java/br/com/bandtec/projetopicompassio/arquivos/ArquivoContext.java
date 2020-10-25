@@ -1,6 +1,8 @@
 package br.com.bandtec.projetopicompassio.arquivos;
 
+import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ArquivoContext {
 

@@ -2,6 +2,7 @@ package br.com.bandtec.projetopicompassio.arquivos;
 
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ArquivoAdapter {
 
@@ -14,24 +15,40 @@ public class ArquivoAdapter {
         }
     }
 
-    public static IArquivo importar(String nomeDoArquivo) throws Exception {
-        try {
-            ListaObj<String> linhas = ArquivoHandler.importar(nomeDoArquivo);
+    public static IArquivo importar(MultipartFile file) throws Exception {
+        String delimitador = "\n";
+                //file.getName().endsWith(".txt") ? "\\n" : file.getName().endsWith(".csv") ? ";" : "";
 
-            String modeloDoArquivo = linhas.getElemento(0).substring(0, 1);
-            IArquivo arquivo = null;
+        ListaObj<String> linhas = ArquivoHandler.ler(file.getInputStream(), delimitador);
 
-            for (int i = 0; i < Modelos.values().length; i++) {
-                String id = Modelos.values()[i].getIdArquivo();
-                if (modeloDoArquivo.equals(id)) {
-                    arquivo = ArquivoAdapter.getModeloDoArquivoById(id);
-                    break;
-                }
+        String modeloDoArquivo = linhas.getElemento(0).substring(0, 2);
+        IArquivo arquivo = null;
+
+        for (int i = 0; i < Modelos.values().length; i++) {
+            String id = Modelos.values()[i].getIdArquivo();
+            if (modeloDoArquivo.equals(id)) {
+                arquivo = ArquivoAdapter.getModeloDoArquivoById(id);
+                break;
             }
-            arquivo.desserializar(linhas);
-            return arquivo;
-        } catch (Exception ex) {
-        throw ex;
         }
+        arquivo.desserializar(linhas);
+        return arquivo;
+    }
+
+    public static IArquivo importar(String nomeDoArquivo) throws Exception {
+        ListaObj<String> linhas = ArquivoHandler.importar(nomeDoArquivo);
+
+        String modeloDoArquivo = linhas.getElemento(0).substring(0, 1);
+        IArquivo arquivo = null;
+
+        for (int i = 0; i < Modelos.values().length; i++) {
+            String id = Modelos.values()[i].getIdArquivo();
+            if (modeloDoArquivo.equals(id)) {
+                arquivo = ArquivoAdapter.getModeloDoArquivoById(id);
+                break;
+            }
+        }
+        arquivo.desserializar(linhas);
+        return arquivo;
     }
 }

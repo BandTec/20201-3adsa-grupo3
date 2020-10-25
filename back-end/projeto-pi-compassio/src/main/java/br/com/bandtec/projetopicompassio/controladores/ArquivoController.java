@@ -10,17 +10,22 @@ import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoVagaRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.VagaRepository;
+import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.ReadableByteChannel;
 import java.util.List;
+import java.util.Scanner;
 
 @RestController
 @RequestMapping("/arquivos")
@@ -43,6 +48,12 @@ public class ArquivoController {
     private String nomeDaOng;
     private String nomeDaVaga;
     private boolean isCsv;
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity importarArquivo(@RequestParam("file") MultipartFile arquivo) throws Exception {
+        IArquivo arquivoImportado = ArquivoAdapter.importar(arquivo);
+        return ResponseEntity.ok(arquivoImportado.getObject());
+    }
 
     @GetMapping(value = "/arquivo01", produces = {"application/octet-stream"})
     @ResponseBody

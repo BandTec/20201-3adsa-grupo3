@@ -37,4 +37,13 @@ public class    ArquivoHandler {
         }
         return (ListaObj<String>) ListaObj.convert(linhas);
     }
+
+    public static ListaObj<String> ler(InputStream stream, String delimitador) throws FileNotFoundException {
+        Scanner leitor = new Scanner(stream).useDelimiter(delimitador);
+        List<String> linhas = new ArrayList();
+        while (leitor.hasNext()) {
+            linhas.add(leitor.next());
+        }
+        return (ListaObj<String>) ListaObj.convert(linhas);
+    }
 }

@@ -29,6 +29,11 @@ public class Arquivo02 implements IArquivo {
     }
 
     @Override
+    public Object getObject() {
+        return voluntariosDeUmaVaga;
+    }
+
+    @Override
     public String getTextoParaExportar(boolean isCsv) {
         if (isCsv)
             return getTextoCsv();
@@ -55,7 +60,7 @@ public class Arquivo02 implements IArquivo {
         }
 
         //Escrevendo Trailer
-        registro.append(String.format("%05d", totalRegistros));
+        registro.append(String.format("%05d\r\n", totalRegistros));
 
         return registro.toString();
     }
@@ -70,7 +75,7 @@ public class Arquivo02 implements IArquivo {
         registro.append("DataNascimento;");
         registro.append("Cidade;");
         registro.append("Estado;");
-        registro.append("\r\n");
+        registro.append("\n");
 
         //Escrevendo Body
         ListaObj<VoluntarioInscritoDTO> voluntarios = voluntariosDeUmaVaga.getVoluntariosInscritos();
@@ -82,8 +87,9 @@ public class Arquivo02 implements IArquivo {
             registro.append(voluntario.getVoluntario().getDataNascimento()+";");
             registro.append(voluntario.getVoluntario().getEndereco().getCidade()+";");
             registro.append(voluntario.getVoluntario().getEndereco().getEstado()+";");
-            registro.append("\r\n");
+            registro.append("\n");
         }
+        registro.append("\r\n");
 
         return registro.toString();
     }

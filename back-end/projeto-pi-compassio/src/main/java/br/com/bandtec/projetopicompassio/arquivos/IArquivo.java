@@ -10,4 +10,5 @@ public interface IArquivo {
     String getTextoParaExportar(boolean isCsv);
     void exportar(String nomeDoArquivo, boolean append, boolean isCsv) throws Exception;
     void desserializar(ListaObj<String> linhas);
+    Object getObject();
 }

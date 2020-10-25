@@ -5,10 +5,11 @@ import br.com.bandtec.projetopicompassio.dto.VagasDeUmaOngDTO;
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
 import br.com.bandtec.projetopicompassio.utils.Converter;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
+import org.springframework.data.convert.Jsr310Converters;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Arquivo01 implements IArquivo {
 
@@ -29,6 +30,11 @@ public class Arquivo01 implements IArquivo {
         vagasDeUmaOng = (VagasDeUmaOngDTO) obj;
     }
 
+    @Override
+    public Object getObject() {
+        return vagasDeUmaOng.toString();
+    }
+
     public String getTextoParaExportar(boolean isCsv) {
         if (isCsv)
             return getTextoCsv();
@@ -41,7 +47,7 @@ public class Arquivo01 implements IArquivo {
 
         //Escrevendo Header
         String dataAtual = Converter.LocalDateToString(LocalDate.now(), "ddMMyyyy");
-        registro.append(String.format("%s%-30s%s%n", idArquivo, vagasDeUmaOng.getNomeDaOng(), dataAtual));
+        registro.append(String.format("%s%-30s%s\n", idArquivo, vagasDeUmaOng.getNomeDaOng(), dataAtual));
 
         //Escrevendo Body
         int totalRegistros = 0;
@@ -64,7 +70,7 @@ public class Arquivo01 implements IArquivo {
         //Escrevendo Header
         registro.append("DataInicio;");
         registro.append("Titulo;");
-        registro.append("\r\n");
+        registro.append("\n");
 
         //Escrevendo Body
         ListaObj<VagaDTO> vagas = vagasDeUmaOng.getVagas();
@@ -72,8 +78,9 @@ public class Arquivo01 implements IArquivo {
             VagaDTO vaga = vagas.getElemento(i);
             registro.append(vaga.getDataInicio()+";");
             registro.append(vaga.getTitulo()+";");
-            registro.append("\r\n");
+            registro.append("\n");
         }
+        registro.append("\r\n");
 
         return registro.toString();
     }
@@ -97,12 +104,18 @@ public class Arquivo01 implements IArquivo {
                 nomeDaOng = linhas.getElemento(i).substring(2, 31).trim();
             else {
                 //Parseia os dados de acordo com o arquivo de layout
-                String dataInicio = linhas.getElemento(i).substring(0, 7);
-                String titulo = linhas.getElemento(i).substring(8, 47).trim();
+                String dia = linhas.getElemento(i).substring(0, 2);
+                String mes = linhas.getElemento(i).substring(3, 5);
+                String ano = linhas.getElemento(i).substring(6, 10);
+                String dataInicio = ano+"-"+mes+"-"+dia;
+                String titulo = linhas.getElemento(i).substring(10, 49).trim();
+
+                LocalDate localDateInicio = Jsr310Converters.StringToLocalDateConverter.INSTANCE.convert(dataInicio);
+                Date finalDateInicio = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(localDateInicio);
 
                 //Instancia o objeto vaga para salvar no atributo
                 //vagasDeUmaOng
-                VagaDTO vaga = new VagaDTO(titulo, Date.valueOf(dataInicio));
+                VagaDTO vaga = new VagaDTO(titulo, finalDateInicio);
 
                 vagas.adiciona(vaga);
             }
