@@ -33,6 +33,7 @@ export default function SignUp() {
         <Rtif boolean={true}>
           <SignUpOng />
         </Rtif>
+
       </div>
   );
 };

@@ -51,8 +51,7 @@ Para isso, recomenda-se fazer o seguinte passo-a-passo:
 
 ### Merge  
 
-**Antes de fazer o merge, os membros do time deverão ser avisados**
-
-Para fazer o merge pelo terminal/bash deve-se executar os comandos:  
-  `git checkout master` <- Troca para a branch master  
-  `git merge nome_da_branch` <- Funde a branch mencionada com a master
+**Quando quiser pegar alterações de outra branch e mesclar com a sua, deverá ser executado o seguinte comando:**  
+  `git merge nome_da_branch` <- Funde a branch mencionada com a sua  
+  
+Esse comando deverá ser executado sempre antes de fazer uma pull request, mergeando sua branch com a **origin/master**
