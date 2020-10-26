@@ -1,0 +1,39 @@
+/* .blueBanner {
+    width: 100vw;
+    height: 15rem;
+    background-color: #1975FF;
+    margin: 1rem -7rem;
+    display: flex;
+    color: #fff;
+    font-size: 1.5rem
+}; */
+
+.blueBanner > .bannerText {
+    background-color: #f00;
+    position: absolute;
+    width: 10rem;
+    height: 10rem;
+    /* margin: 0.5rem 7rem;
+    width: 30%;
+    height: 30%; */
+}
+
+.bannerTextTitle {
+    font-size: 3rem;
+    margin-bottom: 1.5rem
+}
+
+ 
+#donateBtn{
+    background-color: #FFB219;
+    color: #fff;
+    border: 1px solid #fff;
+justify-content: space-between
+}
+
+#moreBtn{
+    color: #fff;
+    background-color: #1975FF;
+    border: 1px solid #fff
+}
+ 

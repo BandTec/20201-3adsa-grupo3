@@ -13,7 +13,7 @@ export default function SignIn() {
   return (
     <section>
       <Navbar/>
-      <LabelWelcome labelText="Realize aqui o seu login"/>
+      <LabelWelcome labelTitle="Bem vindo ao Compass.io" labelText="Realize aqui o seu login"/>
       <br/>
 
 
@@ -49,7 +49,7 @@ export default function SignIn() {
             <div className="bold center">Esqueci minha senha</div>
           </div>
           <div className="blueWord formFooter">
-            <div className="bold center">Ainda não possui cadastro? <span className="yellowWord">Cadastre-se aqui!</span></div>
+            <div className="bold center">Ainda não possui cadastro? <a href="signup" className="yellowWord">Cadastre-se aqui!</a></div>
 
           </div>
         </span>

@@ -3,8 +3,8 @@ import './label-welcome.css';
 
 export default function LabelWelcome(props) {
   return(
-      <div>
-          <label className="bem-vindo">Bem vindo ao Compass.io</label>
+      <div className="labelWelcome">
+          <label className="title">{props.labelTitle}</label>
           <br/>
           <label className="subtitulo">{props.labelText}</label>
       </div>

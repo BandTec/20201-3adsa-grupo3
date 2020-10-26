@@ -6,7 +6,6 @@
 .container > .loginImagePart{
     width: 50%;
     height: 500px;
-    background-color: #1975FF;
     z-index: 0;
 }
 
