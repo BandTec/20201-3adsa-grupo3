@@ -1,7 +1,7 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class UsuarioFisico {
@@ -9,29 +9,41 @@ public class UsuarioFisico {
     @Id
     @Column(name = "id_usuario_fisico")
     private Integer idUsuarioFisico;
-    @Column(length = 90, nullable = false)
+
+    @Column(length = 90, nullable = false, unique = true)
     private String email;
+
     @Column(length = 80, nullable = false)
     private String nome;
+
     @Column(length = 45, nullable = false)
     private String senha;
+
     @Column(length = 15, nullable = false)
     private String telefone;
+
     @Column(nullable = false, name = "data_nascimento")
     private Date dataNascimento;
+
     @Column(length = 14, nullable = false)
     private String cpf;
+
+    @Column(name = "sexo")
     private Boolean sexo;
+
     @OneToOne
     @JoinColumn(nullable = false, name = "fk_endereco")
     private Endereco fkEndereco;
 
-    public Endereco getFkEndereco() {
-        return fkEndereco;
+    @Column(nullable = false)
+    private Boolean logado;
+
+    public Boolean getLogado() {
+        return logado;
     }
 
-    public void setFkEndereco(Endereco fkEndereco) {
-        this.fkEndereco = fkEndereco;
+    public void setLogado(Boolean logado) {
+        this.logado = logado;
     }
 
     public Integer getIdUsuarioFisico() {
@@ -96,5 +108,13 @@ public class UsuarioFisico {
 
     public void setSexo(Boolean sexo) {
         this.sexo = sexo;
+    }
+
+    public Endereco getFkEndereco() {
+        return fkEndereco;
+    }
+
+    public void setFkEndereco(Endereco fkEndereco) {
+        this.fkEndereco = fkEndereco;
     }
 }

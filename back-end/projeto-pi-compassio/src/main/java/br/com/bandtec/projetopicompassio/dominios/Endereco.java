@@ -5,26 +5,30 @@ import javax.persistence.*;
 @Entity
 public class Endereco {
 
-    //Atributos
     @Id
     @Column(name = "id_endereco")
     private Integer idEndereco;
+
     @Column(nullable = false)
     private String logradouro;
+
     @Column(nullable = false, name = "numero_endereco")
     private Integer numeroEndereco;
+
     @Column(nullable = false)
     private String complemento;
+
     @Column(name = "CEP", length = 9, nullable = false)
     private String cep;
+
     @Column(length = 45, nullable = false)
     private String bairro;
-    @Column(length = 45, nullable = false)
+
+    @Column(length = 2, nullable = false)
     private String estado;
+
     @Column(length = 45, nullable = false)
     private String cidade;
-
-    //Métodos
 
     public Integer getIdEndereco() {
         return idEndereco;
