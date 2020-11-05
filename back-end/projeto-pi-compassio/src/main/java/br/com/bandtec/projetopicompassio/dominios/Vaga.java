@@ -1,5 +1,7 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
+import br.com.bandtec.projetopicompassio.dto.VagaDTO;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,44 +10,55 @@ public class Vaga {
 
     @Id
     @Column(name = "id_vaga")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idVaga;
 
     @Column(length = 256, nullable = false)
     private String titulo;
 
-    @Column(length = 256, nullable = false, name = "descricao_vaga")
+    @Column(length = 256, name = "descricao_vaga")
     private String descricaoVaga;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String causa;
 
     @Column(nullable = false, name = "data_inicio")
     @Temporal(value = TemporalType.DATE)
     private Date dataInicio;
 
-    @Column(nullable = false, name = "data_fim")
+    @Column(name = "data_fim")
     @Temporal(value = TemporalType.DATE)
     private Date dataFim;
 
-    @Column(length = 256, nullable = false, name = "descricao_completa")
+    @Column(length = 256, name = "descricao_completa")
     private String descricaoCompleta;
 
-    @Column(length = 100, nullable = false, name = "area_atuacao")
+    @Column(length = 100, name = "area_atuacao")
     private String areaAtuacao;
 
-    @Column(length = 256, nullable = false, name = "descricao_area")
+    @Column(length = 256, name = "descricao_area")
     private String descricaoArea;
 
-    @Column(length = 256, nullable = false, name = "descricao_requisitos")
+    @Column(length = 256, name = "descricao_requisitos")
     private String descricaoRequisitos;
 
     @OneToOne
-    @JoinColumn(nullable = false, name = "fk_endereco")
+    @JoinColumn(name = "fk_endereco")
     private Endereco fkEndereco;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_usuario_juridico")
     private UsuarioJuridico fkUsuarioJuridico;
+
+    public Vaga() {
+
+    }
+
+    public Vaga(VagaDTO other) {
+        this.setIdVaga(null);
+        this.setTitulo(other.getTitulo());
+        this.setDataInicio(other.getDataInicio());
+    }
 
     public Integer getIdVaga() {
         return idVaga;

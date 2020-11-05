@@ -1,7 +1,8 @@
 INSERT INTO endereco (id_endereco, logradouro, numero_endereco, complemento, cep, bairro, estado, cidade) VALUES
 (1, 'Rua Itororó', 185, '', '09645-855', 'Santa Luzia', 'SP', 'Ribeirão Pires'),
 (2, 'Rua Itajobá', 323, '', '09601-000', 'Maria Clara', 'SP', 'Ribeirão Preto'),
-(3, 'Rua das Flores', 555, '', '15254-999', 'Jordanopolis', 'MG', 'Uberlandia');
+(3, 'Rua das Flores', 555, '', '15254-999', 'Jordanopolis', 'MG', 'Uberlandia'),
+(4, 'Rua das Dores', 555, '', '15254-999', 'Jordanopolis', 'MG', 'Uberlandia');
 
 INSERT INTO usuario_juridico (id_usuario_juridico, nome_ong, email, senha, telefone, cnpj, causa, descricao_ong, logado, fk_endereco) VALUES
 (1, 'Teto Brasil', 'tetobrasil@email.com', 'tetobrasil@123', '1159185227', '11637264000168', 'Construção', 'Construção de moradias para pessoas de baixa renda', false, 1);
@@ -19,9 +20,9 @@ INSERT INTO avaliacao (id_avaliacao, pontuacao, relatorio, fk_usaurio_fisico, fk
 (5, 1, 'foi péssimo', 1, 1);
 
 INSERT INTO vaga (id_vaga, titulo, descricao_vaga, causa, data_inicio, data_fim, descricao_completa, area_atuacao, descricao_area, descricao_requisitos, fk_endereco, fk_usuario_juridico) VALUES
-(1, 'Ajudar a construir uma escola', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1),
-(2, 'Mutirão para reforma da creche', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1),
-(3, 'Levar comida para moradores de rua', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1);
+(null, 'Ajudar a construir uma escola', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1),
+(null, 'Mutirão para reforma da creche', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1),
+(null, 'Levar comida para moradores de rua', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1);
 
 INSERT INTO usuario_fisico_vaga (data_inscricao, fk_usuario_fisico, fk_vaga) VALUES
 ('2020-10-20', 1, 1),

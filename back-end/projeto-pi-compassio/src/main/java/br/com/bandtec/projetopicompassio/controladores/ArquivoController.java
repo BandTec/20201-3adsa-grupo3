@@ -5,10 +5,7 @@ import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.dto.*;
-import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoRepository;
-import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoVagaRepository;
-import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
-import br.com.bandtec.projetopicompassio.repositorios.VagaRepository;
+import br.com.bandtec.projetopicompassio.repositorios.*;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -33,6 +30,8 @@ public class ArquivoController {
     private UsuarioFisicoRepository voluntarioRepository;
     @Autowired
     private UsuarioFisicoVagaRepository voluntarioDaVagaRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     private String idArquivo;
     private String nomeDoArquivo;
