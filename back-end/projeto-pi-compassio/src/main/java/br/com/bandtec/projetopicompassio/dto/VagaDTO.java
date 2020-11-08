@@ -1,7 +1,5 @@
 package br.com.bandtec.projetopicompassio.dto;
 
-import br.com.bandtec.projetopicompassio.utils.Converter;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;

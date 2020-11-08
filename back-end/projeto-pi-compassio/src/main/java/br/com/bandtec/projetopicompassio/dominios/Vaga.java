@@ -54,12 +54,6 @@ public class Vaga {
 
     }
 
-    public Vaga(VagaDTO other) {
-        this.setIdVaga(null);
-        this.setTitulo(other.getTitulo());
-        this.setDataInicio(other.getDataInicio());
-    }
-
     public Integer getIdVaga() {
         return idVaga;
     }
