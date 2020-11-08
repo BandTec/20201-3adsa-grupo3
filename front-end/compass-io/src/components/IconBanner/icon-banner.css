@@ -1,0 +1,19 @@
+.text{
+    color: #FFB219;
+    font-size: 3rem;
+}
+
+.subText{
+    font-size: 2rem;
+}
+
+.iconBanner{
+    width: 15rem;
+    height: 18rem;
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+}
+
+.center{
+    align-items: center;
+}

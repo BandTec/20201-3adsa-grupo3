@@ -1,0 +1,10 @@
+.grayBanner{
+    width: 100vw;
+    height: 20rem;
+    background-color: #EEEEEE;
+    margin: 0 -7rem;
+}
+
+.bannerContent{
+    margin-top: 3rem;
+}

@@ -13,19 +13,20 @@ export default function SignIn() {
   return (
     <section>
       <Navbar/>
-      <LabelWelcome labelText="Realize aqui o seu login"/>
+      <LabelWelcome labelTitle="Bem vindo ao Compass.io" labelText="Realize aqui o seu login"/>
       <br/>
 
 
       <div className="container">
-        <span className="loginImage">
+        <span className="loginImagePart">
+          <span className="loginImage">
             <Image width="600" className="childrenImage" height="495" src={loginImage} />
-        </span>
-
-        <span className="textImage">Fazendo a diferença conforme o seu <br/>
+          </span>
+          <span className="textImage">
+            Fazendo a diferença conforme o seu <br/>
             <span className="yellowWord">perfil</span>.
+          </span>
         </span>
-
 
         <span className="loginForm">
           <div className="center title">
@@ -48,7 +49,7 @@ export default function SignIn() {
             <div className="bold center">Esqueci minha senha</div>
           </div>
           <div className="blueWord formFooter">
-            <div className="bold center">Ainda não possui cadastro? <span className="yellowWord">Cadastre-se aqui!</span></div>
+            <div className="bold center">Ainda não possui cadastro? <a href="signup" className="yellowWord">Cadastre-se aqui!</a></div>
 
           </div>
         </span>

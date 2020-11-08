@@ -39,20 +39,19 @@ Para criar uma branch existe 2 formas:
 ### Atualizando sua branch de trabalho
 Todos os dias, antes de iniciar seus trabalhos, é recomendado atualizar a branch "principal" (podendo esta ser a master ou alguma outra).
   
-Para isso, recomenda-se fazer o seguinte passo-a-passo:  
-  `git checkout branch_principal`  
-  `git fetch --all; git pull`  
-  `git reset --hard origin/branch_principal`  
-  `git checkout sua_branch_de_trabalho`  
-  `git rebase branch_principal`  
-  `git push origin +HEAD`  
+Para isso, recomenda-se fazer o seguinte passo-a-passo:
+- git checkout `branch_principal`;
+- git fetch --all; git pull;
+- git reset --hard origin/`branch_principal`;
+- git checkout `sua_branch_de_trabalho`;
+- git rebase `branch_principal`;
+- git push origin +HEAD;
   
  Esses comandos não necessariamente vão atualizar 100% sua branch, além de poder dar conflitos em alguns casos. Caso tenha qualquer problema com esses comandos, cancele ou aborte eles e avise os demais membros do grupo.
 
 ### Merge  
 
-**Antes de fazer o merge, os membros do time deverão ser avisados**
-
-Para fazer o merge pelo terminal/bash deve-se executar os comandos:  
-  `git checkout master` <- Troca para a branch master  
-  `git merge nome_da_branch` <- Funde a branch mencionada com a master
+**Quando quiser pegar alterações de outra branch e mesclar com a sua, deverá ser executado o seguinte comando:**  
+  `git merge nome_da_branch` <- Funde a branch mencionada com a sua  
+  
+Esse comando deverá ser executado sempre antes de fazer uma pull request, mergeando sua branch com a **origin/master**

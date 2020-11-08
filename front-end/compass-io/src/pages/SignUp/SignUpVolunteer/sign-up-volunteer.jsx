@@ -21,7 +21,7 @@ export default function SignUp() {
             <Image width="640" className="childrenImage" height="950" src={imgVolunteerSingup} />
         </span>
 
-        <span className="textImage">Venha também fazer parte desta <br/>
+        <span className="textImage">Venha também fazer <br/>parte desta <br/>
             <span className="yellowWord">mudança</span>.
         </span>
 
