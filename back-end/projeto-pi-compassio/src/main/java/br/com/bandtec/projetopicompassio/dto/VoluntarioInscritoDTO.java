@@ -1,5 +1,7 @@
 package br.com.bandtec.projetopicompassio.dto;
 
+import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.text.SimpleDateFormat;

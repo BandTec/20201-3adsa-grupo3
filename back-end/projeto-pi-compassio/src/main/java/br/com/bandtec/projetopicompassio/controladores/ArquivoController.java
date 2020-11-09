@@ -5,10 +5,10 @@ import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.dto.*;
-import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoRepository;
-import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoVagaRepository;
-import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
-import br.com.bandtec.projetopicompassio.repositorios.VagaRepository;
+import br.com.bandtec.projetopicompassio.mappers.UsuarioFisicoMapper;
+import br.com.bandtec.projetopicompassio.mappers.UsuarioFisicoVagaMapper;
+import br.com.bandtec.projetopicompassio.mappers.VagaMapper;
+import br.com.bandtec.projetopicompassio.repositorios.*;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,6 +34,14 @@ public class ArquivoController {
     private UsuarioFisicoRepository voluntarioRepository;
     @Autowired
     private UsuarioFisicoVagaRepository voluntarioDaVagaRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+    @Autowired
+    private VagaMapper vagaMapper;
+    @Autowired
+    private UsuarioFisicoMapper usuarioFisicoMapper;
+    @Autowired
+    private UsuarioFisicoVagaMapper usuarioFisicoVagaMapper;
 
     private String idArquivo;
     private String nomeDoArquivo;
@@ -43,7 +52,27 @@ public class ArquivoController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity importarArquivo(@RequestParam("file") MultipartFile arquivo) throws Exception {
         IArquivo arquivoImportado = ArquivoAdapter.importar(arquivo);
+        if (arquivoImportado instanceof Arquivo01)
+            convertAndInsertOnDatabaseFromObjectFile(arquivoImportado.getObject());
+        else
+            return ResponseEntity.badRequest().body("Arquivo inválido! O único modelo de arquivo aceito é o 'Arquivo01'");
         return ResponseEntity.ok(arquivoImportado.getObject());
+    }
+
+    private void convertAndInsertOnDatabaseFromObjectFile(Object object) throws Exception {
+        try {
+            VagasDeUmaOngDTO vagasDeUmaOngDTO = (VagasDeUmaOngDTO)object;
+            UsuarioJuridico ong = usuarioJuridicoRepository.findUsuarioJuridicoByNomeOng(vagasDeUmaOngDTO.getNomeDaOng());
+            List<Vaga> vagas = new ArrayList();
+            for (VagaDTO vagaDTO : vagasDeUmaOngDTO.getVagas().getAll()) {
+                Vaga vaga = vagaMapper.toVaga(vagaDTO);
+                vaga.setFkUsuarioJuridico(ong);
+                vagas.add(vaga);
+            }
+            vagaRepository.saveAll(vagas);
+        } catch (Exception ex) {
+            throw new Exception("Objeto de arquivo inválido", ex);
+        }
     }
 
     @GetMapping(value = "/arquivo01", produces = {"application/octet-stream"})
@@ -110,20 +139,7 @@ public class ArquivoController {
 
             ListaObj<VoluntarioInscritoDTO> voluntariosObj = new ListaObj<>(voluntariosDeUmaVaga.size());
             for (UsuarioFisicoVaga voluntario : voluntariosDeUmaVaga) {
-                voluntariosObj.adiciona(
-                    new VoluntarioInscritoDTO(
-                        new UsuarioFisicoDTO(
-                            voluntario.getFkUsuarioFisico().getNome(),
-                            voluntario.getFkUsuarioFisico().getEmail(),
-                            voluntario.getFkUsuarioFisico().getDataNascimento(),
-                            new EnderecoDTO(
-                                voluntario.getFkUsuarioFisico().getFkEndereco().getCidade(),
-                                voluntario.getFkUsuarioFisico().getFkEndereco().getEstado()
-                            )
-                        ),
-                        voluntario.getDataInscricao()
-                    )
-                );
+                voluntariosObj.adiciona(usuarioFisicoVagaMapper.toVoluntarioInscritoDTO(voluntario));
             }
             VoluntariosDeUmaVagaDTO voluntariosDaVaga = new VoluntariosDeUmaVagaDTO(nomeDaOng, nomeDaVaga, voluntariosObj);
             arquivo.setObject(voluntariosDaVaga);
