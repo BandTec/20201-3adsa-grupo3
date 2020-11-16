@@ -1,0 +1,62 @@
+#vacancyMenu{
+    border-top: 1px solid #6A6A6A;
+    border-bottom: 1px solid #6A6A6A;
+    height: 4rem;
+    display: flex;
+    /* justify-content: space-between; */
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500
+}
+
+.menuOptions{
+    margin: auto 15rem auto -1rem;
+    color: #6a6a6a
+}
+
+.menuOptions:hover{
+    color: #000;
+    transition: 0.5s;
+    text-decoration: underline;
+    text-decoration-color: #1975FF
+}
+
+h1{
+    font-size: 2rem
+}
+
+#aboutVacancy{
+    width: 60%;
+    margin-bottom: 1rem;
+}
+
+#aboutOng{
+    border-top: 1px solid #6A6A6A;
+    margin-bottom: 1rem;
+    /* border-bottom: 1px solid #6A6A6A; */
+}
+
+#workSchedule{
+    border-top: 1px solid #6A6A6A;
+    margin-bottom: 1rem
+}
+
+.aboutVacancyText{
+    color: #6A6A6A
+}
+
+.workScheduleInfo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.vacancyCarousel{
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 45rem
+}
+
+.vacancyCarousel > h1{
+    margin-left: 1rem;
+    background-color: #FCFCFC
+}

@@ -1,0 +1,31 @@
+.aboutOng{
+    display: flex;
+
+}
+
+#imgOng{
+    width: 10rem;
+    height: 10rem;
+    background-color: #f00;
+}
+
+.infoOng{
+    color: #6A6A6A;
+    width: 80%;
+    margin-left: 5rem;
+    font-weight: 500
+}
+
+.infoOngTitle{
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.infoOngText{
+    margin-bottom: 1rem
+}
+
+.infoOngUrl{
+    margin-left: -1rem
+}

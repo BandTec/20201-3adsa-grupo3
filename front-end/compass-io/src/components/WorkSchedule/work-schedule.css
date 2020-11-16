@@ -1,0 +1,22 @@
+.workSchedule{
+    margin-top: 1rem;
+    border-bottom: 1px solid #6A6A6A;
+    font-size: 1.5rem;
+}
+
+.grayPhrase{
+    color: #6A6A6A;
+}
+
+.infoWorkSchedule{
+    margin-top: 1rem;
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.boldText{
+    font-weight: 500;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+
+}
