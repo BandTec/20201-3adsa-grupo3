@@ -66,13 +66,12 @@ public class UsuarioJuridicoController {
     }
 
     @PostMapping("/auth")
-    public ResponseEntity autenticar(@RequestBody Auth authentic, HttpSession session){
+    public ResponseEntity autenticar(@RequestBody Auth authentic){
         if (repository.pesquisaEmailESenha(authentic.getEmail(), authentic.getSenha()).isEmpty()){
             return ResponseEntity.notFound().build();
         }
         UsuarioJuridico atual = repository.pesquisaEmailESenha(authentic.getEmail(), authentic.getSenha()).get(0);
         atual.setLogado(true);
-        session.setAttribute("nomeDaOng", atual.getNomeOng());
         repository.save(atual);
         return ResponseEntity.ok(atual);
     }

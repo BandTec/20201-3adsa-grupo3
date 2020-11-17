@@ -1,6 +1,5 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
-
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.repositorios.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
