@@ -9,15 +9,19 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import ComboBox from '../../../components/ComboBox/combo-box';
 
+import Service from '../../../services/sign-up-ong-service'
+
 import './sign-up-ong.css';
 
-// import { Container } from './styles';
-
 export default function SignUp() {
+
+  window.onload = new Service().getUsuarios();
+
   return (
+
     // <div>Cadastro voluntário</div>
 
-<section>
+    <section>
       <div className="container">
         <span className="loginImage">
             <Image width="640" className="childrenImage" height="950" src={imgOngSingup} />
@@ -26,8 +30,9 @@ export default function SignUp() {
         <span className="textImageOng">Encontre aqui os voluntários ideais que <br/>
             <span className="yellowWord">você precisa</span>.
         </span>
-
+        
         <div className="formOng">
+
         <form className="loginForm">
           <div className="inputInfPessoal">
            <label className="label-title">Informações Institucionais</label>

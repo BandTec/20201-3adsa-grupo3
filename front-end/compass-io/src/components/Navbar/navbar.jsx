@@ -16,9 +16,9 @@ function Navbar() {
                 </a>
             </span>
             <div className="botoes">
-                <a className="link" href="www.google.com">Seja voluntário</a>
-                <a className="link" href="www.google.com">Projetos</a>
-                <a className="link" href="www.google.com">Notícias</a>
+                <a className="link" href="#">Seja voluntário</a>
+                <a className="link" href="#">Projetos</a>
+                <a className="link" href="#">Notícias</a>
                 <a disabled id="entrar" href="signin" className="link botao">Entrar</a>
             </div>
         </div>
