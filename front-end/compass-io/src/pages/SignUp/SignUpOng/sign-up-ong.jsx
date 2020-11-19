@@ -15,7 +15,26 @@ import './sign-up-ong.css';
 
 export default function SignUp() {
 
-  window.onload = new Service().getUsuarios();
+  window.onload = () => {
+    debugger;
+
+    let service = new Service();
+    let todosUsuarios = sessionStorage["todosUsuarios"];
+    let usuario = sessionStorage["usuario"];
+
+    service.getUsuarios();
+    let todosUsuariosObj = JSON.parse(todosUsuarios);
+    alert(JSON.stringify(todosUsuariosObj));
+
+    service.getUsuarioById(1);
+    let usuarioObj = JSON.parse(usuario);
+    alert(JSON.stringify(usuarioObj));
+
+    usuarioObj.idUsuarioJuridico = 44;
+    usuarioObj.email = "novoemail44@aaa.com"
+    
+    service.postUsuario(usuarioObj);
+  }
 
   return (
 

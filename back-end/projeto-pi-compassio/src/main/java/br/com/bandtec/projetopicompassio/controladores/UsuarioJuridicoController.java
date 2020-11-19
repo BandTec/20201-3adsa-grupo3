@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarioJuridicos")
+@RequestMapping("/usuariosJuridicos")
 public class UsuarioJuridicoController {
 
     @Autowired
