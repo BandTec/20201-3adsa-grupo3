@@ -2,13 +2,14 @@ import React from 'react';
 // import Carousel from 'react-bootstrap/Carousel';
 // import { Item, Caption } from 'react-bootstrap/Carousel';
 import Slider from "react-slick";
-import AnimalImg from '../../assets/images/animal-img.jpg';
-import ChildImg from '../../assets/images/child-img.jpg';
-import DisabilityImg from '../../assets/images/disability-img.jpg';
-import ElderlyImg from '../../assets/images/elderly-img.jpg';
-import GardeningImg from '../../assets/images/gardening-img.jpg';
-import HumanRightsImg from '../../assets/images/human-rights-img.jpg';
-import NatureImg from '../../assets/images/nature-img.jpg';
+// import AnimalImg from '../../assets/images/animal-img.jpg';
+// import ChildImg from '../../assets/images/child-img.jpg';
+// import DisabilityImg from '../../assets/images/disability-img.jpg';
+// import ElderlyImg from '../../assets/images/elderly-img.jpg';
+// import GardeningImg from '../../assets/images/gardening-img.jpg';
+// import HumanRightsImg from '../../assets/images/human-rights-img.jpg';
+// import NatureImg from '../../assets/images/nature-img.jpg';
+import CarouselCard from '../CarouselCard/carousel-card';
 import { makeStyles } from '@material-ui/core/styles';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -61,9 +62,9 @@ const useStyles = makeStyles({
 
       },
       carouselContainer: {
-        margin: "0 0",
-        width: "105%"
-        // width: "10rem"
+        margin: "0 0 0 2rem",
+        // width: "100%"
+        width: "77rem"
       },
       textImg:{
         color: "#fcfcfc",
@@ -102,14 +103,33 @@ export default function CarouselFilter() {
     arrows: true,
     prevArrow: <SamplePrevArrow />,
     nextArrow: <SampleNextArrow />,
-    slidesToShow: 4,
+    slidesToShow: 3,
     
 }
 
 return (
   <div className={classes.carouselContainer}>
     <Slider className={classes.slider} {...settings}>
-      <div className={classes.carouselImgContainer}>
+        <CarouselCard nameOng="Teto Brasil" title="Teste"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus."
+        location="São Paulo, SP, Grajaú" schedule="1x por semana"/>
+        <CarouselCard nameOng="Teto Brasil" title="Teste"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus."
+        location="São Paulo, SP, Grajaú" schedule="1x por semana"/>
+        <CarouselCard nameOng="Teto Brasil" title="Teste"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus."
+        location="São Paulo, SP, Grajaú" schedule="1x por semana"/>
+        <CarouselCard nameOng="Teto Brasil" title="Teste"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus."
+        location="São Paulo, SP, Grajaú" schedule="1x por semana"/>
+        <CarouselCard nameOng="Teto Brasil" title="Teste"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus."
+        location="São Paulo, SP, Grajaú" schedule="1x por semana"/>
+        <CarouselCard nameOng="Teto Brasil" title="Teste"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus."
+        location="São Paulo, SP, Grajaú" schedule="1x por semana"/>
+
+      {/* <div className={classes.carouselImgContainer}>
         <span className={classes.textImg}>Animais</span>
         <img src={AnimalImg} className={classes.carouselImg} />
       </div>
@@ -139,7 +159,7 @@ return (
           <span className={classes.textImg}>Meio Ambiente</span>
 
         <img src={NatureImg} className={classes.carouselImg} />
-      </div>
+      </div> */}
     </Slider>
   </div>
 

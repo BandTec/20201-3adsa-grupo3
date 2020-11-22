@@ -57,7 +57,7 @@ a{
     border-radius: 0.3rem;
 }
 
-link:hover{
+.link:hover{
     background-color:#0084FE;
     color: #fff;
     padding: 0.5rem 1rem 0.5rem 1rem;

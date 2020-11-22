@@ -1,0 +1,64 @@
+.carouselCard{
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 33rem;
+    width: 20rem;
+    background-color: #eee;
+}
+
+.cardImg{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    height: 12rem;
+    width: 18rem;
+    background-color: #158723
+}
+
+#contentNameOng{
+    margin-left: 1rem;
+    color: #6a6a6a
+}
+
+#contentTitle{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#contentDescription{
+    color: #6a6a6a;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+#contentLocation{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    color: #1975ff;
+    font-weight: 500;
+    display: flex;
+}
+
+#contentLocationText{
+    margin-top: 0.5rem;
+}
+
+#contentSchedule{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    color: #FFB219;
+    font-weight: 500;
+    display: flex;
+}
+
+#contentScheduleText{
+    margin-top: 0.5rem;
+}
+
+#cardDescription{
+    display: flex;
+}
+
+.goNextBtn{
+    margin-top: 2rem;
+    margin-left: 1rem;
+}

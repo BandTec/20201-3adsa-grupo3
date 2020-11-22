@@ -13,6 +13,7 @@ import Service from '../../../services/sign-up-ong-service'
 
 import './sign-up-ong.css';
 
+<<<<<<< HEAD
 export default function SignUp() {
 
   window.onload = () => {
@@ -43,11 +44,28 @@ export default function SignUp() {
     <section>
       <div className="container">
         <span className="loginImage">
-            <Image width="640" className="childrenImage" height="950" src={imgOngSingup} />
-        </span>
+=======
+export default class SignUp extends React.Component {
 
-        <span className="textImageOng">Encontre aqui os voluntários ideais que <br/>
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+
+    return (
+      // <div>Cadastro voluntário</div>
+
+      <section>
+        <div className="container">
+          <span className="loginImage">
+>>>>>>> origin/master
+            <Image width="640" className="childrenImage" height="950" src={imgOngSingup} />
+          </span>
+
+          <span className="textImageOng">Encontre aqui os voluntários ideais que <br />
             <span className="yellowWord">você precisa</span>.
+<<<<<<< HEAD
         </span>
         
         <div className="formOng">
@@ -56,76 +74,93 @@ export default function SignUp() {
           <div className="inputInfPessoal">
            <label className="label-title">Informações Institucionais</label>
           </div>
+=======
+          </span>
 
-          <div className="inputInfPessoal">
-            <InputLine title="Nome da Instituição" type="text" placeholder="Ex: Sonhar Acordado"/>
-          </div>
+          <div className="formOng">
+            <form className="loginForm">
+              <div className="inputInfPessoal">
+                <label className="label-title">Informações Institucionais</label>
+              </div>
+>>>>>>> origin/master
 
-          <div className="inputInfPessoal">
-            <InputLine title="CNPJ" type="text" placeholder="XX.XXX.XXX/XXXX-XX"/>
-          </div>
+              <div className="inputInfPessoal">
+                <InputLine title="Nome da Instituição" type="text" placeholder="Ex: Sonhar Acordado" />
+              </div>
 
-          <div className="inputInfPessoal">          
-            <InputLine title="Telefone de Contato" type="text" placeholder="(XX)XXXXX-XXXX"/>
-          </div>
+              <div className="inputInfPessoal">
+                <InputLine title="CNPJ" type="text" placeholder="XX.XXX.XXX/XXXX-XX" />
+              </div>
 
-          <div className="inputInfPessoal">
-            <h3>Endereço</h3>
-            <InputLine title="Logradouro" type="text" placeholder="Nome da Rua/Avenida/Alameda"/>
-          </div>
+              <div className="inputInfPessoal">
+                <InputLine title="Telefone de Contato" type="text" placeholder="(XX)XXXXX-XXXX" />
+              </div>
 
-          <div className="inputBairro">
-            <InputLine id="numeroForm" title="Número" type="text" placeholder="XXXX"/>
-            <InputLine id="bairroForm" title="Bairro" type="text" placeholder="Ex: Centro"/>
-          </div>
+              <div className="inputInfPessoal">
+                <h3>Endereço</h3>
+                <InputLine title="Logradouro" type="text" placeholder="Nome da Rua/Avenida/Alameda" />
+              </div>
 
-          <div className="inputCep"> 
-            <InputLine title="CEP" type="text" placeholder="XXXXX-XXX"/>
-            <ComboBox labelTitle="Estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
-            nomeItem5="SP"/>
-            <ComboBox labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
-            nomeItem5="Suzano"/>
-          </div>
+              <div className="inputBairro">
+                <InputLine id="numeroForm" title="Número" type="text" placeholder="XXXX" />
+                <InputLine id="bairroForm" title="Bairro" type="text" placeholder="Ex: Centro" />
+              </div>
 
-          <div className="inputInfPessoal"> 
-            <ComboBox labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
-            nomeItem5="Imóveis"/>
-            <Button id="btnAdd" variant="contained" color="primary">+ Adicionar Causa</Button>
-          </div>
+              <div className="inputCep">
+                <InputLine title="CEP" type="text" placeholder="XXXXX-XXX" />
+                <ComboBox labelTitle="Estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
+                  nomeItem5="SP" />
+                <ComboBox labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
+                  nomeItem5="Suzano" />
+              </div>
 
-        </form>
-        
-        <form className="infContaForm">
-            
-          <div className="inputLogin">
-          <LabelTitleForm title="Informações da Conta"/>
-          </div>
+              <div className="inputInfPessoal">
+                <ComboBox labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
+                  nomeItem5="Imóveis" />
+                <Button id="btnAdd" variant="contained" color="primary">+ Adicionar Causa</Button>
+              </div>
 
-          <div className="inputInfPessoal">
-            <InputLine title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com"/>
-          </div>
+            </form>
 
-          <div className="inputSenha">
-            <InputLine title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********"/>
-          </div>
+            <form className="infContaForm">
 
-          <div className="inputSenha">
-            <InputLine title="Confirmar Senha" type="password" placeholder="********"/>
-          </div>
+              <div className="inputLogin">
+                <LabelTitleForm title="Informações da Conta" />
+              </div>
 
-        </form>
+              <div className="inputInfPessoal">
+                <InputLine title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
+              </div>
 
-        <div className="checkboxOng">
-        <Checkbox></Checkbox>
-        <span>Li e concordo com os <b className="blueWord">termos</b></span>
-        </div>
-        
-        <Button id="btnVoltarOng" variant="contained" color="primary">Voltar</Button>
-        <Button id="btnCadastrarOng" variant="contained" color="primary">Cadastrar</Button>
+              <div className="inputSenha">
+                <InputLine title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
+              </div>
 
-        </div>
+              <div className="inputSenha">
+                <InputLine title="Confirmar Senha" type="password" placeholder="********" />
+              </div>
 
+            </form>
+
+<<<<<<< HEAD
       </div>
     </section>
   );
 };
+=======
+            <div className="checkboxOng">
+              <Checkbox></Checkbox>
+              <span>Li e concordo com os <b className="blueWord">termos</b></span>
+            </div>
+
+            <Button id="btnVoltarOng" variant="contained" color="primary">Voltar</Button>
+            <Button id="btnCadastrarOng" variant="contained" color="primary">Cadastrar</Button>
+
+          </div>
+
+        </div>
+      </section>
+    );
+  }
+};
+>>>>>>> origin/master
