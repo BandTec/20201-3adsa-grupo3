@@ -4,7 +4,7 @@ import VacancyHeader from '../../components/VacancyHeader/vacancy-header';
 import AboutOng from '../../components/AboutOng/about-ong';
 import WorkSchedule from '../../components/WorkSchedule/work-schedule';
 import CarouselVacancy from '../../components/CarouselVacancy/carousel-vacancy';
-import './vacancy-specific.css';
+// import './vacancy-specific.css';
 import { Loader } from "@googlemaps/js-api-loader"
 
 // import { Container } from './styles';

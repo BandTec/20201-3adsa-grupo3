@@ -1,4 +1,5 @@
 import React from 'react';
+import bcrypt from 'bcrypt'
 import InputLine from "../../../components/InputLine/input-line";
 import LabelTitleForm from "../../../components/LabelTitleForm/label-title-form";
 import Button from '@material-ui/core/Button';
@@ -9,42 +10,93 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import ComboBox from '../../../components/ComboBox/combo-box';
 
-import Service from '../../../services/sign-up-ong-service'
+import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
+import EnderecoService from '../../../services/endereco-service'
+import CommomFunctions from '../../../utils/functions'
 
 import './sign-up-ong.css';
+import { RecentActorsRounded } from '@material-ui/icons';
 
-<<<<<<< HEAD
-export default function SignUp() {
+function cadastrar() {
+  getEnderecoFormData();
+  getUsuarioFormData();
 
-  window.onload = () => {
-    debugger;
+  let enderecoService = new EnderecoService();
+  let usuarioJuridicoService = new UsuarioJuridicoService();
 
-    let service = new Service();
-    let todosUsuarios = sessionStorage["todosUsuarios"];
-    let usuario = sessionStorage["usuario"];
+  let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
+  const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
+  enderecoService.postEndereco(enderecoAsJson);
 
-    service.getUsuarios();
-    let todosUsuariosObj = JSON.parse(todosUsuarios);
-    alert(JSON.stringify(todosUsuariosObj));
+  let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
+  let usuarioAsJson = CommomFunctions.convertFormToJson(formUsuario);
+  let usuarioObj = JSON.parse(usuarioAsJson);
+  usuarioObj.fkEndereco = JSON.parse(sessionStorage["enderecoCriado"])
+  usuarioObj.senha = bcrypt.hash(usuarioObj.senha, 10);
+  usuarioAsJson = JSON.stringify(usuarioObj);
+  usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
+}
 
-    service.getUsuarioById(1);
-    let usuarioObj = JSON.parse(usuario);
-    alert(JSON.stringify(usuarioObj));
+function getUsuarioFormData() {
 
-    usuarioObj.idUsuarioJuridico = 44;
-    usuarioObj.email = "novoemail44@aaa.com"
-    
-    service.postUsuario(usuarioObj);
+  if (!validarSenha()) {
+    return;
+  } else {
+    let NomeDaOng = document.getElementById("nomeOng");
+    NomeDaOng.innerText = document.getElementsByName("nomeDaOng")[0].value;
+
+    let Email = document.getElementById("email");
+    Email.innerText = document.getElementsByName("email")[0].value;
+
+    let Senha = document.getElementById("senha");
+    Senha.innerText = document.getElementsByName("senha")[0].value;
+
+    let Telefone = document.getElementById("telefone");
+    Telefone.innerText = document.getElementsByName("telefone")[0].value;
+
+    let Cnpj = document.getElementById("cnpj");
+    Cnpj.innerText = document.getElementsByName("cnpj")[0].value;
+
+    let Causa = document.getElementById("causa");
+    Causa.innerText = document.getElementsByName("causa")[0].value;
   }
+}
 
-  return (
+function getEnderecoFormData() {
+  let Logradouro = document.getElementById("logradouro");
+  Logradouro.innerText = document.getElementsByName("logradouro")[0].value;
 
-    // <div>Cadastro voluntário</div>
+  let Numero = document.getElementById("numeroEndereco");
+  Numero.innerText = document.getElementsByName("numero")[0].value;
 
-    <section>
-      <div className="container">
-        <span className="loginImage">
-=======
+  let Cep = document.getElementById("cep");
+  Cep.innerText = document.getElementsByName("cep")[0].value;
+
+  let Bairro = document.getElementById("bairro");
+  Bairro.innerText = document.getElementsByName("bairro")[0].value;
+
+  let Cidade = document.getElementById("cidade");
+  Cidade.innerText = document.getElementsByName("cidade")[0].value;
+
+  let Estado = document.getElementById("estado");
+  Estado.innerText = document.getElementsByName("estado")[0].value;
+}
+
+function validarSenha() {
+  let senha = document.getElementsByName("senha")[0].value;
+  let confSenha = document.getElementsByName("confSenha")[0].value;
+  if (senha != confSenha) {
+    alert("Senhas não coincidem");
+    return false;
+  }
+  else if (senha.length < 8 || senha.length > 20) {
+    alert("A senha deve ter entre 8 e 20 caractéres");
+    return false;
+  }
+  else
+    return true;
+}
+
 export default class SignUp extends React.Component {
 
   constructor(props) {
@@ -52,29 +104,37 @@ export default class SignUp extends React.Component {
   }
 
   render() {
-
     return (
       // <div>Cadastro voluntário</div>
 
-      <section>
+      <React.Fragment>
+
+        <form id="usuarioJuridicoToSubmit" hidden>
+          <input id="nomeOng"/>
+          <input id="email"/>
+          <input id="senha"/>
+          <input id="telefone"/>
+          <input id="cnpj"/>
+          <input id="causa"/>
+        </form>
+
+        <form id="enderecoUsuarioJuridicoToSubmit" hidden>
+          <input id="logradouro"/>
+        <input id="numeroEndereco"/>
+          {/* input id="complemento"/> */}
+          <input id="cep"/>
+          <input id="bairro"/>
+          <input id="estado"/>
+          <input id="cidade"/>
+        </form>
+
         <div className="container">
           <span className="loginImage">
->>>>>>> origin/master
             <Image width="640" className="childrenImage" height="950" src={imgOngSingup} />
           </span>
 
           <span className="textImageOng">Encontre aqui os voluntários ideais que <br />
-            <span className="yellowWord">você precisa</span>.
-<<<<<<< HEAD
-        </span>
-        
-        <div className="formOng">
-
-        <form className="loginForm">
-          <div className="inputInfPessoal">
-           <label className="label-title">Informações Institucionais</label>
-          </div>
-=======
+            <span className="yellowWord">você precisa</span>
           </span>
 
           <div className="formOng">
@@ -82,40 +142,39 @@ export default class SignUp extends React.Component {
               <div className="inputInfPessoal">
                 <label className="label-title">Informações Institucionais</label>
               </div>
->>>>>>> origin/master
-
+              
               <div className="inputInfPessoal">
-                <InputLine title="Nome da Instituição" type="text" placeholder="Ex: Sonhar Acordado" />
+                <InputLine name="nomeDaOng" title="Nome da Instituição" type="text" placeholder="Ex: Sonhar Acordado" />
               </div>
 
               <div className="inputInfPessoal">
-                <InputLine title="CNPJ" type="text" placeholder="XX.XXX.XXX/XXXX-XX" />
+                <InputLine name="cnpj" title="CNPJ" type="text" placeholder="XX.XXX.XXX/XXXX-XX" />
               </div>
 
               <div className="inputInfPessoal">
-                <InputLine title="Telefone de Contato" type="text" placeholder="(XX)XXXXX-XXXX" />
+                <InputLine name="telefone" title="Telefone de Contato" type="text" placeholder="(XX)XXXXX-XXXX" />
               </div>
 
               <div className="inputInfPessoal">
                 <h3>Endereço</h3>
-                <InputLine title="Logradouro" type="text" placeholder="Nome da Rua/Avenida/Alameda" />
+                <InputLine name="logradouro" title="Logradouro" type="text" placeholder="Nome da Rua/Avenida/Alameda" />
               </div>
 
               <div className="inputBairro">
-                <InputLine id="numeroForm" title="Número" type="text" placeholder="XXXX" />
-                <InputLine id="bairroForm" title="Bairro" type="text" placeholder="Ex: Centro" />
+                <InputLine name="numero" id="numeroForm" title="Número" type="text" placeholder="XXXX" />
+                <InputLine name="bairro" id="bairroForm" title="Bairro" type="text" placeholder="Ex: Centro" />
               </div>
 
               <div className="inputCep">
-                <InputLine title="CEP" type="text" placeholder="XXXXX-XXX" />
-                <ComboBox labelTitle="Estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
+                <InputLine name="cep" title="CEP" type="text" placeholder="XXXXX-XXX" />
+                <ComboBox name="estado" labelTitle="Estado" id="estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
                   nomeItem5="SP" />
-                <ComboBox labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
+                <ComboBox name="cidade" labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
                   nomeItem5="Suzano" />
               </div>
 
               <div className="inputInfPessoal">
-                <ComboBox labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
+                <ComboBox name="causa" labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
                   nomeItem5="Imóveis" />
                 <Button id="btnAdd" variant="contained" color="primary">+ Adicionar Causa</Button>
               </div>
@@ -129,38 +188,30 @@ export default class SignUp extends React.Component {
               </div>
 
               <div className="inputInfPessoal">
-                <InputLine title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
+                <InputLine name="email" title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
               </div>
 
               <div className="inputSenha">
-                <InputLine title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
+                <InputLine name="senha" title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
               </div>
 
               <div className="inputSenha">
-                <InputLine title="Confirmar Senha" type="password" placeholder="********" />
+                <InputLine name="confSenha" title="Confirmar Senha" type="password" placeholder="********" />
               </div>
 
             </form>
-
-<<<<<<< HEAD
-      </div>
-    </section>
-  );
-};
-=======
             <div className="checkboxOng">
               <Checkbox></Checkbox>
               <span>Li e concordo com os <b className="blueWord">termos</b></span>
             </div>
 
             <Button id="btnVoltarOng" variant="contained" color="primary">Voltar</Button>
-            <Button id="btnCadastrarOng" variant="contained" color="primary">Cadastrar</Button>
+            <Button id="btnCadastrarOng" onClick={cadastrar} variant="contained" color="primary">Cadastrar</Button>
 
           </div>
 
         </div>
-      </section>
+      </React.Fragment>
     );
   }
 };
->>>>>>> origin/master

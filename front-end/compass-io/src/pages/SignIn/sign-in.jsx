@@ -1,4 +1,5 @@
 import React from 'react';
+import bcrypt from 'bcrypt'
 import Navbar from '../../components/Navbar/navbar';
 import LabelWelcome from '../../components/LabelWelcome/label-welcome';
 import InputLine from "../../components/InputLine/input-line";
@@ -6,16 +7,34 @@ import LabelTitleForm from "../../components/LabelTitleForm/label-title-form";
 import Image from '../../components/Image/image';
 import Button from '@material-ui/core/Button'
 
+import UsuarioJuridicoService from '../../services/usuario-juridico-service'
+import CommomFunctions from '../../utils/functions'
+
 import './sign-in.css';
 import loginImage from '../../assets/images/children-smile.jpg'
 
+function logar() {
+  let usuarioJuridicoService = new UsuarioJuridicoService();
+  
+  let formLogin = document.getElementById("formLoginToSubmit");
+  let formLoginAsJson = CommomFunctions.convertFormToJson(formLogin);
+  let formLoginObj = JSON.parse(formLoginAsJson);
+  formLoginObj.senha = bcrypt.hash(formLoginObj.senha, 10);
+  formLoginAsJson = CommomFunctions.convertFormToJson(formLoginObj);
+  usuarioJuridicoService.loginUsuarioJuridico(formLoginAsJson);
+}
+
 export default function SignIn() {
   return (
-    <section>
+    <React.Fragment>
       <Navbar/>
       <LabelWelcome labelTitle="Bem vindo ao Compass.io" labelText="Realize aqui o seu login"/>
       <br/>
 
+      <form id="formLoginToSubmit" hidden>
+        <input id="email"/>
+        <input id="senha"/>
+      </form>
 
       <div className="container">
         <span className="loginImagePart">
@@ -50,12 +69,10 @@ export default function SignIn() {
           </div>
           <div className="blueWord formFooter">
             <div className="bold center">Ainda não possui cadastro? <a href="signup" className="yellowWord">Cadastre-se aqui!</a></div>
-
           </div>
         </span>
 
-    
       </div>
-    </section>
+    </React.Fragment>
   );
 };
