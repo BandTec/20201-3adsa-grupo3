@@ -16,7 +16,7 @@ public class UsuarioJuridico {
     @Column(length = 80, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 60, nullable = false)
     private String senha;
 
     @Column(length = 15)
