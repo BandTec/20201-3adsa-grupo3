@@ -1,5 +1,4 @@
 import React from 'react';
-import bcryptjs from 'bcryptjs';
 import Navbar from '../../components/Navbar/navbar';
 import LabelWelcome from '../../components/LabelWelcome/label-welcome';
 import InputLine from "../../components/InputLine/input-line";
@@ -14,14 +13,23 @@ import './sign-in.css';
 import loginImage from '../../assets/images/children-smile.jpg'
 
 function logar() {
+  getLoginFormData();
   let usuarioJuridicoService = new UsuarioJuridicoService();
-  
+
   let formLogin = document.getElementById("formLoginToSubmit");
   let formLoginAsJson = CommomFunctions.convertFormToJson(formLogin);
   let formLoginObj = JSON.parse(formLoginAsJson);
-  formLoginObj.senha = bcryptjs.hash(formLoginObj.senha, 10);
-  formLoginAsJson = CommomFunctions.convertFormToJson(formLoginObj);
+  formLoginObj.senha = CommomFunctions.encryptPassword(formLoginObj.senha);
+  formLoginAsJson = JSON.stringify(formLoginObj);
   usuarioJuridicoService.loginUsuarioJuridico(formLoginAsJson);
+}
+
+function getLoginFormData() {
+  let Email = document.getElementById("email");
+  Email.innerText = document.getElementsByName("email")[0].value;
+
+  let Senha = document.getElementById("senha");
+  Senha.innerText = document.getElementsByName("senha")[0].value;
 }
 
 export default function SignIn() {
@@ -53,15 +61,15 @@ export default function SignIn() {
           </div>
 
           <div className="inputLogin">
-            <InputLine title="Email" type="text" placeholder="Ex: joao.moreira.silva@email.com"/>
+            <InputLine name="email" title="Email" type="text" placeholder="Ex: joao.moreira.silva@email.com"/>
           </div>
 
           <div className="inputLogin">
-            <InputLine title="Senha" type="password" placeholder="********"/>
+            <InputLine name="senha" title="Senha" type="password" placeholder="********"/>
           </div>
 
           <div className="buttonEnter center">
-            <Button id="btnEnter" variant="contained" color="primary">Entrar</Button>
+            <Button id="btnEnter" onClick={logar} variant="contained" color="primary">Entrar</Button>
           </div>
 
           <div className="blueWord formFooter">

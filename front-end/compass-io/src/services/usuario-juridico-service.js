@@ -64,6 +64,7 @@ class UsuarioJuridicoService {
     }
 
     loginUsuarioJuridico(auth) {
+        debugger;
         axios.post(`${this.BASE_URL}/auth`, auth, {
             headers: {
                 'Access-Control-Allow-Origin': true,

@@ -1,5 +1,4 @@
 import React from 'react';
-import bcryptjs from 'bcryptjs';
 import InputLine from "../../../components/InputLine/input-line";
 import LabelTitleForm from "../../../components/LabelTitleForm/label-title-form";
 import Button from '@material-ui/core/Button';
@@ -32,7 +31,7 @@ function cadastrar() {
   let usuarioAsJson = CommomFunctions.convertFormToJson(formUsuario);
   let usuarioObj = JSON.parse(usuarioAsJson);
   usuarioObj.fkEndereco = JSON.parse(sessionStorage["enderecoCriado"])
-  usuarioObj.senha = bcryptjs.hash(usuarioObj.senha, 10);
+  usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
   usuarioAsJson = JSON.stringify(usuarioObj);
   usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
 }
@@ -120,7 +119,7 @@ export default class SignUp extends React.Component {
 
         <form id="enderecoUsuarioJuridicoToSubmit" hidden>
           <input id="logradouro"/>
-        <input id="numeroEndereco"/>
+          <input id="numeroEndereco"/>
           {/* input id="complemento"/> */}
           <input id="cep"/>
           <input id="bairro"/>
