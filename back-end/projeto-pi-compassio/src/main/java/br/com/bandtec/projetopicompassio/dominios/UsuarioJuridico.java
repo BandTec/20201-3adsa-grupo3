@@ -7,6 +7,7 @@ public class UsuarioJuridico {
 
     @Id
     @Column(name = "id_usuario_juridico")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUsuarioJuridico;
 
     @Column(length = 90, nullable = false, name = "nome_ong")
@@ -18,23 +19,23 @@ public class UsuarioJuridico {
     @Column(length = 45, nullable = false)
     private String senha;
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 15)
     private String telefone;
 
     @Column(length = 14, nullable = false)
     private String cnpj;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String causa;
 
-    @Column(length = 256, nullable = false, name = "descricao_ong")
+    @Column(length = 256, name = "descricao_ong")
     private String descricaoOng;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_endereco")
     private Endereco fkEndereco;
 
-    @Column(nullable = false)
+    @Column
     private Boolean logado;
 
     public Boolean getLogado() {

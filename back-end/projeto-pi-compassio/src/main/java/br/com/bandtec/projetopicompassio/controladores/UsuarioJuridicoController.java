@@ -4,13 +4,10 @@ import br.com.bandtec.projetopicompassio.dominios.Auth;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.SessionCookieConfig;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -22,8 +19,8 @@ public class UsuarioJuridicoController {
 
     @PostMapping
     public ResponseEntity criar(@RequestBody UsuarioJuridico novoUsuarioJuridico){
-        repository.save(novoUsuarioJuridico);
-        return ResponseEntity.created(null).build();
+        UsuarioJuridico usuarioCriado = repository.save(novoUsuarioJuridico);
+        return ResponseEntity.created(null).body(usuarioCriado);
     }
 
     @GetMapping()
