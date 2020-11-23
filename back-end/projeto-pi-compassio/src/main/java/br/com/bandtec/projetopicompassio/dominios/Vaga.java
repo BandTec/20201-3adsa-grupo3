@@ -1,7 +1,5 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import br.com.bandtec.projetopicompassio.dto.VagaDTO;
-
 import javax.persistence.*;
 import java.util.Date;
 

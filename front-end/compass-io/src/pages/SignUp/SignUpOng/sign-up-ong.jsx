@@ -1,5 +1,5 @@
 import React from 'react';
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs';
 import InputLine from "../../../components/InputLine/input-line";
 import LabelTitleForm from "../../../components/LabelTitleForm/label-title-form";
 import Button from '@material-ui/core/Button';
@@ -32,7 +32,7 @@ function cadastrar() {
   let usuarioAsJson = CommomFunctions.convertFormToJson(formUsuario);
   let usuarioObj = JSON.parse(usuarioAsJson);
   usuarioObj.fkEndereco = JSON.parse(sessionStorage["enderecoCriado"])
-  usuarioObj.senha = bcrypt.hash(usuarioObj.senha, 10);
+  usuarioObj.senha = bcryptjs.hash(usuarioObj.senha, 10);
   usuarioAsJson = JSON.stringify(usuarioObj);
   usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
 }

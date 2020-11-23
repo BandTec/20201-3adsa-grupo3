@@ -1,5 +1,5 @@
 import React from 'react';
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs';
 import Navbar from '../../components/Navbar/navbar';
 import LabelWelcome from '../../components/LabelWelcome/label-welcome';
 import InputLine from "../../components/InputLine/input-line";
@@ -19,7 +19,7 @@ function logar() {
   let formLogin = document.getElementById("formLoginToSubmit");
   let formLoginAsJson = CommomFunctions.convertFormToJson(formLogin);
   let formLoginObj = JSON.parse(formLoginAsJson);
-  formLoginObj.senha = bcrypt.hash(formLoginObj.senha, 10);
+  formLoginObj.senha = bcryptjs.hash(formLoginObj.senha, 10);
   formLoginAsJson = CommomFunctions.convertFormToJson(formLoginObj);
   usuarioJuridicoService.loginUsuarioJuridico(formLoginAsJson);
 }
