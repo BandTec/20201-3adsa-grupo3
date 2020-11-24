@@ -8,6 +8,7 @@ import ProfileOng from './pages/ProfileOng/profile-ong';
 import ProfileVolunteer from './pages/ProfileVolunteer/profile-volunteer';
 import Vacancies from './pages/Vacancies/vacancies';
 import VacancySpecific from './pages/VacancySpecific/vacancy-specific';
+import VacancyRegister from './pages/VacancyRegister/vacancy-register';
 
 export default function Routes() {
   return (
@@ -21,6 +22,7 @@ export default function Routes() {
         <Route path="/vacancy" component={VacancySpecific}/>
         <Route path="/profile/ong/{parametro?}" component={ProfileOng}/>
         <Route path="/profile/volunteer/{parametro?}" component={ProfileVolunteer}/>
+        <Route path="/profile/ong/register" component={VacancyRegister}/>
       </Switch>
     </BrowserRouter>
   );
