@@ -8,7 +8,8 @@ import BlueBanner from '../../components/BlueBanner/blue-banner';
 import GrayBanner from '../../components/GrayBanner/gray-banner';
 import CarouselMain from '../../components/CarouselMain/carousel-main';
 import LabelWelcome from '../../components/LabelWelcome/label-welcome';
-import CarouselFilter from '../../components/CarouselFilter/carousel-filter'
+import CarouselFilter from '../../components/CarouselFilter/carousel-filter';
+import Footer from '../../components/Footer/footer'
 
 
 const useStyles = makeStyles({
@@ -65,6 +66,7 @@ export default function Home() {
       <CardHome/>
       <Button variant="outline" className={classes.outlineBtn}>Ache aqui a vaga<br />ideal para você!</Button>
       <GrayBanner></GrayBanner>
+      <Footer></Footer>
     </div>
   );
 };
