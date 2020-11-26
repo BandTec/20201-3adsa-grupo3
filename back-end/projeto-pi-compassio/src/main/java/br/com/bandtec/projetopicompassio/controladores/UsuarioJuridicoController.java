@@ -67,10 +67,10 @@ public class UsuarioJuridicoController {
 
     @PostMapping("/auth")
     public ResponseEntity autenticar(@RequestBody Auth authentic, HttpSession session){
-        if (repository.pesquisaEmailESenha(authentic.getEmail(), authentic.getSenha()).isEmpty()){
+        if (repository.pesquisaEmailESenhaJuridico(authentic.getEmail(), authentic.getSenha()).isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        UsuarioJuridico atual = repository.pesquisaEmailESenha(authentic.getEmail(), authentic.getSenha()).get(0);
+        UsuarioJuridico atual = repository.pesquisaEmailESenhaJuridico(authentic.getEmail(), authentic.getSenha()).get(0);
         atual.setLogado(true);
         session.setAttribute("nomeDaOng", atual.getNomeOng());
         repository.save(atual);

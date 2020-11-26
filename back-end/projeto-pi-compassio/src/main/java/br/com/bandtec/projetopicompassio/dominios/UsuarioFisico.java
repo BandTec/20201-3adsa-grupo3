@@ -31,11 +31,6 @@ public class UsuarioFisico {
     @Column(name = "sexo")
     private Boolean sexo;
 
-    @OneToOne
-    @JoinColumn(nullable = false, name = "fk_endereco")
-    private Endereco fkEndereco;
-
-    @Column(nullable = false)
     private Boolean logado;
 
     public Boolean getLogado() {
@@ -108,13 +103,5 @@ public class UsuarioFisico {
 
     public void setSexo(Boolean sexo) {
         this.sexo = sexo;
-    }
-
-    public Endereco getFkEndereco() {
-        return fkEndereco;
-    }
-
-    public void setFkEndereco(Endereco fkEndereco) {
-        this.fkEndereco = fkEndereco;
     }
 }
