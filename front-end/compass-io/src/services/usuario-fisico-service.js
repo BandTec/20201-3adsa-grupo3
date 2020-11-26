@@ -4,94 +4,58 @@ class UsuarioFisicoService {
 
     BASE_URL = "http://localhost:8080/usuariosFisicos";
 
-    getUsuariosFisicos() {
-        axios.get(this.BASE_URL)
-        .then((response) => {
-            sessionStorage["todosUsuariosFisicos"] = JSON.stringify(response.data);
+    async getUsuariosFisicos() {
+        return axios.get(this.BASE_URL)
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            sessionStorage["todosUsuariosFisicos"] = JSON.stringify(error);
+        .catch((err) => {
+            return err;
         });
     }
 
-    getUsuarioFisicoById(id) {
-        axios.get(`${this.BASE_URL}?id=${id}`)
-        .then((response) => {
-            sessionStorage["usuarioFisico"] = JSON.stringify(response.data[0]);
+    async getUsuarioFisicoById(id) {
+        return axios.get(`${this.BASE_URL}?id=${id}`)
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            sessionStorage["usuarioFisico"] = JSON.stringify(error);
+        .catch((err) => {
+            return err;
         });
     }
 
-    postUsuarioFisico(usuario) {
-        axios.post(this.BASE_URL, usuario, {
+    async postUsuarioFisico(usuario) {
+        return axios.post(this.BASE_URL, usuario, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => {
-            sessionStorage["usuarioFisicoCriado"] = JSON.stringify(response.data);
-            alert(response.statusText);
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            sessionStorage["usuarioFisicoCriado"] = JSON.stringify(error);
-            alert(error);
+        .catch((err) => {
+            return err;
         });
     }
 
-    putUsuarioFisico(id, usuario) {
-        axios.put(`${this.BASE_URL}/id=${id}`, usuario)
-        .then((response) => {
-            alert(response.statusText);
-            return response;
+    async putUsuarioFisico(id, usuario) {
+        return axios.put(`${this.BASE_URL}/id=${id}`, usuario)
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            alert(error);
+        .catch((err) => {
+            return err;
         });
     }
 
-    deleteUsuarioFisico(id) {
-        axios.delete(`${this.BASE_URL}/id=${id}`)
-        .then((response) => {
-            alert(response.statusText);
-            return response;
+    async deleteUsuarioFisico(id) {
+        return axios.delete(`${this.BASE_URL}/id=${id}`)
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            alert(error);
-        });
-    }
-
-    loginUsuarioFisico(auth) {
-        axios.post(`${this.BASE_URL}/auth`, auth, {
-            headers: {
-                'Access-Control-Allow-Origin': true,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => {
-            alert(response.statusText);
-            return response;
-        })
-        .catch((error) => {
-            alert(error);
-        });
-    }
-
-    logoutUsuarioFisico(id) {
-        axios.post(`${this.BASE_URL}/id=${id}`, null, {
-            headers: {
-                'Access-Control-Allow-Origin': true,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => {
-            alert(response.statusText);
-            return response;
-        })
-        .catch((error) => {
-            alert(error);
+        .catch((err) => {
+            return err;
         });
     }
 };

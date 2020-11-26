@@ -5,7 +5,7 @@ class UsuarioJuridicoService {
     BASE_URL = "http://localhost:8080/usuariosJuridicos";
 
     async getUsuariosJuridicos() {
-        return await axios.get(this.BASE_URL)
+        return axios.get(this.BASE_URL)
         .then((res) => {
             return res;
         })
@@ -15,7 +15,7 @@ class UsuarioJuridicoService {
     }
 
     async getUsuarioJuridicoById(id) {
-        return await axios.get(`${this.BASE_URL}?id=${id}`)
+        return axios.get(`${this.BASE_URL}?id=${id}`)
         .then((res) => {
             return res;
         })
@@ -25,7 +25,7 @@ class UsuarioJuridicoService {
     }
 
     async postUsuarioJuridico(usuario) {
-        return await axios.post(this.BASE_URL, usuario, {
+        return axios.post(this.BASE_URL, usuario, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
@@ -40,29 +40,27 @@ class UsuarioJuridicoService {
     }
 
     async putUsuarioJuridico(id, usuario) {
-        try {
-            let resp;
-            await axios.put(`${this.BASE_URL}/id=${id}`, usuario)
-            .then((response) => resp = response.data);
-            return resp;
-        } catch (error) {
-            return error;
-        }
+        return axios.put(`${this.BASE_URL}/id=${id}`, usuario)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            return err;
+        });
     }
 
     async deleteUsuarioJuridico(id) {
-        try {
-            let resp;
-            await axios.delete(`${this.BASE_URL}/id=${id}`)
-            .then((response) => resp = response.data);
-            return resp;
-        } catch (error) {
-            return error;
-        }
+        return axios.delete(`${this.BASE_URL}/id=${id}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            return err;
+        });
     }
 
     async loginUsuarioJuridico(auth) {
-        return await axios.post(`${this.BASE_URL}/auth`, auth, {
+        return axios.post(`${this.BASE_URL}/auth`, auth, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
@@ -77,7 +75,7 @@ class UsuarioJuridicoService {
     }
 
     async logoutUsuarioJuridico(id) {
-        return await axios.post(`${this.BASE_URL}/id=${id}`, null, {
+        return axios.post(`${this.BASE_URL}/id=${id}`, null, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'

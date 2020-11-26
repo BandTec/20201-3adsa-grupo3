@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-class EnderecoService {
+class VagaService {
 
-    BASE_URL = "http://localhost:8080/enderecos";
+    BASE_URL = "http://localhost:8080/vagas";
 
-    async getEnderecos() {
+    async getVagas() {
         return axios.get(this.BASE_URL)
         .then((res) => {
             return res;
@@ -14,7 +14,7 @@ class EnderecoService {
         });
     }
 
-    async getEnderecoById(id) {
+    async getVagaById(id) {
         return axios.get(`${this.BASE_URL}?id=${id}`)
         .then((res) => {
             return res;
@@ -24,8 +24,8 @@ class EnderecoService {
         });
     }
 
-    async postEndereco(endereco) {
-        return axios.post(this.BASE_URL, endereco, {
+    async postVaga(vaga) {
+        return axios.post(this.BASE_URL, vaga, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
@@ -35,29 +35,29 @@ class EnderecoService {
             return res;
         })
         .catch((err) => {
-            throw err;
+            return err;
         });
     }
 
-    async putEndereco(id, endereco) {
-        return axios.put(`${this.BASE_URL}/id=${id}`, endereco)
+    async putVaga(id, vaga) {
+        return axios.put(`${this.BASE_URL}/id=${id}`, vaga)
         .then((res) => {
             return res;
         })
         .catch((err) => {
-            throw err;
+            return err;
         });
     }
 
-    async deleteEndereco(id) {
+    async deleteVaga(id) {
         return axios.delete(`${this.BASE_URL}/id=${id}`)
         .then((res) => {
             return res;
         })
         .catch((err) => {
-            throw err;
+            return err;
         });
     }
 };
 
-export default EnderecoService;
+export default VagaService;

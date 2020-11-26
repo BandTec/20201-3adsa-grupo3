@@ -10,6 +10,11 @@ class CommomFunctions {
         return JSON.stringify(object);
     }
 
+    static convertFormToObject(form) {
+      let formAsJson = this.convertFormToJson(form);
+      return JSON.parse(formAsJson);
+  }
+
     static encryptPassword(password) {
       return md5(password);
     }

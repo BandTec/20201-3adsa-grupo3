@@ -28,11 +28,10 @@ async function cadastrar() {
   var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
 
   let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
-  let usuarioAsJson = CommomFunctions.convertFormToJson(formUsuario);
-  let usuarioObj = JSON.parse(usuarioAsJson);
-  usuarioObj.fkEndereco = respEndereco;
+  let usuarioObj = CommomFunctions.convertFormToObject(formUsuario);
+  usuarioObj.fkEndereco = respEndereco.data;
   usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
-  usuarioAsJson = JSON.stringify(usuarioObj);
+  let usuarioAsJson = JSON.stringify(usuarioObj);
   usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
 }
 
