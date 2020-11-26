@@ -4,73 +4,58 @@ class EnderecoService {
 
     BASE_URL = "http://localhost:8080/enderecos";
 
-    getEnderecos() {
-        axios.get(this.BASE_URL)
-        .then((response) => {
-            sessionStorage["todosEnderecos"] = JSON.stringify(response.data);
+    async getEnderecos() {
+        return await axios.get(this.BASE_URL)
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            sessionStorage["todosEnderecos"] = JSON.stringify(error);
-        })
-        .finally((result) => {
-            return result;
+        .catch((err) => {
+            return err;
         });
     }
 
-    getEnderecoById(id) {
-        axios.get(`${this.BASE_URL}?id=${id}`)
-        .then((response) => {
-            sessionStorage["endereco"] = JSON.stringify(response.data[0]);
+    async getEnderecoById(id) {
+        return await axios.get(`${this.BASE_URL}?id=${id}`)
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            sessionStorage["endereco"] = JSON.stringify(error);
-        })
-        .finally((result) => {
-            return result;
+        .catch((err) => {
+            return err;
         });
     }
 
-    postEndereco(endereco) {
-        axios.post(this.BASE_URL, endereco, {
+    async postEndereco(endereco) {
+        return await axios.post(this.BASE_URL, endereco, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => {
-            sessionStorage["enderecoCriado"] = JSON.stringify(response.data);
+        .then((res) => {
+            return res.data;
         })
-        .catch((error) => {
-            sessionStorage["enderecoCriado"] = JSON.stringify(error);
-        })
-        .finally((result) => {
-            return result;
+        .catch((err) => {
+            throw err;
         });
     }
 
-    putEndereco(id, endereco) {
-        axios.put(`${this.BASE_URL}/id=${id}`, endereco)
-        .then((response) => {
-            return response;
+    async putEndereco(id, endereco) {
+        return axios.put(`${this.BASE_URL}/id=${id}`, endereco)
+        .then((res) => {
+            return res.data;
         })
-        .catch((error) => {
-            return error;
-        })
-        .finally((result) => {
-            return result;
+        .catch((err) => {
+            throw err;
         });
     }
 
-    deleteEndereco(id) {
-        axios.delete(`${this.BASE_URL}/id=${id}`)
-        .then((response) => {
-            return response;
+    async deleteEndereco(id) {
+        return axios.delete(`${this.BASE_URL}/id=${id}`)
+        .then((res) => {
+            return res.data;
         })
-        .catch((error) => {
-            return error;
-        })
-        .finally((result) => {
-            return result;
+        .catch((err) => {
+            throw err;
         });
     }
 };

@@ -7,7 +7,6 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
 
-
 // import { Container } from './styles';
 
 // export function Rtif({boolean, ...props}) {
@@ -67,9 +66,7 @@ const useStyles = makeStyles({
         color: '#fff', 
         alignContent: 'center'
       },
-    })
-
-
+})
 
 export default class SignUp extends React.Component {
 
@@ -87,10 +84,6 @@ export default class SignUp extends React.Component {
     }));
     
   }
-
-  
-
-
 
   render(){
     // const useStyles = makeStyles({

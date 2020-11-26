@@ -4,95 +4,90 @@ class UsuarioJuridicoService {
 
     BASE_URL = "http://localhost:8080/usuariosJuridicos";
 
-    getUsuariosJuridicos() {
-        axios.get(this.BASE_URL)
-        .then((response) => {
-            sessionStorage["todosUsuariosJuridicos"] = JSON.stringify(response.data);
+    async getUsuariosJuridicos() {
+        return await axios.get(this.BASE_URL)
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            sessionStorage["todosUsuariosJuridicos"] = JSON.stringify(error);
+        .catch((err) => {
+            return err;
         });
     }
 
-    getUsuarioJuridicoById(id) {
-        axios.get(`${this.BASE_URL}?id=${id}`)
-        .then((response) => {
-            sessionStorage["usuarioJuridico"] = JSON.stringify(response.data[0]);
+    async getUsuarioJuridicoById(id) {
+        return await axios.get(`${this.BASE_URL}?id=${id}`)
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            sessionStorage["usuarioJuridico"] = JSON.stringify(error);
+        .catch((err) => {
+            return err;
         });
     }
 
-    postUsuarioJuridico(usuario) {
-        axios.post(this.BASE_URL, usuario, {
+    async postUsuarioJuridico(usuario) {
+        return await axios.post(this.BASE_URL, usuario, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => {
-            sessionStorage["usuarioJuridicoCriado"] = JSON.stringify(response.data);
-            alert(response.statusText);
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            sessionStorage["usuarioJuridicoCriado"] = JSON.stringify(error);
-            alert(error);
+        .catch((err) => {
+            return err;
         });
     }
 
-    putUsuarioJuridico(id, usuario) {
-        axios.put(`${this.BASE_URL}/id=${id}`, usuario)
-        .then((response) => {
-            alert(response.statusText);
-            return response;
-        })
-        .catch((error) => {
-            alert(error);
-        });
+    async putUsuarioJuridico(id, usuario) {
+        try {
+            let resp;
+            await axios.put(`${this.BASE_URL}/id=${id}`, usuario)
+            .then((response) => resp = response.data);
+            return resp;
+        } catch (error) {
+            return error;
+        }
     }
 
-    deleteUsuarioJuridico(id) {
-        axios.delete(`${this.BASE_URL}/id=${id}`)
-        .then((response) => {
-            alert(response.statusText);
-            return response;
-        })
-        .catch((error) => {
-            alert(error);
-        });
+    async deleteUsuarioJuridico(id) {
+        try {
+            let resp;
+            await axios.delete(`${this.BASE_URL}/id=${id}`)
+            .then((response) => resp = response.data);
+            return resp;
+        } catch (error) {
+            return error;
+        }
     }
 
-    loginUsuarioJuridico(auth) {
-        debugger;
-        axios.post(`${this.BASE_URL}/auth`, auth, {
+    async loginUsuarioJuridico(auth) {
+        return await axios.post(`${this.BASE_URL}/auth`, auth, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => {
-            alert(response.statusText);
-            return response;
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            alert(error);
+        .catch((err) => {
+            return err;
         });
     }
 
-    logoutUsuarioJuridico(id) {
-        axios.post(`${this.BASE_URL}/id=${id}`, null, {
+    async logoutUsuarioJuridico(id) {
+        return await axios.post(`${this.BASE_URL}/id=${id}`, null, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => {
-            alert(response.statusText);
-            return response;
+        .then((res) => {
+            return res;
         })
-        .catch((error) => {
-            alert(error);
+        .catch((err) => {
+            return err;
         });
     }
 };

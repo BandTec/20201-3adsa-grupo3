@@ -16,7 +16,7 @@ import CommomFunctions from '../../../utils/functions'
 import './sign-up-ong.css';
 import { RecentActorsRounded } from '@material-ui/icons';
 
-function cadastrar() {
+async function cadastrar() {
   getEnderecoFormData();
   getUsuarioFormData();
 
@@ -25,12 +25,12 @@ function cadastrar() {
 
   let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
   const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
-  enderecoService.postEndereco(enderecoAsJson);
+  var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
 
   let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
   let usuarioAsJson = CommomFunctions.convertFormToJson(formUsuario);
   let usuarioObj = JSON.parse(usuarioAsJson);
-  usuarioObj.fkEndereco = JSON.parse(sessionStorage["enderecoCriado"])
+  usuarioObj.fkEndereco = respEndereco;
   usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
   usuarioAsJson = JSON.stringify(usuarioObj);
   usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
