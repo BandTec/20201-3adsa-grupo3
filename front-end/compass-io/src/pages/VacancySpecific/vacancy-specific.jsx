@@ -7,27 +7,6 @@ import CarouselVacancy from '../../components/CarouselVacancy/carousel-vacancy';
 // import './vacancy-specific.css';
 import { Loader } from "@googlemaps/js-api-loader"
 
-// import { Container } from './styles';
-// let map;
-// const LoaderMap = google.maps.plugins.loader.Loader;
-// const additionalOptions = {};
-
-// map = new google.maps.Map(document.getElementById('map'), {
-//   center: {lat: -34.397, lng: 150.644},
-//   zoom: 8
-// });
-
-// const loader = new LoaderMap({
-//   apiKey: "YOUR_API_KEY",
-//   version: "weekly",
-//   ...additionalOptions,
-// });
-// loader.load().then(() => {
-//   map = new google.maps.Map(document.getElementById("map"), {
-//     center: { lat: -34.397, lng: 150.644 },
-//     zoom: 8,
-//   });
-// });
 
 export default function VacancySpecific() {
   return (

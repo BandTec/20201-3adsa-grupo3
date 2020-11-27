@@ -14,6 +14,7 @@ import EnderecoService from '../../services/endereco-service'
 import CommomFunctions from '../../utils/functions'
 
 import './vacancy-register.css';
+import { Input } from '@material-ui/core';
 
 async function cadastrarVaga() {
   getEnderecoVagaFormData()
@@ -146,8 +147,9 @@ export default function VacancyRegister() {
               <InputLine name="logradouro" title="Logradouro" type="text" />
           </div>
           <div className="lblForm inputLogin">
-              <InputLine name="numeroEndereco" title="Número" type="text"  />
-              <InputLine name="bairro" title="Bairro" type="text" />
+              <InputLine name="cep" title="CEP" type="text"  />
+              <InputLine name="logradouro" title="Logradouro" type="text" />
+              <InputLine name="numero" title="Número" type="number" />
           </div>
           <div className="lblForm inputLogin">
               <InputLine name="estado" title="Estado" type="text" />
