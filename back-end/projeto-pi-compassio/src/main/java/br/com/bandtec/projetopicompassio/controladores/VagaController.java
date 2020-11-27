@@ -34,8 +34,6 @@ public class VagaController {
         vagaPesquisa.setIdVaga(id);
         vagaPesquisa.setTitulo(titulo);
         vagaPesquisa.setCausa(causa);
-        vagaPesquisa.setAreaAtuacao(area);
-        vagaPesquisa.setDescricaoRequisitos(requisitos);
 
         List<Vaga> resultado = repository.findAll(Example.of(vagaPesquisa));
 
