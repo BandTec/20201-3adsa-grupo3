@@ -28,9 +28,6 @@ public class UsuarioFisico {
     @Column(length = 14, nullable = false)
     private String cpf;
 
-    @Column(name = "sexo")
-    private Boolean sexo;
-
     private Boolean logado;
 
     public Boolean getLogado() {
@@ -95,13 +92,5 @@ public class UsuarioFisico {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public Boolean getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Boolean sexo) {
-        this.sexo = sexo;
     }
 }
