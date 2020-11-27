@@ -66,7 +66,7 @@ export default function Home() {
       <CardHome/>
       <Button variant="outline" className={classes.outlineBtn}>Ache aqui a vaga<br />ideal para você!</Button>
       <GrayBanner></GrayBanner>
-      <Footer></Footer>
+      <Footer/>
     </div>
   );
 };

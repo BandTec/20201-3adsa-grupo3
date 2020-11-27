@@ -145,10 +145,6 @@ export default function VacancyRegister() {
           <div className="lblForm inputLogin">
               <InputLine name="cep" title="CEP" type="text"  />
               <InputLine name="logradouro" title="Logradouro" type="text" />
-          </div>
-          <div className="lblForm inputLogin">
-              <InputLine name="cep" title="CEP" type="text"  />
-              <InputLine name="logradouro" title="Logradouro" type="text" />
               <InputLine name="numero" title="Número" type="number" />
           </div>
           <div className="lblForm inputLogin">

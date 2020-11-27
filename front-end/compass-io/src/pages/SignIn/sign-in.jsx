@@ -6,7 +6,7 @@ import LabelTitleForm from "../../components/LabelTitleForm/label-title-form";
 import Image from '../../components/Image/image';
 import Button from '@material-ui/core/Button'
 
-import UsuarioJuridicoService from '../../services/usuario-juridico-service'
+import AuthService from '../../services/auth-service'
 import CommomFunctions from '../../utils/functions'
 
 import './sign-in.css';
@@ -14,14 +14,14 @@ import loginImage from '../../assets/images/children-smile.jpg'
 
 function logar() {
   getLoginFormData();
-  let usuarioJuridicoService = new UsuarioJuridicoService();
+  let authService = new AuthService();
 
   let formLogin = document.getElementById("formLoginToSubmit");
   let formLoginAsJson = CommomFunctions.convertFormToJson(formLogin);
   let formLoginObj = JSON.parse(formLoginAsJson);
   formLoginObj.senha = CommomFunctions.encryptPassword(formLoginObj.senha);
   formLoginAsJson = JSON.stringify(formLoginObj);
-  usuarioJuridicoService.loginUsuarioJuridico(formLoginAsJson);
+  authService.login(formLoginAsJson);
 }
 
 function getLoginFormData() {

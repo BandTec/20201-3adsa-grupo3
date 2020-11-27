@@ -17,7 +17,7 @@ public class Vaga {
     @Column(length = 50)
     private String causa;
 
-    @Column(length = 256, name = "descricao_vaga")
+    @Column(length = 256, name = "descricao")
     private String descricao;
 
     @Column(nullable = false, name = "data_inicio")

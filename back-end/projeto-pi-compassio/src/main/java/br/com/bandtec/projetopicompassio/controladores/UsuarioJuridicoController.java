@@ -1,6 +1,5 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
-import br.com.bandtec.projetopicompassio.dominios.Auth;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
