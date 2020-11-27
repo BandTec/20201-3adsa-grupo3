@@ -61,32 +61,4 @@ public class UsuarioJuridicoController {
         repository.save(atualizacao);
         return ResponseEntity.ok().build();
     }
-
-    @PostMapping("/auth")
-    public ResponseEntity autenticar(@RequestBody Auth authentic){
-        if (repository.pesquisaEmailESenha(authentic.getEmail(), authentic.getSenha()).isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        UsuarioJuridico atual = repository.pesquisaEmailESenha(authentic.getEmail(), authentic.getSenha()).get(0);
-        atual.setLogado(true);
-        repository.save(atual);
-        return ResponseEntity.ok(atual);
-    }
-
-    @PostMapping("/{id}")
-    public ResponseEntity logout(@PathVariable int id){
-
-        UsuarioJuridico userPesquisa = new UsuarioJuridico();
-
-        userPesquisa.setIdUsuarioJuridico(id);
-
-        UsuarioJuridico user = repository.findAll(Example.of(userPesquisa)).get(0);
-
-        if (user.getLogado() == true){
-            user.setLogado(false);
-            repository.save(user);
-            return ResponseEntity.ok(user);
-        }
-        return ResponseEntity.notFound().build();
-    }
 }
