@@ -1,0 +1,15 @@
+.containerProfileOng{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btnCadastrar {
+    width: 15%;
+    border: 2.5px solid #1975FF;
+    color: #1975FF;
+    font-weight: 600;
+  }
+
+.justcon-sb{
+    justify-content: space-between;
+}

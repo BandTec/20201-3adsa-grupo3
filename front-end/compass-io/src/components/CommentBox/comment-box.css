@@ -1,0 +1,48 @@
+.commentBox{
+    height: 65%;
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid black;
+    background-color: #FAFAFA;
+}
+
+.flex{
+    display: flex;
+}
+
+.pd-v-32{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.txtal-center{
+    text-align: center
+}
+
+.txtal-justify{
+    text-align: justify;
+}
+
+.alcont-center{
+    align-content: center;
+}
+
+.pd-h-16{
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.pd-t-32{
+    padding-top: 1rem;
+}
+
+.iconRotate{
+    /* padding-top: 50%; */
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+     transform: rotate(180deg);
+}
+
+.commentText{
+    /* width: 70%; */
+}

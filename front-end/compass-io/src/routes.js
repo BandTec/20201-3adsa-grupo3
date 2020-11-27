@@ -20,9 +20,11 @@ export default function Routes() {
         <Route path="/vacancies" component={Vacancies}/>
         {/* <Route path="/vacancy/{parametro?}" component={VacancySpecific}/> */}
         <Route path="/vacancy" component={VacancySpecific}/>
-        <Route path="/profile/ong/{parametro?}" component={ProfileOng}/>
+        <Route path="/profile/ong" component={ProfileOng}/>
+        {/* <Route path="/profile/ong/{parametro?}" component={ProfileOng}/> */}
         <Route path="/profile/volunteer/{parametro?}" component={ProfileVolunteer}/>
-        <Route path="/profile/ong/register" component={VacancyRegister}/>
+        <Route path="/register" component={VacancyRegister}/>
+        {/* <Route path="/profile/ong/register" component={VacancyRegister}/> */}
       </Switch>
     </BrowserRouter>
   );

@@ -9,6 +9,7 @@ import GirlVolunteerImg from '../../assets/images/girl-volunteer.jpg';
 import ComboBox from '../../components/ComboBox/combo-box'
 
 import './vacancy-register.css';
+import { Input } from '@material-ui/core';
 
 export default function VacancyRegister() {
   return (
@@ -58,6 +59,7 @@ export default function VacancyRegister() {
           <div className="lblForm inputLogin">
               <InputLine title="CEP" type="text"  />
               <InputLine title="Logradouro" type="text" />
+              <InputLine title="Número" type="number" />
           </div>
           <div className="lblForm inputLogin">
               <InputLine title="Bairro" type="text"  />
