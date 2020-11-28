@@ -24,6 +24,16 @@ class UsuarioFisicoService {
         });
     }
 
+    async getUsuarioFisicoByEmail(email) {
+        return axios.get(`${this.BASE_URL}?email=${email}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            return err;
+        });
+    }
+
     async postUsuarioFisico(usuario) {
         return axios.post(this.BASE_URL, usuario, {
             headers: {

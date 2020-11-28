@@ -17,67 +17,107 @@ import './vacancy-register.css';
 import { Input } from '@material-ui/core';
 
 async function cadastrarVaga() {
-  getEnderecoVagaFormData()
-  getVagaFormData()
+  try {
+    getEnderecoVagaFormData()
+    getVagaFormData()
+  
+    let vagaService = new VagaService();
+    let usuarioJuridicoService = new UsuarioJuridicoService();
+    let enderecoService = new EnderecoService();
 
-  let vagaService = new VagaService();
-  let usuarioJuridicoService = new UsuarioJuridicoService();
-  let enderecoService = new EnderecoService();
+    let formEndereco = document.getElementById("formEnderecoVagaToSubmit");
+    const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
+    var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
 
-  debugger;
-  let formEndereco = document.getElementById("formEnderecoVagaToSubmit");
-  const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
-  var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
+    if (sessionStorage["userId"] == "undefined")
+      throw new Error("Você precisa estar logado para fazer está ação");
 
-  //VER DE SALVAR NA VARIÁVEL DE SESSAO OU COOKIES, SLA
-  //let respUsuarioJuridico = await usuarioJuridicoService.getUsuarioJuridicoById(ID_DA_SESSAO);
-
-  let formVaga = document.getElementById("formVagaToSubmit");
-  let vagaObj = CommomFunctions.convertFormToObject(formVaga);
-  vagaObj.fkEndereco = respEndereco.data;
-  //vagaObj.fkUsuarioJuridico = respUsuarioJuridico.data;
-  const vagaAsJson = JSON.stringify(vagaObj);
-  let respVagas = await vagaService.postVaga(vagaAsJson);
-
-  //Para testar
-  alert(JSON.stringify(respVagas.data))
+    let respUsuarioJuridico = await usuarioJuridicoService.getUsuarioJuridicoById(sessionStorage["userId"]);
+    if (respUsuarioJuridico == "")
+      throw new Error("Ocorreu um erro com seu usuário. Favor fazer login novamente");
+  
+    let formVaga = document.getElementById("formVagaToSubmit");
+    let vagaObj = CommomFunctions.convertFormToObject(formVaga);
+    vagaObj.fkEndereco = respEndereco.data;
+    vagaObj.fkUsuarioJuridico = respUsuarioJuridico.data[0];
+    const vagaAsJson = JSON.stringify(vagaObj);
+    await vagaService.postVaga(vagaAsJson);
+    
+    window.location.href = "/vacancies";
+  } catch (error) {
+    alert(error);
+  }
 }
 
 function getVagaFormData() {
-  let Titulo = document.getElementById("titulo");
-  Titulo.innerText = document.getElementsByName("titulo")[0].value;
+  try {
+    let Titulo = document.getElementById("titulo");
+    Titulo.innerText = document.getElementsByName("titulo")[0].value;
+    if (Titulo.innerText.length == 0)
+      throw getError("Titulo");
+  
+    let Descricao = document.getElementById("descricao");
+    Descricao.innerText = document.getElementsByName("descricao")[0].value;
+    if (Descricao.innerText.length == 0)
+      throw getError("Descricao");
 
-  let Descricao = document.getElementById("descricao");
-  Descricao.innerText = document.getElementsByName("descricao")[0].value;
-
-  let Causa = document.getElementById("causa");
-  Causa.innerText = document.getElementsByName("causa")[0].value;
-
-  let DataInicio = document.getElementById("dataInicio");
-  DataInicio.innerText = document.getElementsByName("dataInicio")[0].value;
-
-  let DataFim = document.getElementById("dataFim");
-  DataFim.innerText = document.getElementsByName("dataFim")[0].value;
+    let Causa = document.getElementById("causa");
+    Causa.innerText = document.getElementsByName("causa")[0].value;
+    if (Causa.innerText.length == 0)
+      throw getError("Causa");
+    
+    let DataInicio = document.getElementById("dataInicio");
+    DataInicio.innerText = document.getElementsByName("dataInicio")[0].value;
+    if (DataInicio.innerText.length == 0)
+      throw getError("Data de início");
+  
+    let DataFim = document.getElementById("dataFim");
+    DataFim.innerText = document.getElementsByName("dataFim")[0].value;
+    if (DataFim.innerText.length == 0)
+      throw getError("Datade fim");
+  } catch (error) {
+    throw error;
+  }
 }
 
 function getEnderecoVagaFormData() {
-  let Logradouro = document.getElementById("logradouro");
-  Logradouro.innerText = document.getElementsByName("logradouro")[0].value;
+  try {
+    let Logradouro = document.getElementById("logradouro");
+    Logradouro.innerText = document.getElementsByName("logradouro")[0].value;
+    if (Logradouro.innerText.length == 0)
+      throw getError("Logradouro");
 
-  let Numero = document.getElementById("numeroEndereco");
-  Numero.innerText = document.getElementsByName("numeroEndereco")[0].value;
+    let Numero = document.getElementById("numeroEndereco");
+    Numero.innerText = document.getElementsByName("numero")[0].value;
+    if (Numero.innerText.length == 0)
+      throw getError("Numero");
 
-  let Cep = document.getElementById("cep");
-  Cep.innerText = document.getElementsByName("cep")[0].value;
+    let Cep = document.getElementById("cep");
+    Cep.innerText = document.getElementsByName("cep")[0].value;
+    if (Cep.innerText.length == 0)
+      throw getError("CEP");
 
-  let Bairro = document.getElementById("bairro");
-  Bairro.innerText = document.getElementsByName("bairro")[0].value;
+    let Bairro = document.getElementById("bairro");
+    Bairro.innerText = document.getElementsByName("bairro")[0].value;
+    if (Bairro.innerText.length == 0)
+      throw getError("Bairro");
 
-  let Cidade = document.getElementById("cidade");
-  Cidade.innerText = document.getElementsByName("cidade")[0].value;
+    let Cidade = document.getElementById("cidade");
+    Cidade.innerText = document.getElementsByName("cidade")[0].value;
+    if (Cidade.innerText.length == 0)
+      throw getError("Cidade");
 
-  let Estado = document.getElementById("estado");
-  Estado.innerText = document.getElementsByName("estado")[0].value;
+    let Estado = document.getElementById("estado");
+    Estado.innerText = document.getElementsByName("estado")[0].value;
+    if (Estado.innerText.length == 0)
+      throw getError("Estado");
+  } catch (error) {
+    throw error;
+  }
+}
+
+function getError(field) {
+  return new Error(`Campo de ${field} vazio`);
 }
 
 export default function VacancyRegister() {
@@ -148,6 +188,7 @@ export default function VacancyRegister() {
               <InputLine name="numero" title="Número" type="number" />
           </div>
           <div className="lblForm inputLogin">
+              <InputLine name="bairro" title="Bairro" type="text" />
               <InputLine name="estado" title="Estado" type="text" />
               <InputLine name="cidade" title="Cidade" type="text" />
           </div>

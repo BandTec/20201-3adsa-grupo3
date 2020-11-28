@@ -24,6 +24,16 @@ class UsuarioJuridicoService {
         });
     }
 
+    async getUsuarioJuridicoByEmail(email) {
+        return axios.get(`${this.BASE_URL}?email=${email}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            return err;
+        });
+    }
+
     async postUsuarioJuridico(usuario) {
         return axios.post(this.BASE_URL, usuario, {
             headers: {

@@ -17,82 +17,119 @@ import './sign-up-ong.css';
 import { RecentActorsRounded } from '@material-ui/icons';
 
 async function cadastrar() {
-  getEnderecoFormData();
-  getUsuarioFormData();
-
-  let enderecoService = new EnderecoService();
-  let usuarioJuridicoService = new UsuarioJuridicoService();
-
-  let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
-  const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
-  var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
-
-  let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
-  let usuarioObj = CommomFunctions.convertFormToObject(formUsuario);
-  usuarioObj.fkEndereco = respEndereco.data;
-  usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
-  let usuarioAsJson = JSON.stringify(usuarioObj);
-  usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
+  try {
+    getEnderecoFormData();
+    getUsuarioFormData();
+  
+    let enderecoService = new EnderecoService();
+    let usuarioJuridicoService = new UsuarioJuridicoService();
+  
+    let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
+    const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
+    var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
+  
+    let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
+    let usuarioObj = CommomFunctions.convertFormToObject(formUsuario);
+    usuarioObj.fkEndereco = respEndereco.data;
+    usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
+    let usuarioAsJson = JSON.stringify(usuarioObj);
+    await usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
+  
+    window.location.href = "/signin";
+  } catch (error) {
+    alert(error);
+  }
 }
 
 function getUsuarioFormData() {
 
-  if (!validarSenha()) {
-    return;
-  } else {
+  try {
+    validarSenha();
     let NomeDaOng = document.getElementById("nomeOng");
     NomeDaOng.innerText = document.getElementsByName("nomeDaOng")[0].value;
+    if (NomeDaOng.innerText.length == 0)
+      throw getError("Nome da ONG");
 
     let Email = document.getElementById("email");
     Email.innerText = document.getElementsByName("email")[0].value;
+    if (Email.innerText.length == 0)
+      throw getError("Email");
 
     let Senha = document.getElementById("senha");
     Senha.innerText = document.getElementsByName("senha")[0].value;
 
     let Telefone = document.getElementById("telefone");
     Telefone.innerText = document.getElementsByName("telefone")[0].value;
+    if (Telefone.innerText.length == 0)
+      throw getError("Telefone");
 
     let Cnpj = document.getElementById("cnpj");
     Cnpj.innerText = document.getElementsByName("cnpj")[0].value;
+    if (Cnpj.innerText.length == 0)
+      throw getError("CNPJ");
 
     let Causa = document.getElementById("causa");
     Causa.innerText = document.getElementsByName("causa")[0].value;
+    if (Causa.innerText.length == 0)
+      throw getError("Causa");
+  } catch (error) {
+    throw error;
   }
 }
 
 function getEnderecoFormData() {
-  let Logradouro = document.getElementById("logradouro");
-  Logradouro.innerText = document.getElementsByName("logradouro")[0].value;
-
-  let Numero = document.getElementById("numeroEndereco");
-  Numero.innerText = document.getElementsByName("numero")[0].value;
-
-  let Cep = document.getElementById("cep");
-  Cep.innerText = document.getElementsByName("cep")[0].value;
-
-  let Bairro = document.getElementById("bairro");
-  Bairro.innerText = document.getElementsByName("bairro")[0].value;
-
-  let Cidade = document.getElementById("cidade");
-  Cidade.innerText = document.getElementsByName("cidade")[0].value;
-
-  let Estado = document.getElementById("estado");
-  Estado.innerText = document.getElementsByName("estado")[0].value;
+  try {
+    let Logradouro = document.getElementById("logradouro");
+    Logradouro.innerText = document.getElementsByName("logradouro")[0].value;
+    if (Logradouro.innerText.length == 0)
+      throw getError("Logradouro");
+  
+    let Numero = document.getElementById("numeroEndereco");
+    Numero.innerText = document.getElementsByName("numero")[0].value;
+    if (Numero.innerText.length == 0)
+      throw getError("Numero");
+  
+    let Cep = document.getElementById("cep");
+    Cep.innerText = document.getElementsByName("cep")[0].value;
+    if (Cep.innerText.length == 0)
+      throw getError("CEP");
+  
+    let Bairro = document.getElementById("bairro");
+    Bairro.innerText = document.getElementsByName("bairro")[0].value;
+    if (Bairro.innerText.length == 0)
+      throw getError("Bairro");
+  
+    let Cidade = document.getElementById("cidade");
+    Cidade.innerText = document.getElementsByName("cidade")[0].value;
+    if (Cidade.innerText.length == 0)
+      throw getError("Cidade");
+  
+    let Estado = document.getElementById("estado");
+    Estado.innerText = document.getElementsByName("estado")[0].value;
+    if (Estado.innerText.length == 0)
+      throw getError("Estado");
+  } catch (error) {
+    throw error;
+  }
 }
 
 function validarSenha() {
-  let senha = document.getElementsByName("senha")[0].value;
-  let confSenha = document.getElementsByName("confSenha")[0].value;
-  if (senha != confSenha) {
-    alert("Senhas não coincidem");
-    return false;
+  try {
+    let senha = document.getElementsByName("senha")[0].value;
+    let confSenha = document.getElementsByName("confSenha")[0].value;
+    if (senha != confSenha) {
+      throw new Error("Senhas não coincidem");
+    }
+    else if (senha.length < 8 || senha.length > 20) {
+      throw new Error("A senha deve ter entre 8 e 20 caractéres");
+    }
+  } catch (error) {
+    throw error;
   }
-  else if (senha.length < 8 || senha.length > 20) {
-    alert("A senha deve ter entre 8 e 20 caractéres");
-    return false;
-  }
-  else
-    return true;
+}
+
+function getError(field) {
+  return new Error(`Campo de ${field} vazio`);
 }
 
 export default class SignUp extends React.Component {

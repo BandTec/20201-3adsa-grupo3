@@ -12,24 +12,41 @@ import CommomFunctions from '../../utils/functions'
 import './sign-in.css';
 import loginImage from '../../assets/images/children-smile.jpg'
 
-function logar() {
-  getLoginFormData();
-  let authService = new AuthService();
-
-  let formLogin = document.getElementById("formLoginToSubmit");
-  let formLoginAsJson = CommomFunctions.convertFormToJson(formLogin);
-  let formLoginObj = JSON.parse(formLoginAsJson);
-  formLoginObj.senha = CommomFunctions.encryptPassword(formLoginObj.senha);
-  formLoginAsJson = JSON.stringify(formLoginObj);
-  authService.login(formLoginAsJson);
+async function logar() {
+  try {
+    getLoginFormData();
+    let authService = new AuthService();
+  
+    let formLogin = document.getElementById("formLoginToSubmit");
+    let formLoginAsJson = CommomFunctions.convertFormToJson(formLogin);
+    let formLoginObj = JSON.parse(formLoginAsJson);
+    formLoginObj.senha = CommomFunctions.encryptPassword(formLoginObj.senha);
+    formLoginAsJson = JSON.stringify(formLoginObj);
+    await authService.login(formLoginAsJson);
+    window.location.href = "/";
+  } catch (error) {
+    alert(error);
+  }
 }
 
 function getLoginFormData() {
-  let Email = document.getElementById("email");
-  Email.innerText = document.getElementsByName("email")[0].value;
+  try {
+    let Email = document.getElementById("email");
+    Email.innerText = document.getElementsByName("email")[0].value;
+    if (Email.innerText.length == 0)
+      throw getError("Email");
+  
+    let Senha = document.getElementById("senha");
+    Senha.innerText = document.getElementsByName("senha")[0].value;
+    if (Senha.innerText.length == 0)
+      throw getError("Senha");
+  } catch (error) {
+    throw error;
+  }
+}
 
-  let Senha = document.getElementById("senha");
-  Senha.innerText = document.getElementsByName("senha")[0].value;
+function getError(field) {
+  return new Error(`Campo de ${field} vazio`);
 }
 
 export default function SignIn() {
