@@ -30,7 +30,7 @@ public class UsuarioFisicoController {
             @RequestParam(required = false) String cpf
     ){
         UsuarioFisico usuarioFisicoPesquisa = new UsuarioFisico();
-        usuarioFisicoPesquisa.setIdUsuarioFisico(id);
+        usuarioFisicoPesquisa.setId(id);
         usuarioFisicoPesquisa.setNome(nome);
         usuarioFisicoPesquisa.setEmail(email);
         usuarioFisicoPesquisa.setCpf(cpf);
@@ -54,7 +54,7 @@ public class UsuarioFisicoController {
 
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody UsuarioFisico atualizacao){
-        atualizacao.setIdUsuarioFisico(id);
+        atualizacao.setId(id);
         repository.save(atualizacao);
         return ResponseEntity.ok().build();
     }

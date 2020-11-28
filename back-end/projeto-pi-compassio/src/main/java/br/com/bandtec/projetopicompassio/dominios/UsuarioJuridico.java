@@ -8,7 +8,7 @@ public class UsuarioJuridico {
     @Id
     @Column(name = "id_usuario_juridico")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUsuarioJuridico;
+    private Integer id;
 
     @Column(length = 90, nullable = false, name = "nome_ong")
     private String nomeOng;
@@ -46,12 +46,12 @@ public class UsuarioJuridico {
         this.logado = logado;
     }
 
-    public Integer getIdUsuarioJuridico() {
-        return idUsuarioJuridico;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdUsuarioJuridico(Integer idUsuarioJuridico) {
-        this.idUsuarioJuridico = idUsuarioJuridico;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNomeOng() {

@@ -8,7 +8,7 @@ public class UsuarioFisico {
 
     @Id
     @Column(name = "id_usuario_fisico")
-    private Integer idUsuarioFisico;
+    private Integer id;
 
     @Column(length = 90, nullable = false, unique = true)
     private String email;
@@ -38,12 +38,12 @@ public class UsuarioFisico {
         this.logado = logado;
     }
 
-    public Integer getIdUsuarioFisico() {
-        return idUsuarioFisico;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdUsuarioFisico(Integer idUsuarioFisico) {
-        this.idUsuarioFisico = idUsuarioFisico;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {

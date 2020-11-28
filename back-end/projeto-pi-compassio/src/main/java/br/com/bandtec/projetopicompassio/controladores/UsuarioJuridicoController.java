@@ -31,7 +31,7 @@ public class UsuarioJuridicoController {
             @RequestParam(required = false) String causa
     ){
         UsuarioJuridico usuarioJuridicoPesquisa = new UsuarioJuridico();
-        usuarioJuridicoPesquisa.setIdUsuarioJuridico(id);
+        usuarioJuridicoPesquisa.setId(id);
         usuarioJuridicoPesquisa.setNomeOng(nome);
         usuarioJuridicoPesquisa.setEmail(email);
         usuarioJuridicoPesquisa.setCnpj(cnpj);
@@ -56,7 +56,7 @@ public class UsuarioJuridicoController {
 
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody UsuarioJuridico atualizacao){
-        atualizacao.setIdUsuarioJuridico(id);
+        atualizacao.setId(id);
         repository.save(atualizacao);
         return ResponseEntity.ok().build();
     }

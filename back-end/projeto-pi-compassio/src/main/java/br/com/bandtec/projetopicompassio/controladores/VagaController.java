@@ -17,9 +17,9 @@ public class VagaController {
     private VagaRepository repository;
 
     @PostMapping
-    public ResponseEntity criar(@RequestBody Vaga novoVaga){
-        repository.save(novoVaga);
-        return ResponseEntity.created(null).build();
+    public ResponseEntity criar(@RequestBody Vaga novaVaga){
+        Vaga vaga = repository.save(novaVaga);
+        return ResponseEntity.created(null).body(vaga);
     }
 
     @GetMapping()

@@ -47,11 +47,11 @@ public class AuthController {
         if (session.getAttribute("nomeDaOng") == null){
             UsuarioFisico userPesquisa = new UsuarioFisico();
 
-            userPesquisa.setIdUsuarioFisico(id);
+            userPesquisa.setId(id);
 
             UsuarioFisico user = usuarioFisicoRepository.findAll(Example.of(userPesquisa)).get(0);
 
-            if (user.getLogado() == true){
+            if (user.getLogado()){
                 user.setLogado(false);
                 usuarioFisicoRepository.save(user);
                 return ResponseEntity.ok(user);
@@ -60,7 +60,7 @@ public class AuthController {
         if (session.getAttribute("nomeDoVoluntario") == null){
             UsuarioJuridico userPesquisa = new UsuarioJuridico();
 
-            userPesquisa.setIdUsuarioJuridico(id);
+            userPesquisa.setId(id);
 
             UsuarioJuridico user = usuarioJuridicoRepository.findAll(Example.of(userPesquisa)).get(0);
 
@@ -73,4 +73,35 @@ public class AuthController {
         return ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity logout2(@RequestParam Integer id, @RequestParam String userType){
+
+        if (userType.equals("fisico")) {
+            UsuarioFisico userPesquisa = new UsuarioFisico();
+
+            userPesquisa.setId(id);
+
+            UsuarioFisico user = usuarioFisicoRepository.findAll(Example.of(userPesquisa)).get(0);
+
+            if (user.getLogado()){
+                user.setLogado(false);
+                usuarioFisicoRepository.save(user);
+                return ResponseEntity.ok(user);
+            }
+        }
+        if (userType.equals("juridico")){
+            UsuarioJuridico userPesquisa = new UsuarioJuridico();
+
+            userPesquisa.setId(id);
+
+            UsuarioJuridico user = usuarioJuridicoRepository.findAll(Example.of(userPesquisa)).get(0);
+
+            if (user.getLogado() == true){
+                user.setLogado(false);
+                usuarioJuridicoRepository.save(user);
+                return ResponseEntity.ok(user);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
