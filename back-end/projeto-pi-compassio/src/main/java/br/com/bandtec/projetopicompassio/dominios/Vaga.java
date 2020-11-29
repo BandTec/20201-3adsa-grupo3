@@ -28,6 +28,9 @@ public class Vaga {
     @Temporal(value = TemporalType.DATE)
     private Date dataFim;
 
+    @Column(length = 255)
+    private String foto;
+
     @OneToOne
     @JoinColumn(name = "fk_endereco")
     private Endereco fkEndereco;
@@ -84,6 +87,14 @@ public class Vaga {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public Endereco getFkEndereco() {

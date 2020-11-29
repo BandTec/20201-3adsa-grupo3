@@ -28,6 +28,9 @@ public class UsuarioJuridico {
     @Column(length = 50)
     private String causa;
 
+    @Column(length = 255)
+    private String foto;
+
     @Column(length = 256, name = "descricao_ong")
     private String descricaoOng;
 
@@ -108,6 +111,14 @@ public class UsuarioJuridico {
 
     public void setDescricaoOng(String descricaoOng) {
         this.descricaoOng = descricaoOng;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public Endereco getFkEndereco() {

@@ -28,15 +28,10 @@ public class UsuarioFisico {
     @Column(length = 14, nullable = false)
     private String cpf;
 
+    @Column(length = 255)
+    private String foto;
+
     private Boolean logado;
-
-    public Boolean getLogado() {
-        return logado;
-    }
-
-    public void setLogado(Boolean logado) {
-        this.logado = logado;
-    }
 
     public Integer getId() {
         return id;
@@ -92,5 +87,21 @@ public class UsuarioFisico {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public Boolean getLogado() {
+        return logado;
+    }
+
+    public void setLogado(Boolean logado) {
+        this.logado = logado;
     }
 }
