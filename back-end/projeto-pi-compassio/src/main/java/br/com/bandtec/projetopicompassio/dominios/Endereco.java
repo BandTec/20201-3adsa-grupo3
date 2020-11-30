@@ -7,27 +7,27 @@ public class Endereco {
 
     @Id
     @Column(name = "id_endereco")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEndereco;
 
     @Column(nullable = false)
     private String logradouro;
 
-    @Column(nullable = false, name = "numero_endereco")
+    @Column(name = "numero_endereco")
     private Integer numeroEndereco;
 
-    @Column(nullable = false)
     private String complemento;
 
-    @Column(name = "CEP", length = 9, nullable = false)
+    @Column(name = "CEP", length = 9)
     private String cep;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 45)
     private String bairro;
 
-    @Column(length = 2, nullable = false)
+    @Column(length = 2)
     private String estado;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 45)
     private String cidade;
 
     public Integer getIdEndereco() {

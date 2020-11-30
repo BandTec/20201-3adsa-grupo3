@@ -1,0 +1,19 @@
+.ratingContainer{
+    width: 100%
+}
+
+.ratingComment{
+    display: flex;
+    height: 18rem;
+}
+
+.commentImg{
+    height: 80%;
+    width: 20%;
+    background-color: #158723
+}
+
+.ratingCommentContent{
+    margin-left: 1rem;
+    width: 80%;
+}

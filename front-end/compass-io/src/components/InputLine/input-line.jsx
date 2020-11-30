@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 export default function InputLine(props) {
   return(
     <div>
-          <TextField id="inputLine" type={props.type} label={props.title} placeholder={props.placeholder} fullWidth/>
+          <TextField name={props.name} id="inputLine" type={props.type} label={props.title} placeholder={props.placeholder} fullWidth/>
     </div>
   );
 }

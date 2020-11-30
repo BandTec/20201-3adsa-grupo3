@@ -4,7 +4,6 @@ import phoneCallFill from '@iconify/icons-eva/phone-call-fill';
 import mailOutlined from '@iconify/icons-ant-design/mail-outlined';
 import './footer.css';
 
-
 function Footer() {
     return (
         /*    <div>

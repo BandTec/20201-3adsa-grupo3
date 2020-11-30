@@ -33,7 +33,8 @@ export default function ComboBox(props) {
     <InputLabel id="tituloLabel">{props.labelTitle}</InputLabel>
     <Select
       labelId="tituloLabel"
-      id="tituloLabel"
+      id="tituloSelect"
+      name={props.name}
       value={cidade}
       onChange={handleChange}
       label={props.labelTitle}
@@ -42,11 +43,11 @@ export default function ComboBox(props) {
       <MenuItem value="">
         <em>None</em>
       </MenuItem>
-      <MenuItem value={10}>{props.nomeItem1}</MenuItem>
-      <MenuItem value={20}>{props.nomeItem2}</MenuItem>
-      <MenuItem value={30}>{props.nomeItem3}</MenuItem>
-      <MenuItem value={40}>{props.nomeItem4}</MenuItem>
-      <MenuItem value={50}>{props.nomeItem5}</MenuItem>
+      <MenuItem value={props.nomeItem1}>{props.nomeItem1}</MenuItem>
+      <MenuItem value={props.nomeItem2}>{props.nomeItem2}</MenuItem>
+      <MenuItem value={props.nomeItem3}>{props.nomeItem3}</MenuItem>
+      <MenuItem value={props.nomeItem4}>{props.nomeItem4}</MenuItem>
+      <MenuItem value={props.nomeItem5}>{props.nomeItem5}</MenuItem>
     </Select>
   </FormControl>
   );

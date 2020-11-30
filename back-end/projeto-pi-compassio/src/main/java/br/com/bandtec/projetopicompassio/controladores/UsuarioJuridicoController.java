@@ -1,20 +1,16 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
-import br.com.bandtec.projetopicompassio.dominios.Auth;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.SessionCookieConfig;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarioJuridicos")
+@RequestMapping("/usuariosJuridicos")
 public class UsuarioJuridicoController {
 
     @Autowired
@@ -22,8 +18,8 @@ public class UsuarioJuridicoController {
 
     @PostMapping
     public ResponseEntity criar(@RequestBody UsuarioJuridico novoUsuarioJuridico){
-        repository.save(novoUsuarioJuridico);
-        return ResponseEntity.created(null).build();
+        UsuarioJuridico usuarioCriado = repository.save(novoUsuarioJuridico);
+        return ResponseEntity.created(null).body(usuarioCriado);
     }
 
     @GetMapping()
@@ -63,34 +59,5 @@ public class UsuarioJuridicoController {
         atualizacao.setIdUsuarioJuridico(id);
         repository.save(atualizacao);
         return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/auth")
-    public ResponseEntity autenticar(@RequestBody Auth authentic, HttpSession session){
-        if (repository.pesquisaEmailESenhaJuridico(authentic.getEmail(), authentic.getSenha()).isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        UsuarioJuridico atual = repository.pesquisaEmailESenhaJuridico(authentic.getEmail(), authentic.getSenha()).get(0);
-        atual.setLogado(true);
-        session.setAttribute("nomeDaOng", atual.getNomeOng());
-        repository.save(atual);
-        return ResponseEntity.ok(atual);
-    }
-
-    @PostMapping("/{id}")
-    public ResponseEntity logout(@PathVariable int id){
-
-        UsuarioJuridico userPesquisa = new UsuarioJuridico();
-
-        userPesquisa.setIdUsuarioJuridico(id);
-
-        UsuarioJuridico user = repository.findAll(Example.of(userPesquisa)).get(0);
-
-        if (user.getLogado() == true){
-            user.setLogado(false);
-            repository.save(user);
-            return ResponseEntity.ok(user);
-        }
-        return ResponseEntity.notFound().build();
     }
 }

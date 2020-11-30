@@ -18,8 +18,8 @@ public class EnderecoController {
 
     @PostMapping
     public ResponseEntity criar(@RequestBody Endereco novoEndereco){
-        repository.save(novoEndereco);
-        return ResponseEntity.created(null).build();
+        Endereco enderecoCriado = repository.save(novoEndereco);
+        return ResponseEntity.created(null).body(enderecoCriado);
     }
 
     @GetMapping()

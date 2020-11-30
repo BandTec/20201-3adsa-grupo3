@@ -7,6 +7,7 @@ import java.util.Date;
 public class UsuarioFisico {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario_fisico")
     private Integer idUsuarioFisico;
 
@@ -22,14 +23,12 @@ public class UsuarioFisico {
     @Column(length = 15, nullable = false)
     private String telefone;
 
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false, name = "data_nascimento")
     private Date dataNascimento;
 
     @Column(length = 14, nullable = false)
     private String cpf;
-
-    @Column(name = "sexo")
-    private Boolean sexo;
 
     private Boolean logado;
 
@@ -95,13 +94,5 @@ public class UsuarioFisico {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public Boolean getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(Boolean sexo) {
-        this.sexo = sexo;
     }
 }

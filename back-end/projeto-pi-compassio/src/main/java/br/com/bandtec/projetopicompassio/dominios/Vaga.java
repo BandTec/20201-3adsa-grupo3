@@ -1,7 +1,5 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import br.com.bandtec.projetopicompassio.dto.VagaDTO;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,11 +14,11 @@ public class Vaga {
     @Column(length = 256, nullable = false)
     private String titulo;
 
-    @Column(length = 256, name = "descricao_vaga")
-    private String descricaoVaga;
-
     @Column(length = 50)
     private String causa;
+
+    @Column(length = 256, name = "descricao")
+    private String descricao;
 
     @Column(nullable = false, name = "data_inicio")
     @Temporal(value = TemporalType.DATE)
@@ -30,18 +28,6 @@ public class Vaga {
     @Temporal(value = TemporalType.DATE)
     private Date dataFim;
 
-    @Column(length = 256, name = "descricao_completa")
-    private String descricaoCompleta;
-
-    @Column(length = 100, name = "area_atuacao")
-    private String areaAtuacao;
-
-    @Column(length = 256, name = "descricao_area")
-    private String descricaoArea;
-
-    @Column(length = 256, name = "descricao_requisitos")
-    private String descricaoRequisitos;
-
     @OneToOne
     @JoinColumn(name = "fk_endereco")
     private Endereco fkEndereco;
@@ -50,9 +36,7 @@ public class Vaga {
     @JoinColumn(nullable = false, name = "fk_usuario_juridico")
     private UsuarioJuridico fkUsuarioJuridico;
 
-    public Vaga() {
-
-    }
+    public Vaga() { }
 
     public Integer getIdVaga() {
         return idVaga;
@@ -70,12 +54,12 @@ public class Vaga {
         this.titulo = titulo;
     }
 
-    public String getDescricaoVaga() {
-        return descricaoVaga;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricaoVaga(String descricaoVaga) {
-        this.descricaoVaga = descricaoVaga;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getCausa() {
@@ -100,38 +84,6 @@ public class Vaga {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
-    }
-
-    public String getDescricaoCompleta() {
-        return descricaoCompleta;
-    }
-
-    public void setDescricaoCompleta(String descricaoCompleta) {
-        this.descricaoCompleta = descricaoCompleta;
-    }
-
-    public String getAreaAtuacao() {
-        return areaAtuacao;
-    }
-
-    public void setAreaAtuacao(String areaAtuacao) {
-        this.areaAtuacao = areaAtuacao;
-    }
-
-    public String getDescricaoArea() {
-        return descricaoArea;
-    }
-
-    public void setDescricaoArea(String descricaoArea) {
-        this.descricaoArea = descricaoArea;
-    }
-
-    public String getDescricaoRequisitos() {
-        return descricaoRequisitos;
-    }
-
-    public void setDescricaoRequisitos(String descricaoRequisitos) {
-        this.descricaoRequisitos = descricaoRequisitos;
     }
 
     public Endereco getFkEndereco() {

@@ -1,6 +1,5 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
-
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.repositorios.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +34,6 @@ public class VagaController {
         vagaPesquisa.setIdVaga(id);
         vagaPesquisa.setTitulo(titulo);
         vagaPesquisa.setCausa(causa);
-        vagaPesquisa.setAreaAtuacao(area);
-        vagaPesquisa.setDescricaoRequisitos(requisitos);
 
         List<Vaga> resultado = repository.findAll(Example.of(vagaPesquisa));
 

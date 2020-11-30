@@ -6,16 +6,43 @@ import LabelTitleForm from "../../components/LabelTitleForm/label-title-form";
 import Image from '../../components/Image/image';
 import Button from '@material-ui/core/Button'
 
+import AuthService from '../../services/auth-service'
+import CommomFunctions from '../../utils/functions'
+
 import './sign-in.css';
 import loginImage from '../../assets/images/children-smile.jpg'
 
+function logar() {
+  getLoginFormData();
+  let authService = new AuthService();
+
+  let formLogin = document.getElementById("formLoginToSubmit");
+  let formLoginAsJson = CommomFunctions.convertFormToJson(formLogin);
+  let formLoginObj = JSON.parse(formLoginAsJson);
+  formLoginObj.senha = CommomFunctions.encryptPassword(formLoginObj.senha);
+  formLoginAsJson = JSON.stringify(formLoginObj);
+  authService.login(formLoginAsJson);
+}
+
+function getLoginFormData() {
+  let Email = document.getElementById("email");
+  Email.innerText = document.getElementsByName("email")[0].value;
+
+  let Senha = document.getElementById("senha");
+  Senha.innerText = document.getElementsByName("senha")[0].value;
+}
+
 export default function SignIn() {
   return (
-    <section>
+    <React.Fragment>
       <Navbar/>
       <LabelWelcome labelTitle="Bem vindo ao Compass.io" labelText="Realize aqui o seu login"/>
       <br/>
 
+      <form id="formLoginToSubmit" hidden>
+        <input id="email"/>
+        <input id="senha"/>
+      </form>
 
       <div className="container">
         <span className="loginImagePart">
@@ -34,15 +61,15 @@ export default function SignIn() {
           </div>
 
           <div className="inputLogin">
-            <InputLine title="Email" type="text" placeholder="Ex: joao.moreira.silva@email.com"/>
+            <InputLine name="email" title="Email" type="text" placeholder="Ex: joao.moreira.silva@email.com"/>
           </div>
 
           <div className="inputLogin">
-            <InputLine title="Senha" type="password" placeholder="********"/>
+            <InputLine name="senha" title="Senha" type="password" placeholder="********"/>
           </div>
 
           <div className="buttonEnter center">
-            <Button id="btnEnter" variant="contained" color="primary">Entrar</Button>
+            <Button id="btnEnter" onClick={logar} variant="contained" color="primary">Entrar</Button>
           </div>
 
           <div className="blueWord formFooter">
@@ -50,12 +77,10 @@ export default function SignIn() {
           </div>
           <div className="blueWord formFooter">
             <div className="bold center">Ainda não possui cadastro? <a href="signup" className="yellowWord">Cadastre-se aqui!</a></div>
-
           </div>
         </span>
 
-    
       </div>
-    </section>
+    </React.Fragment>
   );
 };
