@@ -68,36 +68,6 @@ class UsuarioJuridicoService {
             return err;
         });
     }
-
-    async loginUsuarioJuridico(auth) {
-        return axios.post(`${this.BASE_URL}/auth`, auth, {
-            headers: {
-                'Access-Control-Allow-Origin': true,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((res) => {
-            return res;
-        })
-        .catch((err) => {
-            return err;
-        });
-    }
-
-    async logoutUsuarioJuridico(id) {
-        return axios.post(`${this.BASE_URL}/id=${id}`, null, {
-            headers: {
-                'Access-Control-Allow-Origin': true,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((res) => {
-            return res;
-        })
-        .catch((err) => {
-            return err;
-        });
-    }
 };
 
 export default UsuarioJuridicoService;

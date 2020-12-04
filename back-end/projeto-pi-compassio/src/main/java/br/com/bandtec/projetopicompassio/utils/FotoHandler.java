@@ -39,7 +39,7 @@ public class FotoHandler {
                 new File("fotos").mkdir();
                 Path path = new File("fotos", filePath).toPath();
                 Path savedPath = Files.write(path, conteudo, StandardOpenOption.CREATE);
-                return savedPath.toString();
+                return savedPath.toString().replace('\\', '/');
             }
             else
                 throw new IllegalArgumentException();

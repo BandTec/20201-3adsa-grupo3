@@ -73,9 +73,13 @@ public class VagaController {
     @PostMapping(value = "/foto/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity uploadFoto(@RequestParam Integer idVaga, @RequestParam MultipartFile arquivo)  {
         try {
-            String fotoPath = FotoHandler.upload(arquivo).replace('\\', '/');
-
-            Vaga vaga = repository.findById(idVaga).get();
+            String fotoPath = FotoHandler.upload(arquivo);
+            Vaga vaga = null;
+            try {
+                vaga = repository.findById(idVaga).get();
+            } catch (Exception ex) {
+                throw new IllegalArgumentException("Verifique o id da vaga", ex);
+            }
             vaga.setFoto(fotoPath);
             repository.save(vaga);
 
@@ -93,7 +97,12 @@ public class VagaController {
     @ResponseBody
     public ResponseEntity download(@RequestParam Integer idVaga) {
         try {
-            String pathFotoVaga = repository.findById(idVaga).get().getFoto();
+            String pathFotoVaga = null;
+            try {
+                pathFotoVaga = repository.findById(idVaga).get().getFoto();
+            } catch (Exception ex) {
+                throw new IllegalArgumentException("Verifique o id da vaga", ex);
+            }
             byte[] foto = FotoHandler.download(pathFotoVaga);
             return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(foto);
         } catch (FileNotFoundException fEx) {

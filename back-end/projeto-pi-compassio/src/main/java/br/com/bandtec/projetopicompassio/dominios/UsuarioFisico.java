@@ -8,6 +8,7 @@ public class UsuarioFisico {
 
     @Id
     @Column(name = "id_usuario_fisico")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(length = 90, nullable = false, unique = true)

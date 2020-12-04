@@ -5,9 +5,12 @@ import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.dto.*;
+<<<<<<< Updated upstream
 import br.com.bandtec.projetopicompassio.mappers.UsuarioFisicoMapper;
 import br.com.bandtec.projetopicompassio.mappers.UsuarioFisicoVagaMapper;
 import br.com.bandtec.projetopicompassio.mappers.VagaMapper;
+=======
+>>>>>>> Stashed changes
 import br.com.bandtec.projetopicompassio.repositorios.*;
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +39,15 @@ public class ArquivoController {
     private UsuarioFisicoVagaRepository voluntarioDaVagaRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+<<<<<<< Updated upstream
     @Autowired
     private VagaMapper vagaMapper;
     @Autowired
     private UsuarioFisicoMapper usuarioFisicoMapper;
     @Autowired
     private UsuarioFisicoVagaMapper usuarioFisicoVagaMapper;
+=======
+>>>>>>> Stashed changes
 
     private String idArquivo;
     private String nomeDoArquivo;
