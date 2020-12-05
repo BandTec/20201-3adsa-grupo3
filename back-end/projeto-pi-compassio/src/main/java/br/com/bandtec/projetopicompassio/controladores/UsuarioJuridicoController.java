@@ -85,7 +85,7 @@ public class UsuarioJuridicoController {
     }
 
     @PostMapping(value = "/foto/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity uploadFoto(@RequestParam Integer idUsuario, @RequestParam MultipartFile arquivo)  {
+    public ResponseEntity uploadFoto(@RequestParam Integer idUsuario, @RequestBody MultipartFile arquivo)  {
         try {
             String fotoPath = FotoHandler.upload(arquivo);
             UsuarioJuridico usuario = null;

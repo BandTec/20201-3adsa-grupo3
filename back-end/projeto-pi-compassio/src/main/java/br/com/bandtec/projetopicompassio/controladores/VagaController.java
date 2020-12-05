@@ -71,7 +71,7 @@ public class VagaController {
     }
 
     @PostMapping(value = "/foto/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity uploadFoto(@RequestParam Integer idVaga, @RequestParam MultipartFile arquivo)  {
+    public ResponseEntity uploadFoto(@RequestParam Integer idVaga, @RequestBody MultipartFile arquivo)  {
         try {
             String fotoPath = FotoHandler.upload(arquivo);
             Vaga vaga = null;
