@@ -1,4 +1,5 @@
 import React from 'react';
+import GenderBox from '../../../components/GenderBox/gender-box';
 import InputLine from "../../../components/InputLine/input-line";
 import LabelTitleForm from "../../../components/LabelTitleForm/label-title-form";
 import Button from '@material-ui/core/Button';
@@ -10,6 +11,7 @@ import './sign-up-volunteer.css';
 
 
 // import { Container } from './styles';
+
 
 export default class SignUp extends React.Component {
 
@@ -39,7 +41,7 @@ export default class SignUp extends React.Component {
                 <InputLine title="Data de Nascimento" type="text" placeholder="DD/MM/AAAA" />
                 <InputLine title="CPF" type="text" placeholder="000.000.000-00" />
                 <InputLine title="Telefone" type="text" placeholder="(xx)xxxxx-xxxx" />
-                <InputLine title="Telefone" type="text" placeholder="(xx)xxxxx-xxxx" />
+                <GenderBox/>
               </div>
             </form>
 
@@ -58,7 +60,6 @@ export default class SignUp extends React.Component {
               <span>Li e concordo com os <b className="blueWord">termos</b></span>
             </div>
 
-            <Button id="btnVoltar" variant="contained" color="primary">Voltar</Button>
             <Button id="btnCadastrar" variant="contained" color="primary">Cadastrar</Button>
 
           </div>

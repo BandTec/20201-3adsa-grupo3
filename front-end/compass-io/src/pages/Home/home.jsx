@@ -45,13 +45,18 @@ const useStyles = makeStyles({
 });
 
 export default function Home() {
-  function clickVagas(e){
+  function ClickVagas(){
     window.location.href="http://localhost:3000/vacancies";
   }
+
+  function ClickScroll(){
+    window.scrollTo(0, 1560);
+  }
+
   const classes = useStyles();
   return (
     <div>
-      <Navbar/>
+      <Navbar position={ClickScroll}/>
       <CarouselMain></CarouselMain>
       <div className={classes.bannerVerVagas}>
         <div className={classes.labelWelcome}>
@@ -59,16 +64,16 @@ export default function Home() {
             <br/>
             <label className="subtitulo">Encontre facilmente aqui, instituições que lutem nas causas que você quer ajudar!</label>
         </div>
-        <Button size="large" className={classes.btnVerVagas} variant="contained" onClick={clickVagas}>Ver vagas</Button>
+        <Button size="large" className={classes.btnVerVagas} variant="contained" onClick={ClickVagas}>Ver vagas</Button>
       </div>
       <CarouselFilter></CarouselFilter>
       {/* <LabelWelcome className="labelWelcome"
         labelTitle="Ajude uma causa que seja do seu interesse!" 
         labelText="Encontre facilmente aqui, instituições que lutem nas causas que você quer ajudar!"></LabelWelcome> */}
       <BlueBanner></BlueBanner>
-      <CardHome/>
-      <Button variant="outline" className={classes.outlineBtn}>Ache aqui a vaga<br />ideal para você!</Button>
-      <GrayBanner></GrayBanner>
+      <CardHome id="comoFunciona"/>
+      <Button variant="outline" className={classes.outlineBtn} onClick={ClickVagas}>Ache aqui a vaga<br />ideal para você!</Button>
+      <GrayBanner id="locationTag"></GrayBanner>
       <Footer id="carouselTeste"/>
     </div>
   );

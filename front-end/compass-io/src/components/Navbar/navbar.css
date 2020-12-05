@@ -22,6 +22,7 @@
 }
 
 .link {
+    cursor: pointer;
     color: #0084FE;
     position: relative;
     margin: auto;

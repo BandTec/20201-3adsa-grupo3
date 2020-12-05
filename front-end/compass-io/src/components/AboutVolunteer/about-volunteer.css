@@ -43,7 +43,7 @@ input[type='file'] {
     display: none
   }
 
-label{
+.containerProfileVolunteer > label{
     background-color: #1975FF;
     width: 13rem;
     height: 2rem;

@@ -55,7 +55,7 @@ import { makeStyles } from '@material-ui/core/styles';
 //   const classes = useStyles();
 //   return(
 //     <div className="signUpView">
-//         {this.state.isOng ? <SignUpVolunteer /> : <SignUpOng />}
+//         {this.state.isVolunteer ? <SignUpVolunteer /> : <SignUpOng />}
 //     </div>  
 //   );
 // };
@@ -73,14 +73,14 @@ export default class SignUp extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      isOng: false,
+      isVolunteer: false,
     };
     this.handleClick = this.handleClick.bind(this);
   };
 
   handleClick() {
     this.setState(prevState => ({
-      isOng: !prevState.isOng
+      isVolunteer: !prevState.isVolunteer
     }));
     
   }
@@ -95,9 +95,19 @@ export default class SignUp extends React.Component {
     // })
     const classes = useStyles;
 
+    function OnChange(){
+      const direction = document.getElementById("comoFunciona");
+      direction.value = direction.value.ClickDirection();
+    }
+
+    function ClickDirection(){
+      window.location.href="/";
+      window.scrollTo(0, 1560);
+    }
+
     return(
       <div>
-         <Navbar />
+         <Navbar changes={OnChange} position={ClickDirection}/>
          <LabelWelcome labelTitle="Bem vindo ao Compass.io" labelText="Preencha o formulário para realizar o cadastro"/>
          <ToggleButtonGroup>
            <ToggleButton className={classes.btnToggle} style={{
@@ -106,11 +116,11 @@ export default class SignUp extends React.Component {
         alignContent: 'center',
         marginTop: '1rem',
         marginBottom: '1rem'
-      }} id="btnToggle" onClick={this.handleClick}>{this.state.isOng ? 'Sou uma ONG' : 'Sou Voluntário'}</ToggleButton>
+      }} id="btnToggle" onClick={this.handleClick}>{this.state.isVolunteer ? 'Sou Voluntário' : 'Sou uma ONG'}</ToggleButton>
          </ToggleButtonGroup>
-         {/* <ToggleBtn onClick={this.handleClick}>{this.state.isOng ? 'Sou uma ONG' : 'Sou Voluntário'}</ToggleBtn> */}
+         {/* <ToggleBtn onClick={this.handleClick}>{this.state.isVolunteer ? 'Sou uma ONG' : 'Sou Voluntário'}</ToggleBtn> */}
          <div className="signUpView">
-          {this.state.isOng ? <SignUpVolunteer /> : <SignUpOng />}
+          {this.state.isVolunteer ? <SignUpOng /> : <SignUpVolunteer />}
          </div>
 
       </div>

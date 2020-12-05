@@ -240,7 +240,6 @@ export default class SignUp extends React.Component {
               <span>Li e concordo com os <b className="blueWord">termos</b></span>
             </div>
 
-            <Button id="btnVoltarOng" variant="contained" color="primary">Voltar</Button>
             <Button id="btnCadastrarOng" onClick={cadastrar} variant="contained" color="primary">Cadastrar</Button>
 
           </div>
