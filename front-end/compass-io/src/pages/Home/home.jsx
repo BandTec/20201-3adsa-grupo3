@@ -45,6 +45,9 @@ const useStyles = makeStyles({
 });
 
 export default function Home() {
+  function clickVagas(e){
+    window.location.href="http://localhost:3000/vacancies";
+  }
   const classes = useStyles();
   return (
     <div>
@@ -56,7 +59,7 @@ export default function Home() {
             <br/>
             <label className="subtitulo">Encontre facilmente aqui, instituições que lutem nas causas que você quer ajudar!</label>
         </div>
-        <Button size="large" className={classes.btnVerVagas} variant="contained">Ver vagas</Button>
+        <Button size="large" className={classes.btnVerVagas} variant="contained" onClick={clickVagas}>Ver vagas</Button>
       </div>
       <CarouselFilter></CarouselFilter>
       {/* <LabelWelcome className="labelWelcome"
@@ -66,7 +69,7 @@ export default function Home() {
       <CardHome/>
       <Button variant="outline" className={classes.outlineBtn}>Ache aqui a vaga<br />ideal para você!</Button>
       <GrayBanner></GrayBanner>
-      <Footer/>
+      <Footer id="carouselTeste"/>
     </div>
   );
 };

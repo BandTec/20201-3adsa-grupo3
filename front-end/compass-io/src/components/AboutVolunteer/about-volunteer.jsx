@@ -22,6 +22,21 @@ function AboutVolunteer(props) {
                <div className="inscriptionVolunteerTitle"><u><b>Inscrições</b></u></div>
                <div className="inscriptionVolunteerText">5 inscrições pendentes</div>
            </div>
+
+           <div className="vagasBox">
+               <div>
+                   <span>Vagas acessadas</span>
+               </div>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+               <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
+           </div>
        </section>
     );
 }

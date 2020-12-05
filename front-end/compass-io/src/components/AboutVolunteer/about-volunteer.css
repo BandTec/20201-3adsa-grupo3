@@ -53,3 +53,15 @@ label{
     text-align: center;
     border-color: #000000;
 }
+
+.vagasBox{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-left: 18rem;
+    width: 17.5rem;
+    height: 17rem;
+    border: 0.1rem solid #000000;
+    border-radius: 1rem;
+    background-color: #fafafa;
+    padding: 0;
+}
