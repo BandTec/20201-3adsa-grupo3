@@ -103,7 +103,7 @@ public class PilhaObj<T> {
 
     public List<T> toList() {
         List lista = new ArrayList();
-        for (int i = 0; i < this.count(); i++)
+        for (int i = topo; i >= 0; i--)
             lista.add(pilha[i]);
         return lista;
     }

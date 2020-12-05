@@ -1,6 +1,5 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
-import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import br.com.bandtec.projetopicompassio.utils.FilaObj;
@@ -38,6 +37,8 @@ public class UsuarioJuridicoController {
 
     @PostMapping
     public ResponseEntity criar(@RequestBody @Valid UsuarioJuridico novoUsuarioJuridico){
+        if (!repository.findAll(Example.of(novoUsuarioJuridico)).isEmpty())
+            return ResponseEntity.badRequest().body("Usuário já cadastrado");
         if (usuariosPendentes.isFull())
             return ResponseEntity.badRequest().body("A fila de requisições está cheia, por favor aguarde alguns minutos antes de tentar novamente");
         usuariosPendentes.insert(novoUsuarioJuridico);

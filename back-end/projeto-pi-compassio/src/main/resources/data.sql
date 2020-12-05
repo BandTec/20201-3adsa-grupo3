@@ -19,17 +19,10 @@ INSERT INTO avaliacao (id_avaliacao, pontuacao, relatorio, fk_usaurio_fisico, fk
 (4, 2, 'foi ruim', 1, 1),
 (5, 1, 'foi péssimo', 1, 1);
 
-<<<<<<< Updated upstream
 INSERT INTO vaga (id_vaga, titulo, descricao, causa, data_inicio, data_fim, fk_endereco, fk_usuario_juridico) VALUES
 (null, 'Ajudar a construir uma escola', 'jkljkljljla', 'Construção', '2001-01-01', '2001-01-01', 1, 1),
 (null, 'Mutirão para reforma da creche', 'lkjljjljljka', 'Construção', '2001-01-01', '2001-01-01', 1, 1),
 (null, 'Levar comida para moradores de rua', 'jkljkkljkljkljka', 'Necessitados', '2001-01-01', '2001-01-01', 1, 1);
-=======
-INSERT INTO vaga (id_vaga, titulo, descricao_vaga, causa, data_inicio, data_fim, descricao_completa, area_atuacao, descricao_area, descricao_requisitos, fk_endereco, fk_usuario_juridico) VALUES
-(null, 'Ajudar a construir uma escola', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1),
-(null, 'Mutirão para reforma da creche', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1),
-(null, 'Levar comida para moradores de rua', 'a', 'a', '2001-01-01', '2001-01-01', 'a', 'a', 'a', 'a', 1, 1);
->>>>>>> Stashed changes
 
 INSERT INTO usuario_fisico_vaga (data_inscricao, fk_usuario_fisico, fk_vaga) VALUES
 ('2020-10-20', 1, 1),

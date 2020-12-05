@@ -5,25 +5,32 @@ import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoRepository;
 import br.com.bandtec.projetopicompassio.utils.FilaObj;
 import br.com.bandtec.projetopicompassio.utils.FotoHandler;
+import br.com.bandtec.projetopicompassio.utils.PilhaObj;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.task.TaskExecutorBuilder;
+import org.springframework.boot.task.TaskExecutorCustomizer;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.core.task.support.TaskExecutorAdapter;
 import org.springframework.data.domain.Example;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.Schedules;
+import org.springframework.scheduling.config.Task;
+import org.springframework.scheduling.config.TaskExecutorFactoryBean;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ThemeResolver;
 
 import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuariosFisicos")
@@ -38,8 +45,19 @@ public class UsuarioFisicoController {
     private FilaObj<UsuarioFisico> usuariosPendentes = new FilaObj<>(20);
     private List<UsuarioFisico> usuariosNovos = new ArrayList();
 
+    private Hashtable<Integer, PilhaObj<Vaga>> ultimasVagasVisualizadas = new Hashtable();
+
+    @Scheduled(initialDelay = 5000, fixedRate = 100000)
+    public void configureController() {
+        for (UsuarioFisico u : repository.findAll()) {
+            this.ultimasVagasVisualizadas.putIfAbsent(u.getId(), new PilhaObj<Vaga>(5));
+        }
+    }
+
     @PostMapping
     public ResponseEntity criar(@RequestBody @Valid UsuarioFisico novoUsuarioFisico){
+        if (!repository.findAll(Example.of(novoUsuarioFisico)).isEmpty())
+            return ResponseEntity.badRequest().body("Usuário já cadastrado");
         if (usuariosPendentes.isFull())
             return ResponseEntity.badRequest().body("A fila de requisições está cheia, por favor aguarde alguns minutos antes de tentar novamente");
         usuariosPendentes.insert(novoUsuarioFisico);
@@ -160,7 +178,8 @@ public class UsuarioFisicoController {
             Optional<UsuarioFisico> usuarioAprovadoOptional =
                     usuariosNovos.stream().filter(u -> u.getEmail().equals(email)).findFirst();
             if (usuarioAprovadoOptional.isPresent()) {
-                repository.save(usuarioAprovadoOptional.get());
+                UsuarioFisico u = repository.save(usuarioAprovadoOptional.get());
+                ultimasVagasVisualizadas.put(u.getId(), new PilhaObj<Vaga>(5));
                 return ResponseEntity.created(null).body(
                         "<div>" +
                                 "<div id='header' style='width: 100vw;height: 15vh;background: blue;text-align: center;'>" +
@@ -172,6 +191,38 @@ public class UsuarioFisicoController {
                                 "</div>");
             }
             return ResponseEntity.notFound().build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/{idUsuario}/vagas")
+    public ResponseEntity addLastAccessed(@PathVariable Integer idUsuario, @RequestBody Vaga vaga) {
+        try {
+            if (!repository.findById(idUsuario).isPresent())
+                return ResponseEntity.notFound().build();
+            if (ultimasVagasVisualizadas.get(idUsuario).isFull()) {
+                PilhaObj<Vaga> aux = ultimasVagasVisualizadas.get(idUsuario).multiPop(4);
+                ultimasVagasVisualizadas.get(idUsuario).pop();
+                ultimasVagasVisualizadas.get(idUsuario).multiPush(aux);
+            }
+            this.ultimasVagasVisualizadas.get(idUsuario).push(vaga);
+            return ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/{idUsuario}/vagas")
+    public ResponseEntity getRecentlyAccessedVagas(@PathVariable Integer idUsuario) {
+        try {
+            if (!repository.findById(idUsuario).isPresent())
+                return ResponseEntity.notFound().build();
+            List<Vaga> vagas = this.ultimasVagasVisualizadas.get(idUsuario).toList();
+            if (vagas.isEmpty())
+                return ResponseEntity.noContent().build();
+            else
+                return ResponseEntity.ok(vagas);
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex.getMessage());
         }

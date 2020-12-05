@@ -1,7 +1,5 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import br.com.bandtec.projetopicompassio.dto.VagaDTO;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,12 +14,6 @@ public class Vaga {
     @Column(length = 256, nullable = false)
     private String titulo;
 
-<<<<<<< Updated upstream
-=======
-    @Column(length = 256, name = "descricao_vaga")
-    private String descricaoVaga;
-
->>>>>>> Stashed changes
     @Column(length = 50)
     private String causa;
 
@@ -36,22 +28,8 @@ public class Vaga {
     @Temporal(value = TemporalType.DATE)
     private Date dataFim;
 
-<<<<<<< Updated upstream
     @Column(length = 255)
     private String foto;
-=======
-    @Column(length = 256, name = "descricao_completa")
-    private String descricaoCompleta;
-
-    @Column(length = 100, name = "area_atuacao")
-    private String areaAtuacao;
-
-    @Column(length = 256, name = "descricao_area")
-    private String descricaoArea;
-
-    @Column(length = 256, name = "descricao_requisitos")
-    private String descricaoRequisitos;
->>>>>>> Stashed changes
 
     @OneToOne
     @JoinColumn(name = "fk_endereco")
@@ -61,19 +39,9 @@ public class Vaga {
     @JoinColumn(nullable = false, name = "fk_usuario_juridico")
     private UsuarioJuridico fkUsuarioJuridico;
 
-<<<<<<< Updated upstream
-    public Vaga() { }
-=======
     public Vaga() {
 
     }
-
-    public Vaga(VagaDTO other) {
-        this.setIdVaga(null);
-        this.setTitulo(other.getTitulo());
-        this.setDataInicio(other.getDataInicio());
-    }
->>>>>>> Stashed changes
 
     public Integer getIdVaga() {
         return idVaga;
