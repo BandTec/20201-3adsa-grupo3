@@ -1,0 +1,96 @@
+.fs-48p{
+    font-size: 3rem;
+}
+
+.fs-32p{
+    font-size: 2rem;
+}
+
+.fs-24p{
+    font-size: 1.5rem;
+}
+
+.fs-16p{
+    font-size: 1rem;
+}
+
+.fw-400{
+    font-weight: 400;
+}
+
+.fw-500{
+    font-weight: 500;
+}
+
+.fw-600{
+    font-weight: 600;
+}
+
+.gray{
+    color: #6a6a6a;
+}
+
+.pd-t-32{
+    padding-top: 2rem;
+}
+
+.table{
+    display: table;
+}
+
+.center{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mg-v-16{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.border-b{
+    border-bottom: 1px solid #6A6A6A
+}
+
+.bg-color-blue{
+    background-color: #1975FF
+}
+
+.bg-color-white-fc{
+    background-color: #fcfcfc
+}
+
+.font-color-white {
+    color: #fff
+}
+
+.border-rd-5{
+    border-radius: 5px;
+}
+
+.width-1000pg{
+    width: 1000%
+}
+
+.width-500pg{
+    width: 500%
+}
+
+.width-250pg{
+    width: 250%
+}
+
+.width-20pg{
+    width: 20%
+}
+
+.height-80p{
+    height: 5rem;
+}
+
+.height-40p{
+    height: 2.5rem;
+}
