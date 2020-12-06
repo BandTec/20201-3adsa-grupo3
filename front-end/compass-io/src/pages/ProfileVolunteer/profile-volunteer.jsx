@@ -31,9 +31,13 @@ export default function ProfileVolunteer() {
         <CarouselSkills/>
       </div>
       <div classname="ratingBox">
-      <h1><u>Avaliações</u></h1>
-      <Rating/>
-      <Rating/>
+      <Rating isVolunteerProfile 
+            imgVolunteer={ImgVolunteer}
+            vacancyTitle="Marcenaria para construção de móveis" 
+            infoVacancy="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                      Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, 
+                      accusantium cupiditate incidunt laboriosam aspernatur. P
+                      laceat ut maxime facilis molestias pariatur!"/>
       </div>
     </div>
   );

@@ -212,7 +212,7 @@ export default class SignUp extends React.Component {
                   nomeItem5="Suzano" />
               </div>
 
-              <div className="inputInfPessoal">
+              <div className="inputInfPessoal flex">
                 <ComboBox name="causa" labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
                   nomeItem5="Imóveis" />
                 <Button id="btnAdd" variant="contained" color="primary">+ Adicionar Causa</Button>

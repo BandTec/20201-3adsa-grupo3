@@ -21,7 +21,7 @@ function AboutVolunteer(props) {
                </div>
            </div>
 
-           <div className="vagasBox">
+           {/* <div className="vagasBox">
                <div>
                    <span>Vagas acessadas</span>
                </div>
@@ -34,7 +34,7 @@ function AboutVolunteer(props) {
                <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
                <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
                <a href="https://www.google.com/"><img width="60" height="70" src={props.imgVolunteer}></img></a>
-           </div>
+           </div> */}
        </section>
     );
 }
