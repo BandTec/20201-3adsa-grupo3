@@ -143,6 +143,18 @@ public class UsuarioFisicoController {
         }
     }
 
+    @GetMapping(value = "/foto/base64")
+    public ResponseEntity getFotoAsBase64(@RequestParam Integer idUsuario) {
+        try {
+            ResponseEntity response = this.download(idUsuario);
+            byte[] foto = (byte[])response.getBody();
+            byte[] fotoBase64 = Base64.getEncoder().encode(foto);
+            return ResponseEntity.ok().body(fotoBase64);
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
     @Scheduled(fixedRate = 30000)
     public ResponseEntity sendConfirmationEmail() {
         try {

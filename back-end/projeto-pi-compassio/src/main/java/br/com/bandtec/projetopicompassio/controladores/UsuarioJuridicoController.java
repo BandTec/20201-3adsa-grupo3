@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -121,6 +122,18 @@ public class UsuarioJuridicoController {
             return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(foto);
         } catch (FileNotFoundException fEx) {
             return ResponseEntity.badRequest().body(fEx.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/foto/base64")
+    public ResponseEntity getFotoAsBase64(@RequestParam Integer idUsuario) {
+        try {
+            ResponseEntity response = this.download(idUsuario);
+            byte[] foto = (byte[])response.getBody();
+            byte[] fotoBase64 = Base64.getEncoder().encode(foto);
+            return ResponseEntity.ok().body(fotoBase64);
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex.getMessage());
         }
