@@ -101,10 +101,10 @@ public class UsuarioFisicoController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/foto/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity uploadFoto(@RequestParam Integer idUsuario, @RequestBody MultipartFile arquivo)  {
+    @PostMapping(value = "/foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity uploadFoto(@RequestParam Integer idUsuario, @RequestBody MultipartFile foto)  {
         try {
-            String fotoPath = FotoHandler.upload(arquivo);
+            String fotoPath = FotoHandler.upload(foto);
             UsuarioFisico usuario = null;
             try {
                 usuario = repository.findById(idUsuario).get();
@@ -124,7 +124,7 @@ public class UsuarioFisicoController {
         }
     }
 
-    @GetMapping(value = "/foto/download", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/foto", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
     public ResponseEntity download(@RequestParam Integer idUsuario) {
         try {
