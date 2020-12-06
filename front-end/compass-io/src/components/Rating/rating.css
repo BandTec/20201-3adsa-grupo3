@@ -81,14 +81,12 @@
 .buttonProfileOng:hover{
     background-color: #bbb;
     color: #fff;
-    /* padding: 0.5rem 1rem 0.5rem 1rem; */
     transition: 0.75s;
 }
 
 .buttonProfile:hover{
     background-color: #FFB219;
     color: #fff;
-    /* padding: 0.5rem 1rem 0.5rem 1rem; */
     transition: 0.75s;
 }
 

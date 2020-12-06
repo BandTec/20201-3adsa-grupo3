@@ -1,21 +1,9 @@
 import React from 'react';
-import CommentBox from '../CommentBox/comment-box';
-import Button from '@material-ui/core/Button';
 import './rating.css';
-import AboutOng from '../AboutOng/about-ong';
 
 function Rating(props) {
     return (
         <div className="width-100pg mg-v-32">
-
-            {/* <div className="ratingComment">
-                <div className="commentImg">
-                </div>
-                <div className="ratingCommentContent">
-                    <div><span>Estrelas</span></div>
-                    <CommentBox />
-                </div>
-            </div> */}
             <div className={props.isVolunteerProfile ? 
                 "display-block bg-color-gray-light height-280p width-100pg border border-rd-10 " : 
                 "display-none"}>
@@ -23,15 +11,6 @@ function Rating(props) {
                     <h1 >Última vaga visitada</h1>
                     <div className="flex ">
                         <img width="140" height="140" src={props.imgVolunteer}></img>
-                        {/* <div className="mg-l-16">
-                            <div className="fs-24p"><u><b>{props.nameVolunteer}</b></u></div>
-                            <div className="fs-16p mg-t-16">
-                                <div><span className="font-weight-500">Idade: </span> {props.ageVolunteer}</div>
-                                <div><span className="font-weight-500">Profissão: </span> {props.professionVolunteer}</div>
-                                <div><span className="font-weight-500">Escolaridade: </span> {props.schoolVolunteer}</div>
-                                <div><span className="font-weight-500">Mora em: </span> {props.liveInVolunteer}</div>
-                            </div>
-                        </div> */}
                         <div className="mg-l-16">
                             <div className="fs-24p font-weight-500 mg-b-16">{ props.vacancyTitle }</div>
                             <div className="fs-16p txtal-justify">{ props.infoVacancy }</div>

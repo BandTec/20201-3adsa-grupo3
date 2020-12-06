@@ -38,15 +38,6 @@ export default function ProfileOng() {
           <CarouselVacancy />
         </div>
         <div className="ratings">
-          <Rating isVolunteerProfile 
-            imgVolunteer={ImgVolunteer}
-            vacancyTitle="Marcenaria para construção de móveis" 
-            infoVacancy="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                      Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, 
-                      accusantium cupiditate incidunt laboriosam aspernatur. P
-                      laceat ut maxime facilis molestias pariatur!" />
-        </div>
-        {/* <div className="ratings">
           <Rating isOngProfile 
             imgVolunteer={ImgVolunteer} 
             nameVolunteer="Iago Roani de Lima" 
@@ -54,7 +45,7 @@ export default function ProfileOng() {
             professionVolunteer="Automação"
             schoolVolunteer="Cursando Superior" 
             liveInVolunteer="Suzano,SP,Brasil"/>
-        </div> */}
+        </div>
         <div className="flex justcon-sb">
           <CardProfileOng isContact location="R. Rodrigues, 116 - Vila Zat, São Paulo - SP, 02977-025"
           contact="contato.teto@teto.com.br" website="https://www.techo.org/" instagram="@teto.br" 
