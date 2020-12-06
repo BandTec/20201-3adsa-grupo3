@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import CarouselVacancy from '../../components/CarouselVacancy/carousel-vacancy';
 import Rating from '../../components/Rating/rating';
 import CardProfileOng from '../../components/CardProfileOng/card-profile-ong';
+import ImgVolunteer from '../../assets/images/child-img.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Footer from '../../components/Footer/footer';
@@ -37,10 +38,23 @@ export default function ProfileOng() {
           <CarouselVacancy />
         </div>
         <div className="ratings">
-          <h1>Avaliações</h1>
-          <Rating />
-          <Rating />
+          <Rating isVolunteerProfile 
+            imgVolunteer={ImgVolunteer}
+            vacancyTitle="Marcenaria para construção de móveis" 
+            infoVacancy="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                      Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, 
+                      accusantium cupiditate incidunt laboriosam aspernatur. P
+                      laceat ut maxime facilis molestias pariatur!" />
         </div>
+        {/* <div className="ratings">
+          <Rating isOngProfile 
+            imgVolunteer={ImgVolunteer} 
+            nameVolunteer="Iago Roani de Lima" 
+            ageVolunteer="21 anos" 
+            professionVolunteer="Automação"
+            schoolVolunteer="Cursando Superior" 
+            liveInVolunteer="Suzano,SP,Brasil"/>
+        </div> */}
         <div className="flex justcon-sb">
           <CardProfileOng isContact location="R. Rodrigues, 116 - Vila Zat, São Paulo - SP, 02977-025"
           contact="contato.teto@teto.com.br" website="https://www.techo.org/" instagram="@teto.br" 
