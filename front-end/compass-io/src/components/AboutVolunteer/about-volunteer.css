@@ -39,22 +39,6 @@
     margin-top: 0.5rem;
 }
 
-input[type='file'] {
-    display: none
-  }
-
-#trocaFoto{
-    cursor: pointer;
-    background-color: #1975FF;
-    width: 13rem;
-    height: 2rem;
-    border-radius: 0.5rem;
-    color: #fff;
-    font-size: 1.2rem;
-    text-align: center;
-    border-color: #000000;
-}
-
 .vagasBox{
     font-size: 1.2rem;
     font-weight: 500;

@@ -1,4 +1,5 @@
 import React from 'react';
+import InputFile from '../InputFile/input-file';
 
 import './about-volunteer.css';
 
@@ -8,8 +9,7 @@ function AboutVolunteer(props) {
            
            <div className="imgVolunteerBox">
            <img width="210" height="280" src={props.imgVolunteer}></img>
-           <label id="trocaFoto" for="file">Editar Perfil </label>
-           <input type="file" id="file"></input>
+           <InputFile id="editarFoto" text="Editar foto" callBack={props.editImgVolunteer}/>
            </div>
            <div className="infoVolunteer">
                <div className="infoVolunteerTitle"><u><b>{ props.nameVolunteer }</b></u></div>

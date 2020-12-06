@@ -6,12 +6,12 @@ import Image from '../../../components/Image/image';
 import imgVolunteerSingup from '../../../assets/images/img-volunteer-singup.jpg'
 import Checkbox from '@material-ui/core/Checkbox';
 import Alert from '../../../components/AlertCard/alert-card';
+import Button from '../../../components/Button/button'
 
 import CommomFunctions from '../../../utils/functions'
 import UsuarioFisicoService from '../../../services/usuario-fisico-service'
 
 import './sign-up-volunteer.css';
-
 
 function validarSenha() {
   let senhaInput = document.getElementsByName("senha")[0].value;

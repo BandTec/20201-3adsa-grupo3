@@ -158,7 +158,6 @@ export default function Vacancies() {
 
   return (
     <section>
-      <Navbar />
       <div className="mg-b-16 border-b pd-b-16 flex justcon-sb">
         <div className="flex justcon-sb width-20pg">
           <ClickAwayListener onClickAway={handleClickAway}>

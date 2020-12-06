@@ -52,7 +52,6 @@ function getError(field) {
 export default function SignIn() {
   return (
     <React.Fragment>
-      <Navbar/>
       <LabelWelcome labelTitle="Bem vindo ao Compass.io" labelText="Realize aqui o seu login"/>
       <br/>
 
