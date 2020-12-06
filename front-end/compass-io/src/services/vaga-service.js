@@ -60,7 +60,7 @@ class VagaService {
     }
 
     async uploadFoto(id, formData) {
-        return axios.post(`${this.BASE_URL}/foto/upload?idVaga=${id}`, formData, {
+        return axios.post(`${this.BASE_URL}/foto?idVaga=${id}`, formData, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
