@@ -11,7 +11,6 @@ import LabelWelcome from '../../components/LabelWelcome/label-welcome';
 import CarouselFilter from '../../components/CarouselFilter/carousel-filter';
 import Footer from '../../components/Footer/footer'
 
-
 const useStyles = makeStyles({
   outlineBtn: {
     width: "20%",
@@ -40,9 +39,9 @@ const useStyles = makeStyles({
     marginBottom: "1rem",
 
   },
-
-
 });
+
+window.onload = () => {};
 
 export default function Home() {
   const classes = useStyles();

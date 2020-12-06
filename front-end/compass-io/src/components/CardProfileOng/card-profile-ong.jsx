@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 function CardProfileOng(props) {
     const classes = useStyles();
     return (
-        <div className="cardProfileOng">
+        <div name={props.name} className="cardProfileOng">
             <div className={props.isContact ? "cardProfileOngContent display-block" : "display-none"}>
                 <h1>Contato</h1>
                 <div className="flex">

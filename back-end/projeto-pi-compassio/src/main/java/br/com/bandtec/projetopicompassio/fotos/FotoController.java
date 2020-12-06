@@ -1,11 +1,7 @@
 package br.com.bandtec.projetopicompassio.fotos;
 
-import org.apache.tomcat.jni.Directory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MimeType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,13 +9,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.concurrent.ThreadLocalRandom;
 
+/* NÃO USAR, SOMENTE PARA REFERÊNCIA */
 @RestController
 @RequestMapping("/fotos")
 public class FotoController {

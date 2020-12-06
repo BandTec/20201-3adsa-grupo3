@@ -7,7 +7,6 @@ import java.util.Date;
 public class UsuarioFisico {
 
     @Id
-    @Column(name = "id_usuario_fisico")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -23,6 +22,7 @@ public class UsuarioFisico {
     @Column(length = 15, nullable = false)
     private String telefone;
 
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false, name = "data_nascimento")
     private Date dataNascimento;
 

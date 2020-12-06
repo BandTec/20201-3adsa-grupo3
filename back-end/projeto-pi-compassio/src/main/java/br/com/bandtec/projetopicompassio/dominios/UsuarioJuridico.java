@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class UsuarioJuridico {
 
     @Id
-    @Column(name = "id_usuario_juridico")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -31,8 +31,8 @@ public class UsuarioJuridico {
     @Column(length = 255)
     private String foto;
 
-    @Column(length = 256, name = "descricao_ong")
-    private String descricaoOng;
+    @Column(length = 256, name = "descricao")
+    private String descricao;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_endereco")
@@ -105,12 +105,12 @@ public class UsuarioJuridico {
         this.causa = causa;
     }
 
-    public String getDescricaoOng() {
-        return descricaoOng;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricaoOng(String descricaoOng) {
-        this.descricaoOng = descricaoOng;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getFoto() {

@@ -11,6 +11,8 @@ import Footer from '../../components/Footer/footer';
 
 import './profile-ong.css';
 
+import UsuarioJuridicoService from '../../services/usuario-juridico-service';
+
 const useStyles = makeStyles({
   outlineBtn: {
     width: "15%",
@@ -20,6 +22,29 @@ const useStyles = makeStyles({
     margin: "1rem auto",
   }
 });
+
+async function renderPerfil() {
+
+  let usuarioJuridicoService = new UsuarioJuridicoService();
+  const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(1);
+  let vagaInfos = resposta.data[0];
+  console.log(vagaInfos);
+
+  /*let DescricaoVaga = document.getElementsByName("descricaoVaga")[0];
+  DescricaoVaga.innerHTML = vagaInfos.descricao;
+  let ong = document.getElementsByName("ong")[0];
+  ong.children.item(1).children.item(0).innerText=vagaInfos.fkUsuarioJuridico.nomeOng;
+  ong.children.item(1).children.item(1).innerText=vagaInfos.fkUsuarioJuridico.descricaoOng;
+  ong.children.item(1).children.item(2).innerText="www.google.com.br";
+  debugger
+  let vaga = document.getElementsByName("vaga")[0];
+  vaga.children.item(1).children.item(1).innerText=vagaInfos.dataInicio;
+  vaga.children.item(2).children.item(1).innerText=vagaInfos.dataFim;
+  vaga.children.item(3).children.item(1).innerText=vagaInfos.fkEndereco.logradouro + ', ' + vagaInfos.fkEndereco.numeroEndereco + ' - ' + vagaInfos.fkEndereco.bairro + ', ' + vagaInfos.fkEndereco.cidade + ' - ' + vagaInfos.fkEndereco.estado + ', ' + vagaInfos.fkEndereco.cep;
+*/
+}
+
+window.onload = renderPerfil();
 
 export default function ProfileOng() {
   const classes = useStyles();

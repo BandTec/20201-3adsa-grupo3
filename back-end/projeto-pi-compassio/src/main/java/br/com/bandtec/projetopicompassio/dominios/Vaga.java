@@ -39,9 +39,7 @@ public class Vaga {
     @JoinColumn(nullable = false, name = "fk_usuario_juridico")
     private UsuarioJuridico fkUsuarioJuridico;
 
-    public Vaga() {
-
-    }
+    public Vaga() { }
 
     public Integer getIdVaga() {
         return idVaga;
