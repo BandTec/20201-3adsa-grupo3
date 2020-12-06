@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import CarouselVacancy from '../../components/CarouselVacancy/carousel-vacancy';
 import Rating from '../../components/Rating/rating';
 import CardProfileOng from '../../components/CardProfileOng/card-profile-ong';
+import ImgVolunteer from '../../assets/images/child-img.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Footer from '../../components/Footer/footer';
@@ -37,9 +38,13 @@ export default function ProfileOng() {
           <CarouselVacancy />
         </div>
         <div className="ratings">
-          <h1>Avaliações</h1>
-          <Rating />
-          <Rating />
+          <Rating isOngProfile 
+            imgVolunteer={ImgVolunteer} 
+            nameVolunteer="Iago Roani de Lima" 
+            ageVolunteer="21 anos" 
+            professionVolunteer="Automação"
+            schoolVolunteer="Cursando Superior" 
+            liveInVolunteer="Suzano,SP,Brasil"/>
         </div>
         <div className="flex justcon-sb">
           <CardProfileOng isContact location="R. Rodrigues, 116 - Vila Zat, São Paulo - SP, 02977-025"

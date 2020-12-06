@@ -17,3 +17,83 @@
     margin-left: 1rem;
     width: 80%;
 }
+
+.height-320p{
+    height: 20rem
+}
+
+.width-100pg{
+    width: 100%
+}
+
+.mg-v-32{
+    margin-top: 2rem;
+    margin-bottom: 2rem;    
+}
+
+.mg-l-32{
+    margin-left: 2rem
+}
+
+.mg-l-64{
+    margin-left: 4rem
+}
+
+.mg-l-80{
+    margin-left: 5rem
+}
+
+.mg-h-32{
+    margin-left: 2rem;
+    margin-right: 2rem
+}
+
+.mg-t-40{
+    margin-top: 2.5rem;
+}
+
+.height-56p{
+    height: 3.5rem
+}
+
+.width-60pg{
+    width: 60%
+}
+
+.buttonProfile{
+    color: #fff;
+    border-radius: 0.5rem;
+    height: 4rem;
+}
+
+.bg-color-red{
+    background-color: #E31717;
+}
+
+.bg-color-green{
+    background-color: #17D641;
+}
+
+.fs-20p{
+    font-size: 1.25rem
+}
+
+.buttonProfileOng:hover{
+    background-color: #bbb;
+    color: #fff;
+    transition: 0.75s;
+}
+
+.buttonProfile:hover{
+    background-color: #FFB219;
+    color: #fff;
+    transition: 0.75s;
+}
+
+.width-80pg{
+    width: 80%;
+}
+
+.width-90pg{
+    width: 90%;
+}
