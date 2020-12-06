@@ -75,7 +75,7 @@ class VagaService {
     }
 
     async getFoto(id) {
-        return axios.get(`${this.BASE_URL}/foto/download?idVaga=${id}`)
+        return axios.get(`${this.BASE_URL}/foto/base64?idVaga=${id}`)
         .then((res) => {
             return res;
         })

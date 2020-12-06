@@ -94,9 +94,8 @@ export default class SignUp extends React.Component {
               <div className="inputInfPessoal">
                 <LabelTitleForm title="Informações Pessoais" />
                 <InputLine name="nome" title="Nome Completo" type="text" placeholder="Ex: João Moreira da Silva" />
-                <InputLine name="dataNascimento" title="Data de Nascimento" type="text" placeholder="DD/MM/AAAA" />
+                <InputLine name="dataNascimento" title="Data de Nascimento" type="date" placeholder="DD/MM/AAAA" />
                 <InputLine name="cpf" title="CPF" type="text" placeholder="000.000.000-00" />
-                <InputLine name="celular" title="Telefone" type="text" placeholder="(xx)xxxxx-xxxx" />
                 <InputLine name="telefone" title="Telefone" type="text" placeholder="(xx)xxxxx-xxxx" />
               </div>
             </form>

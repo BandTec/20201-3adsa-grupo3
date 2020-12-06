@@ -77,15 +77,17 @@ class UsuarioJuridicoService {
             }
         })
         .then((res) => {
+            debugger
             return res;
         })
         .catch((err) => {
+            debugger
             throw err;
         })
     }
 
     async getFoto(id) {
-        return axios.get(`${this.BASE_URL}/foto/download?idUsuario=${id}`)
+        return axios.get(`${this.BASE_URL}/foto/base64?idUsuario=${id}`)
         .then((res) => {
             return res;
         })
