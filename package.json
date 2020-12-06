@@ -1,0 +1,9 @@
+{
+  "name": "compassio-raiz",
+  "version": "0.0.1",
+  "private": "true",
+  "scripts": {
+    "start": "node ./front-end/compass-io/src/index.js",
+    "postinstall": "cd ./front-end/compass-io && npm install"
+  }
+}
