@@ -1,0 +1,68 @@
+.aboutVolunteer{
+    display: flex;
+    height: 20rem;
+}
+
+.imgVolunteerBox{
+    display: grid;
+}
+
+.infoVolunteer{
+    margin-left: 1.5rem;
+}
+
+.infoVolunteerTitle{
+    font-size: 1.8rem;
+}
+
+.infoVolunteerText{
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    margin-left: 1rem;
+}
+
+.infoVolunteerText > span{
+    color: #6a6a6a;
+    font-weight: 500;
+}
+
+.font-weight-500{
+    font-weight: 500;
+}
+
+.inscriptionVolunteerTitle{
+    font-size: 1.8rem;
+    margin-top: 4rem;
+}
+
+.inscriptionVolunteerText{
+    margin-top: 0.5rem;
+}
+
+input[type='file'] {
+    display: none
+  }
+
+#trocaFoto{
+    cursor: pointer;
+    background-color: #1975FF;
+    width: 13rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+    border-color: #000000;
+}
+
+.vagasBox{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-left: 18rem;
+    width: 17.5rem;
+    height: 17rem;
+    border: 0.1rem solid #000000;
+    border-radius: 1rem;
+    background-color: #fafafa;
+    padding: 0;
+}

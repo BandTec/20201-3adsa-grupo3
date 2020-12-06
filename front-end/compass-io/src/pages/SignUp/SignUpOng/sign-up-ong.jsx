@@ -8,6 +8,7 @@ import imgEyePassword from '../../../assets/images/img-eye-password.png';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import ComboBox from '../../../components/ComboBox/combo-box';
+import Alert from '../../../components/AlertCard/alert-card';
 
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
@@ -240,8 +241,8 @@ export default class SignUp extends React.Component {
               <span>Li e concordo com os <b className="blueWord">termos</b></span>
             </div>
 
-            <Button id="btnVoltarOng" variant="contained" color="primary">Voltar</Button>
             <Button id="btnCadastrarOng" onClick={cadastrar} variant="contained" color="primary">Cadastrar</Button>
+            <Alert statusAlert="error" />
 
           </div>
 

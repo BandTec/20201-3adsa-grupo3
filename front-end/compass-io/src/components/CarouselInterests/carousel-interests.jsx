@@ -5,11 +5,8 @@ import Slider from "react-slick";
 import AnimalImg from '../../assets/images/animal-img.jpg';
 import ChildImg from '../../assets/images/child-img.jpg';
 import DisabilityImg from '../../assets/images/disability-img.jpg';
-import ElderlyImg from '../../assets/images/elderly-img.jpg';
-import GardeningImg from '../../assets/images/gardening-img.jpg';
-import HumanRightsImg from '../../assets/images/human-rights-img.jpg';
-import NatureImg from '../../assets/images/nature-img.jpg';
 import { makeStyles } from '@material-ui/core/styles';
+import CarouselVolunteerCard from '../../components/CarouselVolunteerCard/carousel-volunteer-card';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -54,15 +51,16 @@ const useStyles = makeStyles({
     //     height: "30rem",
     //   },
       carouselImg: {
-        height: "25rem",
-        // width: "90%",
-        // marginRight: "0rem",
-        justifyContent: "space-between"
+        margintop: "1rem",
+        marginleft: "1rem",
+        height: "12rem",
+        width: "15.8rem",
+        backgroundcolor: "#158723"
 
       },
       carouselContainer: {
         margin: "0 0",
-        width: "105%"
+        width: "100%"
         // width: "10rem"
       },
       textImg:{
@@ -93,11 +91,6 @@ const useStyles = makeStyles({
 // import { Container } from './styles';
 
 export default function CarouselFilter() {
-
-  function vacancyFilter(){
-    window.location.href="vacancies";
-  }
-
   const classes = useStyles();
   const settings = {
     infinite: true,
@@ -115,34 +108,18 @@ return (
   <div className={classes.carouselContainer}>
     <Slider className={classes.slider} {...settings}>
       <div className={classes.carouselImgContainer}>
-        <span className={classes.textImg}>Animais</span>
-        <a href="vacancies"><img className="filter" src={AnimalImg} className={classes.carouselImg} /></a> 
+      <CarouselVolunteerCard isImage nameCard="TETO - Brasil"/>
       </div>
       <div className={classes.carouselImgContainer}>
-        <span className={classes.textImg}>Crianças</span>
-        <a href="vacancies"><img src={ChildImg} className={classes.carouselImg} /></a>
+      <CarouselVolunteerCard isImage nameCard="Sonhar Acordado"/>
       </div>
       <div className={classes.carouselImgContainer}>
-        <span className={classes.textImg}>Pessoas com Deficiência</span>
-        <a href=""><img src={DisabilityImg} className={classes.carouselImg} /></a>
+      <CarouselVolunteerCard isImage nameCard="ProMigra"/>
       </div>
       <div className={classes.carouselImgContainer}>
-        <span className={classes.textImg}>Idosos</span>
-        <a href="vacancies"><img src={ElderlyImg} className={classes.carouselImg} /></a>  
+          <CarouselVolunteerCard isImage nameCard="ABEUNI"/>
       </div>
-      <div className={classes.carouselImgContainer}>
-        <span className={classes.textImg}>Lares</span>
-        <a href="vacancies"><img src={GardeningImg} className={classes.carouselImg} /></a>
-      </div>
-      <div className={classes.carouselImgContainer}>
-        <span className={classes.textImg}>Direitos Civis</span>
-        <a href="vacancies"><img src={HumanRightsImg} className={classes.carouselImg} /></a>
-      </div>
-      <div className={classes.carouselImgContainer}>
-          <span className={classes.textImg}>Meio Ambiente</span>
-          <a href="vacancies"><img src={NatureImg} className={classes.carouselImg} /></a>
-      </div>
-    </Slider>
+      </Slider>
   </div>
 
 );

@@ -1,6 +1,7 @@
 .container{
     width: 100%;
     display: flex;
+    margin-bottom: 3rem;
 }
 
 .container > .loginImage{
@@ -83,26 +84,16 @@
     margin-top: 1.5rem;
 }
 
-
-#btnVoltar{
-    margin-left: 13%;
-    margin-right: 2rem;
-    width:10rem;
-    font-weight: 600;
-    height: 3rem;
-    color: black;
-    font-size: 1.0rem;
-    border: black;
-    border-radius: 0.5rem;
-    background: #E0DDDD
-}
-
 #btnCadastrar{
-    margin-left: 2%;
+    margin-left: 3.8rem;
     width:10rem;
     font-weight: 600;
     height: 3rem;
     font-size: 1.0rem;
     border-radius: 0.5rem;
     background: #1975FF
+}
+
+.genderGroup{
+    display: flex;
 }

@@ -50,7 +50,6 @@ export default function ProfileOng() {
   const classes = useStyles();
   return (
     <section>
-      <Navbar />
       <div className="containerProfileOng">
         <AboutOng nameOng="TETO Brasil" 
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!" 
@@ -74,7 +73,6 @@ export default function ProfileOng() {
         </div>
 
       </div>
-      <Footer />
     </section>
   );
 };

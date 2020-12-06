@@ -124,22 +124,8 @@
     margin-top: 1.5rem;
 }
 
-
-#btnVoltarOng{
-    margin-left: 10%;
-    margin-right: 2rem;
-    width:10rem;
-    font-weight: 600;
-    height: 3rem;
-    color: black;
-    font-size: 1.0rem;
-    border: black;
-    border-radius: 0.5rem;
-    background: #E0DDDD
-}
-
 #btnCadastrarOng{
-    margin-left: 2%;
+    margin-left: 3rem;
     width:10rem;
     font-weight: 600;
     height: 3rem;

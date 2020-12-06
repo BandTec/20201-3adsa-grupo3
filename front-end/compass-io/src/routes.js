@@ -18,11 +18,11 @@ export default function Routes() {
         <Route path="/signin" component={SignIn}/>
         <Route path="/signup" component={SignUp}/>
         <Route path="/vacancies" component={Vacancies}/>
+        <Route path="/register" component={VacancyRegister}/>
         <Route path="/vacancy/{id?}" component={VacancySpecific}/>
         <Route path="/vacancy" component={VacancySpecific}/>
-        <Route path="/profile/ong{id?}" component={ProfileOng}/>
-        <Route path="/profile/volunteer/{parametro?}" component={ProfileVolunteer}/>
-        <Route path="/register" component={VacancyRegister}/>
+        <Route path="/profile/ong" component={ProfileOng}/>
+        <Route path="/profile/volunteer" component={ProfileVolunteer}/>
       </Switch>
     </BrowserRouter>
   );

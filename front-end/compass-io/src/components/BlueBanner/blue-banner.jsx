@@ -36,6 +36,10 @@ const useStyles = makeStyles({
 function BlueBanner() {
     const classes = useStyles();
 
+    function ClickDonate(){
+        window.location.href="https://www.doebem.org.br/";
+    }
+
     return (
         <div className={classes.blueBanner}>
             <Grid className={classes.bannerText}>
@@ -43,8 +47,8 @@ function BlueBanner() {
                     Doações Mensais
                 </div>
                 <div >
-                    Não pode se voluntariar, mas quer ajudar de alguma forma? Não tem problema!<br /><br />
-                    Contribua aqui com o que puder ajudar!
+                    Não pode se voluntariar, mas quer ajudar de alguma forma? Não tem problema!<br /><br/>
+                    Conheça a nossa parceira de doações, a doebem!
                 </div>
             </Grid>
             <Grid container
@@ -52,8 +56,7 @@ function BlueBanner() {
                     justify="space-evenly"
                     alignItems="center" 
                     className={classes.bannerButtons}>
-                <Button id="donateBtn" variant="contained" size="large">Quero doar!</Button>
-                <Button id="moreBtn" variant="outlined" size = "large">Saiba mais</Button>
+                <Button id="moreBtn" variant="outlined" onClick={ClickDonate} size = "large">Saiba mais</Button>
             </Grid>
         </div>
     );

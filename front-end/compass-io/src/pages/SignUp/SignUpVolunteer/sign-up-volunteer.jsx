@@ -1,10 +1,11 @@
 import React from 'react';
+import GenderBox from '../../../components/GenderBox/gender-box';
 import InputLine from "../../../components/InputLine/input-line";
 import LabelTitleForm from "../../../components/LabelTitleForm/label-title-form";
-import Button from '@material-ui/core/Button';
 import Image from '../../../components/Image/image';
 import imgVolunteerSingup from '../../../assets/images/img-volunteer-singup.jpg'
 import Checkbox from '@material-ui/core/Checkbox';
+import Alert from '../../../components/AlertCard/alert-card';
 
 import CommomFunctions from '../../../utils/functions'
 import UsuarioFisicoService from '../../../services/usuario-fisico-service'
@@ -117,6 +118,7 @@ export default class SignUp extends React.Component {
 
             <Button id="btnVoltar" variant="contained" color="primary">Voltar</Button>
             <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
+            <Alert statusAlert="success" />
 
           </div>
 

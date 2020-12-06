@@ -1,3 +1,8 @@
 .carouselImg{
     justify-content: space-
 }
+
+.filter {
+    cursor: auto;
+    border: none;
+}
