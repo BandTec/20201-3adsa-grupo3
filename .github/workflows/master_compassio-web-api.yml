@@ -21,7 +21,9 @@ jobs:
         java-version: '11'
 
     - name: Build with Maven
-      run: mvn clean install
+      run: 
+        cd ./back-end/projeto-pi-compassio
+        mvn clean install
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
