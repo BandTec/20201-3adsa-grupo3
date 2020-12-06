@@ -141,7 +141,6 @@ export default function VacancyRegister() {
         <input id="cidade"/>
       </form>
 
-      <Navbar/>
       <LabelWelcome labelTitle="Detalhes da oportunidade" labelText="Nos ajude a divulgar a sua vaga"/>
       <br/>
 

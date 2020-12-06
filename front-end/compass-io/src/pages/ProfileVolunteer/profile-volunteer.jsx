@@ -16,7 +16,6 @@ import './profile-volunteer.css';
 export default function ProfileVolunteer() {
   return (
     <div classname="containerProfileVolunteer">
-      <Navbar/>
       <AboutVolunteer imgVolunteer={ImgVolunteer} nameVolunteer="Iago Roani de Lima" ageVolunteer="21 anos" professionVolunteer="Automação"
       schoolVolunteer="Cursando Superior" liveInVolunteer="Suzano,SP,Brasil"></AboutVolunteer>
       <span><h1><u><b>Sobre Mim</b></u></h1></span>
@@ -36,7 +35,6 @@ export default function ProfileVolunteer() {
       <Rating/>
       <Rating/>
       </div>
-      <Footer/>
     </div>
   );
 };

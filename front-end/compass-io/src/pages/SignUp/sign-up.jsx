@@ -95,19 +95,8 @@ export default class SignUp extends React.Component {
     // })
     const classes = useStyles;
 
-    function OnChange(){
-      const direction = document.getElementById("comoFunciona");
-      direction.value = direction.value.ClickDirection();
-    }
-
-    function ClickDirection(){
-      window.location.href="/";
-      window.scrollTo(0, 1560);
-    }
-
     return(
       <div>
-         <Navbar changes={OnChange} position={ClickDirection}/>
          <LabelWelcome labelTitle="Bem vindo ao Compass.io" labelText="Preencha o formulário para realizar o cadastro"/>
          <ToggleButtonGroup>
            <ToggleButton className={classes.btnToggle} style={{

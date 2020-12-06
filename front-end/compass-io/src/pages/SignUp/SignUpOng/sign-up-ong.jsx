@@ -8,6 +8,7 @@ import imgEyePassword from '../../../assets/images/img-eye-password.png';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import ComboBox from '../../../components/ComboBox/combo-box';
+import Alert from '../../../components/AlertCard/alert-card';
 
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
@@ -241,6 +242,7 @@ export default class SignUp extends React.Component {
             </div>
 
             <Button id="btnCadastrarOng" onClick={cadastrar} variant="contained" color="primary">Cadastrar</Button>
+            <Alert statusAlert="error" />
 
           </div>
 

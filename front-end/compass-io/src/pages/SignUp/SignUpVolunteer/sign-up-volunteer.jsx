@@ -2,10 +2,10 @@ import React from 'react';
 import GenderBox from '../../../components/GenderBox/gender-box';
 import InputLine from "../../../components/InputLine/input-line";
 import LabelTitleForm from "../../../components/LabelTitleForm/label-title-form";
-import Button from '@material-ui/core/Button';
 import Image from '../../../components/Image/image';
 import imgVolunteerSingup from '../../../assets/images/img-volunteer-singup.jpg'
 import Checkbox from '@material-ui/core/Checkbox';
+import Alert from '../../../components/AlertCard/alert-card';
 
 import './sign-up-volunteer.css';
 
@@ -60,7 +60,7 @@ export default class SignUp extends React.Component {
               <span>Li e concordo com os <b className="blueWord">termos</b></span>
             </div>
 
-            <Button id="btnCadastrar" variant="contained" color="primary">Cadastrar</Button>
+            <Alert statusAlert="success" />
 
           </div>
 

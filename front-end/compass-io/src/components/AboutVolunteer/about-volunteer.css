@@ -43,7 +43,8 @@ input[type='file'] {
     display: none
   }
 
-.containerProfileVolunteer > label{
+#trocaFoto{
+    cursor: pointer;
     background-color: #1975FF;
     width: 13rem;
     height: 2rem;

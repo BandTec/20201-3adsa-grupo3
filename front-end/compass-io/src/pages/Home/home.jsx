@@ -56,7 +56,6 @@ export default function Home() {
   const classes = useStyles();
   return (
     <div>
-      <Navbar position={ClickScroll}/>
       <CarouselMain></CarouselMain>
       <div className={classes.bannerVerVagas}>
         <div className={classes.labelWelcome}>
@@ -74,7 +73,6 @@ export default function Home() {
       <CardHome id="comoFunciona"/>
       <Button variant="outline" className={classes.outlineBtn} onClick={ClickVagas}>Ache aqui a vaga<br />ideal para você!</Button>
       <GrayBanner id="locationTag"></GrayBanner>
-      <Footer id="carouselTeste"/>
     </div>
   );
 };
