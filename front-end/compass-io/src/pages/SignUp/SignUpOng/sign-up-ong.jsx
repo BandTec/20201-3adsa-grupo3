@@ -9,7 +9,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import ComboBox from '../../../components/ComboBox/combo-box';
 import AlertCard from '../../../components/AlertCard/alert-card';
-import InputFile from '../../../components/InputFile/input-file';
 
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
@@ -219,7 +218,6 @@ export default class SignUp extends React.Component {
                 <ComboBox name="causa" labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
                   nomeItem5="Imóveis" />
                 <Button id="btnAdd" className="btnCause bg-color-blue" variant="contained" color="primary">+ Adicionar Causa</Button>
-                <InputFile id="foto" className="inputFoto" text="Escolher foto"/>
               </div>
 
             </form>

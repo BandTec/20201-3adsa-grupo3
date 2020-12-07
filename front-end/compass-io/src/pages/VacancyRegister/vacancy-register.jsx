@@ -7,6 +7,8 @@ import Image from '../../components/Image/image';
 import Button from '@material-ui/core/Button';
 import GirlVolunteerImg from '../../assets/images/girl-volunteer.jpg';
 import ComboBox from '../../components/ComboBox/combo-box'
+import InputFile from '../../components/InputFile/input-file';
+import AlertCard from '../../components/AlertCard/alert-card';
 
 import VagaService from '../../services/vaga-service'
 import UsuarioJuridicoService from '../../services/usuario-juridico-service'
@@ -15,9 +17,11 @@ import CommomFunctions from '../../utils/functions'
 
 import './vacancy-register.css';
 import { Input } from '@material-ui/core';
+import { render } from 'react-dom';
 
 async function cadastrarVaga() {
   try {
+    debugger
     getEnderecoVagaFormData()
     getVagaFormData()
   
@@ -35,17 +39,21 @@ async function cadastrarVaga() {
     let respUsuarioJuridico = await usuarioJuridicoService.getUsuarioJuridicoById(sessionStorage["userId"]);
     if (respUsuarioJuridico == "")
       throw new Error("Ocorreu um erro com seu usuário. Favor fazer login novamente");
-  
+
     let formVaga = document.getElementById("formVagaToSubmit");
     let vagaObj = CommomFunctions.convertFormToObject(formVaga);
     vagaObj.fkEndereco = respEndereco.data;
     vagaObj.fkUsuarioJuridico = respUsuarioJuridico.data[0];
     const vagaAsJson = JSON.stringify(vagaObj);
-    await vagaService.postVaga(vagaAsJson);
+    let vagaCadastrada = await vagaService.postVaga(vagaAsJson);
     
-    window.location.href = "/vacancies";
+    uparFoto(vagaCadastrada.data);
+
+    render(<AlertCard message="Vaga cadastrada" severity="success"/>, document.getElementById("alertArea"));
+    window.location.href = "/profile/ong";
   } catch (error) {
-    alert(error);
+    let errorString = `${error}`;
+    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
 
@@ -120,9 +128,30 @@ function getError(field) {
   return new Error(`Campo de ${field} vazio`);
 }
 
+async function uparFoto(vaga) {
+  try {
+    debugger
+    let vagaService = new VagaService();
+
+    let foto = document.getElementById("editarFoto").files[0];
+    let formDataFoto = new FormData();
+    formDataFoto.set("foto", foto);
+    
+    let id = parseInt(vaga.idVaga);
+
+    await vagaService.uploadFoto(id, formDataFoto);
+
+  } catch (error) {
+    let errorString = `${error}`;
+    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
+  }
+}
+
 export default function VacancyRegister() {
   return (
     <React.Fragment>
+
+      <div id="alertArea"></div>
 
       <form id="formVagaToSubmit" hidden>
         <input id="titulo"/>
@@ -163,6 +192,9 @@ export default function VacancyRegister() {
                 <div className="inputLogin">
                     <ComboBox name="causa" labelTitle="Causa" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
                     nomeItem5="SP" />
+                </div>
+                <div className="inputLogin">
+                    <InputFile id="editarFoto" text="Enviar foto"/>
                 </div>
             </span>
 

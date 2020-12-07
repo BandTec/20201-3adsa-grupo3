@@ -35,6 +35,8 @@ async function renderPerfil() {
   let vagaInfos = resposta.data[0];
   console.log(vagaInfos);
 
+  //getFoto()
+
   /*let DescricaoVaga = document.getElementsByName("descricaoVaga")[0];
   DescricaoVaga.innerHTML = vagaInfos.descricao;
   let ong = document.getElementsByName("ong")[0];
@@ -73,8 +75,6 @@ async function trocarFoto() {
     render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
-
-//window.onload = getFoto();
 
 async function getFoto() {
   debugger;
