@@ -5,12 +5,14 @@ import InputLine from "../../components/InputLine/input-line";
 import LabelTitleForm from "../../components/LabelTitleForm/label-title-form";
 import Image from '../../components/Image/image';
 import Button from '@material-ui/core/Button'
+import AlertCard from '../../components/AlertCard/alert-card';
 
 import AuthService from '../../services/auth-service'
 import CommomFunctions from '../../utils/functions'
 
 import './sign-in.css';
 import loginImage from '../../assets/images/children-smile.jpg'
+import { render } from 'react-dom';
 
 async function logar() {
   try {
@@ -23,9 +25,11 @@ async function logar() {
     formLoginObj.senha = CommomFunctions.encryptPassword(formLoginObj.senha);
     formLoginAsJson = JSON.stringify(formLoginObj);
     await authService.login(formLoginAsJson);
+    render(<AlertCard message="Usuário autenticado" severity="success" />, document.getElementById("alertArea"));
     window.location.href = "/";
   } catch (error) {
-    alert(error);
+    let errorString = `${error}`;
+    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
 
@@ -61,6 +65,7 @@ export default function SignIn() {
       </form>
 
       <div className="container">
+        <div id="alertArea"></div>
         <span className="loginImagePart">
           <span className="loginImage">
             <Image width="600" className="childrenImage" height="495" src={loginImage} />

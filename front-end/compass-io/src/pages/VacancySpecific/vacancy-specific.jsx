@@ -46,13 +46,13 @@ export default function VacancySpecific() {
         <a href="#workSchedule" className="menuOptions">Horário de Trabalho</a>
       </div>
       <div id="aboutVacancy">
-        <h1>Sobre a Vaga</h1>
+        <h1 className="fs-32p">Sobre a Vaga</h1>
         <div name="descricaoVaga" className="aboutVacancyText">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus.
         </div>
       </div>
       <div id="aboutOng">
-        <h1>Sobre a ONG</h1>
+        <h1 className="fs-32p">Sobre a ONG</h1>
         <AboutOng name="ong" nameOng="TETO Brasil"
           infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!"
           link="www.google.com.br" />
@@ -61,7 +61,7 @@ export default function VacancySpecific() {
         </div> */}
       </div>
       <div id="workSchedule">
-        <h1>Horário de Trabalho</h1>
+        <h1 className="fs-32p">Horário de Trabalho</h1>
         <div id="vagaSchedule" className="workScheduleInfo">
           <WorkSchedule name="vaga"
             schedule="1x por semana (preferencialmente nos fins de semana)"

@@ -5,13 +5,14 @@ import LabelTitleForm from "../../../components/LabelTitleForm/label-title-form"
 import Image from '../../../components/Image/image';
 import imgVolunteerSingup from '../../../assets/images/img-volunteer-singup.jpg'
 import Checkbox from '@material-ui/core/Checkbox';
-import Alert from '../../../components/AlertCard/alert-card';
-import Button from '../../../components/Button/button'
+import Button from '@material-ui/core/Button';
+import AlertCard from '../../../components/AlertCard/alert-card';
 
 import CommomFunctions from '../../../utils/functions'
 import UsuarioFisicoService from '../../../services/usuario-fisico-service'
 
 import './sign-up-volunteer.css';
+import { render } from 'react-dom';
 
 function validarSenha() {
   let senhaInput = document.getElementsByName("senha")[0].value;
@@ -31,33 +32,45 @@ function validarSenha() {
     return true;
 }
 
-function cadastrar(){
-  if (!validarSenha()){
-    return;
+async function cadastrar(){  
+  try {
+    if (!validarSenha()){
+      return;
+    }
+    let Email = document.getElementById('email');
+    Email.innerText = document.getElementsByName('email')[0].value;
+  
+    let Nome = document.getElementById("nome");
+    Nome.innerText = document.getElementsByName("nome")[0].value;
+  
+    let SenhaForm = document.getElementById("senha");
+    SenhaForm.innerText = CommomFunctions.encryptPassword(document.getElementsByName("senha")[0].value);
+  
+    let Telefone = document.getElementById("telefone");
+    Telefone.innerText = document.getElementsByName("telefone")[0].value;
+  
+    let Nascimento = document.getElementById("dataNascimento");
+    let NascimentoSplit = document.getElementsByName("dataNascimento")[0].value.split("/");
+    let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
+    Nascimento.innerText = NascimentoConvert;
+  
+    let Cpf = document.getElementById("cpf");
+    Cpf.innerText = document.getElementsByName("cpf")[0].value;
+  
+    let Logado = document.getElementById("logado");
+    Logado.innerText = false;
+  
+    let formFisico = document.getElementById("fisicoForm");
+    let fisicoJson = CommomFunctions.convertFormToJson(formFisico);
+  
+    let usuarioFisicoService = new UsuarioFisicoService();
+    console.log(fisicoJson);
+    await usuarioFisicoService.postUsuarioFisico(fisicoJson);
+    render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success"/>, document.getElementById("alertArea"));
+  } catch (error) {
+    let errorString = `${error}`;
+    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
-  let Email = document.getElementById('email');
-  Email.innerText = document.getElementsByName('email')[0].value;
-  let Nome = document.getElementById("nome");
-  Nome.innerText = document.getElementsByName("nome")[0].value;
-  let SenhaForm = document.getElementById("senha");
-  SenhaForm.innerText = CommomFunctions.encryptPassword(document.getElementsByName("senha")[0].value);
-  let Telefone = document.getElementById("telefone");
-  Telefone.innerText = document.getElementsByName("telefone")[0].value;
-  let Nascimento = document.getElementById("dataNascimento");
-  let NascimentoSplit = document.getElementsByName("dataNascimento")[0].value.split("/");
-  let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
-  Nascimento.innerText = NascimentoConvert;
-  let Cpf = document.getElementById("cpf");
-  Cpf.innerText = document.getElementsByName("cpf")[0].value;
-  let Logado = document.getElementById("logado");
-  Logado.innerText = false;
-
-  let formFisico = document.getElementById("fisicoForm");
-  let fisicoJson = CommomFunctions.convertFormToJson(formFisico);
-
-  let usuarioFisicoService = new UsuarioFisicoService();
-  console.log(fisicoJson);
-  usuarioFisicoService.postUsuarioFisico(fisicoJson);
 }
 
 // import { Container } from './styles';
@@ -69,7 +82,7 @@ export default class SignUp extends React.Component {
     return (
 
       <section>
-
+        <div id="alertArea"></div>
         <form id="fisicoForm" hidden>
           <input id="email"/>
           <input id="nome"/>
@@ -115,9 +128,7 @@ export default class SignUp extends React.Component {
               <span>Li e concordo com os <b className="blueWord">termos</b></span>
             </div>
 
-            <Button id="btnVoltar" variant="contained" color="primary">Voltar</Button>
             <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
-            <Alert statusAlert="success" />
 
           </div>
 

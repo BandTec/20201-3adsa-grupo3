@@ -17,7 +17,7 @@ function Navbar() {
                 </a>
             </span>
             <div className="botoes">
-                <a className="link" href="signup">Seja voluntário</a>
+                <a className="link" href="/signup">Seja voluntário</a>
                 {/*<button className="link" onClick={props.direciona}>Como funciona</button>*/}
                 <a className="link" href="/#comoFunciona">Como funciona</a>
                 <a className="link" href="vacancies">Vagas</a>

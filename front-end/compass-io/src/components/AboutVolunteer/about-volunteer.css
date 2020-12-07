@@ -1,15 +1,27 @@
-.aboutVolunteer{
+/* .aboutVolunteer{
     display: flex;
     height: 20rem;
+} */
+
+.justcon-se{
+    justify-content: space-evenly
 }
 
-.imgVolunteerBox{
+.align-content-center{
+    align-content: center
+}
+
+.grid{
+    display: grid
+}
+
+/* .imgVolunteerBox{
     display: grid;
-}
+} */
 
-.infoVolunteer{
+/* .infoVolunteer{
     margin-left: 1.5rem;
-}
+} */
 
 .infoVolunteerTitle{
     font-size: 1.8rem;
@@ -49,4 +61,16 @@
     border-radius: 1rem;
     background-color: #fafafa;
     padding: 0;
+}
+
+.mg-r-64{
+    margin-right: 4rem;
+}
+
+.mg-r-128{
+    margin-right: 8rem;
+}
+
+.mg-r-auto{
+    margin-right: auto;
 }
