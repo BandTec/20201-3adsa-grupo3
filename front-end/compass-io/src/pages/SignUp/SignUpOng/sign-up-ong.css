@@ -75,7 +75,8 @@
 }
 
 #btnAdd{
-    margin-top: 6.5%;
+    margin-top: 5%;
+    margin-bottom: 2%;
     background: #1975FF
 }
 
@@ -132,4 +133,14 @@
     font-size: 1.0rem;
     border-radius: 0.5rem;
     background: #1975FF
+}
+
+.inputFoto{
+    margin-top: 1rem;
+}
+
+.btnCause:hover{
+    background-color: #FFB219;
+    color: #fff;
+    transition: 0.75s;
 }

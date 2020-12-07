@@ -5,13 +5,18 @@ import './about-volunteer.css';
 
 function AboutVolunteer(props) {
     return (
-       <section className="aboutVolunteer">
+       <section className="width-100pg flex ">
+
+           {/* <div className="grid">
+               <img width="210" height="280" src={props.imgVolunteer}></img>
+               <InputFile className="width-100pg" id="editarFoto" text="Editar foto" callBack={props.editImgVolunteer}/>    
+           </div> */}
            
-           <div className="imgVolunteerBox">
-           <img width="210" height="280" src={props.imgVolunteer}></img>
-           <InputFile id="editarFoto" text="Editar foto" callBack={props.editImgVolunteer}/>
+           <div className="imgVolunteerBox grid">
+                <img width="210" height="280" src={props.imgVolunteer}></img>
+                <InputFile className="" id="editarFoto" text="Editar foto" callBack={props.editImgVolunteer}/>
            </div>
-           <div className="infoVolunteer">
+           <div className="infoVolunteer mg-l-16">
                <div className="infoVolunteerTitle"><u><b>{ props.nameVolunteer }</b></u></div>
                <div className="infoVolunteerText">
                     <div><span className="font-weight-500">Idade: </span> { props.ageVolunteer }</div>

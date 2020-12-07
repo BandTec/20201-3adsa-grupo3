@@ -58,11 +58,11 @@ export default function ProfileOng(props) {
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!" 
             link="www.google.com.br"
             width="600"/>
-        <div className="flex flex-column mg-t-16">
+        <div className="flex flex-column mg-t-16 width-15pg">
           <InputFile id="editarFoto" text="Editar foto" callBack={props.editImgVolunteer}/>
 
-          <Button variant="outline" className={classes.outlineBtn}>+Cadastrar Vaga</Button>
         </div>
+          <Button variant="outline" className={classes.outlineBtn}>+Cadastrar Vaga</Button>
         <div className="vacancyCarousel">
           <h1>Vagas Abertas</h1>
           <CarouselVacancy />

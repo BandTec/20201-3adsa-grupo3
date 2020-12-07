@@ -16,9 +16,12 @@ import './profile-volunteer.css';
 export default function ProfileVolunteer() {
   return (
     <div classname="containerProfileVolunteer">
-      <AboutVolunteer imgVolunteer={ImgVolunteer} nameVolunteer="Iago Roani de Lima" ageVolunteer="21 anos" professionVolunteer="Automação"
+      <AboutVolunteer className="mg-b-16" imgVolunteer={ImgVolunteer} nameVolunteer="Iago Roani de Lima" ageVolunteer="21 anos" professionVolunteer="Automação"
       schoolVolunteer="Cursando Superior" liveInVolunteer="Suzano,SP,Brasil"></AboutVolunteer>
-      <span><h1><u><b>Sobre Mim</b></u></h1></span>
+      <div className="">
+        <h1>Sobre mim</h1>
+      </div>
+      {/* <span className><h1><u><b>Sobre Mim</b></u></h1></span> */}
       <div classname="descriptionVolunteer">
       <CommentBox/>
       </div>

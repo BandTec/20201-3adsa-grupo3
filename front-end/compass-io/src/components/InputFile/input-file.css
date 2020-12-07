@@ -13,3 +13,46 @@ input[type='file'] {
     text-align: center;
     border-color: #000000;
 }
+
+.width-25pg{
+    width: 25%
+}
+
+.txtal-vertical-center{
+    vertical-align: middle
+}
+
+.align-items-center{
+    align-items: center;
+}
+
+.center-v-h{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.height-32p{
+    height: 2rem
+}
+
+.mg-r-16{
+    margin-right: 1rem;
+}
+
+.width-10pg{
+    width: 10%
+}
+
+.width-15pg{
+    width: 15%
+}
+
+.btnPhoto:hover{
+    background-color: #FFB219;
+    color: #fff;
+    transition: 0.75s;
+}

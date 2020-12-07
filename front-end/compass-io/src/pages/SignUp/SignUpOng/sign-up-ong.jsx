@@ -212,11 +212,11 @@ export default class SignUp extends React.Component {
                   nomeItem5="Suzano" />
               </div>
 
-              <div className="inputInfPessoal flex">
+              <div className="inputInfPessoal justcon-sb flex">
                 <ComboBox name="causa" labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
                   nomeItem5="Imóveis" />
-                <Button id="btnAdd" variant="contained" color="primary">+ Adicionar Causa</Button>
-                <InputFile id="foto" text="Escolher foto"/>
+                <Button id="btnAdd" className="btnCause bg-color-blue" variant="contained" color="primary">+ Adicionar Causa</Button>
+                <InputFile id="foto" className="inputFoto" text="Escolher foto"/>
               </div>
 
             </form>
