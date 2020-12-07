@@ -7,6 +7,8 @@ import CarouselVacancy from '../../components/CarouselVacancy/carousel-vacancy';
 // import './vacancy-specific.css';
 import { Loader } from "@googlemaps/js-api-loader"
 
+import './vacancy-specific.css'
+
 import VagaService from '../../services/vaga-service';
 
 window.onload = () => {};
@@ -40,12 +42,13 @@ export default function VacancySpecific() {
         type="text/javascript"></script>
 
       <VacancyHeader title="Teste"></VacancyHeader>
-      <div id="vacancyMenu">
-        <a href="#aboutVacancy" className="menuOptions">Sobre a vaga</a>
-        <a href="#aboutOng" className="menuOptions">ONG</a>
-        <a href="#workSchedule" className="menuOptions">Horário de Trabalho</a>
+
+      <div className="border-b mg-t-24 height-56p font-color-gray-light fs-32p">
+        <a href="#aboutVacancy" className="mg-t-8 mg-r-64 menuOptions">Sobre a vaga</a>
+        <a href="#aboutOng" className="mg-t-8 mg-r-64 menuOptions">ONG</a>
+        <a href="#workSchedule" className="mg-t-8 mg-r-64 menuOptions">Horário de Trabalho</a>
       </div>
-      <div id="aboutVacancy">
+      <div id="aboutVacancy" className="width-60pg mg-b-16">
         <h1 className="fs-32p">Sobre a Vaga</h1>
         <div name="descricaoVaga" className="aboutVacancyText">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus.
