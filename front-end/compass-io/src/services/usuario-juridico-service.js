@@ -70,7 +70,7 @@ class UsuarioJuridicoService {
     }
 
     async uploadFoto(id, formData) {
-        return axios.post(`${this.BASE_URL}/foto/upload?idUsuario=${id}`, formData, {
+        return axios.post(`${this.BASE_URL}/foto?idUsuario=${id}`, formData, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'

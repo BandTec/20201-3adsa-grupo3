@@ -38,12 +38,16 @@ public class UsuarioJuridicoController {
 
     @PostMapping
     public ResponseEntity criar(@RequestBody @Valid UsuarioJuridico novoUsuarioJuridico){
-        if (!repository.findAll(Example.of(novoUsuarioJuridico)).isEmpty())
-            return ResponseEntity.badRequest().body("Usuário já cadastrado");
-        if (usuariosPendentes.isFull())
-            return ResponseEntity.badRequest().body("A fila de requisições está cheia, por favor aguarde alguns minutos antes de tentar novamente");
-        usuariosPendentes.insert(novoUsuarioJuridico);
-        return ResponseEntity.accepted().build();
+        try {
+            if (!repository.findAll(Example.of(novoUsuarioJuridico)).isEmpty())
+                return ResponseEntity.badRequest().body("Usuário já cadastrado");
+            if (usuariosPendentes.isFull())
+                return ResponseEntity.badRequest().body("A fila de requisições está cheia, por favor aguarde alguns minutos antes de tentar novamente");
+            usuariosPendentes.insert(novoUsuarioJuridico);
+            return ResponseEntity.accepted().build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
     }
 
     @GetMapping()
@@ -85,10 +89,10 @@ public class UsuarioJuridicoController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/foto/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity uploadFoto(@RequestParam Integer idUsuario, @RequestBody MultipartFile arquivo)  {
+    @PostMapping(value = "/foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity uploadFoto(@RequestParam Integer idUsuario, @RequestBody MultipartFile foto)  {
         try {
-            String fotoPath = FotoHandler.upload(arquivo);
+            String fotoPath = FotoHandler.upload(foto);
             UsuarioJuridico usuario = null;
             try {
                 usuario = repository.findById(idUsuario).get();
@@ -108,7 +112,7 @@ public class UsuarioJuridicoController {
         }
     }
 
-    @GetMapping(value = "/foto/download", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/foto", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
     public ResponseEntity download(@RequestParam Integer idUsuario) {
         try {
@@ -151,7 +155,7 @@ public class UsuarioJuridicoController {
                 helper.setSubject("Confirmação de cadastro");
                 helper.setText("<div><p>Olá, vimos que você se cadastrou em nosso site!</p>" +
                         "<p>Pedimos que clique neste " +
-                        "<a href='http://localhost:8080/usuariosFisicos/confirm?email="+novoUsuario.getEmail()+"'>link</a> " +
+                        "<a href='http://localhost:8080/usuariosJuridicos/confirm?email="+novoUsuario.getEmail()+"'>link</a> " +
                         "para confirmar o cadastro no nosso sistema.</p>" +
                         "<br/>" +
                         "<br/>" +

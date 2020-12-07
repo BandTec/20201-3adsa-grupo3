@@ -8,7 +8,7 @@ import imgEyePassword from '../../../assets/images/img-eye-password.png';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import ComboBox from '../../../components/ComboBox/combo-box';
-import Alert from '../../../components/AlertCard/alert-card';
+import AlertCard from '../../../components/AlertCard/alert-card';
 import InputFile from '../../../components/InputFile/input-file';
 
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
@@ -17,6 +17,7 @@ import CommomFunctions from '../../../utils/functions'
 
 import './sign-up-ong.css';
 import { RecentActorsRounded } from '@material-ui/icons';
+import { render } from 'react-dom';
 
 async function cadastrar() {
   try {
@@ -37,9 +38,11 @@ async function cadastrar() {
     let usuarioAsJson = JSON.stringify(usuarioObj);
     await usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
   
+    render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success"/>, document.getElementById("alertArea"));
     window.location.href = "/signin";
   } catch (error) {
-    alert(error);
+    let errorString = `${error}`;
+    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
 
@@ -147,7 +150,7 @@ export default class SignUp extends React.Component {
       <React.Fragment>
 
         <img id="imgTeste"/>
-
+        <div id="alertArea"></div>
         <form id="usuarioJuridicoToSubmit" hidden>
           <input id="nomeOng"/>
           <input id="email"/>
@@ -246,7 +249,6 @@ export default class SignUp extends React.Component {
             </div>
 
             <Button id="btnCadastrarOng" onClick={cadastrar} variant="contained" color="primary">Cadastrar</Button>
-            <Alert statusAlert="error" />
 
           </div>
 

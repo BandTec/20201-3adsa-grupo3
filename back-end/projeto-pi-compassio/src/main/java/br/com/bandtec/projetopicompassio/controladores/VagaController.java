@@ -71,10 +71,10 @@ public class VagaController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/foto/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity uploadFoto(@RequestParam Integer idVaga, @RequestBody MultipartFile arquivo)  {
+    @PostMapping(value = "/foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity uploadFoto(@RequestParam Integer idVaga, @RequestBody MultipartFile foto)  {
         try {
-            String fotoPath = FotoHandler.upload(arquivo);
+            String fotoPath = FotoHandler.upload(foto);
             Vaga vaga = null;
             try {
                 vaga = repository.findById(idVaga).get();
@@ -94,7 +94,7 @@ public class VagaController {
         }
     }
 
-    @GetMapping(value = "/foto/download", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/foto", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
     public ResponseEntity download(@RequestParam Integer idVaga) {
         try {

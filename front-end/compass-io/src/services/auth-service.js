@@ -17,7 +17,7 @@ class AuthService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -36,7 +36,7 @@ class AuthService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 };
