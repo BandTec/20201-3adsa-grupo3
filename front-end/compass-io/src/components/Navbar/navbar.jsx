@@ -17,7 +17,7 @@ function Navbar(props) {
                 </a>
             </span>
             <div className="botoes">
-                <a className="link" href="signup">Seja voluntário</a>
+                <a className="link" href="/signup">Seja voluntário</a>
                 {/*<button className="link" onClick={props.direciona}>Como funciona</button>*/}
                 <a className="link" onClick={props.position} href={props.directionURL} onChange={props.changes}>Como funciona</a>
                 <a className="link" href="vacancies">Vagas</a>
