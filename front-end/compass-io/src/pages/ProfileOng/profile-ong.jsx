@@ -24,7 +24,6 @@ const useStyles = makeStyles({
 });
 
 async function renderPerfil() {
-
   let usuarioJuridicoService = new UsuarioJuridicoService();
   const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(1);
   let vagaInfos = resposta.data[0];
@@ -47,6 +46,11 @@ async function renderPerfil() {
 window.onload = renderPerfil();
 
 export default function ProfileOng() {
+
+  function ClickDirection(){
+    window.location.href = "/register";
+  }
+
   const classes = useStyles();
   return (
     <section>
@@ -55,7 +59,7 @@ export default function ProfileOng() {
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!" 
             link="www.google.com.br"
             width="600"/>
-        <Button variant="outline" className={classes.outlineBtn}>+Cadastrar Vaga</Button>
+        <Button variant="outline" onClick={ClickDirection} className={classes.outlineBtn}>+Cadastrar Vaga</Button>
         <div className="vacancyCarousel">
           <h1>Vagas Abertas</h1>
           <CarouselVacancy />

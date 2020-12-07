@@ -53,10 +53,11 @@ h1{
 .vacancyCarousel{
     border: 1px solid black;
     border-radius: 10px;
-    height: 42rem
+    height: 42rem;
+    margin-bottom: 3rem;
 }
 
 .vacancyCarousel > h1{
     margin-left: 1rem;
-    background-color: #FCFCFC
+    background-color: #FCFCFC;
 }
