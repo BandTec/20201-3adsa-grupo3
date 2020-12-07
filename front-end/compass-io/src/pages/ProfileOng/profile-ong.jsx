@@ -7,6 +7,7 @@ import Rating from '../../components/Rating/rating';
 import CardProfileOng from '../../components/CardProfileOng/card-profile-ong';
 import InputFile from '../../components/InputFile/input-file';
 import ImgVolunteer from '../../assets/images/child-img.jpg';
+import AlertCard from '../../components/AlertCard/alert-card';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,6 +16,7 @@ import Footer from '../../components/Footer/footer';
 import './profile-ong.css';
 
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
+import { render } from 'react-dom';
 
 const useStyles = makeStyles({
   outlineBtn: {
@@ -49,17 +51,53 @@ async function renderPerfil() {
 
 window.onload = renderPerfil();
 
+async function trocarFoto() {
+  try {
+    let usuarioJuridicoService = new UsuarioJuridicoService();
+
+    let foto = document.getElementById("editarFoto").files[0];
+    let formDataFoto = new FormData();
+    formDataFoto.set("foto", foto);
+
+    debugger
+  
+    let id = parseInt(sessionStorage["userId"])
+    let response = await usuarioJuridicoService.uploadFoto(id, formDataFoto);
+
+    if (response.status == 201) {
+      getFoto();
+    }
+    render(<AlertCard message="Foto atualizada" severity="success"/>, document.getElementById("alertArea"));
+  } catch (error) {
+    let errorString = `${error}`;
+    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
+  }
+}
+
+//window.onload = getFoto();
+
+async function getFoto() {
+  debugger;
+  let usuarioJuridicoService = new UsuarioJuridicoService();
+  let id = parseInt(sessionStorage["userId"])
+  
+  let fotoResponse = await usuarioJuridicoService.getFoto(id);
+  let imgOng = document.getElementById("imgOng");
+  imgOng.src = "data:image/png;base64," + fotoResponse.data;
+}
+
 export default function ProfileOng(props) {
   const classes = useStyles();
   return (
     <section>
+      <div id="alertArea"></div>
       <div className="containerProfileOng">
-        <AboutOng nameOng="TETO Brasil" 
+        <AboutOng nameOng="TETO Brasil"
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!" 
             link="www.google.com.br"
             width="600"/>
         <div className="flex flex-column mg-t-16 width-15pg">
-          <InputFile id="editarFoto" text="Editar foto" callBack={props.editImgVolunteer}/>
+          <InputFile id="editarFoto" text="Editar foto" callBack={trocarFoto}/>
 
         </div>
           <Button variant="outline" className={classes.outlineBtn}>+Cadastrar Vaga</Button>

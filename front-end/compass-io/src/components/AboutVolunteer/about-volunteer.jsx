@@ -13,7 +13,7 @@ function AboutVolunteer(props) {
            </div> */}
            
            <div className="imgVolunteerBox grid">
-                <img width="210" height="280" src={props.imgVolunteer}></img>
+                <img id={props.imgId} width="210" height="280" src={props.imgSrc}></img>
                 <InputFile className="" id="editarFoto" text="Editar foto" callBack={props.editImgVolunteer}/>
            </div>
            <div className="infoVolunteer mg-l-16">
