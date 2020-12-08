@@ -67,13 +67,13 @@ export default function SignIn() {
       <div className="width-100pg height-560p flex">
         <div id="alertArea"></div>
         <div className="width-50pg flex relative">
-          <Image width="600" className="childrenImage" height="480" src={loginImage} />
+          <Image width="100%" className="childrenImage" height="90%" src={loginImage} />
           <div className="bold absolute top-280p font-color-white fs-56p mg-l-16">
             Fazendo a diferença conforme o seu <br/>
             <span className="yellowWord">perfil</span>.
           </div>
         </div>
-        <div className="height-480p mg-l-16 border border-rd-10 bg-color-gray-light width-55pg">
+        <div className="height-500p mg-l-16 border border-rd-10 bg-color-gray-light width-55pg">
           <div className="center mg-t-32 blueWord">
             <LabelTitleForm title="Entrar"/>
           </div>

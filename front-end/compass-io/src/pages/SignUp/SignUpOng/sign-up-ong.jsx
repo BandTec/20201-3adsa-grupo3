@@ -9,7 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import ComboBox from '../../../components/ComboBox/combo-box';
 import AlertCard from '../../../components/AlertCard/alert-card';
-
+import InputFile from '../../../components/InputFile/input-file';
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
 import CommomFunctions from '../../../utils/functions'
@@ -171,9 +171,9 @@ export default class SignUp extends React.Component {
 
         <div className="width-100pg mg-b-32 flex">
           <div className="width-50pg flex relative">
-            <Image width="640" className="childrenImage" height="950" src={imgOngSingup} />
+            <Image width="100%" className="childrenImage" height="70%" src={imgOngSingup} />
             <div className="bold absolute top-640p font-color-white fs-56p mg-l-16">Encontre aqui os voluntários ideais que <br />
-              <span className="yellowWord">você precisa</span>
+              <span className="yellowWord">você precisa</span>.
             </div>
           </div>
           <div className="mg-l-32 width-50pg">

@@ -173,12 +173,15 @@ export default function VacancyRegister() {
       <LabelWelcome labelTitle="Detalhes da oportunidade" labelText="Nos ajude a divulgar a sua vaga"/>
       <br/>
 
-      <div className="container width-100pg height-720p">
-        <div>
-          <Image width="480" className="childrenImage" height="640" src={GirlVolunteerImg} />
+      <div className="container width-100pg height-800p">
+        <div className="width-50pg flex relative">
+         <Image width="100%" className="childrenImage" height="90%" src={GirlVolunteerImg} />
         </div>
 
-        <span className="height-680p mg-l-16 border border-rd-10 bg-color-gray-light width-60pg">
+        <span className="height-90pg mg-l-16 border border-rd-10 bg-color-gray-light width-60pg">
+              <div className=" mg-t-16 mg-l-16">
+                <LabelTitleForm title="Informações da Vaga" />
+              </div>
               <div className="mg-t-8 mg-l-16 mg-r-16">
                   <InputLine name="titulo" title="Título da vaga" type="text" placeholder="O que você busca?"/>
               </div> 
