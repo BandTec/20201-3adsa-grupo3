@@ -173,58 +173,63 @@ export default function VacancyRegister() {
       <LabelWelcome labelTitle="Detalhes da oportunidade" labelText="Nos ajude a divulgar a sua vaga"/>
       <br/>
 
-      <div className="container">
-        <span className="loginImagePart">
-          <span className="loginImage">
-            <Image width="535" className="childrenImage" height="560" src={GirlVolunteerImg} />
-          </span>
-          <span className="textImage">
-            Fazendo a diferença conforme o seu <br/>
-            <span className="yellowWord">perfil</span>.
-          </span>
-        </span>
+      <div className="container width-100pg height-720p">
+        <div>
+          <Image width="480" className="childrenImage" height="640" src={GirlVolunteerImg} />
+        </div>
 
-        <span className="registerVacancyForm">
-            <span className="lblForm">
-                <div className="inputLogin">
-                    <InputLine name="titulo" title="Título da vaga" type="text" placeholder="O que você busca?"/>
-                </div> 
-                <div className="inputLogin">
-                    <ComboBox name="causa" labelTitle="Causa" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
-                    nomeItem5="SP" />
+        <span className="height-680p mg-l-16 border border-rd-10 bg-color-gray-light width-60pg">
+              <div className="mg-t-8 mg-l-16 mg-r-16">
+                  <InputLine name="titulo" title="Título da vaga" type="text" placeholder="O que você busca?"/>
+              </div> 
+              <div className="flex justcon-sb mg-t-8 mg-l-16 mg-r-16">
+                <div className="width-70pg">
+                  <InputLine title="Carga Horária" type="text" placeholder="Ex: 4h semanais"/>
                 </div>
-                <div className="inputLogin">
-                    <InputFile id="editarFoto" text="Enviar foto"/>
-                </div>
-            </span>
-
-            <span className="lblForm">
-                <div className="inputLogin">
-                    <InputLine title="Carga Horária" type="text" placeholder="Ex: 4h semanais"/>
-                </div> 
-                <div className="inputLogin">
+                  <ComboBox name="causa" labelTitle="Causa" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
+                  nomeItem5="SP" />
+              </div>
+            <div className="flex mg-t-8 mg-l-16 mg-r-16">
+                <div className="width-40pg">
                     <InputLine name="dataInicio" title="Data Início" type="date" placeholder="DD/MM/AAAA"/>
                 </div>
-                <div className="inputLogin">
+                <div className="width-40pg mg-l-64">
                     <InputLine name="dataFim" title="Data Fim" type="date" placeholder="DD/MM/AAAA"/>
                 </div>
-            </span>
+            </div>
 
-          <div className="inputLogin">
+          <div className="mg-t-8 mg-l-16 mg-r-16">
             <InputLine name="descricao" title="Descrição" type="text" placeholder="Dê uma breve descrição do trabalho"/>
           </div>
-          <div className="lblForm inputLogin">
+
+          <div className="flex mg-t-8 mg-l-16 mg-r-16 justcon-sb">
+            <div className="width-30pg">
               <InputLine name="cep" title="CEP" type="text"  />
+            </div>
+          </div>
+
+          <div className="flex mg-t-8 mg-l-16 mg-r-16 justcon-sb">
+            <div className="width-70pg">
               <InputLine name="logradouro" title="Logradouro" type="text" />
-              <InputLine name="numero" title="Número" type="number" />
+            </div>
+            <div className="width-20pg mg-r-16">
+              <InputLine name="numero" title="Número" type="tel" />
+            </div>
           </div>
-          <div className="lblForm inputLogin">
+
+          <div className="flex mg-t-8 mg-l-16 mg-r-16 justcon-sb">
+            <div className="width-30pg">
               <InputLine name="bairro" title="Bairro" type="text" />
+            </div>
+            <div className="width-30pg">
               <InputLine name="estado" title="Estado" type="text" />
+            </div>
+            <div className="width-30pg">
               <InputLine name="cidade" title="Cidade" type="text" />
+            </div>
           </div>
-          <div className="btnPage">
-            <Button id="btnVoltarOng" variant="contained" color="primary">Voltar</Button>
+          <div className="flex mg-t-64 mg-l-16 mg-r-16">
+            <Button id="btnVoltarOng" variant="contained">Voltar</Button>
             <Button id="btnCadastrarOng" onClick={cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
           </div>
         </span>

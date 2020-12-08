@@ -1,7 +1,7 @@
-.container{
+/* .container{
     width: 100%;
     display: flex;
-}
+} */
 
 .container > .loginImagePart{
     width: 50%;
@@ -16,6 +16,62 @@
     background-color: #fff;
     z-index: 1;
     position: absolute;
+}
+
+.mg-t-80{
+    margin-top: 5rem;
+}
+
+.mg-t-56{
+    margin-top: 4rem;
+}
+
+.mg-t-48{
+    margin-top: 3rem;
+}
+
+.fs-56p{
+    font-size: 3.5rem
+}
+
+.flex-inline-block{
+    display: inline-block;
+}
+
+.relative{
+    position: relative;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.top-480p{
+    top: 30rem
+}
+
+.top-320p{
+    top: 20rem
+}
+
+.top-280p{
+    top: 17.5rem
+}
+
+.top-240p{
+    top: 15rem
+}
+
+.height-640p{
+    height: 40rem;
+}
+
+.height-560p{
+    height: 35rem;
+}
+
+.height-480p{
+    height: 30rem;
 }
 
 .container > .loginImagePart > .textImage{

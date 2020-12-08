@@ -13,6 +13,22 @@
     filter: brightness(0.8); 
 }
 
+.top-640p{
+    top: 40rem;
+}
+
+.height-1040p{
+    height: 65rem;
+}
+
+.height-400p{
+    height: 25rem;
+}
+
+.mg-t-360{
+    margin-top: 22.5rem
+}
+
 .textImage{
     color: #fff;
     font-weight: 700;
@@ -85,7 +101,7 @@
 }
 
 #btnCadastrar{
-    margin-left: 3rem;
+    margin-left: 0.8rem;
     width:10rem;
     font-weight: 600;
     height: 3rem;
