@@ -53,15 +53,13 @@ function Footer() {
                             <div className="footerIconSocialMidia">
                                 <Icon icon={facebookFilled} style={{
                                     fontSize: '35px',
-                                    backgroundColor: "#0629d8",
                                     borderRadius: "0.5rem"
                                     }} />
-                                <span className="footerInstaFace" >Compass.io</span>
+                                <span className="footerInstaFace">Compass.io</span>
                             </div>
                             <div className="footerIconSocialMidia">
                                 <Icon icon={instagramOutlined} style={{
                                     fontSize: '35px',
-                                    backgroundColor: "#0629d8",
                                     borderRadius: "0.5rem"
                                     }} />
                                 <span className="footerInstaFace">@Compass.io</span>
@@ -84,7 +82,7 @@ function Footer() {
                             </div>
                         <div className="footerIconText">
                                 <Icon icon={mailOutlined} style={{ fontSize: '29px' }} />
-                                <div className="footerEmailPhone">compass.io@gmail.com</div>
+                                <div className="footerEmailPhone">contato.compass.io@gmail.com</div>
                         </div>
 
                         <div className="footerIconText">
