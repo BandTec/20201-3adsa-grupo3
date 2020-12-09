@@ -7,6 +7,7 @@ import Rating from '../../components/Rating/rating';
 import CardProfileOng from '../../components/CardProfileOng/card-profile-ong';
 import InputFile from '../../components/InputFile/input-file';
 import ImgVolunteer from '../../assets/images/child-img.jpg';
+import AlertCard from '../../components/AlertCard/alert-card';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,6 +16,7 @@ import Footer from '../../components/Footer/footer';
 import './profile-ong.css';
 
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
+import { render } from 'react-dom';
 
 const useStyles = makeStyles({
   outlineBtn: {
@@ -31,6 +33,8 @@ async function renderPerfil() {
   const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(1);
   let vagaInfos = resposta.data[0];
   console.log(vagaInfos);
+
+  //getFoto()
 
   /*let DescricaoVaga = document.getElementsByName("descricaoVaga")[0];
   DescricaoVaga.innerHTML = vagaInfos.descricao;
@@ -57,8 +61,9 @@ export default function ProfileOng() {
   const classes = useStyles();
   return (
     <section>
+      <div id="alertArea"></div>
       <div className="containerProfileOng">
-        <AboutOng nameOng="TETO Brasil" 
+        <AboutOng nameOng="TETO Brasil"
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!" 
             link="www.google.com.br"
             width="600"/>

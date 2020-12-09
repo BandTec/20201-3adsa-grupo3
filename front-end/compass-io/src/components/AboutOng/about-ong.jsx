@@ -4,7 +4,7 @@ import './about-ong.css';
 function AboutOng(props) {
     return (
        <section name={props.name} className="aboutOng">
-           <div id="imgOng" width={props.width} height={props.height}></div>
+           <img id="imgOng" width={props.width} height={props.height} src={props.imgSrc}/>
            <div className="infoOng">
                <div className="infoOngTitle">{ props.nameOng }</div>
                <div className="infoOngText">{ props.infoOng }</div>

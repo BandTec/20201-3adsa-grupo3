@@ -85,7 +85,7 @@
 .footerInfo{
     background-color: #1975ff;
     height: 15rem;
-    width: 87.32rem;
+    width: 100vw;
     margin: 0 -7rem;
     color: #fff;
 }
@@ -95,8 +95,8 @@
     background-color: #2a4aeb;
     color: #fff;
     height: 2rem;
-    width: 87.32rem;
-    margin: 0 -7rem;
+    width: 100vw;
+    margin: 0 -10rem;
     padding-top: 0.8rem;
 }
 
