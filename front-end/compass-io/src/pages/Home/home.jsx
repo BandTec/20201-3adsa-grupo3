@@ -69,7 +69,9 @@ export default function Home() {
         labelTitle="Ajude uma causa que seja do seu interesse!" 
         labelText="Encontre facilmente aqui, instituições que lutem nas causas que você quer ajudar!"></LabelWelcome> */}
       <BlueBanner></BlueBanner>
-      <CardHome id="comoFunciona"/>
+      <div id="comoFunciona">
+      <CardHome/>
+      </div>
       <Button variant="outline" className={classes.outlineBtn} onClick={ClickVagas}>Ache aqui a vaga<br />ideal para você!</Button>
       <GrayBanner id="locationTag"></GrayBanner>
     </div>

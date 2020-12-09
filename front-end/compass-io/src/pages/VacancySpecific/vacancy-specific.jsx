@@ -40,7 +40,7 @@ export default function VacancySpecific() {
 
       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6hOO7TuGsB5W39Y7g6oaAXWaUMnrxyeA&callback=initMap"
         type="text/javascript"></script>
-
+        
       <VacancyHeader title="Teste"></VacancyHeader>
 
       <div className="border-b mg-t-24 height-56p font-color-gray-light fs-32p">

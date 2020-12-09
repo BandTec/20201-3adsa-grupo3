@@ -29,7 +29,6 @@ const useStyles = makeStyles({
 });
 
 async function renderPerfil() {
-
   let usuarioJuridicoService = new UsuarioJuridicoService();
   const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(1);
   let vagaInfos = resposta.data[0];
@@ -87,6 +86,11 @@ async function getFoto() {
 }
 
 export default function ProfileOng(props) {
+
+  function ClickDirection(){
+    window.location.href = "/register";
+  }
+
   const classes = useStyles();
   return (
     <section>
@@ -98,9 +102,8 @@ export default function ProfileOng(props) {
             width="600"/>
         <div className="flex flex-column mg-t-16 width-15pg">
           <InputFile id="editarFoto" text="Editar foto" callBack={trocarFoto}/>
-
         </div>
-          <Button variant="outline" className={classes.outlineBtn}>+Cadastrar Vaga</Button>
+          <Button variant="outline" onClick={ClickDirection} className={classes.outlineBtn}>+Cadastrar Vaga</Button>
         <div className="vacancyCarousel">
           <h1>Vagas Abertas</h1>
           <CarouselVacancy />
@@ -125,4 +128,3 @@ export default function ProfileOng(props) {
     </section>
   );
 };
-

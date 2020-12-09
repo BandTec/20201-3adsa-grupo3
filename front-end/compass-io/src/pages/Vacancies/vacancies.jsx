@@ -293,13 +293,12 @@ export default function Vacancies() {
       </div>
       <div className="flex justcon-sb pd-t-16 pd-b-16">
         <div className="fs-32p fw-600 gray">VAGAS</div>
-        <div className="blueWord fs-16p fw-500">Quer conhecer as ONGs parceiras? <a href="" className="yellowWord">Clique aqui</a></div>
+        <div className="blueWord fs-16p fw-500">Quer conhecer a nossa parceira doebem? <a href="https://www.doebem.org.br/" className="yellowWord">Clique aqui</a></div>
       </div>
       <div className="">
         <CardVacancy className="" />
       </div>
       <Pagination count={10} variant="outlined" shape="rounded" className="mg-v-16 center" />
-      <Footer />
     </section>
   );
 };

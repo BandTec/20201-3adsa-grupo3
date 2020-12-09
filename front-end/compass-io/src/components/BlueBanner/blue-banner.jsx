@@ -8,7 +8,7 @@ import './blue-banner.css';
 
 const useStyles = makeStyles({
     blueBanner: {
-        width: "100vw",
+        width: "87.32rem",
         height: "15rem",
         backgroundColor: "#1975FF",
         margin: "1rem -7rem",
