@@ -16,13 +16,13 @@ public class UsuarioJuridico {
     @Column(length = 80, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 60, nullable = false)
+    @Column(length = 45, nullable = false)
     private String senha;
 
     @Column(length = 15)
     private String telefone;
 
-    @Column(length = 14, nullable = false)
+    @Column(length = 18, nullable = false)
     private String cnpj;
 
     @Column(length = 50)
