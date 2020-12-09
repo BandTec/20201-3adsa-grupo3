@@ -75,9 +75,23 @@
 }
 
 #btnAdd{
-    margin-top: 5%;
-    margin-bottom: 2%;
+    /* margin-top: 5%;
+    margin-bottom: 2%; */
+
+    height: 3.5rem;
     background: #1975FF
+}
+
+.height-1020p{
+    height: 70rem;
+}
+
+.height-1036p{
+    height: 71rem;
+}
+
+.mg-b-32{
+    margin-bottom: 2rem;
 }
 
 .comboBox{
@@ -143,4 +157,8 @@
     background-color: #FFB219;
     color: #fff;
     transition: 0.75s;
+}
+
+.mg-l-8{
+    margin-left: 0.5rem;
 }
