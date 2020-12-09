@@ -2,7 +2,7 @@ package br.com.bandtec.projetopicompassio.dominios;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "usuario_juridico")
 public class UsuarioJuridico {
 
     @Id

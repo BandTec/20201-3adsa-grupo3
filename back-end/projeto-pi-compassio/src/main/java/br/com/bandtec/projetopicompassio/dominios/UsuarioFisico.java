@@ -3,7 +3,7 @@ package br.com.bandtec.projetopicompassio.dominios;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "UsuarioFisico")
+@Entity(name = "usuario_fisico")
 public class UsuarioFisico {
 
     @Id
