@@ -6,14 +6,15 @@ import LabelTitleForm from "../../components/LabelTitleForm/label-title-form";
 import Image from '../../components/Image/image';
 import Button from '@material-ui/core/Button';
 import GirlVolunteerImg from '../../assets/images/girl-volunteer.jpg';
-import ComboBox from '../../components/ComboBox/combo-box'
+import ComboBox from '../../components/ComboBox/combo-box';
 import InputFile from '../../components/InputFile/input-file';
 import AlertCard from '../../components/AlertCard/alert-card';
 
-import VagaService from '../../services/vaga-service'
-import UsuarioJuridicoService from '../../services/usuario-juridico-service'
-import EnderecoService from '../../services/endereco-service'
-import CommomFunctions from '../../utils/functions'
+import VagaService from '../../services/vaga-service';
+import UsuarioJuridicoService from '../../services/usuario-juridico-service';
+import EnderecoService from '../../services/endereco-service';
+import ConsultaSimplesService from '../../services/consulta-simples-service';
+import CommomFunctions from '../../utils/functions';
 
 import './vacancy-register.css';
 import { Input } from '@material-ui/core';
@@ -62,27 +63,27 @@ function getVagaFormData() {
     let Titulo = document.getElementById("titulo");
     Titulo.innerText = document.getElementsByName("titulo")[0].value;
     if (Titulo.innerText.length == 0)
-      throw getError("Titulo");
+      throw getError("título");
   
     let Descricao = document.getElementById("descricao");
     Descricao.innerText = document.getElementsByName("descricao")[0].value;
     if (Descricao.innerText.length == 0)
-      throw getError("Descricao");
+      throw getError("descricao");
 
     let Causa = document.getElementById("causa");
     Causa.innerText = document.getElementsByName("causa")[0].value;
     if (Causa.innerText.length == 0)
-      throw getError("Causa");
+      throw getError("causa");
     
     let DataInicio = document.getElementById("dataInicio");
     DataInicio.innerText = document.getElementsByName("dataInicio")[0].value;
     if (DataInicio.innerText.length == 0)
-      throw getError("Data de início");
+      throw getError("data de início");
   
     let DataFim = document.getElementById("dataFim");
     DataFim.innerText = document.getElementsByName("dataFim")[0].value;
     if (DataFim.innerText.length == 0)
-      throw getError("Datade fim");
+      throw getError("data de fim");
   } catch (error) {
     throw error;
   }
@@ -93,12 +94,12 @@ function getEnderecoVagaFormData() {
     let Logradouro = document.getElementById("logradouro");
     Logradouro.innerText = document.getElementsByName("logradouro")[0].value;
     if (Logradouro.innerText.length == 0)
-      throw getError("Logradouro");
+      throw getError("logradouro");
 
     let Numero = document.getElementById("numeroEndereco");
     Numero.innerText = document.getElementsByName("numero")[0].value;
     if (Numero.innerText.length == 0)
-      throw getError("Numero");
+      throw getError("numero");
 
     let Cep = document.getElementById("cep");
     Cep.innerText = document.getElementsByName("cep")[0].value;
@@ -108,17 +109,17 @@ function getEnderecoVagaFormData() {
     let Bairro = document.getElementById("bairro");
     Bairro.innerText = document.getElementsByName("bairro")[0].value;
     if (Bairro.innerText.length == 0)
-      throw getError("Bairro");
+      throw getError("bairro");
 
     let Cidade = document.getElementById("cidade");
     Cidade.innerText = document.getElementsByName("cidade")[0].value;
     if (Cidade.innerText.length == 0)
-      throw getError("Cidade");
+      throw getError("cidade");
 
     let Estado = document.getElementById("estado");
     Estado.innerText = document.getElementsByName("estado")[0].value;
     if (Estado.innerText.length == 0)
-      throw getError("Estado");
+      throw getError("estado");
   } catch (error) {
     throw error;
   }
@@ -130,14 +131,13 @@ function getError(field) {
 
 async function uparFoto(vaga) {
   try {
-    debugger
     let vagaService = new VagaService();
 
-    let foto = document.getElementById("editarFoto").files[0];
+    let foto = document.getElementById("adicionarFoto").files[0];
     let formDataFoto = new FormData();
     formDataFoto.set("foto", foto);
     
-    let id = parseInt(vaga.idVaga);
+    let id = parseInt(vaga.id);
 
     await vagaService.uploadFoto(id, formDataFoto);
 
@@ -147,7 +147,18 @@ async function uparFoto(vaga) {
   }
 }
 
+async function getCidadesByEstado() {
+  let consultaService = new ConsultaSimplesService();
+}
+
+async function getEstados() {
+  let consultaService = new ConsultaSimplesService();
+  let estados = await consultaService.getEstados();
+  return estados;
+}
+
 export default function VacancyRegister() {
+
   return (
     <React.Fragment>
 
@@ -175,7 +186,7 @@ export default function VacancyRegister() {
 
       <div className="container width-100pg height-800p">
         <div className="width-50pg flex relative">
-         <Image width="100%" className="childrenImage" height="90%" src={GirlVolunteerImg} />
+          <Image width="100%" className="childrenImage" height="90%" src={GirlVolunteerImg} />
         </div>
 
         <span className="height-90pg mg-l-16 border border-rd-10 bg-color-gray-light width-60pg">
@@ -186,11 +197,8 @@ export default function VacancyRegister() {
                   <InputLine name="titulo" title="Título da vaga" type="text" placeholder="O que você busca?"/>
               </div> 
               <div className="flex justcon-sb mg-t-8 mg-l-16 mg-r-16">
-                <div className="width-70pg">
-                  <InputLine title="Carga Horária" type="text" placeholder="Ex: 4h semanais"/>
-                </div>
-                  <ComboBox name="causa" labelTitle="Causa" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
-                  nomeItem5="SP" />
+                <InputFile text="Adicionar foto" id="adicionarFoto"/>
+                <ComboBox name="causa" labelTitle="Causa" />
               </div>
             <div className="flex mg-t-8 mg-l-16 mg-r-16">
                 <div className="width-40pg">
@@ -207,7 +215,7 @@ export default function VacancyRegister() {
 
           <div className="flex mg-t-8 mg-l-16 mg-r-16 justcon-sb">
             <div className="width-30pg">
-              <InputLine name="cep" title="CEP" type="text"  />
+              <InputLine name="cep" title="CEP" type="text"/>
             </div>
           </div>
 
@@ -225,14 +233,14 @@ export default function VacancyRegister() {
               <InputLine name="bairro" title="Bairro" type="text" />
             </div>
             <div className="width-30pg">
-              <InputLine name="estado" title="Estado" type="text" />
+              <ComboBox id="estado" name="estado" labelTitle="Estado"/>
             </div>
             <div className="width-30pg">
-              <InputLine name="cidade" title="Cidade" type="text" />
+              <ComboBox id="cidade" name="cidade" labelTitle="Cidade"/>
             </div>
           </div>
           <div className="flex mg-t-64 mg-l-16 mg-r-16">
-            <Button id="btnVoltarOng" variant="contained">Voltar</Button>
+            <Button id="btnVoltarOng" variant="contained" onClick={getEstados}>Voltar</Button>
             <Button id="btnCadastrarOng" onClick={cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
           </div>
         </span>

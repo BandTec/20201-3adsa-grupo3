@@ -20,23 +20,15 @@ function validarSenha() {
   console.log(senhaInput);
   console.log(confSenhaInput);
 
-  if (senhaInput != confSenhaInput) {
-    alert("Senhas não coincidem");
-    return false;
-  }
-  else if (senhaInput.length < 8 || senhaInput.length > 20) {
-    alert("A senha deve ter entre 8 e 20 caractéres");
-    return false;
-  }
-  else
-    return true;
+  if (senhaInput != confSenhaInput)
+    throw new Error("Senhas não coincidem");
+  else if (senhaInput.length < 8 || senhaInput.length > 20)
+    throw new Error("A senha deve ter entre 8 e 20 caractéres");
 }
 
 async function cadastrar() {
   try {
-    if (!validarSenha()) {
-      return;
-    }
+    validarSenha()
     let Email = document.getElementById('email');
     Email.innerText = document.getElementsByName('email')[0].value;
 
@@ -51,8 +43,9 @@ async function cadastrar() {
 
     let Nascimento = document.getElementById("dataNascimento");
     let NascimentoSplit = document.getElementsByName("dataNascimento")[0].value.split("/");
-    let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
-    Nascimento.innerText = NascimentoConvert;
+    //let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
+    // Nascimento.innerText = NascimentoConvert;
+    Nascimento.innerText = NascimentoSplit;
 
     let Cpf = document.getElementById("cpf");
     Cpf.innerText = document.getElementsByName("cpf")[0].value;
@@ -122,8 +115,6 @@ export default class SignUp extends React.Component {
               <div className="mg-t-8 mg-l-16 mg-r-16">
               </div>
             </div>
-
-
 
             <div className="height-400p mg-t-24 border border-rd-10 bg-color-gray-light">
               <div className=" mg-t-16 mg-l-16">

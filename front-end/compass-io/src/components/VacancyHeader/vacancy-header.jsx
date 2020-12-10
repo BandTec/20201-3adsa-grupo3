@@ -30,6 +30,7 @@ export default function VacancyHeader(props) {
     return(
         <div className="vacancyHeader">
             <div id="imgVacancy">
+                <img id={props.imgId}></img>
             </div>
             <span id="headerText">
                 <div id="headerTitle">{ props.title }</div>
