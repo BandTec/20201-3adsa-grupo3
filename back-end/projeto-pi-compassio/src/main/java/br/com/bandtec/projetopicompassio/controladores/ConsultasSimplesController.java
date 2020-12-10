@@ -26,4 +26,14 @@ public class CidadeController {
             return ResponseEntity.status(500).body(ex.getMessage());
         }
     }
+
+    @GetMapping
+    public ResponseEntity getUfs() {
+        try {
+            List ufs = template.queryForList("SELECT SIGLA_UF FROM ESTADO");
+            return ResponseEntity.ok(ufs);
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
 }
