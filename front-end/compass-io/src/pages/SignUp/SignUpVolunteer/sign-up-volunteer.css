@@ -127,15 +127,11 @@
     display: flex;
 }
 
-/*-----------Resposividade----------*/
+/*-----------Responsividade----------*/
 
-@media (max-width: 600px){
+@media (max-width: 640px){
 
-    .textImage{
-        display: none;
-    }
-
-    .loginImage{
+    .container > .loginImage, .childrenImage{
         display: none;
     }
 
@@ -171,4 +167,7 @@
     #btnCadastrar{
         margin-left: 4%;
     }
+
+
+
 }
