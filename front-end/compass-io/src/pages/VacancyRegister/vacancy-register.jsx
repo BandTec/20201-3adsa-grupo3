@@ -9,6 +9,8 @@ import GirlVolunteerImg from '../../assets/images/girl-volunteer.jpg';
 import ComboBox from '../../components/ComboBox/combo-box'
 import InputFile from '../../components/InputFile/input-file';
 import AlertCard from '../../components/AlertCard/alert-card';
+import Alerta from '../../components/Alerta/alerta'
+
 
 import VagaService from '../../services/vaga-service'
 import UsuarioJuridicoService from '../../services/usuario-juridico-service'
@@ -21,7 +23,6 @@ import { render } from 'react-dom';
 
 async function cadastrarVaga() {
   try {
-    debugger
     getEnderecoVagaFormData()
     getVagaFormData()
   
@@ -49,11 +50,14 @@ async function cadastrarVaga() {
     
     uparFoto(vagaCadastrada.data);
 
-    render(<AlertCard message="Vaga cadastrada" severity="success"/>, document.getElementById("alertArea"));
+    render(<Alerta isSuccess message="Vaga cadastrada com sucesso"/>, document.getElementById("alertArea"))
+
+    // render(<AlertCard message="Vaga cadastrada" severity="success"/>, document.getElementById("alertArea"));
     window.location.href = "/profile/ong";
   } catch (error) {
     let errorString = `${error}`;
-    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
+    render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
+    // render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
 
@@ -151,8 +155,6 @@ export default function VacancyRegister() {
   return (
     <React.Fragment>
 
-      <div id="alertArea"></div>
-
       <form id="formVagaToSubmit" hidden>
         <input id="titulo"/>
         <input id="descricao"/>
@@ -234,6 +236,8 @@ export default function VacancyRegister() {
           <div className="flex mg-t-64 mg-l-16 mg-r-16">
             <Button id="btnVoltarOng" variant="contained">Voltar</Button>
             <Button id="btnCadastrarOng" onClick={cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
+            <div id="alertArea" className="mg-l-32 width-100pg"></div>
+
           </div>
         </span>
       </div>

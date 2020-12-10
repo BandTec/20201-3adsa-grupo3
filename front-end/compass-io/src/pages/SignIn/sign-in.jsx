@@ -6,6 +6,7 @@ import LabelTitleForm from "../../components/LabelTitleForm/label-title-form";
 import Image from '../../components/Image/image';
 import Button from '@material-ui/core/Button'
 import AlertCard from '../../components/AlertCard/alert-card';
+import Alerta from '../../components/Alerta/alerta'
 
 import AuthService from '../../services/auth-service'
 import CommomFunctions from '../../utils/functions'
@@ -18,6 +19,8 @@ async function logar() {
   try {
     getLoginFormData();
     let authService = new AuthService();
+    console.log("passou aqui");
+    
   
     let formLogin = document.getElementById("formLoginToSubmit");
     let formLoginAsJson = CommomFunctions.convertFormToJson(formLogin);
@@ -25,11 +28,14 @@ async function logar() {
     formLoginObj.senha = CommomFunctions.encryptPassword(formLoginObj.senha);
     formLoginAsJson = JSON.stringify(formLoginObj);
     await authService.login(formLoginAsJson);
-    render(<AlertCard message="Usuário autenticado" severity="success" />, document.getElementById("alertArea"));
+    // render(<AlertCard message="Usuário autenticado" severity="success" />, document.getElementById("alertArea"));
+    render(<Alerta isSuccess message="Login realizado com sucesso"/>, document.getElementById("alertArea"))
     window.location.href = "/";
   } catch (error) {
     let errorString = `${error}`;
-    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
+    render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
+
+    // render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
 
@@ -44,6 +50,10 @@ function getLoginFormData() {
     Senha.innerText = document.getElementsByName("senha")[0].value;
     if (Senha.innerText.length == 0)
       throw getError("Senha");
+
+    if(Senha.innerText.length < 8 || Senha.innerText.length > 20)
+      throw getErrorDigitacao("senha");
+      
   } catch (error) {
     throw error;
   }
@@ -51,6 +61,10 @@ function getLoginFormData() {
 
 function getError(field) {
   return new Error(`Campo de ${field} vazio`);
+}
+
+function getErrorDigitacao(field) {
+  return new Error(`Campo '${field}' incorreto`);
 }
 
 export default function SignIn() {
@@ -65,7 +79,7 @@ export default function SignIn() {
       </form>
 
       <div className="width-100pg height-560p flex">
-        <div id="alertArea"></div>
+        
         <div className="width-50pg flex relative">
           <Image width="100%" className="childrenImage" height="90%" src={loginImage} />
           <div className="bold absolute top-280p font-color-white fs-56p mg-l-16">
@@ -92,6 +106,7 @@ export default function SignIn() {
           <div className="blueWord mg-t-16">
             <div className="bold center">Ainda não possui cadastro? <a href="signup" className="yellowWord">Cadastre-se aqui!</a></div>
           </div>
+          <div className="center mg-t-16 mg-b-16" id="alertArea"></div>
         </div>
       </div>
 

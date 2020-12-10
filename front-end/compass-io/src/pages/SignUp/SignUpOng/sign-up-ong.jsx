@@ -12,7 +12,8 @@ import AlertCard from '../../../components/AlertCard/alert-card';
 import InputFile from '../../../components/InputFile/input-file';
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
-import CommomFunctions from '../../../utils/functions'
+import CommomFunctions from '../../../utils/functions';
+import Alerta from '../../../components/Alerta/alerta'
 
 import './sign-up-ong.css';
 import { RecentActorsRounded } from '@material-ui/icons';
@@ -37,11 +38,15 @@ async function cadastrar() {
     let usuarioAsJson = JSON.stringify(usuarioObj);
     await usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
   
-    render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success"/>, document.getElementById("alertArea"));
+    render(<Alerta isSuccess message="ONG cadastrada com sucesso"/>, document.getElementById("alertArea"))
+
+    // render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success"/>, document.getElementById("alertArea"));
     window.location.href = "/signin";
   } catch (error) {
     let errorString = `${error}`;
-    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
+    render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
+
+    // render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
 
@@ -149,7 +154,6 @@ export default class SignUp extends React.Component {
       <React.Fragment>
 
         <img id="imgTeste"/>
-        <div id="alertArea"></div>
         <form id="usuarioJuridicoToSubmit" hidden>
           <input id="nomeOng"/>
           <input id="email"/>
@@ -251,8 +255,12 @@ export default class SignUp extends React.Component {
               <span>Li e concordo com os <b className="blueWord">termos</b></span>
            </div> 
 
-          <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
-     
+           <div className="mg-t-16 flex">
+            <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
+            <div id="alertArea" className="mg-l-32 width-100pg"></div>
+           </div>
+
+
           </div>
         </div>
 
