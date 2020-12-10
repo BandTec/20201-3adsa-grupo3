@@ -187,10 +187,8 @@ export default function VacancyRegister() {
               <div className="mg-t-8 mg-l-16 mg-r-16">
                   <InputLine name="titulo" title="Título da vaga" type="text" placeholder="O que você busca?"/>
               </div> 
-              <div className="flex justcon-sb mg-t-8 mg-l-16 mg-r-16">
-                <div className="width-70pg">
-                  <InputLine title="Carga Horária" type="text" placeholder="Ex: 4h semanais"/>
-                </div>
+              <div className="flex justcon-sb mg-t-8 mg-l-16 mg-r-16 width-50pg">
+                  <InputFile id="foto" className="inputFoto" text="Escolher foto"/>
                   <ComboBox name="causa" labelTitle="Causa" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
                   nomeItem5="SP" />
               </div>
