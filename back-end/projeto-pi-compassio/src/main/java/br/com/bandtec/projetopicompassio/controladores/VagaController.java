@@ -106,9 +106,9 @@ public class VagaController {
     }
 
     @GetMapping(value = "/foto/base64")
-    public ResponseEntity getFotoAsBase64(@RequestParam Integer idUsuario) {
+    public ResponseEntity getFotoAsBase64(@RequestParam Integer idVaga) {
         try {
-            ResponseEntity response = this.download(idUsuario);
+            ResponseEntity response = this.download(idVaga);
             byte[] foto = (byte[])response.getBody();
             byte[] fotoBase64 = Base64.getEncoder().encode(foto);
             return ResponseEntity.ok().body(fotoBase64);

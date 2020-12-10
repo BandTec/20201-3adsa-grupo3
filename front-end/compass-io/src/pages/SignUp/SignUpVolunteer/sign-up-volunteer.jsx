@@ -39,6 +39,7 @@ function getVolunteerForm(){
   try{
     validarSenha();
 
+
     let Nome = document.getElementById("nome");
     Nome.innerText = document.getElementsByName("nome")[0].value;
     if (Nome.innerText.length == 0)
@@ -51,8 +52,10 @@ function getVolunteerForm(){
 
     let Nascimento = document.getElementById("dataNascimento");
     let NascimentoSplit = document.getElementsByName("dataNascimento")[0].value.split("/");
-    let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
-    Nascimento.innerText = NascimentoConvert;
+
+    //let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
+    // Nascimento.innerText = NascimentoConvert;
+    Nascimento.innerText = NascimentoSplit;
     if (Nascimento.innerText.length == 0)
       throw getError("Data de Nascimento");
 
@@ -187,8 +190,6 @@ export default class SignUp extends React.Component {
               <div className="mg-t-8 mg-l-16 mg-r-16">
               </div>
             </div>
-
-
 
             <div className="height-400p mg-t-24 border border-rd-10 bg-color-gray-light">
               <div className=" mg-t-16 mg-l-16">

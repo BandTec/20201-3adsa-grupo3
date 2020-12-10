@@ -1,6 +1,8 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
+import br.com.bandtec.projetopicompassio.dominios.Endereco;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
+import br.com.bandtec.projetopicompassio.repositorios.EnderecoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
 import br.com.bandtec.projetopicompassio.utils.FilaObj;
 import br.com.bandtec.projetopicompassio.utils.FotoHandler;
@@ -28,7 +30,10 @@ import java.util.Optional;
 public class UsuarioJuridicoController {
 
     @Autowired
-    private UsuarioJuridicoRepository repository;
+    private UsuarioJuridicoRepository usuarioRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -39,7 +44,7 @@ public class UsuarioJuridicoController {
     @PostMapping
     public ResponseEntity criar(@RequestBody @Valid UsuarioJuridico novoUsuarioJuridico){
         try {
-            if (!repository.findAll(Example.of(novoUsuarioJuridico)).isEmpty())
+            if (!usuarioRepository.findAll(Example.of(novoUsuarioJuridico)).isEmpty())
                 return ResponseEntity.badRequest().body("Usuário já cadastrado");
             if (usuariosPendentes.isFull())
                 return ResponseEntity.badRequest().body("A fila de requisições está cheia, por favor aguarde alguns minutos antes de tentar novamente");
@@ -65,7 +70,7 @@ public class UsuarioJuridicoController {
         usuarioJuridicoPesquisa.setCnpj(cnpj);
         usuarioJuridicoPesquisa.setCausa(causa);
 
-        List<UsuarioJuridico> resultado = repository.findAll(Example.of(usuarioJuridicoPesquisa));
+        List<UsuarioJuridico> resultado = usuarioRepository.findAll(Example.of(usuarioJuridicoPesquisa));
 
         if (resultado.isEmpty()){
             return ResponseEntity.noContent().build();
@@ -75,8 +80,8 @@ public class UsuarioJuridicoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deletar(@PathVariable int id){
-        if (repository.existsById(id)){
-            repository.deleteById(id);
+        if (usuarioRepository.existsById(id)){
+            usuarioRepository.deleteById(id);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
@@ -85,7 +90,7 @@ public class UsuarioJuridicoController {
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody UsuarioJuridico atualizacao){
         atualizacao.setId(id);
-        repository.save(atualizacao);
+        usuarioRepository.save(atualizacao);
         return ResponseEntity.ok().build();
     }
 
@@ -95,12 +100,12 @@ public class UsuarioJuridicoController {
             String fotoPath = FotoHandler.upload(foto);
             UsuarioJuridico usuario = null;
             try {
-                usuario = repository.findById(idUsuario).get();
+                usuario = usuarioRepository.findById(idUsuario).get();
             } catch (Exception ex) {
                 throw new IllegalArgumentException("Verifique o id do usuário", ex);
             }
             usuario.setFoto(fotoPath);
-            repository.save(usuario);
+            usuarioRepository.save(usuario);
 
             return ResponseEntity.created(null).build();
         } catch (IllegalArgumentException ilEx) {
@@ -118,7 +123,7 @@ public class UsuarioJuridicoController {
         try {
             String pathFotoUsuario = null;
             try {
-                pathFotoUsuario = repository.findById(idUsuario).get().getFoto();
+                pathFotoUsuario = usuarioRepository.findById(idUsuario).get().getFoto();
             } catch (Exception ex) {
                 throw new IllegalArgumentException("Verifique o id do usuário", ex);
             }
@@ -178,7 +183,9 @@ public class UsuarioJuridicoController {
             Optional<UsuarioJuridico> usuarioAprovadoOptional =
                     usuariosNovos.stream().filter(u -> u.getEmail().equals(email)).findFirst();
             if (usuarioAprovadoOptional.isPresent()) {
-                repository.save(usuarioAprovadoOptional.get());
+                Endereco e = usuarioAprovadoOptional.get().getFkEndereco();
+                enderecoRepository.save(e);
+                usuarioRepository.save(usuarioAprovadoOptional.get());
                 return ResponseEntity.created(null).body(
                         "<div>" +
                                 "<div id='header' style='width: 100vw;height: 15vh;background: blue;text-align: center;'>" +

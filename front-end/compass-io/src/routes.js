@@ -11,6 +11,7 @@ import VacancySpecific from './pages/VacancySpecific/vacancy-specific';
 import VacancyRegister from './pages/VacancyRegister/vacancy-register';
 
 export default function Routes() {
+
   return (
     <BrowserRouter basename="/">
       <Switch>

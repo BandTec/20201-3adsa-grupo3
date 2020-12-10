@@ -20,13 +20,19 @@ const useStyles = makeStyles((theme) => ({
   
 
 export default function ComboBox(props) {
-
-    const classes = useStyles();
+  const classes = useStyles();
   const [cidade, setCidade] = React.useState('');
 
   const handleChange = (event) => {
     setCidade(event.target.value);
   };
+
+  const items = [];
+  let estados = JSON.parse(props.menuItems)
+
+  for (let item of estados) {
+    items.push(<MenuItem value={item}/>)
+  }
 
   return(
     <FormControl variant="outlined" className={classes.formControl} >
@@ -40,14 +46,7 @@ export default function ComboBox(props) {
       label={props.labelTitle}
       width={props.width}
     >
-      <MenuItem value="">
-        <em>None</em>
-      </MenuItem>
-      <MenuItem value={props.nomeItem1}>{props.nomeItem1}</MenuItem>
-      <MenuItem value={props.nomeItem2}>{props.nomeItem2}</MenuItem>
-      <MenuItem value={props.nomeItem3}>{props.nomeItem3}</MenuItem>
-      <MenuItem value={props.nomeItem4}>{props.nomeItem4}</MenuItem>
-      <MenuItem value={props.nomeItem5}>{props.nomeItem5}</MenuItem>
+      {items}
     </Select>
   </FormControl>
   );
