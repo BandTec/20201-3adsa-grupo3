@@ -11,7 +11,8 @@ import ComboBox from '../../../components/ComboBox/combo-box';
 import AlertCard from '../../../components/AlertCard/alert-card';
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
-import CommomFunctions from '../../../utils/functions'
+import CommomFunctions from '../../../utils/functions';
+import Alerta from '../../../components/Alerta/alerta'
 
 import './sign-up-ong.css';
 import { RecentActorsRounded } from '@material-ui/icons';
@@ -36,11 +37,15 @@ async function cadastrar() {
     let usuarioAsJson = JSON.stringify(usuarioObj);
     await usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
   
-    render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success"/>, document.getElementById("alertArea"));
+    render(<Alerta isSuccess message="ONG cadastrada com sucesso"/>, document.getElementById("alertArea"))
+
+    // render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success"/>, document.getElementById("alertArea"));
     window.location.href = "/signin";
   } catch (error) {
     let errorString = `${error}`;
-    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
+    render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
+
+    // render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
 
@@ -135,35 +140,44 @@ function getError(field) {
   return new Error(`Campo de ${field} vazio`);
 }
 
-export default function SignUp(props) {
+export default class SignUp extends React.Component {
 
-  return (
-    <React.Fragment>
+  constructor(props) {
+    super(props);
+  }
 
-      <div id="alertArea"></div>
-      <form id="usuarioJuridicoToSubmit" hidden>
-        <input id="nomeOng"/>
-        <input id="email"/>
-        <input id="senha"/>
-        <input id="telefone"/>
-        <input id="cnpj"/>
-        <input id="causa"/>
-      </form>
+  render() {
+    return (
+      // <div>Cadastro voluntário</div>
 
-      <form id="enderecoUsuarioJuridicoToSubmit" hidden>
-        <input id="logradouro"/>
-        <input id="numeroEndereco"/>
-        <input id="cep"/>
-        <input id="bairro"/>
-        <input id="estado"/>
-        <input id="cidade"/>
-      </form>
+      <React.Fragment>
 
-      <div className="width-100pg mg-b-32 flex">
-        <div className="width-50pg flex relative">
-          <Image width="100%" className="childrenImage" height="70%" src={imgOngSingup} />
-          <div className="bold absolute top-640p font-color-white fs-56p mg-l-16">Encontre aqui os voluntários ideais que <br />
-            <span className="yellowWord">você precisa</span>.
+        <img id="imgTeste"/>
+        <form id="usuarioJuridicoToSubmit" hidden>
+          <input id="nomeOng"/>
+          <input id="email"/>
+          <input id="senha"/>
+          <input id="telefone"/>
+          <input id="cnpj"/>
+          <input id="causa"/>
+        </form>
+
+        <form id="enderecoUsuarioJuridicoToSubmit" hidden>
+          <input id="logradouro"/>
+          <input id="numeroEndereco"/>
+          {/* input id="complemento"/> */}
+          <input id="cep"/>
+          <input id="bairro"/>
+          <input id="estado"/>
+          <input id="cidade"/>
+        </form>
+
+        <div className="width-100pg mg-b-32 flex">
+          <div className="width-50pg flex relative">
+            <Image width="100%" className="childrenImage" height="70%" src={imgOngSingup} />
+            <div className="bold absolute top-640p font-color-white fs-56p mg-l-16">Encontre aqui os voluntários ideais que <br />
+              <span className="yellowWord">você precisa</span>.
+            </div>
           </div>
         </div>
         <div className="mg-l-32 width-50pg">
@@ -211,9 +225,6 @@ export default function SignUp(props) {
               <div className="width-30pg ">
                 <ComboBox name="causa" labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
                   nomeItem5="Imóveis" />
-              </div>
-              <div className="width-30pg mg-l-32 mg-r-64 mg-t-24">
-                <Button id="btnAdd" className="btnCause bg-color-blue" variant="contained" color="primary">+ Adicionar Causa</Button>
               </div>
             </div>
           </div>
