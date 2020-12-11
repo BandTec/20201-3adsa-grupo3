@@ -221,7 +221,7 @@ export default class SignUp extends React.Component {
             </div>
             <div className="mg-t-16 mg-l-8 mg-r-16 flex">
               <div className="width-30pg ">
-                <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis']} labelTitle="Causa" />
+                <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} labelTitle="Causa" />
               </div>
             </div>
           </div>

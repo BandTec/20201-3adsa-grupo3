@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/navbar';
 import LabelWelcome from '../../components/LabelWelcome/label-welcome';
 import InputLine from "../../components/InputLine/input-line";
 import LabelTitleForm from "../../components/LabelTitleForm/label-title-form";
@@ -7,15 +6,14 @@ import Image from '../../components/Image/image';
 import Button from '@material-ui/core/Button';
 import GirlVolunteerImg from '../../assets/images/girl-volunteer.jpg';
 import ComboBox from '../../components/ComboBox/combo-box';
+import ComboBoxStateAndCities from '../../components/ComboBoxStateAndCities/combo-box-state-and-cities';
 import InputFile from '../../components/InputFile/input-file';
 import AlertCard from '../../components/AlertCard/alert-card';
 import Alerta from '../../components/Alerta/alerta'
 
-
 import VagaService from '../../services/vaga-service';
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
 import EnderecoService from '../../services/endereco-service';
-import ConsultaSimplesService from '../../services/consulta-simples-service';
 import CommomFunctions from '../../utils/functions';
 
 import './vacancy-register.css';
@@ -52,13 +50,10 @@ async function cadastrarVaga() {
     uparFoto(vagaCadastrada.data);
 
     render(<Alerta isSuccess message="Vaga cadastrada com sucesso"/>, document.getElementById("alertArea"))
-
-    // render(<AlertCard message="Vaga cadastrada" severity="success"/>, document.getElementById("alertArea"));
     window.location.href = "/profile/ong";
   } catch (error) {
     let errorString = `${error}`;
     render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
-    // render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
   }
 }
 
@@ -151,16 +146,6 @@ async function uparFoto(vaga) {
   }
 }
 
-async function getCidadesByEstado() {
-  let consultaService = new ConsultaSimplesService();
-}
-
-async function getEstados() {
-  let consultaService = new ConsultaSimplesService();
-  let estados = await consultaService.getEstados();
-  return estados;
-}
-
 export default function VacancyRegister() {
 
   return (
@@ -200,8 +185,7 @@ export default function VacancyRegister() {
               </div> 
               <div className="flex justcon-sb mg-t-8 mg-l-16 mg-r-16 width-50pg">
                   <InputFile id="foto" className="inputFoto" text="Escolher foto"/>
-                  <ComboBox name="causa" labelTitle="Causa" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
-                  nomeItem5="SP" />
+                  <ComboBox name="causa" labelTitle="Causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} />
 
               </div>
             <div className="flex mg-t-8 mg-l-16 mg-r-16">
@@ -236,15 +220,20 @@ export default function VacancyRegister() {
             <div className="width-30pg">
               <InputLine name="bairro" title="Bairro" type="text" />
             </div>
-            <div className="width-30pg">
+            {/* <div className="width-30pg">
               <ComboBox id="estado" name="estado" labelTitle="Estado"/>
-            </div>
-            <div className="width-30pg">
+            </div> */}
+
+
+            <ComboBoxStateAndCities cidadeName="cidade" estadoName="estado"/>
+
+
+            {/* <div className="width-30pg">
               <ComboBox id="cidade" name="cidade" labelTitle="Cidade"/>
-            </div>
+            </div> */}
           </div>
           <div className="flex mg-t-64 mg-l-16 mg-r-16">
-            <Button id="btnVoltarOng" variant="contained" onClick={getEstados}>Voltar</Button>
+            <Button id="btnVoltarOng" variant="contained" href={window.location.ancestorOrigins}>Voltar</Button>
             <Button id="btnCadastrarOng" onClick={cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
             <div id="alertArea" className="mg-l-32 width-100pg"></div>
 

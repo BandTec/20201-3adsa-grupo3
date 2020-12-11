@@ -34,7 +34,6 @@ export default class ComboBox extends React.Component {
   }
 
   setContent = () => {
-    debugger
     this.setState({content: this.props.content});
   }
 
