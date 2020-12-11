@@ -165,59 +165,63 @@ export default class SignUp extends React.Component {
           <input id="cidade" />
         </form>
 
-        <div className="width-100pg mg-b-32 flex">
+
+        <div className="width-100pg mg-b-64 flex">
           <div className="width-50pg flex relative">
-            <Image width="100%" className="childrenImage" height="70%" src={imgOngSingup} />
+            <Image width="100%" className="childrenImage" height="80%" src={imgOngSingup} />
             <div className="bold absolute top-640p font-color-white fs-56p mg-l-16">Encontre aqui os voluntários ideais que <br />
               <span className="yellowWord">você precisa</span>.
             </div>
           </div>
-        </div>
-        <div className="mg-l-32 width-50pg">
-          <div className="height-720p border border-rd-10 bg-color-gray-light">
-            <div className=" mg-t-16 mg-l-16">
-              <LabelTitleForm title="Informações Institucionais" />
-            </div>
-            <div className="mg-t-16 mg-l-16 mg-r-16">
-              <InputLine name="nomeDaOng" title="Nome da Instituição" type="text" placeholder="Ex: Sonhar Acordado" />
-            </div>
-            <div className="mg-t-8 mg-l-16 flex">
-              <div className="width-50pg ">
-                <InputLine name="cnpj" title="CNPJ" type="text" placeholder="XX.XXX.XXX/XXXX-XX" />
+          <div className="mg-l-32 width-50pg">
+            <div className="height-60pg border border-rd-10 bg-color-gray-light">
+              <div className=" mg-t-32 mg-l-16">
+                <LabelTitleForm title="Informações Institucionais" />
               </div>
-              <div className="width-40pg mg-l-32">
-                <InputLine name="telefone" title="Telefone de Contato" type="text" placeholder="(XX)XXXXX-XXXX" />
+              <div className="mg-t-32 mg-l-16 mg-r-16">
+                <InputLine name="nomeDaOng" title="Nome da Instituição" type="text" placeholder="Ex: Sonhar Acordado" />
+              </div>
+              <div className="mg-t-8 mg-l-16 flex">
+                <div className="width-50pg ">
+                  <InputLine name="cnpj" title="CNPJ" type="text" placeholder="XX.XXX.XXX/XXXX-XX" />
+                </div>
+                <div className="width-40pg mg-l-32">
+                  <InputLine name="telefone" title="Telefone de Contato" type="text" placeholder="(XX)XXXXX-XXXX" />
+                </div>
+              </div>
+              <div className="mg-t-32 mg-l-16 mg-r-16">
+                <h3>Endereço</h3>
+                <InputLine name="logradouro" title="Logradouro" type="text" placeholder="Nome da Rua/Avenida/Alameda" />
+              </div>
+              <div className="mg-t-32 mg-l-16 mg-r-16 flex">
+                <div className="width-60pg ">
+                  <InputLine name="bairro" id="bairroForm" title="Bairro" type="text" placeholder="Ex: Centro" />
+                </div>
+                <div className="width-30pg mg-l-32">
+                  <InputLine name="numero" id="numeroForm" title="Número" type="text" placeholder="XXXX" />
+                </div>
+              </div>
+              <div className="mg-t-32 mg-l-16 mg-r-16 flex">
+                <div className="width-30pg mg-t-24">
+                  <InputLine name="cep" title="CEP" type="text" placeholder="XXXXX-XXX" />
+                </div>
+                <div className="width-30pg mg-l-32">
+                  <ComboBox name="estado" labelTitle="Estado" id="estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
+                    nomeItem5="SP" />
+                </div>
+                <div className="width-30pg mg-l-32">
+                  <ComboBox name="cidade" labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
+                    nomeItem5="Suzano" />
+                </div>
+              </div>
+              <div className="mg-t-16 mg-l-8 mg-b-16 mg-r-16 flex">
+                <div className="width-30pg ">
+                  <ComboBox name="causa" labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
+                    nomeItem5="Imóveis" />
+                </div>
               </div>
             </div>
-            <div className="mg-t-16 mg-l-16 mg-r-16">
-              <h3>Endereço</h3>
-              <InputLine name="logradouro" title="Logradouro" type="text" placeholder="Nome da Rua/Avenida/Alameda" />
-            </div>
-            <div className="mg-t-16 mg-l-16 mg-r-16 flex">
-              <div className="width-60pg ">
-                <InputLine name="bairro" id="bairroForm" title="Bairro" type="text" placeholder="Ex: Centro" />
-              </div>
-              <div className="width-30pg mg-l-32">
-                <InputLine name="numero" id="numeroForm" title="Número" type="text" placeholder="XXXX" />
-              </div>
-            </div>
-            <div className="mg-t-16 mg-l-16 mg-r-16 flex">
-              <div className="width-30pg ">
-                <InputLine name="cep" title="CEP" type="text" placeholder="XXXXX-XXX" />
-              </div>
-              {/* <div className="width-30pg mg-l-32">
-                <ComboBox name="estado" labelTitle="Estado" id="estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
-                  nomeItem5="SP" />
-              </div> */}
 
-
-              <ComboBoxStateAndCities cidadeName="cidade" estadoName="estado"/>
-
-
-              {/* <div className="width-30pg mg-l-32">
-                <ComboBox name="cidade" labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
-                  nomeItem5="Suzano" />
-              </div> */}
             </div>
             <div className="mg-t-16 mg-l-8 mg-r-16 flex">
               <div className="width-30pg ">
@@ -225,30 +229,37 @@ export default class SignUp extends React.Component {
               </div>
             </div>
           </div>
+          <div className="mg-t-16 mg-l-8 mg-r-16 flex">
+            <div className="width-30pg ">
+              <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis']} labelTitle="Causa" />
+              <div className="height-30pg mg-t-24 border border-rd-10 bg-color-gray-light">
+                <div className=" mg-t-32 mg-l-16">
+                  <LabelTitleForm title="Informações da Conta" />
+                </div>
+                <div className="mg-t-24 mg-l-16 mg-r-16">
+                  <InputLine name="email" title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
+                </div>
+                <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
+                  <InputLine name="senha" title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
+                </div>
+                <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
+                  <InputLine name="confSenha" title="Confirmar Senha" type="password" placeholder="********" />
+                </div>
+              </div>
 
-          <div className="height-400p mg-t-24 border border-rd-10 bg-color-gray-light">
-            <div className=" mg-t-16 mg-l-16">
-              <LabelTitleForm title="Informações da Conta" />
+              <div className="mg-t-16">
+                <Checkbox></Checkbox>
+                <span>Li e concordo com os <b className="blueWord">termos</b></span>
+              </div>
+
+              <div className="mg-t-16 flex">
+                <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
+                <div id="alertArea" className="mg-l-32 width-100pg"></div>
+              </div>
             </div>
-            <div className="mg-t-16 mg-l-16 mg-r-16">
-              <InputLine name="email" title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
-            </div>
-            <div className="mg-t-8 mg-l-16 mg-r-16 width-70pg">
-              <InputLine name="senha" title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
-            </div>
-            <div className="mg-t-8 mg-l-16 mg-r-16 width-70pg">
-              <InputLine name="confSenha" title="Confirmar Senha" type="password" placeholder="********" />
-            </div>
+
           </div>
-
-          <div className="mg-t-16">
-            <Checkbox></Checkbox>
-            <span>Li e concordo com os <b className="blueWord">termos</b></span>
-          </div>
-
-          <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
-
-        </div>
-      </React.Fragment>);
+      </React.Fragment>
+    );
   }
 }

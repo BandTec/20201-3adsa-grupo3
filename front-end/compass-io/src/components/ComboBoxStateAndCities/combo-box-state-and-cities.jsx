@@ -59,40 +59,48 @@ export default class ComboBoxStateAndCities extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <FormControl variant="outlined" className={this.classes.formControl} >
-          <InputLabel id="tituloLabelEstado">Estados</InputLabel>
-          <Select
-            labelId="tituloLabelEstadoSelect"
-            id="tituloSelectEstado"
-            name={this.props.estadoName}
-            value={this.state.selectedState}
-            onChange={this.handleChangeEstado}
-            label={this.props.labelTitle}
-            width={this.props.width}
-          >
-            {this.state.states.map(estado => (
-              <MenuItem key={estado.SIGLA_UF} value={estado.SIGLA_UF}>{estado.SIGLA_UF}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <div className="flex justcon-sb">
+          <div className="width-40pg">
+            <FormControl fullWidth={true} variant="outlined" className={this.classes.formControl} >
+                <InputLabel id="tituloLabelEstado">Estados</InputLabel>
+              <Select
+                autoWidth
+                labelId="tituloLabelEstadoSelect"
+                id="tituloSelectEstado"
+                name={this.props.estadoName}
+                value={this.state.selectedState}
+                onChange={this.handleChangeEstado}
+                label={this.props.labelTitle}
+                width={this.props.width}
+                >
+                {this.state.states.map(estado => (
+                  <MenuItem key={estado.SIGLA_UF} value={estado.SIGLA_UF}>{estado.SIGLA_UF}</MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          </div>
+          
+          <div className="width-40pg">
+            <FormControl fullWidth={true} variant="outlined" className={this.classes.formControl} >
+              <InputLabel id="tituloLabelCidade">Cidades</InputLabel>
+              <Select
+                labelId="tituloLabelCidadeSelect"
+                id="tituloSelectCidade"
+                name={this.props.cidadeName}
+                value={this.state.selectedCity}
+                onSelect={this.getCidades}
+                onChange={this.handleChangeCidade}
+                label="Cidades"
+                width={this.props.width}
+              >
+                {this.state.cities.map(cidade => (
+                  <MenuItem key={cidade.NOME} value={cidade.NOME}>{cidade.NOME}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
 
-        <FormControl variant="outlined" className={this.classes.formControl} >
-          <InputLabel id="tituloLabelCidade">Cidades</InputLabel>
-          <Select
-            labelId="tituloLabelCidadeSelect"
-            id="tituloSelectCidade"
-            name={this.props.cidadeName}
-            value={this.state.selectedCity}
-            onSelect={this.getCidades}
-            onChange={this.handleChangeCidade}
-            label="Cidades"
-            width={this.props.width}
-          >
-            {this.state.cities.map(cidade => (
-              <MenuItem key={cidade.NOME} value={cidade.NOME}>{cidade.NOME}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
       </React.Fragment>
     );
   }

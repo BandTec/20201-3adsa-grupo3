@@ -43,22 +43,22 @@ export default class ComboBox extends React.Component {
 
   render() {
     return(
-      <FormControl variant="outlined" className={this.classes.formControl} >
-      <InputLabel id="tituloLabel">{this.props.labelTitle}</InputLabel>
-      <Select
-        labelId="tituloLabel"
-        id="tituloSelect"
-        name={this.props.name}
-        value={this.state.selectedItem}
-        onChange={this.handleChange}
-        label={this.props.labelTitle}
-        width={this.props.width}
-      >
-        {this.state.content.map(item => (
-                <MenuItem key={item} value={item}>{item}</MenuItem>
-              ))}
-      </Select>
-    </FormControl>
+        <FormControl fullWidth={true} variant="outlined" className={this.classes.formControl} >
+        <InputLabel id="tituloLabel">{this.props.labelTitle}</InputLabel>
+        <Select
+          labelId="tituloLabel"
+          id="tituloSelect"
+          name={this.props.name}
+          value={this.state.selectedItem}
+          onChange={this.handleChange}
+          label={this.props.labelTitle}
+          width={this.props.width}
+        >
+          {this.state.content.map(item => (
+                  <MenuItem key={item} value={item}>{item}</MenuItem>
+                ))}
+        </Select>
+      </FormControl>
     );
   }
 }

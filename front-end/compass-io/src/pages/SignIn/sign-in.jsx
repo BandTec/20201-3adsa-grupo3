@@ -87,26 +87,26 @@ export default function SignIn() {
             <span className="yellowWord">perfil</span>.
           </div>
         </div>
-        <div className="height-500p mg-l-16 border border-rd-10 bg-color-gray-light width-55pg">
+        <div className="height-90pg mg-l-16 border border-rd-10 bg-color-gray-light width-55pg">
           <div className="center mg-t-32 blueWord">
             <LabelTitleForm title="Entrar"/>
           </div>
           <div className="mg-t-32 mg-l-16 mg-r-16">
             <InputLine name="email" title="Email" type="text" placeholder="Ex: joao.moreira.silva@email.com"/>
           </div>
-          <div className="mg-t-16 mg-l-16 mg-r-16">
+          <div className="mg-t-32 mg-l-16 mg-r-16">
             <InputLine name="senha" title="Senha" type="password" placeholder="********"/>
           </div>
           <div className="center mg-t-32">
             <Button id="btnEnter" onClick={logar} variant="contained" color="primary">Entrar</Button>
           </div>
-          <div className="blueWord mg-t-16">
+          <div className="blueWord mg-t-32">
             <div className="bold center">Esqueci minha senha</div>
           </div>
-          <div className="blueWord mg-t-16">
+          <div className="blueWord mg-t-32">
             <div className="bold center">Ainda não possui cadastro? <a href="signup" className="yellowWord">Cadastre-se aqui!</a></div>
           </div>
-          <div className="center mg-t-16 mg-b-16" id="alertArea"></div>
+          <div className="center mg-t-32 mg-b-16" id="alertArea"></div>
         </div>
       </div>
 
