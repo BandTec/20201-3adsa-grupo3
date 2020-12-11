@@ -205,60 +205,56 @@ export default class SignUp extends React.Component {
                 <div className="width-30pg mg-t-24">
                   <InputLine name="cep" title="CEP" type="text" placeholder="XXXXX-XXX" />
                 </div>
-                <div className="width-30pg mg-l-32">
+                {/* <div className="width-30pg mg-l-32">
                   <ComboBox name="estado" labelTitle="Estado" id="estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
                     nomeItem5="SP" />
                 </div>
                 <div className="width-30pg mg-l-32">
                   <ComboBox name="cidade" labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
                     nomeItem5="Suzano" />
+                </div> */}
+                <div className="width-50pg mg-l-32">
+                  <ComboBoxStateAndCities cidadeName="cidade" estadoName="estado" />
                 </div>
-              </div>
-              <div className="mg-t-16 mg-l-8 mg-b-16 mg-r-16 flex">
-                <div className="width-30pg ">
-                  <ComboBox name="causa" labelTitle="Causa" nomeItem1="Animais" nomeItem2="Crianças" nomeItem3="Deficientes" nomeItem4="Desempregados"
-                    nomeItem5="Imóveis" />
-                </div>
-              </div>
-            </div>
-
-            </div>
-            <div className="mg-t-16 mg-l-8 mg-r-16 flex">
-              <div className="width-30pg ">
-                <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} labelTitle="Causa" />
-              </div>
-            </div>
-          </div>
-          <div className="mg-t-16 mg-l-8 mg-r-16 flex">
-            <div className="width-30pg ">
-              <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis']} labelTitle="Causa" />
-              <div className="height-30pg mg-t-24 border border-rd-10 bg-color-gray-light">
-                <div className=" mg-t-32 mg-l-16">
-                  <LabelTitleForm title="Informações da Conta" />
-                </div>
-                <div className="mg-t-24 mg-l-16 mg-r-16">
-                  <InputLine name="email" title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
-                </div>
-                <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
-                  <InputLine name="senha" title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
-                </div>
-                <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
-                  <InputLine name="confSenha" title="Confirmar Senha" type="password" placeholder="********" />
-                </div>
-              </div>
-
-              <div className="mg-t-16">
-                <Checkbox></Checkbox>
-                <span>Li e concordo com os <b className="blueWord">termos</b></span>
-              </div>
-
-              <div className="mg-t-16 flex">
-                <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
-                <div id="alertArea" className="mg-l-32 width-100pg"></div>
               </div>
             </div>
 
           </div>
+          <div className="mg-t-16 mg-l-8 mg-r-16 flex">
+            <div className="width-30pg ">
+              <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} labelTitle="Causa" />
+            </div>
+          </div>
+        </div>
+        <div className="mg-t-16 mg-l-8 mg-r-16 flex">
+          <div className="width-30pg ">
+            <div className="height-30pg mg-t-24 border border-rd-10 bg-color-gray-light">
+              <div className=" mg-t-32 mg-l-16">
+                <LabelTitleForm title="Informações da Conta" />
+              </div>
+              <div className="mg-t-24 mg-l-16 mg-r-16">
+                <InputLine name="email" title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
+              </div>
+              <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
+                <InputLine name="senha" title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
+              </div>
+              <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
+                <InputLine name="confSenha" title="Confirmar Senha" type="password" placeholder="********" />
+              </div>
+            </div>
+
+            <div className="mg-t-16">
+              <Checkbox></Checkbox>
+              <span>Li e concordo com os <b className="blueWord">termos</b></span>
+            </div>
+
+            <div className="mg-t-16 flex">
+              <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
+              <div id="alertArea" className="mg-l-32 width-100pg"></div>
+            </div>
+          </div>
+
+        </div>
       </React.Fragment>
     );
   }

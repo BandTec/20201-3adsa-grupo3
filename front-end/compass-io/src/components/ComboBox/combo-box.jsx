@@ -46,7 +46,7 @@ export default class ComboBox extends React.Component {
         <FormControl fullWidth={true} variant="outlined" className={this.classes.formControl} >
         <InputLabel id="tituloLabel">{this.props.labelTitle}</InputLabel>
         <Select
-          labelId="tituloLabel"
+          labelId="tituloLabelSelect"
           id="tituloSelect"
           name={this.props.name}
           value={this.state.selectedItem}
