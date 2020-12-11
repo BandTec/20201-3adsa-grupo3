@@ -7,7 +7,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import './combo-box.css';
 
-const useStyles = makeStyles((theme) => ({
+export default class ComboBox extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  state = {
+    content: [],
+    selectedItem: ''
+  }
+
+  classes = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
       minWidth: 140,
@@ -17,29 +28,38 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   }));
-  
-export default function ComboBox(props) {
-  const classes = useStyles();
-  const [cidade, setCidade] = React.useState('');
 
-  const handleChange = (event) => {
-    setCidade(event.target.value);
+  componentDidMount() {
+    this.setContent();
+  }
+
+  setContent = () => {
+    debugger
+    this.setState({content: this.props.content});
+  }
+
+  handleChange = (event) => {
+    this.setState({selectedItem: event.target.value});
   };
 
-  return(
-    <FormControl variant="outlined" className={classes.formControl} >
-    <InputLabel id="tituloLabel">{props.labelTitle}</InputLabel>
-    <Select
-      labelId="tituloLabel"
-      id="tituloSelect"
-      name={props.name}
-      value={cidade}
-      onChange={handleChange}
-      label={props.labelTitle}
-      width={props.width}
-    >
-      <MenuItem value="teste">teste</MenuItem>
-    </Select>
-  </FormControl>
-  );
+  render() {
+    return(
+      <FormControl variant="outlined" className={this.classes.formControl} >
+      <InputLabel id="tituloLabel">{this.props.labelTitle}</InputLabel>
+      <Select
+        labelId="tituloLabel"
+        id="tituloSelect"
+        name={this.props.name}
+        value={this.state.selectedItem}
+        onChange={this.handleChange}
+        label={this.props.labelTitle}
+        width={this.props.width}
+      >
+        {this.state.content.map(item => (
+                <MenuItem key={item} value={item}>{item}</MenuItem>
+              ))}
+      </Select>
+    </FormControl>
+    );
+  }
 }
