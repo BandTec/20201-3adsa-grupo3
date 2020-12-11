@@ -1,6 +1,7 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class ConsultasSimplesController {
     private JdbcTemplate template;
 
     @GetMapping("/cidades")
+    @Cacheable("cidades")
     public ResponseEntity getCidadesByUf(@RequestParam String uf) {
         try {
             List cidades = template.queryForList("SELECT NOME FROM CIDADE WHERE FK_SIGLA_UF LIKE ?", uf);
@@ -28,6 +30,7 @@ public class ConsultasSimplesController {
     }
 
     @GetMapping("/estados")
+    @Cacheable("estados")
     public ResponseEntity getUfs() {
         try {
             List ufs = template.queryForList("SELECT SIGLA_UF FROM ESTADO");
