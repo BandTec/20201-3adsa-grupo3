@@ -210,7 +210,7 @@ export default class SignUp extends React.Component {
 
             <div className="mg-t-16 flex">
               <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
-              <div id="alertArea" className="mg-l-32 width-100pg"></div>
+              {/* <div id="alertArea" className="mg-l-32 width-100pg"></div> */}
             </div>
 
           </div>
