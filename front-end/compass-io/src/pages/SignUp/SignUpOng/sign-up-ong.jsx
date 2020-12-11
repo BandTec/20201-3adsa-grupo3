@@ -1,52 +1,44 @@
 import React from 'react';
+import { render } from 'react-dom';
 import InputLine from "../../../components/InputLine/input-line";
 import LabelTitleForm from "../../../components/LabelTitleForm/label-title-form";
 import Button from '@material-ui/core/Button';
 import Image from '../../../components/Image/image';
 import imgOngSingup from '../../../assets/images/img-ong-singup.jpg';
-import imgEyePassword from '../../../assets/images/img-eye-password.png';
 import Checkbox from '@material-ui/core/Checkbox';
-import TextField from '@material-ui/core/TextField';
 import ComboBox from '../../../components/ComboBox/combo-box';
-import AlertCard from '../../../components/AlertCard/alert-card';
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
 import CommomFunctions from '../../../utils/functions';
 import Alerta from '../../../components/Alerta/alerta'
 
 import './sign-up-ong.css';
-import { RecentActorsRounded } from '@material-ui/icons';
-import { render } from 'react-dom';
 
 async function cadastrar() {
-  try {
-    getEnderecoFormData();
-    getUsuarioFormData();
-  
-    let enderecoService = new EnderecoService();
-    let usuarioJuridicoService = new UsuarioJuridicoService();
-  
-    let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
-    const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
-    var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
-  
-    let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
-    let usuarioObj = CommomFunctions.convertFormToObject(formUsuario);
-    usuarioObj.fkEndereco = respEndereco.data;
-    usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
-    let usuarioAsJson = JSON.stringify(usuarioObj);
-    await usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
-  
-    render(<Alerta isSuccess message="ONG cadastrada com sucesso"/>, document.getElementById("alertArea"))
+  // try {
+  //   getEnderecoFormData();
+  //   getUsuarioFormData();
 
-    // render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success"/>, document.getElementById("alertArea"));
-    window.location.href = "/signin";
-  } catch (error) {
-    let errorString = `${error}`;
-    render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
+  //   let enderecoService = new EnderecoService();
+  //   let usuarioJuridicoService = new UsuarioJuridicoService();
 
-    // render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
-  }
+  //   let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
+  //   const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
+  //   var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
+
+  //   let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
+  //   let usuarioObj = CommomFunctions.convertFormToObject(formUsuario);
+  //   usuarioObj.fkEndereco = respEndereco.data;
+  //   usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
+  //   let usuarioAsJson = JSON.stringify(usuarioObj);
+  //   await usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
+
+  //   render(<Alerta isSuccess message="ONG cadastrada com sucesso" />, document.getElementById("alertArea"))
+  //   window.location.href = "/signin";
+  // } catch (error) {
+  //   let errorString = `${error}`;
+  //   render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
+  // }
 }
 
 function getUsuarioFormData() {
@@ -91,27 +83,27 @@ function getEnderecoFormData() {
     Logradouro.innerText = document.getElementsByName("logradouro")[0].value;
     if (Logradouro.innerText.length == 0)
       throw getError("logradouro");
-  
+
     let Numero = document.getElementById("numeroEndereco");
     Numero.innerText = document.getElementsByName("numero")[0].value;
     if (Numero.innerText.length == 0)
       throw getError("numero");
-  
+
     let Cep = document.getElementById("cep");
     Cep.innerText = document.getElementsByName("cep")[0].value;
     if (Cep.innerText.length == 0)
       throw getError("CEP");
-  
+
     let Bairro = document.getElementById("bairro");
     Bairro.innerText = document.getElementsByName("bairro")[0].value;
     if (Bairro.innerText.length == 0)
       throw getError("bairro");
-  
+
     let Cidade = document.getElementById("cidade");
     Cidade.innerText = document.getElementsByName("cidade")[0].value;
     if (Cidade.innerText.length == 0)
       throw getError("cidade");
-  
+
     let Estado = document.getElementById("estado");
     Estado.innerText = document.getElementsByName("estado")[0].value;
     if (Estado.innerText.length == 0)
@@ -152,24 +144,23 @@ export default class SignUp extends React.Component {
 
       <React.Fragment>
 
-        <img id="imgTeste"/>
+        <img id="imgTeste" />
         <form id="usuarioJuridicoToSubmit" hidden>
-          <input id="nomeOng"/>
-          <input id="email"/>
-          <input id="senha"/>
-          <input id="telefone"/>
-          <input id="cnpj"/>
-          <input id="causa"/>
+          <input id="nomeOng" />
+          <input id="email" />
+          <input id="senha" />
+          <input id="telefone" />
+          <input id="cnpj" />
+          <input id="causa" />
         </form>
 
         <form id="enderecoUsuarioJuridicoToSubmit" hidden>
-          <input id="logradouro"/>
-          <input id="numeroEndereco"/>
-          {/* input id="complemento"/> */}
-          <input id="cep"/>
-          <input id="bairro"/>
-          <input id="estado"/>
-          <input id="cidade"/>
+          <input id="logradouro" />
+          <input id="numeroEndereco" />
+          <input id="cep" />
+          <input id="bairro" />
+          <input id="estado" />
+          <input id="cidade" />
         </form>
 
         <div className="width-100pg mg-b-32 flex">
@@ -241,19 +232,17 @@ export default class SignUp extends React.Component {
             </div>
             <div className="mg-t-8 mg-l-16 mg-r-16 width-70pg">
               <InputLine name="confSenha" title="Confirmar Senha" type="password" placeholder="********" />
-            </div> 
+            </div>
           </div>
 
           <div className="mg-t-16">
             <Checkbox></Checkbox>
             <span>Li e concordo com os <b className="blueWord">termos</b></span>
-          </div> 
+          </div>
 
-        <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
-    
+          <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
+
         </div>
-      </div>
-
-    </React.Fragment>
-  );
-};
+      </React.Fragment>);
+  }
+}

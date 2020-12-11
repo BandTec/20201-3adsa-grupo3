@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-export default function ComboBox(props) {
+export default function ComboBoxCities(props) {
   const classes = useStyles();
   const [cidade, setCidade] = React.useState('');
 
