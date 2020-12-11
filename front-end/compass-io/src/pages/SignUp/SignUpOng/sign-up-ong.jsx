@@ -7,6 +7,7 @@ import Image from '../../../components/Image/image';
 import imgOngSingup from '../../../assets/images/img-ong-singup.jpg';
 import Checkbox from '@material-ui/core/Checkbox';
 import ComboBox from '../../../components/ComboBox/combo-box';
+import ComboBoxStateAndCities from '../../../components/ComboBoxStateAndCities/combo-box-state-and-cities';
 import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
 import CommomFunctions from '../../../utils/functions';
@@ -15,30 +16,31 @@ import Alerta from '../../../components/Alerta/alerta'
 import './sign-up-ong.css';
 
 async function cadastrar() {
-  // try {
-  //   getEnderecoFormData();
-  //   getUsuarioFormData();
+  try {
+    debugger
+    getEnderecoFormData();
+    getUsuarioFormData();
 
-  //   let enderecoService = new EnderecoService();
-  //   let usuarioJuridicoService = new UsuarioJuridicoService();
+    let enderecoService = new EnderecoService();
+    let usuarioJuridicoService = new UsuarioJuridicoService();
 
-  //   let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
-  //   const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
-  //   var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
+    let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
+    const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
+    var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
 
-  //   let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
-  //   let usuarioObj = CommomFunctions.convertFormToObject(formUsuario);
-  //   usuarioObj.fkEndereco = respEndereco.data;
-  //   usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
-  //   let usuarioAsJson = JSON.stringify(usuarioObj);
-  //   await usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
+    let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
+    let usuarioObj = CommomFunctions.convertFormToObject(formUsuario);
+    usuarioObj.fkEndereco = respEndereco.data;
+    usuarioObj.senha = CommomFunctions.encryptPassword(usuarioObj.senha);
+    let usuarioAsJson = JSON.stringify(usuarioObj);
+    await usuarioJuridicoService.postUsuarioJuridico(usuarioAsJson);
 
-  //   render(<Alerta isSuccess message="ONG cadastrada com sucesso" />, document.getElementById("alertArea"))
-  //   window.location.href = "/signin";
-  // } catch (error) {
-  //   let errorString = `${error}`;
-  //   render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
-  // }
+    render(<Alerta isSuccess message="Dados enviados. Verifique seu email e confirme o cadastro!" />, document.getElementById("alertArea"))
+    window.location.href = "/signin";
+  } catch (error) {
+    let errorString = `${error}`;
+    render(<Alerta isError message={errorString} />, document.getElementById("alertArea"))
+  }
 }
 
 function getUsuarioFormData() {
@@ -144,7 +146,7 @@ export default class SignUp extends React.Component {
 
       <React.Fragment>
 
-        <img id="imgTeste" />
+        <img id="alertArea" />
         <form id="usuarioJuridicoToSubmit" hidden>
           <input id="nomeOng" />
           <input id="email" />
@@ -203,14 +205,19 @@ export default class SignUp extends React.Component {
               <div className="width-30pg ">
                 <InputLine name="cep" title="CEP" type="text" placeholder="XXXXX-XXX" />
               </div>
-              <div className="width-30pg mg-l-32">
+              {/* <div className="width-30pg mg-l-32">
                 <ComboBox name="estado" labelTitle="Estado" id="estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
                   nomeItem5="SP" />
-              </div>
-              <div className="width-30pg mg-l-32">
+              </div> */}
+
+
+              <ComboBoxStateAndCities cidadeName="cidade" estadoName="estado"/>
+
+
+              {/* <div className="width-30pg mg-l-32">
                 <ComboBox name="cidade" labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
                   nomeItem5="Suzano" />
-              </div>
+              </div> */}
             </div>
             <div className="mg-t-16 mg-l-8 mg-r-16 flex">
               <div className="width-30pg ">

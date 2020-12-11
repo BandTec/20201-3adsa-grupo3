@@ -52,7 +52,6 @@ function getVolunteerForm(){
 
     let Nascimento = document.getElementById("dataNascimento");
     let NascimentoSplit = document.getElementsByName("dataNascimento")[0].value.split("/");
-
     //let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
     // Nascimento.innerText = NascimentoConvert;
     Nascimento.innerText = NascimentoSplit;
@@ -132,13 +131,9 @@ async function cadastrar() {
     console.log(fisicoJson);
     await usuarioFisicoService.postUsuarioFisico(fisicoJson);
     render(<Alerta isSuccess message="Voluntário cadastrado com sucesso"/>, document.getElementById("alertArea"));
-
-    // render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success" />, document.getElementById("alertArea"));
   } catch (error) {
     let errorString = `${error}`;
     render(<Alerta isError message={errorString} />, document.getElementById("alertArea"));
-
-    // render(<AlertCard message={errorString} severity="error" />, document.getElementById("alertArea"));
   }
 }
 
