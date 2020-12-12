@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface UsuarioFisicoRepository extends JpaRepository<UsuarioFisico, Integer> {
 
-    List<UsuarioFisicoDTO> findAllByIdUsuarioFisico(int[] id);
+    List<UsuarioFisicoDTO> findAllById(int[] id);
 
-    @Query("select a from UsuarioJuridico a where a.email = ?1 and a.senha = ?2")
+    @Query("select a from UsuarioFisico a where a.email = ?1 and a.senha = ?2")
     List<UsuarioFisico> pesquisaEmailESenhaFisico(String email, String senha);
 }

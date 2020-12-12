@@ -93,6 +93,11 @@ const useStyles = makeStyles({
 // import { Container } from './styles';
 
 export default function CarouselFilter() {
+
+  function vacancyFilter(){
+    window.location.href="vacancies";
+  }
+
   const classes = useStyles();
   const settings = {
     infinite: true,
@@ -111,34 +116,31 @@ return (
     <Slider className={classes.slider} {...settings}>
       <div className={classes.carouselImgContainer}>
         <span className={classes.textImg}>Animais</span>
-        <img src={AnimalImg} className={classes.carouselImg} />
+        <a href="vacancies"><img className="filter" src={AnimalImg} className={classes.carouselImg} /></a> 
       </div>
       <div className={classes.carouselImgContainer}>
         <span className={classes.textImg}>Crianças</span>
-        <img src={ChildImg} className={classes.carouselImg} />
+        <a href="vacancies"><img src={ChildImg} className={classes.carouselImg} /></a>
       </div>
       <div className={classes.carouselImgContainer}>
-          <span className={classes.textImg}>Pessoas com Deficiência</span>
-        <img src={DisabilityImg} className={classes.carouselImg} />
+        <span className={classes.textImg}>Pessoas com Deficiência</span>
+        <a href=""><img src={DisabilityImg} className={classes.carouselImg} /></a>
       </div>
       <div className={classes.carouselImgContainer}>
-          <span className={classes.textImg}>Idosos</span>
-        <img src={ElderlyImg} className={classes.carouselImg} />
+        <span className={classes.textImg}>Idosos</span>
+        <a href="vacancies"><img src={ElderlyImg} className={classes.carouselImg} /></a>  
       </div>
       <div className={classes.carouselImgContainer}>
         <span className={classes.textImg}>Lares</span>
-
-        <img src={GardeningImg} className={classes.carouselImg} />
+        <a href="vacancies"><img src={GardeningImg} className={classes.carouselImg} /></a>
       </div>
       <div className={classes.carouselImgContainer}>
         <span className={classes.textImg}>Direitos Civis</span>
-
-        <img src={HumanRightsImg} className={classes.carouselImg} />
+        <a href="vacancies"><img src={HumanRightsImg} className={classes.carouselImg} /></a>
       </div>
       <div className={classes.carouselImgContainer}>
           <span className={classes.textImg}>Meio Ambiente</span>
-
-        <img src={NatureImg} className={classes.carouselImg} />
+          <a href="vacancies"><img src={NatureImg} className={classes.carouselImg} /></a>
       </div>
     </Slider>
   </div>

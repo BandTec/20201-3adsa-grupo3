@@ -3,13 +3,12 @@ package br.com.bandtec.projetopicompassio.dominios;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name = "usuario_fisico")
 public class UsuarioFisico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario_fisico")
-    private Integer idUsuarioFisico;
+    private Integer id;
 
     @Column(length = 90, nullable = false, unique = true)
     private String email;
@@ -30,22 +29,17 @@ public class UsuarioFisico {
     @Column(length = 14, nullable = false)
     private String cpf;
 
+    @Column(length = 255)
+    private String foto;
+
     private Boolean logado;
 
-    public Boolean getLogado() {
-        return logado;
+    public Integer getId() {
+        return id;
     }
 
-    public void setLogado(Boolean logado) {
-        this.logado = logado;
-    }
-
-    public Integer getIdUsuarioFisico() {
-        return idUsuarioFisico;
-    }
-
-    public void setIdUsuarioFisico(Integer idUsuarioFisico) {
-        this.idUsuarioFisico = idUsuarioFisico;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -94,5 +88,21 @@ public class UsuarioFisico {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public Boolean getLogado() {
+        return logado;
+    }
+
+    public void setLogado(Boolean logado) {
+        this.logado = logado;
     }
 }

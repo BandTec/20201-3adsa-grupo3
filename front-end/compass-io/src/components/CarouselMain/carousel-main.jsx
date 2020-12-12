@@ -60,7 +60,7 @@ const useStyles = makeStyles({
     // filter: "brightness(80%)"
   },
   carouselContainer: {
-    margin: "0 -6rem",
+    margin: "0 -4rem",
     // width: "10rem"
   },
   textImg:{
@@ -112,7 +112,7 @@ export default function CarouselMain() {
     customPaging: i => (
       <div
         style={{
-          width: "30px",
+          width: "25px",
           color: "blue",
           border: "1px blue solid",
           position: "absolute"

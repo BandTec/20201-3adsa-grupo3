@@ -1,0 +1,55 @@
+.border{
+    border: 2px solid black
+}
+
+.border-rd-10{
+    border-radius: 10px
+}
+
+.height-160p{
+    height: 10rem;
+}
+
+.height-200p{
+    height: 12.5rem;
+}
+
+.height-240p{
+    height: 15rem;
+}
+
+.height-280p{
+    height: 17.5rem;
+}
+
+.width-30pg{
+    width: 30%
+}
+
+.width-45pg{
+    width: 45%
+}
+
+.width-40pg{
+    width: 40%
+}
+
+.bg-color-gray-light{
+    background-color: #fcfcfc
+}
+
+.cardImg{
+    width: 10rem;
+    height: 10rem;
+    background-color: #f00;
+}
+
+.pd-v-16{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.mg-h-16{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

@@ -10,7 +10,7 @@ class EnderecoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -20,7 +20,7 @@ class EnderecoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 

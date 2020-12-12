@@ -75,8 +75,55 @@
 }
 
 #btnAdd{
-    margin-top: 6.5%;
+    /* margin-top: 5%;
+    margin-bottom: 2%; */
+
+    height: 3.5rem;
     background: #1975FF
+}
+
+.height-1020p{
+    height: 70rem;
+}
+
+.height-1036p{
+    height: 71rem;
+}
+
+.height-65pg{
+    height: 65%;
+}
+
+.height-60pg{
+    height: 60%;
+}
+
+.height-45pg{
+    height: 45%;
+}
+
+.height-40pg{
+    height: 40%;
+}
+
+.height-35pg{
+    height: 35%;
+}
+
+.height-25pg{
+    height: 25%;
+}
+
+.height-30pg{
+    height: 30%;
+}
+
+.mg-b-64{
+    margin-bottom: 4rem;
+}
+
+.mg-b-32{
+    margin-bottom: 2rem;
 }
 
 .comboBox{
@@ -124,26 +171,26 @@
     margin-top: 1.5rem;
 }
 
-
-#btnVoltarOng{
-    margin-left: 10%;
-    margin-right: 2rem;
-    width:10rem;
-    font-weight: 600;
-    height: 3rem;
-    color: black;
-    font-size: 1.0rem;
-    border: black;
-    border-radius: 0.5rem;
-    background: #E0DDDD
-}
-
 #btnCadastrarOng{
-    margin-left: 2%;
+    margin-left: 3rem;
     width:10rem;
     font-weight: 600;
     height: 3rem;
     font-size: 1.0rem;
     border-radius: 0.5rem;
     background: #1975FF
+}
+
+.inputFoto{
+    margin-top: 1rem;
+}
+
+.btnCause:hover{
+    background-color: #FFB219;
+    color: #fff;
+    transition: 0.75s;
+}
+
+.mg-l-8{
+    margin-left: 0.5rem;
 }

@@ -24,6 +24,16 @@ class UsuarioFisicoService {
         });
     }
 
+    async getUsuarioFisicoByEmail(email) {
+        return axios.get(`${this.BASE_URL}?email=${email}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            return err;
+        });
+    }
+
     async postUsuarioFisico(usuario) {
         return axios.post(this.BASE_URL, usuario, {
             headers: {
@@ -57,6 +67,55 @@ class UsuarioFisicoService {
         .catch((err) => {
             return err;
         });
+    }
+
+    async uploadFoto(id, formData) {
+        return axios.post(`${this.BASE_URL}/foto?idUsuario=${id}`, formData, {
+            headers: {
+                'Access-Control-Allow-Origin': true,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            throw err;
+        })
+    }
+
+    async getFoto(id) {
+        return axios.get(`${this.BASE_URL}/foto/base64?idUsuario=${id}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            throw err;
+        })
+    }
+
+    async getUltimasVagas(id) {
+        return axios.get(`${this.BASE_URL}/${id}/vagas`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            throw err;
+        })
+    }
+
+    async setUltimaVaga(id, vaga) {
+        return axios.post(`${this.BASE_URL}/${id}/vagas`, vaga, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            throw err;
+        })
     }
 };
 

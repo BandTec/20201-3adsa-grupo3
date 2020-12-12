@@ -7,7 +7,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import './combo-box.css';
 
-const useStyles = makeStyles((theme) => ({
+export default class ComboBox extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  state = {
+    content: [],
+    selectedItem: ''
+  }
+
+  classes = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
       minWidth: 140,
@@ -17,38 +28,37 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   }));
-  
 
-export default function ComboBox(props) {
+  componentDidMount() {
+    this.setContent();
+  }
 
-    const classes = useStyles();
-  const [cidade, setCidade] = React.useState('');
+  setContent = () => {
+    this.setState({content: this.props.content});
+  }
 
-  const handleChange = (event) => {
-    setCidade(event.target.value);
+  handleChange = (event) => {
+    this.setState({selectedItem: event.target.value});
   };
 
-  return(
-    <FormControl variant="outlined" className={classes.formControl} >
-    <InputLabel id="tituloLabel">{props.labelTitle}</InputLabel>
-    <Select
-      labelId="tituloLabel"
-      id="tituloSelect"
-      name={props.name}
-      value={cidade}
-      onChange={handleChange}
-      label={props.labelTitle}
-      width={props.width}
-    >
-      <MenuItem value="">
-        <em>None</em>
-      </MenuItem>
-      <MenuItem value={props.nomeItem1}>{props.nomeItem1}</MenuItem>
-      <MenuItem value={props.nomeItem2}>{props.nomeItem2}</MenuItem>
-      <MenuItem value={props.nomeItem3}>{props.nomeItem3}</MenuItem>
-      <MenuItem value={props.nomeItem4}>{props.nomeItem4}</MenuItem>
-      <MenuItem value={props.nomeItem5}>{props.nomeItem5}</MenuItem>
-    </Select>
-  </FormControl>
-  );
+  render() {
+    return(
+        <FormControl fullWidth={true} variant="outlined" className={this.classes.formControl} >
+        <InputLabel id="tituloLabel">{this.props.labelTitle}</InputLabel>
+        <Select
+          labelId="tituloLabelSelect"
+          id="tituloSelect"
+          name={this.props.name}
+          value={this.state.selectedItem}
+          onChange={this.handleChange}
+          label={this.props.labelTitle}
+          width={this.props.width}
+        >
+          {this.state.content.map(item => (
+                  <MenuItem key={item} value={item}>{item}</MenuItem>
+                ))}
+        </Select>
+      </FormControl>
+    );
+  }
 }

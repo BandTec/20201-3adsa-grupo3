@@ -7,9 +7,9 @@ import java.util.Date;
 public class Vaga {
 
     @Id
-    @Column(name = "id_vaga")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idVaga;
+    private Integer id;
 
     @Column(length = 256, nullable = false)
     private String titulo;
@@ -28,6 +28,9 @@ public class Vaga {
     @Temporal(value = TemporalType.DATE)
     private Date dataFim;
 
+    @Column(length = 255)
+    private String foto;
+
     @OneToOne
     @JoinColumn(name = "fk_endereco")
     private Endereco fkEndereco;
@@ -38,12 +41,12 @@ public class Vaga {
 
     public Vaga() { }
 
-    public Integer getIdVaga() {
-        return idVaga;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdVaga(Integer idVaga) {
-        this.idVaga = idVaga;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -84,6 +87,14 @@ public class Vaga {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public Endereco getFkEndereco() {

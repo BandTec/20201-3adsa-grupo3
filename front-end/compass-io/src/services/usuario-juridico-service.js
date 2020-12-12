@@ -10,7 +10,7 @@ class UsuarioJuridicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -20,7 +20,17 @@ class UsuarioJuridicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
+        });
+    }
+
+    async getUsuarioJuridicoByEmail(email) {
+        return axios.get(`${this.BASE_URL}?email=${email}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            throw err;
         });
     }
 
@@ -35,7 +45,7 @@ class UsuarioJuridicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -45,7 +55,7 @@ class UsuarioJuridicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -55,12 +65,12 @@ class UsuarioJuridicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
-    async loginUsuarioJuridico(auth) {
-        return axios.post(`${this.BASE_URL}/auth`, auth, {
+    async uploadFoto(id, formData) {
+        return axios.post(`${this.BASE_URL}/foto?idUsuario=${id}`, formData, {
             headers: {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json'
@@ -70,23 +80,18 @@ class UsuarioJuridicoService {
             return res;
         })
         .catch((err) => {
-            return err;
-        });
+            throw err;
+        })
     }
 
-    async logoutUsuarioJuridico(id) {
-        return axios.post(`${this.BASE_URL}/id=${id}`, null, {
-            headers: {
-                'Access-Control-Allow-Origin': true,
-                'Content-Type': 'application/json'
-            }
-        })
+    async getFoto(id) {
+        return axios.get(`${this.BASE_URL}/foto/base64?idUsuario=${id}`)
         .then((res) => {
             return res;
         })
         .catch((err) => {
-            return err;
-        });
+            throw err;
+        })
     }
 };
 
