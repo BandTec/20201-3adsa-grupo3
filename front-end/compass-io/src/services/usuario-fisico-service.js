@@ -93,6 +93,30 @@ class UsuarioFisicoService {
             throw err;
         })
     }
+
+    async getUltimasVagas(id) {
+        return axios.get(`${this.BASE_URL}/${id}/vagas`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            throw err;
+        })
+    }
+
+    async setUltimaVaga(id, vaga) {
+        return axios.post(`${this.BASE_URL}/${id}/vagas`, vaga, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            throw err;
+        })
+    }
 };
 
 export default UsuarioFisicoService;

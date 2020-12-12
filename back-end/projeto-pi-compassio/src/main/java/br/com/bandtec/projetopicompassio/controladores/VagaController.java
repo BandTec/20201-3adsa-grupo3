@@ -10,16 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.Base64;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 @RequestMapping("/vagas")
@@ -38,12 +32,10 @@ public class VagaController {
     public ResponseEntity consultar(
             @RequestParam(required = false) Integer id,
             @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String causa,
-            @RequestParam(required = false) String area,
-            @RequestParam(required = false) String requisitos
+            @RequestParam(required = false) String causa
     ){
         Vaga vagaPesquisa = new Vaga();
-        vagaPesquisa.setIdVaga(id);
+        vagaPesquisa.setId(id);
         vagaPesquisa.setTitulo(titulo);
         vagaPesquisa.setCausa(causa);
 
@@ -66,7 +58,7 @@ public class VagaController {
 
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody Vaga atualizacao){
-        atualizacao.setIdVaga(id);
+        atualizacao.setId(id);
         repository.save(atualizacao);
         return ResponseEntity.ok().build();
     }
@@ -114,9 +106,9 @@ public class VagaController {
     }
 
     @GetMapping(value = "/foto/base64")
-    public ResponseEntity getFotoAsBase64(@RequestParam Integer idUsuario) {
+    public ResponseEntity getFotoAsBase64(@RequestParam Integer idVaga) {
         try {
-            ResponseEntity response = this.download(idUsuario);
+            ResponseEntity response = this.download(idVaga);
             byte[] foto = (byte[])response.getBody();
             byte[] fotoBase64 = Base64.getEncoder().encode(foto);
             return ResponseEntity.ok().body(fotoBase64);

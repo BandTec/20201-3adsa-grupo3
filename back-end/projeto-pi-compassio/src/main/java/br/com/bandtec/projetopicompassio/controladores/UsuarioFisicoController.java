@@ -2,31 +2,23 @@ package br.com.bandtec.projetopicompassio.controladores;
 
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
+import br.com.bandtec.projetopicompassio.repositorios.EnderecoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoRepository;
 import br.com.bandtec.projetopicompassio.utils.FilaObj;
 import br.com.bandtec.projetopicompassio.utils.FotoHandler;
 import br.com.bandtec.projetopicompassio.utils.PilhaObj;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.task.TaskExecutorBuilder;
-import org.springframework.boot.task.TaskExecutorCustomizer;
-import org.springframework.core.task.TaskExecutor;
-import org.springframework.core.task.support.TaskExecutorAdapter;
 import org.springframework.data.domain.Example;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.annotation.Schedules;
-import org.springframework.scheduling.config.Task;
-import org.springframework.scheduling.config.TaskExecutorFactoryBean;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ThemeResolver;
 
 import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -37,7 +29,7 @@ import java.util.List;
 public class UsuarioFisicoController {
 
     @Autowired
-    private UsuarioFisicoRepository repository;
+    private UsuarioFisicoRepository usuarioRepository;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -47,16 +39,16 @@ public class UsuarioFisicoController {
 
     private Hashtable<Integer, PilhaObj<Vaga>> ultimasVagasVisualizadas = new Hashtable();
 
-    @Scheduled(initialDelay = 5000, fixedRate = 100000)
+    @Scheduled(initialDelay = 5000, fixedRate = 1000000)
     public void configureController() {
-        for (UsuarioFisico u : repository.findAll()) {
+        for (UsuarioFisico u : usuarioRepository.findAll()) {
             this.ultimasVagasVisualizadas.putIfAbsent(u.getId(), new PilhaObj<Vaga>(5));
         }
     }
 
     @PostMapping
     public ResponseEntity criar(@RequestBody @Valid UsuarioFisico novoUsuarioFisico){
-        if (!repository.findAll(Example.of(novoUsuarioFisico)).isEmpty())
+        if (!usuarioRepository.findAll(Example.of(novoUsuarioFisico)).isEmpty())
             return ResponseEntity.badRequest().body("Usuário já cadastrado");
         if (usuariosPendentes.isFull())
             return ResponseEntity.badRequest().body("A fila de requisições está cheia, por favor aguarde alguns minutos antes de tentar novamente");
@@ -77,7 +69,7 @@ public class UsuarioFisicoController {
         usuarioFisicoPesquisa.setEmail(email);
         usuarioFisicoPesquisa.setCpf(cpf);
 
-        List<UsuarioFisico> resultado = repository.findAll(Example.of(usuarioFisicoPesquisa));
+        List<UsuarioFisico> resultado = usuarioRepository.findAll(Example.of(usuarioFisicoPesquisa));
 
         if (resultado.isEmpty()){
             return ResponseEntity.noContent().build();
@@ -87,8 +79,8 @@ public class UsuarioFisicoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deletar(@PathVariable Integer id){
-        if (repository.existsById(id)){
-            repository.deleteById(id);
+        if (usuarioRepository.existsById(id)){
+            usuarioRepository.deleteById(id);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
@@ -97,7 +89,7 @@ public class UsuarioFisicoController {
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody UsuarioFisico atualizacao){
         atualizacao.setId(id);
-        repository.save(atualizacao);
+        usuarioRepository.save(atualizacao);
         return ResponseEntity.ok().build();
     }
 
@@ -107,12 +99,12 @@ public class UsuarioFisicoController {
             String fotoPath = FotoHandler.upload(foto);
             UsuarioFisico usuario = null;
             try {
-                usuario = repository.findById(idUsuario).get();
+                usuario = usuarioRepository.findById(idUsuario).get();
             } catch (Exception ex) {
                 throw new IllegalArgumentException("Verifique o id do usuário", ex);
             }
             usuario.setFoto(fotoPath);
-            repository.save(usuario);
+            usuarioRepository.save(usuario);
 
             return ResponseEntity.created(null).build();
         } catch (IllegalArgumentException ilEx) {
@@ -130,7 +122,7 @@ public class UsuarioFisicoController {
         try {
             String pathFotoUsuario = null;
             try {
-                pathFotoUsuario = repository.findById(idUsuario).get().getFoto();
+                pathFotoUsuario = usuarioRepository.findById(idUsuario).get().getFoto();
             } catch (Exception ex) {
                 throw new IllegalArgumentException("Verifique o id do usuário", ex);
             }
@@ -190,7 +182,7 @@ public class UsuarioFisicoController {
             Optional<UsuarioFisico> usuarioAprovadoOptional =
                     usuariosNovos.stream().filter(u -> u.getEmail().equals(email)).findFirst();
             if (usuarioAprovadoOptional.isPresent()) {
-                UsuarioFisico u = repository.save(usuarioAprovadoOptional.get());
+                UsuarioFisico u = usuarioRepository.save(usuarioAprovadoOptional.get());
                 ultimasVagasVisualizadas.put(u.getId(), new PilhaObj<Vaga>(5));
                 return ResponseEntity.created(null).body(
                         "<div>" +
@@ -198,7 +190,7 @@ public class UsuarioFisicoController {
                                     "<h1 style='margin-top: 0px;margin-bottom: 0px;'>Compass.io</h1>" +
                                 "</div>" +
                                     "<div>Seu cadastro foi concluído com sucesso! Clique " +
-                                    "<a href='https://youtu.be/pzDMi89Do7c'>aqui</a> " +
+                                    "<a href='http://localhost:3000/signin'>aqui</a> " +
                                     "para ir para sua conta em nosso site </div>" +
                                 "</div>");
             }
@@ -211,7 +203,7 @@ public class UsuarioFisicoController {
     @PostMapping("/{idUsuario}/vagas")
     public ResponseEntity addLastAccessed(@PathVariable Integer idUsuario, @RequestBody Vaga vaga) {
         try {
-            if (!repository.findById(idUsuario).isPresent())
+            if (!usuarioRepository.findById(idUsuario).isPresent())
                 return ResponseEntity.notFound().build();
             if (ultimasVagasVisualizadas.get(idUsuario).isFull()) {
                 PilhaObj<Vaga> aux = ultimasVagasVisualizadas.get(idUsuario).multiPop(4);
@@ -228,7 +220,7 @@ public class UsuarioFisicoController {
     @GetMapping("/{idUsuario}/vagas")
     public ResponseEntity getRecentlyAccessedVagas(@PathVariable Integer idUsuario) {
         try {
-            if (!repository.findById(idUsuario).isPresent())
+            if (!usuarioRepository.findById(idUsuario).isPresent())
                 return ResponseEntity.notFound().build();
             List<Vaga> vagas = this.ultimasVagasVisualizadas.get(idUsuario).toList();
             if (vagas.isEmpty())

@@ -90,6 +90,26 @@
     height: 71rem;
 }
 
+.height-60pg{
+    height: 60%;
+}
+
+.height-45pg{
+    height: 45%;
+}
+
+.height-25pg{
+    height: 25%;
+}
+
+.height-30pg{
+    height: 30%;
+}
+
+.mg-b-64{
+    margin-bottom: 4rem;
+}
+
 .mg-b-32{
     margin-bottom: 2rem;
 }

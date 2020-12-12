@@ -8,15 +8,15 @@ import CardProfileOng from '../../components/CardProfileOng/card-profile-ong';
 import InputFile from '../../components/InputFile/input-file';
 import ImgVolunteer from '../../assets/images/child-img.jpg';
 import AlertCard from '../../components/AlertCard/alert-card';
-
-import { makeStyles } from '@material-ui/core/styles';
-
 import Footer from '../../components/Footer/footer';
 
-import './profile-ong.css';
+import { render } from 'react-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
-import { render } from 'react-dom';
+import ArquivoService from '../../services/arquivo-service';
+
+import './profile-ong.css';
 
 const useStyles = makeStyles({
   outlineBtn: {
@@ -52,7 +52,60 @@ async function renderPerfil() {
 
 window.onload = renderPerfil();
 
+<<<<<<< HEAD
 export default function ProfileOng() {
+=======
+async function trocarFoto() {
+  try {
+    let usuarioJuridicoService = new UsuarioJuridicoService();
+
+    let foto = document.getElementById("editarFoto").files[0];
+    let formDataFoto = new FormData();
+    formDataFoto.set("foto", foto);
+  
+    let id = parseInt(sessionStorage["userId"])
+    let response = await usuarioJuridicoService.uploadFoto(id, formDataFoto);
+
+    if (response.status == 201) {
+      getFoto();
+    }
+    render(<AlertCard message="Foto atualizada" severity="success"/>, document.getElementById("alertArea"));
+  } catch (error) {
+    let errorString = `${error}`;
+    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
+  }
+}
+
+async function getFoto() {
+  debugger;
+  let usuarioJuridicoService = new UsuarioJuridicoService();
+  let id = parseInt(sessionStorage["userId"])
+  
+  let fotoResponse = await usuarioJuridicoService.getFoto(id);
+  let imgOng = document.getElementById("imgOng");
+  imgOng.src = "data:image/png;base64," + fotoResponse.data;
+}
+
+async function baixarArquivo() {
+  let userId = parseInt(sessionStorage["userId"]);
+  let usuarioAtual = await new UsuarioJuridicoService().getUsuarioJuridicoById(userId);
+  let nomeOng = usuarioAtual.data[0].nomeOng;
+
+  window.location.href=`http://localhost:8080/arquivos/arquivo01?nomeDoArquivo=TodasAsVagas&nomeDaOng=${nomeOng}&isCsv=false`;
+}
+
+async function subirArquivo() {
+  
+  let arquivo = document.getElementById("inputFile").files[0];
+  let formDataFile = new FormData();
+  formDataFile.set("file", arquivo);
+
+  await new ArquivoService().subirArquivo(formDataFile);
+  window.location.href="http://localhost:3000/profile/ong";
+}
+
+export default function ProfileOng(props) {
+>>>>>>> 98c8e5553ea9f8ff6351b76b14f30490ef1b4724
 
   function ClickDirection(){
     window.location.href = "/register";
@@ -67,10 +120,19 @@ export default function ProfileOng() {
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!" 
             link="www.google.com.br"
             width="600"/>
+<<<<<<< HEAD
         <Button variant="outline" onClick={ClickDirection} className={classes.outlineBtn}>+Cadastrar Vaga</Button>
+=======
+        <div className="flex flex-column mg-t-16 width-15pg">
+          <InputFile id="editarFoto" text="Editar foto" callBack={trocarFoto}/>
+        </div>
+          <Button variant="outline" onClick={ClickDirection} className={classes.outlineBtn}>+Cadastrar Vaga</Button>
+>>>>>>> 98c8e5553ea9f8ff6351b76b14f30490ef1b4724
         <div className="vacancyCarousel">
           <h1>Vagas Abertas</h1>
           <CarouselVacancy />
+          <Button onClick={baixarArquivo}>Baixar arquivo de vagas TXT</Button>
+          <InputFile id="inputFile" text="Importar arquivo" callBack={subirArquivo}/>
         </div>
         <div className="ratings">
           <Rating isOngProfile 
@@ -92,4 +154,3 @@ export default function ProfileOng() {
     </section>
   );
 };
-

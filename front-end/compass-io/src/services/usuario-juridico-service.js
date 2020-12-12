@@ -77,11 +77,9 @@ class UsuarioJuridicoService {
             }
         })
         .then((res) => {
-            debugger
             return res;
         })
         .catch((err) => {
-            debugger
             throw err;
         })
     }

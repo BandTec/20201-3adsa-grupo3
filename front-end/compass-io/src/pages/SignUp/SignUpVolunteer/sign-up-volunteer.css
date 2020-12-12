@@ -42,6 +42,18 @@
     margin-top: 22.5rem
 }
 
+.height-20pg{
+    height: 20%
+}
+
+.height-50pg{
+    height: 50%
+}
+
+.height-80pg{
+    height: 80%
+}
+
 .textImage{
     color: #fff;
     font-weight: 700;

@@ -7,9 +7,9 @@ import java.util.Date;
 public class Vaga {
 
     @Id
-    @Column(name = "id_vaga")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idVaga;
+    private Integer id;
 
     @Column(length = 256, nullable = false)
     private String titulo;
@@ -41,12 +41,12 @@ public class Vaga {
 
     public Vaga() { }
 
-    public Integer getIdVaga() {
-        return idVaga;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdVaga(Integer idVaga) {
-        this.idVaga = idVaga;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitulo() {
