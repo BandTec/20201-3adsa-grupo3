@@ -143,3 +143,48 @@
 .genderGroup{
     display: flex;
 }
+
+/*-----------Responsividade----------*/
+
+@media (max-width: 640px){
+
+    .container > .loginImage, .childrenImage{
+        display: none;
+    }
+
+    .formVolunteer{
+        margin-left: 0;
+    }
+
+    .signupVForm{
+        margin-left: 0;
+    }
+
+    .container > .formVolunteer > .signupVForm{
+        margin-left: 0%;
+        width: 25rem;
+        height: 35rem;
+        background-color: #FCFCFC;
+        border-radius: 1rem;
+        border: 1px solid #000;
+    } 
+
+    .container > .formVolunteer > .infContaVForm{
+        margin-top: 2%;
+        margin-left: 0%;
+        width: 25rem;
+        height: 24rem;
+        
+    } 
+
+    .formVolunteer > .checkbox{
+        margin-left: 1%;
+    }
+
+    #btnCadastrar{
+        margin-left: 4%;
+    }
+
+
+
+}

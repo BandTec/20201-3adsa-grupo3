@@ -9,7 +9,6 @@ import './global.css'
 ReactDOM.render(
   <React.StrictMode>
     <NavBar/>
-    <div id="alertArea" className="flex-end mg-r-32 fixed width-90pg"></div>
     <App />
     <Footer/>
   </React.StrictMode>,

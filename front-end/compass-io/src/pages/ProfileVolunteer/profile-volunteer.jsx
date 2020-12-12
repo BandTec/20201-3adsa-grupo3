@@ -17,77 +17,97 @@ import Footer from '../../components/Footer/footer';
 
 import './profile-volunteer.css';
 
-async function trocarFoto() {
-  try {
-    let usuarioFisicoService = new UsuarioFisicoService();
-
-    let foto = document.getElementById("editarFoto").files[0];
-    let formDataFoto = new FormData();
-    formDataFoto.set("foto", foto);
-
-    debugger
-  
-    let id = parseInt(sessionStorage["userId"])
-    let response = await usuarioFisicoService.uploadFoto(id, formDataFoto);
-    
-    if (response.status == 201) {
-      getFoto();
-    }
-    render(<AlertCard message="Foto atualizada" severity="success"/>, document.getElementById("alertArea"));
-  } catch (error) {
-    let errorString = `${error}`;
-    render(<AlertCard message={errorString} severity="error"/>, document.getElementById("alertArea"));
-  }
-}
-
-//window.onload = getFoto();
-
-async function getFoto() {
-  debugger;
-  let usuarioFisicoService = new UsuarioFisicoService();
-  let id = parseInt(sessionStorage["userId"])
-
-  let fotoResponse = await usuarioFisicoService.getFoto(id);
-  let imgVolunteer = document.getElementById("imgVolunteer");
-  imgVolunteer.src = "data:image/png;base64," + fotoResponse.data;
-}
-
 export default class ProfileVolunteer extends React.Component {
-  
-  state = {
 
+  constructor(props) {
+    super(props)
+  }
+
+  state = {
+    message: '',
+    severity: '',
+    open: false
   }
 
   componentDidMount() {
-    getFoto()
+    this.getFoto()
   }
+
+  getFoto = async () => {
+    debugger;
+    let usuarioFisicoService = new UsuarioFisicoService();
+    let id = parseInt(sessionStorage["userId"])
+
+    let fotoResponse = await usuarioFisicoService.getFoto(id);
+    let imgVolunteer = document.getElementById("imgVolunteer");
+    imgVolunteer.src = "data:image/png;base64," + fotoResponse.data;
+  }
+
+  trocarFoto = async () => {
+    try {
+      let usuarioFisicoService = new UsuarioFisicoService();
+
+      let foto = document.getElementById("editarFoto").files[0];
+      let formDataFoto = new FormData();
+      formDataFoto.set("foto", foto);
+
+      debugger
+
+      let id = parseInt(sessionStorage["userId"])
+      let response = await usuarioFisicoService.uploadFoto(id, formDataFoto);
+
+      if (response.status == 201) {
+        this.getFoto();
+      }
+      this.setState({
+        message: "Foto atualizada",
+        severity: "success",
+        open: true
+      })
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      })
+    }
+  }
+
+  fecharAlerta = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ open: false })
+  };
 
   render() {
     return (
       <div classname="containerProfileVolunteer">
-        <div id="alertArea"></div>
-        <AboutVolunteer imgId="imgVolunteer" editImgVolunteer={trocarFoto} className="mg-b-16" nameVolunteer="Iago Roani de Lima" ageVolunteer="21 anos" professionVolunteer="Automação"
-        schoolVolunteer="Cursando Superior" liveInVolunteer="Suzano,SP,Brasil"></AboutVolunteer>
+
+        <AlertCard open={this.state.open} message={this.state.message} severity={this.state.severity} onClose={this.fecharAlerta} />
+        
+        <AboutVolunteer imgId="imgVolunteer" editImgVolunteer={this.trocarFoto} className="mg-b-16" nameVolunteer="Iago Roani de Lima" ageVolunteer="21 anos" professionVolunteer="Automação"
+          schoolVolunteer="Cursando Superior" liveInVolunteer="Suzano,SP,Brasil"></AboutVolunteer>
         <div className="">
           <h1>Sobre mim</h1>
         </div>
-        {/* <span className><h1><u><b>Sobre Mim</b></u></h1></span> */}
         <div classname="descriptionVolunteer">
-        <CommentBox/>
+          <CommentBox />
         </div>
         <div>
           <h1><u>Interesses</u></h1>
-          <CarouselInterests/>
+          <CarouselInterests />
         </div>
         <div>
           <h1><u>Competências</u></h1>
-          <CarouselSkills/>
+          <CarouselSkills />
         </div>
         <div classname="ratingBox">
-        <Rating isVolunteerProfile 
-              imgVolunteer={ImgVolunteer}
-              vacancyTitle="Marcenaria para construção de móveis" 
-              infoVacancy="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          <Rating isVolunteerProfile
+            imgVolunteer={ImgVolunteer}
+            vacancyTitle="Marcenaria para construção de móveis"
+            infoVacancy="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                         Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, 
                         accusantium cupiditate incidunt laboriosam aspernatur. P
                         laceat ut maxime facilis molestias pariatur!"/>
