@@ -205,14 +205,6 @@ export default class SignUp extends React.Component {
                 <div className="width-30pg mg-t-24">
                   <InputLine name="cep" title="CEP" type="text" placeholder="XXXXX-XXX" />
                 </div>
-                {/* <div className="width-30pg mg-l-32">
-                  <ComboBox name="estado" labelTitle="Estado" id="estado" nomeItem1="AC" nomeItem2="DF" nomeItem3="MG" nomeItem4="RJ"
-                    nomeItem5="SP" />
-                </div>
-                <div className="width-30pg mg-l-32">
-                  <ComboBox name="cidade" labelTitle="Cidade" nomeItem1="Guaianazes" nomeItem2="Guarulhos" nomeItem3="Mogi das Cruzes" nomeItem4="São Paulo"
-                    nomeItem5="Suzano" />
-                </div> */}
                 <div className="width-50pg mg-l-32">
                   <ComboBoxStateAndCities cidadeName="cidade" estadoName="estado" />
                 </div>
