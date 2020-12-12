@@ -146,7 +146,7 @@ export default class SignUp extends React.Component {
 
       <React.Fragment>
 
-        <img id="alertArea" />
+        {/* <img id="alertArea" /> */}
         <form id="usuarioJuridicoToSubmit" hidden>
           <input id="nomeOng" />
           <input id="email" />
@@ -166,21 +166,25 @@ export default class SignUp extends React.Component {
         </form>
 
 
-        <div className="width-100pg mg-b-64 flex">
+        <div className="width-100pg mg-b-64 height-1056p flex">
+
           <div className="width-50pg flex relative">
             <Image width="100%" className="childrenImage" height="80%" src={imgOngSingup} />
             <div className="bold absolute top-640p font-color-white fs-56p mg-l-16">Encontre aqui os voluntários ideais que <br />
               <span className="yellowWord">você precisa</span>.
             </div>
           </div>
+
           <div className="mg-l-32 width-50pg">
             <div className="height-60pg border border-rd-10 bg-color-gray-light">
               <div className=" mg-t-32 mg-l-16">
                 <LabelTitleForm title="Informações Institucionais" />
               </div>
+
               <div className="mg-t-32 mg-l-16 mg-r-16">
                 <InputLine name="nomeDaOng" title="Nome da Instituição" type="text" placeholder="Ex: Sonhar Acordado" />
               </div>
+
               <div className="mg-t-8 mg-l-16 flex">
                 <div className="width-50pg ">
                   <InputLine name="cnpj" title="CNPJ" type="text" placeholder="XX.XXX.XXX/XXXX-XX" />
@@ -189,10 +193,12 @@ export default class SignUp extends React.Component {
                   <InputLine name="telefone" title="Telefone de Contato" type="text" placeholder="(XX)XXXXX-XXXX" />
                 </div>
               </div>
+
               <div className="mg-t-32 mg-l-16 mg-r-16">
                 <h3>Endereço</h3>
                 <InputLine name="logradouro" title="Logradouro" type="text" placeholder="Nome da Rua/Avenida/Alameda" />
               </div>
+
               <div className="mg-t-32 mg-l-16 mg-r-16 flex">
                 <div className="width-60pg ">
                   <InputLine name="bairro" id="bairroForm" title="Bairro" type="text" placeholder="Ex: Centro" />
@@ -201,50 +207,50 @@ export default class SignUp extends React.Component {
                   <InputLine name="numero" id="numeroForm" title="Número" type="text" placeholder="XXXX" />
                 </div>
               </div>
+
               <div className="mg-t-32 mg-l-16 mg-r-16 flex">
-                <div className="width-30pg mg-t-24">
+                <div className="width-30pg mg-t-8">
                   <InputLine name="cep" title="CEP" type="text" placeholder="XXXXX-XXX" />
                 </div>
                 <div className="width-50pg mg-l-32">
                   <ComboBoxStateAndCities cidadeName="cidade" estadoName="estado" />
                 </div>
               </div>
+
+              <div className="mg-t-32 mg-l-8 mg-r-16 flex">
+                <div className="width-30pg ">
+                  <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} labelTitle="Causa" />
+                </div>
+              </div>
+
             </div>
 
-          </div>
-          <div className="mg-t-16 mg-l-8 mg-r-16 flex">
-            <div className="width-30pg ">
-              <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} labelTitle="Causa" />
-            </div>
-          </div>
-        </div>
-        <div className="mg-t-16 mg-l-8 mg-r-16 flex">
-          <div className="width-30pg ">
-            <div className="height-30pg mg-t-24 border border-rd-10 bg-color-gray-light">
-              <div className=" mg-t-32 mg-l-16">
-                <LabelTitleForm title="Informações da Conta" />
-              </div>
-              <div className="mg-t-24 mg-l-16 mg-r-16">
-                <InputLine name="email" title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
-              </div>
-              <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
-                <InputLine name="senha" title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
-              </div>
-              <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
-                <InputLine name="confSenha" title="Confirmar Senha" type="password" placeholder="********" />
-              </div>
-            </div>
 
-            <div className="mg-t-16">
-              <Checkbox></Checkbox>
-              <span>Li e concordo com os <b className="blueWord">termos</b></span>
-            </div>
+              <div className="mg-t-24 height-30pg border border-rd-10 bg-color-gray-light">
+                <div className=" mg-t-32 mg-l-16">
+                  <LabelTitleForm title="Informações da Conta" />
+                </div>
+                <div className="mg-t-24 mg-l-16 mg-r-16">
+                  <InputLine name="email" title="Email" type="text" placeholder="Ex: sonhar.acordado@email.com" />
+                </div>
+                <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
+                  <InputLine name="senha" title="Senha(mínimo de 8 dígitos)" type="password" placeholder="********" />
+                </div>
+                <div className="mg-t-24 mg-l-16 mg-r-16 width-70pg">
+                  <InputLine name="confSenha" title="Confirmar Senha" type="password" placeholder="********" />
+                </div>
+              </div>
 
-            <div className="mg-t-16 flex">
-              <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
-              <div id="alertArea" className="mg-l-32 width-100pg"></div>
+              <div className="mg-t-16">
+                <Checkbox></Checkbox>
+                <span>Li e concordo com os <b className="blueWord">termos</b></span>
+              </div>
+
+              <div className="mg-t-16 flex">
+                <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
+                {/* <div id="alertArea" className="mg-l-32 width-100pg"></div> */}
+              </div>
             </div>
-          </div>
 
         </div>
       </React.Fragment>

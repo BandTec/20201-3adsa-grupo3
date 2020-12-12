@@ -106,7 +106,7 @@ export default function SignIn() {
           <div className="blueWord mg-t-32">
             <div className="bold center">Ainda não possui cadastro? <a href="signup" className="yellowWord">Cadastre-se aqui!</a></div>
           </div>
-          <div className="center mg-t-32 mg-b-16" id="alertArea"></div>
+          {/* <div className="center mg-t-32 mg-b-16" id="alertArea"></div> */}
         </div>
       </div>
 
