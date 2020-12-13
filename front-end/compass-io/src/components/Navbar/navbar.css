@@ -69,24 +69,73 @@ a{
 
 @media (max-width: 640px){
 
-    .navbar {
-        width: 100%;
-        max-width: 640px;
-    }
-
-    .logo{
-        width: 10vw;
-        height: 10vh;
-    }
-
     .botoes {
-        width: 3rem;
-        height: auto;
+        display: none;
     }
 
-    a{
-        padding: 0.5rem;
-        padding-left: 0.1rem;
-        padding-right: 1rem;
+    .one, .two, .three{
+        background-color: #0084FE;
+        height: 5px;
+        width: 100%;
+        margin: 6px auto;
+        margin-left: 50px;
+
+        transition-duration: 0.3s;
     }
+
+    .menuResponsivo{
+        width: 40px;
+        height: 30px;
+        margin-top: 30px;
+        margin-right: 100px;
+    }
+
+    .menuSection.on{
+        position: absolute;
+        top: 20px;
+        right: 0px;
+
+        width: 25vw;
+        height: 100vh;
+
+        background-color: #fff;
+
+        display: flex;
+        justify-content: left;
+
+    }
+
+    .menuSection.on .botoes{
+        display: block;
+    }
+
+    .menuSection.on .menuResponsivo {
+        position: absolute;
+        top: 15;
+    }
+
+    .menuSection.on .menuResponsivo .one{
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menuSection.on .menuResponsivo .two{
+        opacity: 0;
+    }
+
+    .menuSection.on .menuResponsivo .three{
+        transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    .menuSection.on .botoes{
+        text-align: center;
+        display: block;
+    }
+
+    .menuSection.on .botoes a{
+        transition-duration: 0.5s;
+        font-size: 3rem;
+        line-height: 3rem;
+        display: block;
+    }
+
 }

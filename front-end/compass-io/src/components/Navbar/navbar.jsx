@@ -16,6 +16,13 @@ function Navbar() {
                 <img src={LogoCompassio}/>
                 </a>
             </span>
+            <div className="menuSection">
+            <div className="menuResponsivo">
+                <div className="one"></div>
+                <div className="two"></div>
+                <div className="three"></div>
+            </div>
+            </div>
             <div className="botoes">
                 <a className="link" href="/signup">Seja voluntário</a>
                 {/*<button className="link" onClick={props.direciona}>Como funciona</button>*/}

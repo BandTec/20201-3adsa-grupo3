@@ -3,7 +3,6 @@ input[type='file'] {
 }
 
 .inputFile {
-    cursor: pointer;
     background-color: #1975FF;
     width: 13rem;
     height: 2rem;
@@ -55,4 +54,5 @@ input[type='file'] {
     background-color: #FFB219;
     color: #fff;
     transition: 0.75s;
+    cursor: pointer;
 }

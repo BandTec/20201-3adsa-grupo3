@@ -83,6 +83,10 @@
     transition: 0.75s;
 }
 
+.buttonProfile{
+    cursor: pointer;
+}
+
 .buttonProfile:hover{
     background-color: #FFB219;
     color: #fff;
@@ -96,3 +100,4 @@
 .width-90pg{
     width: 90%;
 }
+
