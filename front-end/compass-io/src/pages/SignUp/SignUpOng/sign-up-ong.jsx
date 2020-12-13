@@ -49,7 +49,7 @@ export default class SignUp extends React.Component {
 
       this.setState({
         message: "Dados enviados! Verifique seu email para concluir o seu cadastro.",
-        severity: "error",
+        severity: "success",
         open: true
       });
 

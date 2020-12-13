@@ -28,9 +28,7 @@ export default class SignUp extends React.Component {
 
   cadastrar = async () => {
     try {
-      if (!this.validarSenha()) {
-        return;
-      }
+      debugger
       this.getVolunteerForm();
       this.getCadastroForm();
 
@@ -50,7 +48,7 @@ export default class SignUp extends React.Component {
         open: true
       });
 
-      window.location.href = "/profile";
+      window.location.href = "/";
     } catch (error) {
       let errorString = `${error}`;
       this.setState({
