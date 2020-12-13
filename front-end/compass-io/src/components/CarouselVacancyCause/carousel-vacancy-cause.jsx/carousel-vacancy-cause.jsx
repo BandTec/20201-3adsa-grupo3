@@ -16,7 +16,7 @@ import "slick-carousel/slick/slick-theme.css";
 import VagaService from '../../services/vaga-service';
 
 
-export default class CarouselVacancy extends React.Component {
+export default class CarouselVacancyCause extends React.Component {
   state = {
     resposta: []
   };
@@ -27,8 +27,9 @@ export default class CarouselVacancy extends React.Component {
 
   loadVagas = async () => {
     let vagaService = new VagaService();
-    const response = await vagaService.getVagas();
+    const response = await vagaService.getVagasByCausa(sessionStorage.getItem("causa"));
     this.setState({ resposta: response.data });
+    this.state.resposta = response.data;
     console.log(response);
     console.log(this.state.resposta);
   }
@@ -157,6 +158,7 @@ export default class CarouselVacancy extends React.Component {
       slidesToShow: 3
     };
 
+    
     
     return (
 

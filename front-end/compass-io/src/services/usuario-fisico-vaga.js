@@ -68,31 +68,6 @@ class VagaService {
             return err;
         });
     }
-
-    async uploadFoto(id, formData) {
-        return axios.post(`${this.BASE_URL}/foto?idVaga=${id}`, formData, {
-            headers: {
-                'Access-Control-Allow-Origin': true,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((res) => {
-            return res;
-        })
-        .catch((err) => {
-            throw err;
-        })
-    }
-
-    async getFoto(id) {
-        return axios.get(`${this.BASE_URL}/foto/base64?idVaga=${id}`)
-        .then((res) => {
-            return res;
-        })
-        .catch((err) => {
-            throw err;
-        })
-    }
 };
 
 export default VagaService;
