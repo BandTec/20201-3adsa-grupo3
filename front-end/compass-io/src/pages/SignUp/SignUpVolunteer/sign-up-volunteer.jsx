@@ -28,9 +28,7 @@ export default class SignUp extends React.Component {
 
   cadastrar = async () => {
     try {
-      if (!this.validarSenha()) {
-        return;
-      }
+     
       this.getVolunteerForm();
       this.getCadastroForm();
 
@@ -42,7 +40,8 @@ export default class SignUp extends React.Component {
 
       let usuarioFisicoService = new UsuarioFisicoService();
       console.log(fisicoJson);
-      await usuarioFisicoService.postUsuarioFisico(fisicoJson);
+      debugger
+      let resposta = await usuarioFisicoService.postUsuarioFisico(fisicoJson);
 
       this.setState({
         message: "Dados enviados! Verifique seu email para concluir o seu cadastro.",

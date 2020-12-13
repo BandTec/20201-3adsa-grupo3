@@ -1,5 +1,6 @@
 package br.com.bandtec.projetopicompassio.repositorios;
 
+import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,4 +13,7 @@ public interface UsuarioJuridicoRepository extends JpaRepository<UsuarioJuridico
     List<UsuarioJuridico> pesquisaEmailESenhaJuridico(String email, String senha);
 
     UsuarioJuridico findUsuarioJuridicoByNomeOng(String nomeOng);
+
+ //   List<UsuarioJuridico> findAllByEmail(String email);
+     UsuarioJuridico findByEmail(String email);
 }

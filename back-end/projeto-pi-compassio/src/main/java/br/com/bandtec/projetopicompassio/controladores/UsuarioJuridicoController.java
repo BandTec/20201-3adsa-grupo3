@@ -44,7 +44,7 @@ public class UsuarioJuridicoController {
     @PostMapping
     public ResponseEntity criar(@RequestBody @Valid UsuarioJuridico novoUsuarioJuridico){
         try {
-            if (!usuarioRepository.findAll(Example.of(novoUsuarioJuridico)).isEmpty())
+            if (usuarioRepository.findByEmail(novoUsuarioJuridico.getEmail()) != null)
                 return ResponseEntity.badRequest().body("Usuário já cadastrado");
             if (usuariosPendentes.isFull())
                 return ResponseEntity.badRequest().body("A fila de requisições está cheia, por favor aguarde alguns minutos antes de tentar novamente");
