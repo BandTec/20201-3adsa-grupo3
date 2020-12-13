@@ -12,6 +12,8 @@ public interface UsuarioFisicoRepository extends JpaRepository<UsuarioFisico, In
 
     List<UsuarioFisicoDTO> findAllById(int[] id);
 
-    @Query("select a from UsuarioFisico a where a.email = ?1 and a.senha = ?2")
+    @Query("select a from usuario_fisico a where a.email = ?1 and a.senha = ?2")
     List<UsuarioFisico> pesquisaEmailESenhaFisico(String email, String senha);
+
+    UsuarioFisico findByEmail(String email);
 }

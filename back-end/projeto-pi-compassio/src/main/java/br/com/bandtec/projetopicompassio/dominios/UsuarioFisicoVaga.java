@@ -17,8 +17,38 @@ public class UsuarioFisicoVaga {
     @JoinColumn(nullable = false, name = "fk_vaga")
     private Vaga fkVaga;
 
+    private Boolean curtido;
+
+    private Boolean aprovado;
+
+    private Boolean aplicado;
+
     @Column(name = "data_inscricao")
     private Date dataInscricao;
+
+    public Boolean getAplicado() {
+        return aplicado;
+    }
+
+    public void setAplicado(Boolean aplicado) {
+        this.aplicado = aplicado;
+    }
+
+    public Boolean getCurtido() {
+        return curtido;
+    }
+
+    public void setCurtido(Boolean curtido) {
+        this.curtido = curtido;
+    }
+
+    public Boolean getAprovado() {
+        return aprovado;
+    }
+
+    public void setAprovado(Boolean aprovado) {
+        this.aprovado = aprovado;
+    }
 
     public UsuarioFisico getFkUsuarioFisico() {
         return fkUsuarioFisico;

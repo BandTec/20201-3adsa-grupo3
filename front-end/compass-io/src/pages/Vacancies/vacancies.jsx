@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex'
   },
 
-
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,

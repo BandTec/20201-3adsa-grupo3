@@ -61,12 +61,12 @@ export default class SignIn extends React.Component {
       let Email = document.getElementById("email");
       Email.innerText = document.getElementsByName("email")[0].value;
       if (Email.innerText.length == 0)
-        throw this.getError("Email");
+        throw this.getError("email");
   
       let Senha = document.getElementById("senha");
       Senha.innerText = document.getElementsByName("senha")[0].value;
       if (Senha.innerText.length == 0)
-        throw this.getError("Senha");
+        throw this.getError("senha");
   
       if (Senha.innerText.length < 8 || Senha.innerText.length > 20)
         throw this.getErrorDigitacao("senha");

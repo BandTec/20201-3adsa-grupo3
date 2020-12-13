@@ -3,7 +3,7 @@ CREATE TABLE Endereco(
 id INTEGER IDENTITY(1,1),
 logradouro VARCHAR(100) NOT NULL,
 numero_endereco INTEGER,
-CEP VARCHAR(9),
+cep VARCHAR(9),
 bairro VARCHAR(45),
 estado VARCHAR(2),
 cidade VARCHAR(45),
@@ -19,23 +19,23 @@ telefone VARCHAR(15) NOT NULL,
 data_nascimento DATE NOT NULL,
 cpf VARCHAR(14) NOT NULL,
 foto varchar(255),
-logado bit,
-PRIMARY KEY (id),
-fk_endereco	INTEGER FOREIGN KEY REFERENCES Endereco(id)
+<<<<<<< HEAD
+logado BIT DEFAULT 0,
+PRIMARY KEY (id)
 )-- Conferido
 
 CREATE TABLE UsuarioJuridico(
 id INTEGER IDENTITY(1,1),
 nome_ong VARCHAR(90) NOT NULL,
-email VARCHAR(80) NOT NULL,
+email VARCHAR(80) UNIQUE NOT NULL,
 senha VARCHAR(45) NOT NULL,
-telefone VARCHAR(15) NOT NULL,
+telefone VARCHAR(15),
 cnpj VARCHAR(18) NOT NULL,
 causa VARCHAR(50),
 foto varchar(255),
 descricao VARCHAR(256),
 fk_endereco INTEGER FOREIGN KEY REFERENCES Endereco(id) NOT NULL,
-logado bit,
+logado BIT DEFAULT 0,
 PRIMARY KEY(id)
 )-- Conferido
 

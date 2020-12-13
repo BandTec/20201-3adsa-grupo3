@@ -15,6 +15,10 @@
     display: grid
 }
 
+.width-400pg{
+    width: 400%
+}
+
 /* .imgVolunteerBox{
     display: grid;
 } */
@@ -53,14 +57,31 @@
 
 .vagasBox{
     font-size: 1.2rem;
-    font-weight: 500;
-    margin-left: 18rem;
-    width: 17.5rem;
-    height: 17rem;
+    margin-left: 14rem;
+    width: 30vw;
+    height: 20.5vw;
     border: 0.1rem solid #000000;
     border-radius: 1rem;
     background-color: #fafafa;
     padding: 0;
+}
+
+.titleBox{
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    margin-left: 1.3rem;
+    color: #0084FE;
+    font-weight: 700;
+}
+
+.filaDeVagas{
+    margin-left: 1rem;
+    margin-top: 0.4rem;
+    background: #fff;
+    border: 1px solid #e6e3e3;
+    border-radius: 1rem;
+    width: 27vw;
+    height: 16vw;
 }
 
 .mg-r-64{
@@ -74,3 +95,35 @@
 .mg-r-auto{
     margin-right: auto;
 }
+
+
+/*Scroll-Container*/
+
+  scroll-container {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  scroll-container {
+    margin-top: 0.5rem;
+    display: block;
+    width: 350px;
+    height: 200px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
+
+  scroll-page {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 5em;
+  }
+
+  #listItem{
+      text-decoration: none;
+      list-style: none;
+  }

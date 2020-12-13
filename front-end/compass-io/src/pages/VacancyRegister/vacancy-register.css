@@ -46,6 +46,14 @@
     height: 55rem
 }
 
+.width-300pg{
+    width: 300%
+}
+
+.width-200pg{
+    width: 200%
+}
+
 .center{
     text-align: center
 }

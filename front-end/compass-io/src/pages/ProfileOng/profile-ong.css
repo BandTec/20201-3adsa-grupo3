@@ -1,7 +1,7 @@
-.containerProfileOng{
+/* .containerProfileOng{
     margin-top: 1rem;
     margin-bottom: 1rem;
-}
+} */
 
 .btnCadastrar {
     width: 15%;
@@ -16,4 +16,16 @@
 
 .flex-column{
     flex-direction: column;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.width-75pg{
+    width: 75%
+}
+
+.width-95pg{
+    width: 95%
 }

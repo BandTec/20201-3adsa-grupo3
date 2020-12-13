@@ -158,11 +158,6 @@ export default class CarouselVacancy extends React.Component {
       slidesToShow: 3
     };
 
-    // let { vagas };
-
-    // for (i = 0; i < this.state.resposta.length; i++){
-
-    // }
     
     return (
 

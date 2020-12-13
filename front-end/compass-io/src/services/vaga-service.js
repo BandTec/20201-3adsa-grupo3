@@ -24,6 +24,16 @@ class VagaService {
         });
     }
 
+    async getVagasByCausa(causa) {
+        return axios.get(`${this.BASE_URL}?causa=${causa}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            return err;
+        });
+    }
+
     async postVaga(vaga) {
         return axios.post(this.BASE_URL, vaga, {
             headers: {

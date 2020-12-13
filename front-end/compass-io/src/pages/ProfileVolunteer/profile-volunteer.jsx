@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Navbar from '../../components/Navbar/navbar';
 import AboutVolunteer from '../../components/AboutVolunteer/about-volunteer';
 import ImgVolunteer from '../../assets/images/volunteer-woman-img.jpg';
 import Rating from '../../components/Rating/rating';
@@ -10,10 +9,6 @@ import CarouselSkills from '../../components/CarouselSkills/carousel-skills';
 import AlertCard from '../../components/AlertCard/alert-card';
 
 import UsuarioFisicoService from '../../services/usuario-fisico-service';
-
-import Footer from '../../components/Footer/footer';
-
-// import { Container } from './styles';
 
 import './profile-volunteer.css';
 
@@ -30,8 +25,8 @@ export default class ProfileVolunteer extends React.Component {
   }
 
   componentDidMount() {
-    this.getFoto();
     this.renderPerfil();
+    this.getFoto();
   }
 
   async renderPerfil() {
@@ -55,7 +50,6 @@ export default class ProfileVolunteer extends React.Component {
     }
     voluntario.children.item(1).children.item(1).children.item(0).innerText = idade + ' anos';
   }
-
 
   getFoto = async () => {
     debugger;
