@@ -22,6 +22,7 @@ async function renderVaga() {
   let vagaInfos = resposta.data[0];
   console.log(vagaInfos);
   console.log(URL.toString());
+  debugger
   sessionStorage.setItem("causa", vagaInfos.causa);
 
   let DescricaoVaga = document.getElementById("descricaoVaga");
@@ -81,7 +82,7 @@ export default class VacancySpecific extends React.Component {
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6hOO7TuGsB5W39Y7g6oaAXWaUMnrxyeA&callback=initMap"
           type="text/javascript"></script>
           
-        <VacancyHeader name="headerVaga" imgId="vacancyImage" title="Teste"></VacancyHeader>
+        <VacancyHeader name="headerVaga" imgId="vacancyImage" title="Teste" width="100%" height="20%"></VacancyHeader>
   
         <div className="border-b mg-t-24 height-56p font-color-gray-light fs-32p">
           <a href="#aboutVacancy" className="mg-t-8 mg-r-64 menuOptions">Sobre a vaga</a>
