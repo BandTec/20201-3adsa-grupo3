@@ -85,9 +85,8 @@ export default class ProfileOng extends React.Component {
   }
 
   getFoto = async () => {
-    debugger;
     let usuarioJuridicoService = new UsuarioJuridicoService();
-    let id = parseInt(sessionStorage["userId"])
+    let id = parseInt(sessionStorage["userId"]);
 
     let fotoResponse = await usuarioJuridicoService.getFoto(id);
     let imgOng = document.getElementById("imgOng");

@@ -40,10 +40,12 @@ class AboutVolunteer extends React.Component {
 
         for (var i = 0; i < ultimasVagasAcessadas.data.length; i++) {
             let fotoVaga = await new VagaService().getFoto(ultimasVagasAcessadas.data[i].id);
-            vagas.push({
-                dados: ultimasVagasAcessadas.data[i],
-                foto: 'data:image/jpeg;base64,' + fotoVaga.data
-            })
+            if (fotoVaga != null) {
+                vagas.push({
+                    dados: ultimasVagasAcessadas.data[i],
+                    foto: 'data:image/jpeg;base64,' + fotoVaga.data
+                })
+            }
         }
         this.setState({ultimasVagas: vagas});
     }
@@ -61,7 +63,7 @@ class AboutVolunteer extends React.Component {
 
     render() {
         return (
-            <section className="width-100pg flex ">
+            <section name={this.props.name} className="width-100pg flex ">
                 <div className="imgVolunteerBox grid width-20pg">
                     <img id={this.props.imgId} width="210" height="280" src={this.props.imgSrc}></img>
                     <div className="mg-t-16 width-200pg">
