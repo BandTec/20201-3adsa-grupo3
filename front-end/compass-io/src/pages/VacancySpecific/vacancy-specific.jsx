@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar/navbar';
 import VacancyHeader from '../../components/VacancyHeader/vacancy-header';
 import AboutOng from '../../components/AboutOng/about-ong';
 import WorkSchedule from '../../components/WorkSchedule/work-schedule';
-import CarouselVacancyCause from '../../components/CarouselVacancy/carousel-vacancy';
+import CarouselVacancyCause from '../../components/CarouselVacancyCause/carousel-vacancy-cause';
 import Button from '@material-ui/core/Button';
 // import './vacancy-specific.css';
 import { Loader } from "@googlemaps/js-api-loader"
@@ -115,7 +115,7 @@ export default class VacancySpecific extends React.Component {
           </div>
         </div>
         <div className="vacancyCarousel">
-          <h1>Vagas Similares</h1>
+          <h1>Vagas   Similares</h1>
           <CarouselVacancyCause />
         </div>
       </section>

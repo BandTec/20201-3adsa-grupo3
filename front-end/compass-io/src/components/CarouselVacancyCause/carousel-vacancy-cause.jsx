@@ -69,7 +69,7 @@ export default class CarouselVacancyCause extends React.Component {
     );
   }
 
-  useStyles = makeStyles({
+  classes = makeStyles({
     // carouselImgContainer: {
     //     height: "30rem",
     //   },
@@ -106,65 +106,30 @@ export default class CarouselVacancyCause extends React.Component {
       // paddingBottom: "2rem"
 
     }
-  });
+  })
+  settings = {
+    infinite: true,
+    speed: 1000,
+    autoplaySpeed: 1000,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: <this.SamplePrevArrow />,
+    nextArrow: <this.SampleNextArrow />,
+    slidesToShow: 3
+  };
+
+  limitarCaracter(texto){
+    let retorno;
+    texto.lenght >= 130 ? retorno = texto.substring(0, 170) + "..." : retorno = texto;
+  }
 
   render() {
-    const classes = makeStyles({
-      // carouselImgContainer: {
-      //     height: "30rem",
-      //   },
-      carouselImg: {
-        height: "25rem",
-        // width: "90%",
-        // marginRight: "0rem",
-        justifyContent: "space-between"
-
-      },
-      carouselContainer: {
-        margin: "0 0 0 2rem",
-        // width: "100%"
-        width: "77rem"
-      },
-      textImg: {
-        color: "#fcfcfc",
-        fontSize: "1.25rem",
-        position: "fixed",
-        marginTop: "23rem",
-        marginLeft: "1rem",
-        fontWeight: 700,
-        // textStrokeWidth: "1px",
-        // textStrokeColor: "#000",
-        width: "40rem"
-        // marginTop: "28rem"
-        // alignContent: "center",
-        // textAlign: "end"
-        // marginRight: "5rem",
-        // marginLeft: "6rem",
-        // marginTop: "22rem"
-
-        // marginTop: "50%"
-        // paddingBottom: "2rem"
-
-      }
-    })
-    const settings = {
-      infinite: true,
-      speed: 1000,
-      autoplaySpeed: 1000,
-      slidesToScroll: 1,
-      arrows: true,
-      prevArrow: <this.SamplePrevArrow />,
-      nextArrow: <this.SampleNextArrow />,
-      slidesToShow: 3
-    };
-
-    
     
     return (
 
       <div>
 
-        <Slider id="slider" className={classes.slider} {...settings}>
+        <Slider id="slider" className={this.classes.slider} {...this.settings}>
 
           {this.state.resposta.map(vaga => (
               <CarouselCard key={vaga.idVaga} nameOng={vaga.fkUsuarioJuridico.nomeOng} title={vaga.titulo}
