@@ -4,15 +4,17 @@ input[type='file'] {
 
 .inputFile {
     cursor: pointer;
-    background-color: #1975FF;
-    width: 13rem;
-    height: 2rem;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
     border-radius: 0.5rem;
     color: #fff;
     font-size: 1.2rem;
     text-align: center;
     border-color: #000000;
 }
+
+
 
 .width-25pg{
     width: 25%
@@ -53,6 +55,6 @@ input[type='file'] {
 
 .btnPhoto:hover{
     background-color: #FFB219;
-    color: #fff;
+    color: #000;
     transition: 0.75s;
 }

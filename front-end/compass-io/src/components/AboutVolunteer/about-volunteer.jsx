@@ -62,10 +62,13 @@ class AboutVolunteer extends React.Component {
     render() {
         return (
             <section className="width-100pg flex ">
-                <div className="imgVolunteerBox grid">
+                <div className="imgVolunteerBox grid width-20pg">
                     <img id={this.props.imgId} width="210" height="280" src={this.props.imgSrc}></img>
-                    <InputFile className="" id="editarFoto" text="Editar foto" callBack={this.props.editImgVolunteer} />
+                    <div className="mg-t-16 width-200pg">
+                        <InputFile className="" id="editarFoto" text="Editar foto" callBack={this.props.editImgVolunteer} />
+                    </div>
                 </div>
+
                 <div className="infoVolunteer mg-l-16">
                     <div className="infoVolunteerTitle"><u><b>{this.props.nameVolunteer}</b></u></div>
                     <div className="infoVolunteerText">
