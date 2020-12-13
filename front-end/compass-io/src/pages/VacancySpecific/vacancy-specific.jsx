@@ -115,7 +115,7 @@ export default class VacancySpecific extends React.Component {
           </div>
         </div>
         <div className="vacancyCarousel">
-          <h1>Vagas Similares</h1>
+          <h1>Vagas   Similares</h1>
           <CarouselVacancyCause />
         </div>
       </section>
