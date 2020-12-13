@@ -8,7 +8,7 @@ function Rating(props) {
                 "display-block bg-color-gray-light height-280p width-100pg border border-rd-10 " : 
                 "display-none"}>
                 <div className="mg-l-16">
-                    <h1 >Última vaga visitada</h1>
+                    <h1 >Última vaga pleiteada</h1>
                     <div className="flex ">
                         <img width="140" height="140" src={props.imgVolunteer}></img>
                         <div className="mg-l-16">

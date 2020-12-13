@@ -14,6 +14,8 @@ import UsuarioJuridicoService from '../../../services/usuario-juridico-service'
 import EnderecoService from '../../../services/endereco-service'
 import CommomFunctions from '../../../utils/functions';
 
+import { RecentActorsRounded } from '@material-ui/icons';
+
 import './sign-up-ong.css';
 
 export default class SignUp extends React.Component {

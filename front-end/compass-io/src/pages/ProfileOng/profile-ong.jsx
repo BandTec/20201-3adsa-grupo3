@@ -52,7 +52,6 @@ export default class ProfileOng extends React.Component {
     OngLocation.children.item(0).children.item(0).innerText = perfilJuridicoInfo.email;
     OngLocation.children.item(0).children.item(2).children.item(0).innerText = "https://www.techo.org/";
     OngLocation.children.item(0).children.item(1).innerText = perfilJuridicoInfo.fkEndereco.logradouro + ', ' + perfilJuridicoInfo.fkEndereco.numeroEndereco + ' - ' + perfilJuridicoInfo.fkEndereco.bairro + ', ' + perfilJuridicoInfo.fkEndereco.cidade + ' - ' + perfilJuridicoInfo.fkEndereco.estado + ', ' + perfilJuridicoInfo.fkEndereco.cep;
-
   }
 
   trocarFoto = async () => {
@@ -163,10 +162,10 @@ export default class ProfileOng extends React.Component {
                   <Button variant="contained" className={this.classes.btnTeste} onClick={this.ClickDirection}>+ Cadastrar Vaga</Button>
                 </div>
                 <div className="width-50pg mg-r-16 mg-t-8">
-                  <Button variant="contained" onClick={this.baixarArquivo} >Upload de vagas em TXT</Button>
+                  <Button variant="contained" onClick={this.baixarArquivo} >Download de vagas em TXT</Button>
                 </div>
                 <div className="width-100pg mg-t-8 flex flex-column">
-                  <InputFile id="inputFile" text="Importar arquivo" callBack={this.subirArquivo} />
+                  <InputFile id="inputFile" text="UPLOAD DE VAGAS EM TXT" callBack={this.subirArquivo} />
                 </div>
               </div>
             </div>
