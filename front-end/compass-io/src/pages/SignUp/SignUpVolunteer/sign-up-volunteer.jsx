@@ -7,7 +7,6 @@ import imgVolunteerSingup from '../../../assets/images/img-volunteer-singup.jpg'
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import AlertCard from '../../../components/AlertCard/alert-card';
-import Alerta from '../../../components/Alerta/alerta'
 
 import CommomFunctions from '../../../utils/functions'
 import UsuarioFisicoService from '../../../services/usuario-fisico-service'
@@ -15,139 +14,127 @@ import UsuarioFisicoService from '../../../services/usuario-fisico-service'
 import './sign-up-volunteer.css';
 import { render } from 'react-dom';
 
-function validarSenha() {
-  let senhaInput = document.getElementsByName("senha")[0].value;
-  let confSenhaInput = document.getElementsByName("confSenha")[0].value;
-  console.log(senhaInput);
-  console.log(confSenhaInput);
-
-  if (senhaInput != confSenhaInput) {
-    // alert("Senhas não coincidem");
-    render(<Alerta isError message="Senhas não coincidem" />, document.getElementById("alertArea"));
-    return false;
-  }
-  else if (senhaInput.length < 8 || senhaInput.length > 20) {
-    // alert("A senha deve ter entre 8 e 20 caractéres");
-    render(<Alerta isError message="A senha deve ter entre 8 e 20 caracteres" />, document.getElementById("alertArea"));
-    return false;
-  }
-  else
-    return true;
-}
-
-function getVolunteerForm() {
-  try {
-    validarSenha();
-
-
-    let Nome = document.getElementById("nome");
-    Nome.innerText = document.getElementsByName("nome")[0].value;
-    if (Nome.innerText.length == 0)
-      throw getError("Nome");
-
-    let Telefone = document.getElementById("telefone");
-    Telefone.innerText = document.getElementsByName("telefone")[0].value;
-    if (Telefone.innerText.length == 0)
-      throw getError("Telefone");
-
-    let Nascimento = document.getElementById("dataNascimento");
-    let NascimentoSplit = document.getElementsByName("dataNascimento")[0].value.split("/");
-    //let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
-    // Nascimento.innerText = NascimentoConvert;
-    Nascimento.innerText = NascimentoSplit;
-    if (Nascimento.innerText.length == 0)
-      throw getError("Data de Nascimento");
-
-    let Cpf = document.getElementById("cpf");
-    Cpf.innerText = document.getElementsByName("cpf")[0].value;
-    if (Cpf.innerText.length == 0)
-      throw getError("CPF");
-
-  } catch (error) {
-    throw error;
-  }
-}
-
-function getError(field) {
-  return new Error(`Campo de ${field} vazio`);
-}
-
-function getCadastroForm() {
-  try {
-    let Email = document.getElementById('email');
-    Email.innerText = document.getElementsByName('email')[0].value;
-    if (Email.innerText.length == 0)
-      throw getError("Email");
-
-    let SenhaForm = document.getElementById("senha");
-    SenhaForm.innerText = CommomFunctions.encryptPassword(document.getElementsByName("senha")[0].value);
-    if (SenhaForm.innerText.length == 0)
-      throw getError("Senha");
-  } catch (error) {
-    throw error;
-  }
-}
-
-async function cadastrar() {
-  try {
-    if (!validarSenha()) {
-      return;
-    }
-    // let Email = document.getElementById('email');
-    // Email.innerText = document.getElementsByName('email')[0].value;
-    // if (Email.innerText.length == 0)
-    //   throw getError("Email");
-
-    // let SenhaForm = document.getElementById("senha");
-    // SenhaForm.innerText = CommomFunctions.encryptPassword(document.getElementsByName("senha")[0].value);
-    // if (SenhaForm.innerText.length == 0)
-    // throw getError("Senha");
-
-    // let Nome = document.getElementById("nome");
-    // Nome.innerText = document.getElementsByName("nome")[0].value;
-
-
-    // let Telefone = document.getElementById("telefone");
-    // Telefone.innerText = document.getElementsByName("telefone")[0].value;
-
-    // let Nascimento = document.getElementById("dataNascimento");
-    // let NascimentoSplit = document.getElementsByName("dataNascimento")[0].value.split("/");
-    // let NascimentoConvert = NascimentoSplit[2] + '-' + NascimentoSplit[1] + '-' + NascimentoSplit[0];
-    // Nascimento.innerText = NascimentoConvert;
-
-    // let Cpf = document.getElementById("cpf");
-    // Cpf.innerText = document.getElementsByName("cpf")[0].value;
-
-    getVolunteerForm();
-    getCadastroForm();
-
-    let Logado = document.getElementById("logado");
-    Logado.innerText = false;
-
-    let formFisico = document.getElementById("fisicoForm");
-    let fisicoJson = CommomFunctions.convertFormToJson(formFisico);
-
-    let usuarioFisicoService = new UsuarioFisicoService();
-    console.log(fisicoJson);
-    await usuarioFisicoService.postUsuarioFisico(fisicoJson);
-    render(<Alerta isSuccess message="Voluntário cadastrado com sucesso" />, document.getElementById("alertArea"));
-    window.location.href = "/profile";
-    // render(<AlertCard message="Dados enviados para análise. Verifique sua caixa de e-mail" severity="success" />, document.getElementById("alertArea"));
-  } catch (error) {
-    let errorString = `${error}`;
-    render(<Alerta isError message={errorString} />, document.getElementById("alertArea"));
-  }
-}
-
-// import { Container } from './styles';
-
 export default class SignUp extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
+  state = {
+    message: '',
+    severity: '',
+    open: false
+  }
+
+  cadastrar = async () => {
+    try {
+      this.getVolunteerForm();
+      this.getCadastroForm();
+
+      let Logado = document.getElementById("logado");
+      Logado.innerText = false;
+
+      let formFisico = document.getElementById("fisicoForm");
+      let fisicoJson = CommomFunctions.convertFormToJson(formFisico);
+
+      let usuarioFisicoService = new UsuarioFisicoService();
+      console.log(fisicoJson);
+      await usuarioFisicoService.postUsuarioFisico(fisicoJson);
+
+      this.setState({
+        message: "Dados enviados! Verifique seu email para concluir o seu cadastro.",
+        severity: "success",
+        open: true
+      });
+
+      window.location.href = "/";
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      })
+    }
+  }
+
+  getVolunteerForm = () => {
+    try {
+      this.validarSenha();
+
+      let Nome = document.getElementById("nome");
+      Nome.innerText = document.getElementsByName("nome")[0].value;
+      if (Nome.innerText.length == 0)
+        throw this.getError("nome");
+
+      let Telefone = document.getElementById("telefone");
+      Telefone.innerText = document.getElementsByName("telefone")[0].value;
+      if (Telefone.innerText.length == 0)
+        throw this.getError("telefone");
+
+      let Nascimento = document.getElementById("dataNascimento");
+      let NascimentoSplit = document.getElementsByName("dataNascimento")[0].value.split("/");
+      Nascimento.innerText = NascimentoSplit;
+      if (Nascimento.innerText.length == 0)
+        throw this.getError("data de Nascimento");
+
+      let Cpf = document.getElementById("cpf");
+      Cpf.innerText = document.getElementsByName("cpf")[0].value;
+      if (Cpf.innerText.length == 0)
+        throw this.getError("CPF");
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  getCadastroForm = () => {
+    try {
+      let Email = document.getElementById('email');
+      Email.innerText = document.getElementsByName('email')[0].value;
+      if (Email.innerText.length == 0)
+        throw this.getError("email");
+
+      let SenhaForm = document.getElementById("senha");
+      SenhaForm.innerText = CommomFunctions.encryptPassword(document.getElementsByName("senha")[0].value);
+      if (SenhaForm.innerText.length == 0)
+        throw this.getError("senha");
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  validarSenha = () => {
+    try {
+      let senha = document.getElementsByName("senha")[0].value;
+      let confSenha = document.getElementsByName("confSenha")[0].value;
+      if (senha != confSenha) {
+        throw new Error("Senhas não coincidem");
+      }
+      else if (senha.length < 8 || senha.length > 20) {
+        throw new Error("A senha deve ter entre 8 e 20 caractéres");
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  getError = (field) => {
+    return new Error(`Campo de ${field} vazio`);
+  }
+
+  fecharAlerta = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ open: false })
+  };
+
   render() {
-
     return (
-
       <React.Fragment>
+
+        <AlertCard open={this.state.open} message={this.state.message} severity={this.state.severity} onClose={this.fecharAlerta} />
         <form id="fisicoForm" hidden>
           <input id="email" />
           <input id="nome" />
@@ -186,8 +173,6 @@ export default class SignUp extends React.Component {
               </div>
             </div>
 
-
-
             <div className="height-80pg mg-t-24 border border-rd-10 bg-color-gray-light">
               <div className=" mg-t-16 mg-l-16">
                 <LabelTitleForm title="Informações da Conta" />
@@ -209,8 +194,7 @@ export default class SignUp extends React.Component {
             </div>
 
             <div className="mg-t-16 flex">
-              <Button id="btnCadastrar" variant="contained" color="primary" onClick={cadastrar}>Cadastrar</Button>
-              {/* <div id="alertArea" className="mg-l-32 width-100pg"></div> */}
+              <Button id="btnCadastrar" variant="contained" color="primary" onClick={this.cadastrar}>Cadastrar</Button>
             </div>
 
           </div>
@@ -218,4 +202,4 @@ export default class SignUp extends React.Component {
       </React.Fragment>
     );
   }
-};
+}

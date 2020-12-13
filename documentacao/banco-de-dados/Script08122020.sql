@@ -19,6 +19,7 @@ telefone VARCHAR(15) NOT NULL,
 data_nascimento DATE NOT NULL,
 cpf VARCHAR(14) NOT NULL,
 foto varchar(255),
+<<<<<<< HEAD
 logado BIT DEFAULT 0,
 PRIMARY KEY (id)
 )-- Conferido
@@ -26,7 +27,7 @@ PRIMARY KEY (id)
 CREATE TABLE UsuarioJuridico(
 id INTEGER IDENTITY(1,1),
 nome_ong VARCHAR(90) NOT NULL,
-email VARCHAR(80) UNIQUE KEY NOT NULL,
+email VARCHAR(80) UNIQUE NOT NULL,
 senha VARCHAR(45) NOT NULL,
 telefone VARCHAR(15),
 cnpj VARCHAR(18) NOT NULL,
@@ -43,8 +44,8 @@ id INTEGER IDENTITY(1,1),
 titulo VARCHAR(256) NOT NULL,
 causa VARCHAR(50),
 descricao VARCHAR(256),
-data_inicio DATETIME NOT NULL,
-data_fim DATETIME,
+data_inicio DATE NOT NULL,
+data_fim DATE,
 foto varchar(255),
 fk_endereco INTEGER FOREIGN KEY REFERENCES Endereco(id),
 fk_usuario_juridico INTEGER FOREIGN KEY  REFERENCES UsuarioJuridico(id) NOT NULL,
@@ -56,11 +57,3 @@ fk_usuario_fisico INTEGER FOREIGN KEY REFERENCES UsuarioFisico(id) NOT NULL,
 fk_vaga INTEGER FOREIGN KEY REFERENCES Vaga(id) NOT NULL,
 data_inscricao DATE
 ) -- Conferido
-
-CREATE TABLE Avaliacao(
-id_avaliacao INTEGER IDENTITY(1,1),
-pontuacao INTEGER,
-relatorio VARCHAR(500),
-fk_usuario_fisico INTEGER FOREIGN KEY REFERENCES UsuarioFisico(id),
-fk_usuario_juridico INTEGER FOREIGN KEY REFERENCES UsuarioJuridico(id)
-)--Conferido
