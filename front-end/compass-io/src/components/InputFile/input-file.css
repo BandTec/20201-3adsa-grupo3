@@ -13,6 +13,8 @@ input[type='file'] {
     border-color: #000000;
 }
 
+
+
 .width-25pg{
     width: 25%
 }
@@ -52,7 +54,7 @@ input[type='file'] {
 
 .btnPhoto:hover{
     background-color: #FFB219;
-    color: #fff;
+    color: #000;
     transition: 0.75s;
     cursor: pointer;
 }

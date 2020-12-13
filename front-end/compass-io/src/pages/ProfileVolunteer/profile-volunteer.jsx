@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Navbar from '../../components/Navbar/navbar';
 import AboutVolunteer from '../../components/AboutVolunteer/about-volunteer';
 import ImgVolunteer from '../../assets/images/volunteer-woman-img.jpg';
 import Rating from '../../components/Rating/rating';
@@ -10,10 +9,6 @@ import CarouselSkills from '../../components/CarouselSkills/carousel-skills';
 import AlertCard from '../../components/AlertCard/alert-card';
 
 import UsuarioFisicoService from '../../services/usuario-fisico-service';
-
-import Footer from '../../components/Footer/footer';
-
-// import { Container } from './styles';
 
 import './profile-volunteer.css';
 
@@ -30,7 +25,30 @@ export default class ProfileVolunteer extends React.Component {
   }
 
   componentDidMount() {
-    this.getFoto()
+    this.renderPerfil();
+    this.getFoto();
+  }
+
+  async renderPerfil() {
+    let usuarioFisico = new UsuarioFisicoService();
+    let resposta = await usuarioFisico.getUsuarioFisicoById(parseInt(sessionStorage["userId"]));
+    let voluntarioInfo = resposta.data[0];
+    let voluntario = document.getElementsByName("voluntarioCard")[0];
+    voluntario.children.item(1).children.item(0).innerText = voluntarioInfo.nome;
+    let convertData = new Date(voluntarioInfo.dataNascimento).toLocaleDateString("pt-BR");
+    let nascimento = convertData.split('/');
+    let hoje = new Date;
+    let hojePartes = [hoje.getDate(), (hoje.getMonth() + 1), hoje.getFullYear()];
+    console.log(hojePartes);
+    let idade;
+    if (hojePartes[1] >= nascimento[1]) {
+      idade = hojePartes[2] - nascimento[2];
+    } else if (hojePartes[0] >= nascimento[0]) {
+      idade = hojePartes[2] - nascimento[2];
+    } else {
+      idade = (hojePartes[2] - nascimento[2]) - 1;
+    }
+    voluntario.children.item(1).children.item(1).children.item(0).innerText = idade + ' anos';
   }
 
   getFoto = async () => {
@@ -86,8 +104,8 @@ export default class ProfileVolunteer extends React.Component {
       <div classname="containerProfileVolunteer">
 
         <AlertCard open={this.state.open} message={this.state.message} severity={this.state.severity} onClose={this.fecharAlerta} />
-        
-        <AboutVolunteer imgId="imgVolunteer" editImgVolunteer={this.trocarFoto} className="mg-b-16" nameVolunteer="Iago Roani de Lima" ageVolunteer="21 anos" professionVolunteer="Automação"
+
+        <AboutVolunteer name="voluntarioCard" imgId="imgVolunteer" editImgVolunteer={this.trocarFoto} className="mg-b-16" nameVolunteer="Iago Roani de Lima" ageVolunteer="21 anos" professionVolunteer="Automação"
           schoolVolunteer="Cursando Superior" liveInVolunteer="Suzano,SP,Brasil"></AboutVolunteer>
         <div className="">
           <h1>Sobre mim</h1>

@@ -15,6 +15,10 @@
     display: grid
 }
 
+.width-400pg{
+    width: 400%
+}
+
 /* .imgVolunteerBox{
     display: grid;
 } */
