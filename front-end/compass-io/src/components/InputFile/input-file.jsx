@@ -6,7 +6,7 @@ function InputFile(props) {
   return(
       <React.Fragment>
         {/* <div className="center-v-h "> */}
-          <label className="btnPhoto mg-t-24 pd-t-16 fs-24 bg-color-blue width-35pg height-40p mg-r-16 font-color-white border-rd-5 txtal-center" 
+          <label className="btnPhoto pd-t-8 fs-24 bg-color-blue width-30pg pd-b-8 txtal-center height-40p mg-r-16 font-color-white border-rd-5 center" 
             for={props.id}>{props.text}</label>
         {/* </div> */}
         <input type="file" id={props.id} onChange={props.callBack}></input>

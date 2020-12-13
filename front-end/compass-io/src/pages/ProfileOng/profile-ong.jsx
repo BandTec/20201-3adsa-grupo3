@@ -9,6 +9,7 @@ import InputFile from '../../components/InputFile/input-file';
 import ImgVolunteer from '../../assets/images/child-img.jpg';
 import AlertCard from '../../components/AlertCard/alert-card';
 import Footer from '../../components/Footer/footer';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import { render } from 'react-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -117,15 +118,19 @@ export default class ProfileOng extends React.Component {
   }
 
   classes = makeStyles({
-    outlineBtn: {
+    outlinedBtn: {
       width: "15%",
       border: "2.5px solid #1975FF",
       color: "#1975FF",
       fontWeight: 600,
       margin: "1rem 0",
+    },
+    btnTeste: {
+      color: "#1975FF"
     }
   });
 
+  
   fecharAlerta = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -137,20 +142,37 @@ export default class ProfileOng extends React.Component {
     return (
       <section>
         <AlertCard open={this.state.open} message={this.state.message} severity={this.state.severity} onClose={this.fecharAlerta} />
-        <div className="containerProfileOng">
+        <div className="mg-v-16 width-100pg">
           <AboutOng name="descricaoOng" nameOng="TETO Brasil"
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!"
             link="www.google.com.br"
             width="600" />
-          <div className="flex flex-column mg-t-16 width-15pg">
-            <InputFile id="editarFoto" text="Editar foto" callBack={this.trocarFoto} />
+          <div className="flex mg-v-16 width-100pg">
+            <div className="width-40pg flex flex-column">
+              <div className="width-100pg">
+                <InputFile id="editarFoto" text="Editar foto" callBack={this.trocarFoto} />
+              </div>
+            </div>
+            
           </div>
-          <Button variant="outline" onClick={this.ClickDirection} className={this.classes.outlineBtn}>+ Cadastrar Vaga</Button>
-          <div className="vacancyCarousel">
-            <h1>Vagas Abertas</h1>
-            <CarouselVacancy />
-            <Button onClick={this.baixarArquivo}>Baixar arquivo de vagas TXT</Button>
-            <InputFile id="inputFile" text="Importar arquivo" callBack={this.subirArquivo} />
+          <div className="width-100pg border border-rd-10 height-500pg">
+            <div className="flex justcon-sb mg-b-16">
+              <h1 className="width-30pg mg-l-32">Vagas Abertas</h1>
+              <div className="width-60pg flex justcon-sb mg-t-8">
+                <div className="width-40pg mg-r-16 mg-t-8">
+                  <Button variant="contained" className={this.classes.btnTeste} onClick={this.ClickDirection}>+ Cadastrar Vaga</Button>
+                </div>
+                <div className="width-50pg mg-r-16 mg-t-8">
+                  <Button variant="contained" onClick={this.baixarArquivo} >Upload de vagas em TXT</Button>
+                </div>
+                <div className="width-100pg mg-t-8 flex flex-column">
+                  <InputFile id="inputFile" text="Importar arquivo" callBack={this.subirArquivo} />
+                </div>
+              </div>
+            </div>
+            <div className="mg-b-16">
+              <CarouselVacancy />
+            </div>
           </div>
           <div className="ratings">
             <Rating isOngProfile
