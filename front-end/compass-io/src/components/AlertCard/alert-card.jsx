@@ -6,27 +6,27 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default class AlertCard extends React.Component {
+export default function AlertCard(props) {
 
-    constructor(props) {
-        super(props);
-    }
+    const [state, setState] = React.useState({
+      open: true
+    });
 
-    fecharAlerta = (event, reason) => {
+    const open = state.open;
+
+    const fecharAlerta = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        this.props.onClose();
+        setState({open: false})
     };
 
-    render() {
-        return (
-            <Snackbar open={this.props.open} autoHideDuration={6000} onClose={this.fecharAlerta}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
-                <Alert onClose={this.fecharAlerta} severity={this.props.severity}>
-                    {this.props.message}
-                </Alert>
-            </Snackbar>
-        );
-    }
+    return (
+        <Snackbar open={open} autoHideDuration={6000} onClose={fecharAlerta}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
+            <Alert onClose={fecharAlerta} severity={props.severity}>
+                {props.message}
+            </Alert>
+        </Snackbar>
+    )
 }

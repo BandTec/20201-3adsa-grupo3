@@ -16,7 +16,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
 import ArquivoService from '../../services/arquivo-service';
 
-import './profile-ong.css';
+import { render } from 'react-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
 export default class ProfileOng extends React.Component {
 

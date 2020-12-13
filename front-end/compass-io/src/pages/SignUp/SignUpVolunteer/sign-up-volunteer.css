@@ -30,11 +30,6 @@
 }
 
 
-.height-1056p{
-    height: 66rem;
-}
-
-
 .height-1040p{
     height: 65rem;
 }
@@ -45,18 +40,6 @@
 
 .mg-t-360{
     margin-top: 22.5rem
-}
-
-.height-20pg{
-    height: 20%
-}
-
-.height-50pg{
-    height: 50%
-}
-
-.height-80pg{
-    height: 80%
 }
 
 .textImage{
@@ -142,49 +125,4 @@
 
 .genderGroup{
     display: flex;
-}
-
-/*-----------Responsividade----------*/
-
-@media (max-width: 640px){
-
-    .container > .loginImage, .childrenImage{
-        display: none;
-    }
-
-    .formVolunteer{
-        margin-left: 0;
-    }
-
-    .signupVForm{
-        margin-left: 0;
-    }
-
-    .container > .formVolunteer > .signupVForm{
-        margin-left: 0%;
-        width: 25rem;
-        height: 35rem;
-        background-color: #FCFCFC;
-        border-radius: 1rem;
-        border: 1px solid #000;
-    } 
-
-    .container > .formVolunteer > .infContaVForm{
-        margin-top: 2%;
-        margin-left: 0%;
-        width: 25rem;
-        height: 24rem;
-        
-    } 
-
-    .formVolunteer > .checkbox{
-        margin-left: 1%;
-    }
-
-    #btnCadastrar{
-        margin-left: 4%;
-    }
-
-
-
 }

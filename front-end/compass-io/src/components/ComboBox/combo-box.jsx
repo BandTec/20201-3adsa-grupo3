@@ -29,36 +29,35 @@ export default class ComboBox extends React.Component {
     },
   }));
 
-  componentDidMount() {
-    this.setContent();
-  }
-
-  setContent = () => {
-    this.setState({content: this.props.content});
-  }
+export default function ComboBox(props) {
+  const classes = useStyles();
+  const [cidade, setCidade] = React.useState('');
 
   handleChange = (event) => {
     this.setState({selectedItem: event.target.value});
   };
 
-  render() {
-    return(
-        <FormControl fullWidth={true} variant="outlined" className={this.classes.formControl} >
-        <InputLabel id="tituloLabel">{this.props.labelTitle}</InputLabel>
-        <Select
-          labelId="tituloLabelSelect"
-          id="tituloSelect"
-          name={this.props.name}
-          value={this.state.selectedItem}
-          onChange={this.handleChange}
-          label={this.props.labelTitle}
-          width={this.props.width}
-        >
-          {this.state.content.map(item => (
-                  <MenuItem key={item} value={item}>{item}</MenuItem>
-                ))}
-        </Select>
-      </FormControl>
-    );
+  const items = [];
+  let estados = JSON.parse(props.menuItems)
+
+  for (let item of estados) {
+    items.push(<MenuItem value={item}/>)
   }
+
+  return(
+    <FormControl variant="outlined" className={classes.formControl} >
+    <InputLabel id="tituloLabel">{props.labelTitle}</InputLabel>
+    <Select
+      labelId="tituloLabel"
+      id="tituloSelect"
+      name={props.name}
+      value={cidade}
+      onChange={handleChange}
+      label={props.labelTitle}
+      width={props.width}
+    >
+      {items}
+    </Select>
+  </FormControl>
+  );
 }
