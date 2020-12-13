@@ -32,9 +32,9 @@ public class UsuarioFisicoVagaController {
     public ResponseEntity curtir(@RequestBody UsuarioFisicoVaga usuarioFisicoVaga){
         try {
             Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(usuarioFisicoVaga.getFkUsuarioFisico().getId());
-            if (!usuarioOptional.isPresent()){
+            if (usuarioOptional.isPresent()){
                 Optional<Vaga> vagaOptional  = vagaRepository.findById(usuarioFisicoVaga.getFkVaga().getId());
-                if (!vagaOptional.isPresent()){
+                if (vagaOptional.isPresent()){
                     UsuarioFisico usuarioCadastrado = usuarioOptional.get();
                     Vaga vagaCadastrada = vagaOptional.get();
                     UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
@@ -56,9 +56,9 @@ public class UsuarioFisicoVagaController {
     public ResponseEntity aplicar(@RequestBody UsuarioFisicoVaga usuarioFisicoVaga){
         try {
             Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(usuarioFisicoVaga.getFkUsuarioFisico().getId());
-            if (!usuarioOptional.isPresent()){
+            if (usuarioOptional.isPresent()){
                 Optional<Vaga> vagaOptional  = vagaRepository.findById(usuarioFisicoVaga.getFkVaga().getId());
-                if (!vagaOptional.isPresent()){
+                if (vagaOptional.isPresent()){
                     UsuarioFisico usuarioCadastrado = usuarioOptional.get();
                     Vaga vagaCadastrada = vagaOptional.get();
                     UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
@@ -80,9 +80,9 @@ public class UsuarioFisicoVagaController {
     public ResponseEntity aprovar(@RequestBody UsuarioFisicoVaga usuarioFisicoVaga){
         try {
             Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(usuarioFisicoVaga.getFkUsuarioFisico().getId());
-            if (!usuarioOptional.isPresent()){
+            if (usuarioOptional.isPresent()){
                 Optional<Vaga> vagaOptional  = vagaRepository.findById(usuarioFisicoVaga.getFkVaga().getId());
-                if (!vagaOptional.isPresent()){
+                if (vagaOptional.isPresent()){
                     UsuarioFisico usuarioCadastrado = usuarioOptional.get();
                     Vaga vagaCadastrada = vagaOptional.get();
                     UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
