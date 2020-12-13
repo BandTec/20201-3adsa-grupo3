@@ -34,6 +34,16 @@ class VagaService {
         });
     }
 
+    async getVagasByFkOng(fkOng) {
+        return axios.get(`${this.BASE_URL}/juridico/${fkOng}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            return err;
+        });
+    }
+
     async postVaga(vaga) {
         return axios.post(this.BASE_URL, vaga, {
             headers: {

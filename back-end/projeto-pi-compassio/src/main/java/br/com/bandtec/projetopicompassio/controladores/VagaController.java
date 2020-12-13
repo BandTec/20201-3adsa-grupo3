@@ -1,5 +1,6 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
+import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
 import br.com.bandtec.projetopicompassio.repositorios.VagaRepository;
 import br.com.bandtec.projetopicompassio.utils.FotoHandler;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -115,5 +117,16 @@ public class VagaController {
         } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex.getMessage());
         }
+    }
+
+    @GetMapping("/juridico/{id}")
+    public ResponseEntity getByfkJuridico(@PathVariable Integer id){
+        List<Vaga> vagas = repository.findAll();
+        List<Vaga> vagasRequeridas = new ArrayList<>(50);
+        for (int i = 0; i < vagas.size(); i++){
+            if (vagas.get(i).getFkUsuarioJuridico().getId() == id) vagasRequeridas.add(vagas.get(i));
+        }
+        if (vagasRequeridas.isEmpty()) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(vagasRequeridas);
     }
 }

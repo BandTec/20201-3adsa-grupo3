@@ -18,22 +18,20 @@ window.onload = () => {};
 
 async function renderVaga() {
   let vagaService = new VagaService();
-  const resposta = await vagaService.getVagaById(37);
+  const resposta = await vagaService.getVagaById(sessionStorage.getItem("idVaga"));
   let vagaInfos = resposta.data[0];
   console.log(vagaInfos);
-  console.log(URL.toString());
   sessionStorage.setItem("causa", vagaInfos.causa);
 
   let DescricaoVaga = document.getElementById("descricaoVaga");
   DescricaoVaga.innerText = vagaInfos.descricao;
-  console.log(vagaInfos.descricao);
   let header = document.getElementsByName("headerVaga")[0];
   header.children.item(1).children.item(0).innerText=vagaInfos.titulo;
 
   let ong = document.getElementsByName("ong")[0];
   ong.children.item(1).children.item(0).innerText=vagaInfos.fkUsuarioJuridico.nomeOng;
   ong.children.item(1).children.item(1).innerText=vagaInfos.fkUsuarioJuridico.descricao;
-  ong.children.item(1).children.item(2).innerText="www.google.com.br";
+  ong.children.item(1).children.item(2).innerText='www.' + vagaInfos.fkUsuarioJuridico.nomeOng + '.org';
 
   let vaga = document.getElementsByName("vaga")[0];
   vaga.children.item(1).children.item(1).innerText=new Date(vagaInfos.dataInicio).toLocaleDateString("pt-BR");

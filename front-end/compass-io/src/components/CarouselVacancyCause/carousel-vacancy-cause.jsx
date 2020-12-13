@@ -121,6 +121,7 @@ export default class CarouselVacancyCause extends React.Component {
   limitarCaracter(texto){
     let retorno;
     texto.lenght >= 130 ? retorno = texto.substring(0, 170) + "..." : retorno = texto;
+    return retorno;
   }
 
   render() {
