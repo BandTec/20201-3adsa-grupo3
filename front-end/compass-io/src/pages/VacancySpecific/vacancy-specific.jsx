@@ -18,11 +18,28 @@ window.onload = () => {};
 
 async function renderVaga() {
   let vagaService = new VagaService();
-  const resposta = await vagaService.getVagaById(4);
+  const resposta = await vagaService.getVagaById(37);
   let vagaInfos = resposta.data[0];
   console.log(vagaInfos);
 
-  sessionStorage["currentVacancy"] = vagaInfos.titulo;
+  let DescricaoVaga = document.getElementById("descricaoVaga");
+  DescricaoVaga.innerText = vagaInfos.descricao;
+  console.log(vagaInfos.descricao);
+  let header = document.getElementsByName("headerVaga")[0];
+  header.children.item(1).children.item(0).innerText=vagaInfos.titulo;
+
+  let ong = document.getElementsByName("ong")[0];
+  ong.children.item(1).children.item(0).innerText=vagaInfos.fkUsuarioJuridico.nomeOng;
+  ong.children.item(1).children.item(1).innerText=vagaInfos.fkUsuarioJuridico.descricao;
+  ong.children.item(1).children.item(2).innerText="www.google.com.br";
+
+  let vaga = document.getElementsByName("vaga")[0];
+  vaga.children.item(1).children.item(1).innerText=new Date(vagaInfos.dataInicio).toLocaleDateString("pt-BR");
+  vaga.children.item(2).children.item(1).innerText=new Date(vagaInfos.dataFim).toLocaleDateString("pt-BR");
+  vaga.children.item(3).children.item(1).innerText=vagaInfos.fkEndereco.logradouro + ', ' + vagaInfos.fkEndereco.numeroEndereco + ' - ' + vagaInfos.fkEndereco.bairro + ', ' + vagaInfos.fkEndereco.cidade + ' - ' + vagaInfos.fkEndereco.estado + ', ' + vagaInfos.fkEndereco.cep;
+
+
+  //sessionStorage["currentVacancy"] = vagaInfos.titulo;
 
   let usuarioFisicoService = new UsuarioFisicoService();
 
@@ -31,20 +48,7 @@ async function renderVaga() {
 
   let vagaAsJson = JSON.stringify(resposta.data[0]);
   let ultimaVagaResponse = await usuarioFisicoService.setUltimaVaga(userIdAsInt, vagaAsJson);
-
-  let DescricaoVaga = document.getElementsByName("descricaoVaga")[0];
-  DescricaoVaga.innerHTML = vagaInfos.descricao;
   
-  let ong = document.getElementsByName("ong")[0];
-  ong.children.item(1).children.item(0).innerText=vagaInfos.fkUsuarioJuridico.nomeOng;
-  ong.children.item(1).children.item(1).innerText=vagaInfos.fkUsuarioJuridico.descricao;
-  ong.children.item(1).children.item(2).innerText="www.google.com.br";
-
-  let vaga = document.getElementsByName("vaga")[0];
-  vaga.children.item(1).children.item(1).innerText=vagaInfos.dataInicio;
-  vaga.children.item(2).children.item(1).innerText=vagaInfos.dataFim;
-  vaga.children.item(3).children.item(1).innerText=vagaInfos.fkEndereco.logradouro + ', ' + vagaInfos.fkEndereco.numeroEndereco + ' - ' + vagaInfos.fkEndereco.bairro + ', ' + vagaInfos.fkEndereco.cidade + ' - ' + vagaInfos.fkEndereco.estado + ', ' + vagaInfos.fkEndereco.cep;
-
   let fotoResponse = await vagaService.getFoto(resposta.data[0].id);
   let vacancyImage = document.getElementById("vacancyImage");
   vacancyImage.src = "data:image/png;base64," + fotoResponse.data;
@@ -75,16 +79,16 @@ export default class VacancySpecific extends React.Component {
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6hOO7TuGsB5W39Y7g6oaAXWaUMnrxyeA&callback=initMap"
           type="text/javascript"></script>
           
-        <VacancyHeader imgId="vacancyImage" title="Teste"></VacancyHeader>
+        <VacancyHeader name="headerVaga" imgId="vacancyImage" title="Teste"></VacancyHeader>
   
         <div className="border-b mg-t-24 height-56p font-color-gray-light fs-32p">
           <a href="#aboutVacancy" className="mg-t-8 mg-r-64 menuOptions">Sobre a vaga</a>
           <a href="#aboutOng" className="mg-t-8 mg-r-64 menuOptions">ONG</a>
           <a href="#workSchedule" className="mg-t-8 mg-r-64 menuOptions">Horário de Trabalho</a>
         </div>
-        <div id="aboutVacancy" className="width-60pg mg-b-16">
+        <div className="width-60pg mg-b-16">
           <h1 className="fs-32p">Sobre a Vaga</h1>
-          <div name="descricaoVaga" className="aboutVacancyText">
+          <div id="descricaoVaga" className="aboutVacancyText">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus.
           </div>
           <Button onClick={baixarArquivo}>Baixar arquivo da vaga TXT</Button>
