@@ -1,5 +1,6 @@
 package br.com.bandtec.projetopicompassio.repositorios;
 
+import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
@@ -12,4 +13,6 @@ import java.util.List;
 public interface UsuarioFisicoVagaRepository extends JpaRepository<UsuarioFisicoVaga, Integer> {
 
     List<UsuarioFisicoVaga> findAllUsuarioFisicoVagaByFkVaga(Vaga fkVaga);
+
+    List<UsuarioFisicoVaga> findAllUsuarioFisicoVagaByFkUsuarioFisico(UsuarioFisico usuarioFisico);
 }
