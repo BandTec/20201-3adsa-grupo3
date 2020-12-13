@@ -32,14 +32,14 @@ export default class SignUp extends React.Component {
     try {
       this.getEnderecoFormData();
       this.getUsuarioFormData();
-  
+
       let enderecoService = new EnderecoService();
       let usuarioJuridicoService = new UsuarioJuridicoService();
-  
+
       let formEndereco = document.getElementById("enderecoUsuarioJuridicoToSubmit");
       const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
       var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
-  
+
       let formUsuario = document.getElementById("usuarioJuridicoToSubmit");
       let usuarioObj = CommomFunctions.convertFormToObject(formUsuario);
       usuarioObj.fkEndereco = respEndereco.data;
@@ -63,33 +63,33 @@ export default class SignUp extends React.Component {
       })
     }
   }
-  
-  getUsuarioFormData = () => {  
+
+  getUsuarioFormData = () => {
     try {
       this.validarSenha();
       let NomeDaOng = document.getElementById("nomeOng");
       NomeDaOng.innerText = document.getElementsByName("nomeDaOng")[0].value;
       if (NomeDaOng.innerText.length == 0)
         throw this.getError("nome da ONG");
-  
+
       let Email = document.getElementById("email");
       Email.innerText = document.getElementsByName("email")[0].value;
       if (Email.innerText.length == 0)
         throw this.getError("email");
-  
+
       let Senha = document.getElementById("senha");
       Senha.innerText = document.getElementsByName("senha")[0].value;
-  
+
       let Telefone = document.getElementById("telefone");
       Telefone.innerText = document.getElementsByName("telefone")[0].value;
       if (Telefone.innerText.length == 0)
         throw this.getError("telefone");
-  
+
       let Cnpj = document.getElementById("cnpj");
       Cnpj.innerText = document.getElementsByName("cnpj")[0].value;
       if (Cnpj.innerText.length == 0)
         throw this.getError("CNPJ");
-  
+
       let Causa = document.getElementById("causa");
       Causa.innerText = document.getElementsByName("causa")[0].value;
       if (Causa.innerText.length == 0)
@@ -98,34 +98,34 @@ export default class SignUp extends React.Component {
       throw error;
     }
   }
-  
+
   getEnderecoFormData = () => {
     try {
       let Logradouro = document.getElementById("logradouro");
       Logradouro.innerText = document.getElementsByName("logradouro")[0].value;
       if (Logradouro.innerText.length == 0)
         throw this.getError("logradouro");
-  
+
       let Numero = document.getElementById("numeroEndereco");
       Numero.innerText = document.getElementsByName("numero")[0].value;
       if (Numero.innerText.length == 0)
         throw this.getError("numero");
-  
+
       let Cep = document.getElementById("cep");
       Cep.innerText = document.getElementsByName("cep")[0].value;
       if (Cep.innerText.length == 0)
         throw this.getError("CEP");
-  
+
       let Bairro = document.getElementById("bairro");
       Bairro.innerText = document.getElementsByName("bairro")[0].value;
       if (Bairro.innerText.length == 0)
         throw this.getError("bairro");
-  
+
       let Cidade = document.getElementById("cidade");
       Cidade.innerText = document.getElementsByName("cidade")[0].value;
       if (Cidade.innerText.length == 0)
         throw this.getError("cidade");
-  
+
       let Estado = document.getElementById("estado");
       Estado.innerText = document.getElementsByName("estado")[0].value;
       if (Estado.innerText.length == 0)
@@ -134,7 +134,7 @@ export default class SignUp extends React.Component {
       throw error;
     }
   }
-  
+
   validarSenha = () => {
     try {
       let senha = document.getElementsByName("senha")[0].value;
@@ -149,7 +149,7 @@ export default class SignUp extends React.Component {
       throw error;
     }
   }
-  
+
   getError = (field) => {
     return new Error(`Campo de ${field} vazio`);
   }
@@ -240,9 +240,7 @@ export default class SignUp extends React.Component {
                   <ComboBox name="causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} labelTitle="Causa" />
                 </div>
               </div>
-
             </div>
-
 
             <div className="mg-t-24 height-30pg border border-rd-10 bg-color-gray-light">
               <div className=" mg-t-32 mg-l-16">

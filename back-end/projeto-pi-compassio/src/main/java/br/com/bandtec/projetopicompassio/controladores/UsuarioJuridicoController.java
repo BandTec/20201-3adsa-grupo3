@@ -192,7 +192,7 @@ public class UsuarioJuridicoController {
                                 "<h1 style='margin-top: 0px;margin-bottom: 0px;'>Compass.io</h1>" +
                                 "</div>" +
                                 "<div>Seu cadastro foi concluído com sucesso! Clique " +
-                                "<a href='https://youtu.be/pzDMi89Do7c'>aqui</a> " +
+                                "<a href='http://localhost:3000/signin'>aqui</a> " +
                                 "para ir para sua conta em nosso site </div>" +
                                 "</div>");
             }

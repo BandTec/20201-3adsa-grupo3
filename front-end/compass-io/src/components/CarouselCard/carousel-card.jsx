@@ -9,7 +9,7 @@ import './carousel-card.css';
 
 function CarouselCard(props){
     return(
-        <div className="carouselCard">
+        <div key={props.key} className="carouselCard">
             <div className="cardImg">
 
             </div>

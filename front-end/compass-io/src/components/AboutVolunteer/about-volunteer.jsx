@@ -61,7 +61,7 @@ class AboutVolunteer extends React.Component {
 
     render() {
         return (
-            <section className="width-100pg flex ">
+            <section name={this.props.name} className="width-100pg flex ">
                 <div className="imgVolunteerBox grid">
                     <img id={this.props.imgId} width="210" height="280" src={this.props.imgSrc}></img>
                     <InputFile className="" id="editarFoto" text="Editar foto" callBack={this.props.editImgVolunteer} />
