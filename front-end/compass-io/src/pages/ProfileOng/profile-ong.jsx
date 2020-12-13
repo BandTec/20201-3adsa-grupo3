@@ -10,9 +10,6 @@ import ImgVolunteer from '../../assets/images/child-img.jpg';
 import AlertCard from '../../components/AlertCard/alert-card';
 import Footer from '../../components/Footer/footer';
 
-import { render } from 'react-dom';
-import { makeStyles } from '@material-ui/core/styles';
-
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
 import ArquivoService from '../../services/arquivo-service';
 

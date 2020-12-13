@@ -15,7 +15,6 @@ import Alerta from '../../../components/Alerta/alerta'
 
 import './sign-up-ong.css';
 import { RecentActorsRounded } from '@material-ui/icons';
-import { render } from 'react-dom';
 
 async function cadastrar() {
   try {
