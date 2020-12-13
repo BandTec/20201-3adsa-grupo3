@@ -10,7 +10,7 @@ class UsuarioFisicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -20,7 +20,7 @@ class UsuarioFisicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -30,7 +30,7 @@ class UsuarioFisicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -42,10 +42,12 @@ class UsuarioFisicoService {
             }
         })
         .then((res) => {
+            
             return res;
         })
         .catch((err) => {
-            return err;
+            
+            throw err;
         });
     }
 
@@ -55,7 +57,7 @@ class UsuarioFisicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 
@@ -65,7 +67,7 @@ class UsuarioFisicoService {
             return res;
         })
         .catch((err) => {
-            return err;
+            throw err;
         });
     }
 

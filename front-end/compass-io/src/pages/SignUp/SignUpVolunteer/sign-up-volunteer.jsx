@@ -28,7 +28,6 @@ export default class SignUp extends React.Component {
 
   cadastrar = async () => {
     try {
-      debugger
       this.getVolunteerForm();
       this.getCadastroForm();
 
