@@ -29,7 +29,6 @@ class AboutVolunteer extends React.Component {
     }
 
     getLastAccessedVacancy = async () => {
-        debugger
         let usuarioFisicoService = new UsuarioFisicoService();
 
         let userId = sessionStorage["userId"];
