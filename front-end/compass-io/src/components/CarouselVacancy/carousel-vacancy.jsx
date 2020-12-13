@@ -15,7 +15,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import VagaService from '../../services/vaga-service';
 
-
 export default class CarouselVacancy extends React.Component {
   state = {
     resposta: []
