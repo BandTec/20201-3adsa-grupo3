@@ -15,4 +15,6 @@ public interface UsuarioFisicoVagaRepository extends JpaRepository<UsuarioFisico
     List<UsuarioFisicoVaga> findAllUsuarioFisicoVagaByFkVaga(Vaga fkVaga);
 
     List<UsuarioFisicoVaga> findAllUsuarioFisicoVagaByFkUsuarioFisico(UsuarioFisico usuarioFisico);
+
+    List<UsuarioFisicoVaga> findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(Vaga fkVaga, UsuarioFisico usuarioFisico);
 }

@@ -263,7 +263,6 @@ export default class VacancyRegister extends React.Component {
             <div className="flex mg-t-64 mg-l-16 mg-r-16">
               <Button id="btnVoltarOng" variant="contained" href="http://localhost:3000/profile/ong">Voltar</Button>
               <Button id="btnCadastrarOng" onClick={this.cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
-
             </div>
           </span>
         </div>

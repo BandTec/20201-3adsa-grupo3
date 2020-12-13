@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar/navbar';
 import VacancyHeader from '../../components/VacancyHeader/vacancy-header';
 import AboutOng from '../../components/AboutOng/about-ong';
 import WorkSchedule from '../../components/WorkSchedule/work-schedule';
-import CarouselVacancy from '../../components/CarouselVacancy/carousel-vacancy';
+import CarouselVacancyCause from '../../components/CarouselVacancyCause/carousel-vacancy-cause';
 import Button from '@material-ui/core/Button';
 // import './vacancy-specific.css';
 import { Loader } from "@googlemaps/js-api-loader"
@@ -21,6 +21,8 @@ async function renderVaga() {
   const resposta = await vagaService.getVagaById(37);
   let vagaInfos = resposta.data[0];
   console.log(vagaInfos);
+  console.log(URL.toString());
+  sessionStorage.setItem("causa", vagaInfos.causa);
 
   let DescricaoVaga = document.getElementById("descricaoVaga");
   DescricaoVaga.innerText = vagaInfos.descricao;
@@ -113,8 +115,8 @@ export default class VacancySpecific extends React.Component {
           </div>
         </div>
         <div className="vacancyCarousel">
-          <h1>Vagas Similares</h1>
-          <CarouselVacancy />
+          <h1>Vagas   Similares</h1>
+          <CarouselVacancyCause />
         </div>
       </section>
     );

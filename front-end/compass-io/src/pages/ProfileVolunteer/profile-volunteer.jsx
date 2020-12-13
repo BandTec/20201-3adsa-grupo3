@@ -30,6 +30,7 @@ export default class ProfileVolunteer extends React.Component {
   }
 
   async renderPerfil() {
+    debugger
     let usuarioFisico = new UsuarioFisicoService();
     let resposta = await usuarioFisico.getUsuarioFisicoById(parseInt(sessionStorage["userId"]));
     let voluntarioInfo = resposta.data[0];
@@ -52,13 +53,14 @@ export default class ProfileVolunteer extends React.Component {
   }
 
   getFoto = async () => {
-    debugger;
     let usuarioFisicoService = new UsuarioFisicoService();
     let id = parseInt(sessionStorage["userId"])
 
     let fotoResponse = await usuarioFisicoService.getFoto(id);
-    let imgVolunteer = document.getElementById("imgVolunteer");
-    imgVolunteer.src = "data:image/png;base64," + fotoResponse.data;
+    if (fotoResponse != undefined) {
+      let imgVolunteer = document.getElementById("imgVolunteer");
+      imgVolunteer.src = "data:image/png;base64," + fotoResponse.data;
+    }
   }
 
   trocarFoto = async () => {
@@ -68,8 +70,6 @@ export default class ProfileVolunteer extends React.Component {
       let foto = document.getElementById("editarFoto").files[0];
       let formDataFoto = new FormData();
       formDataFoto.set("foto", foto);
-
-      debugger
 
       let id = parseInt(sessionStorage["userId"])
       let response = await usuarioFisicoService.uploadFoto(id, formDataFoto);
