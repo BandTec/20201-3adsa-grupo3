@@ -2,8 +2,6 @@ package br.com.bandtec.projetopicompassio.arquivos;
 
 import br.com.bandtec.projetopicompassio.utils.ListaObj;
 
-import java.util.List;
-
 public interface IArquivo {
 
     void setObject(Object obj);

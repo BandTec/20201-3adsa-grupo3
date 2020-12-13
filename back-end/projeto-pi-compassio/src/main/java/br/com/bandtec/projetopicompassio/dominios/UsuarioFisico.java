@@ -3,12 +3,12 @@ package br.com.bandtec.projetopicompassio.dominios;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name = "usuario_fisico")
 public class UsuarioFisico {
 
     @Id
-    @Column(name = "id_usuario_fisico")
-    private Integer idUsuarioFisico;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(length = 90, nullable = false, unique = true)
     private String email;
@@ -22,36 +22,24 @@ public class UsuarioFisico {
     @Column(length = 15, nullable = false)
     private String telefone;
 
+    @Temporal(TemporalType.DATE)
     @Column(nullable = false, name = "data_nascimento")
     private Date dataNascimento;
 
     @Column(length = 14, nullable = false)
     private String cpf;
 
-    @Column(name = "sexo")
-    private Boolean sexo;
+    @Column(length = 255)
+    private String foto;
 
-    @OneToOne
-    @JoinColumn(nullable = false, name = "fk_endereco")
-    private Endereco fkEndereco;
-
-    @Column(nullable = false)
     private Boolean logado;
 
-    public Boolean getLogado() {
-        return logado;
+    public Integer getId() {
+        return id;
     }
 
-    public void setLogado(Boolean logado) {
-        this.logado = logado;
-    }
-
-    public Integer getIdUsuarioFisico() {
-        return idUsuarioFisico;
-    }
-
-    public void setIdUsuarioFisico(Integer idUsuarioFisico) {
-        this.idUsuarioFisico = idUsuarioFisico;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -102,19 +90,19 @@ public class UsuarioFisico {
         this.cpf = cpf;
     }
 
-    public Boolean getSexo() {
-        return sexo;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setSexo(Boolean sexo) {
-        this.sexo = sexo;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
-    public Endereco getFkEndereco() {
-        return fkEndereco;
+    public Boolean getLogado() {
+        return logado;
     }
 
-    public void setFkEndereco(Endereco fkEndereco) {
-        this.fkEndereco = fkEndereco;
+    public void setLogado(Boolean logado) {
+        this.logado = logado;
     }
 }

@@ -23,17 +23,9 @@
     margin-bottom: 1.5rem
 }
 
- 
-#donateBtn{
+#moreBtn{
     background-color: #FFB219;
     color: #fff;
     border: 1px solid #fff;
-justify-content: space-between
-}
-
-#moreBtn{
-    color: #fff;
-    background-color: #1975FF;
-    border: 1px solid #fff
 }
  

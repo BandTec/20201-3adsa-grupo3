@@ -36,6 +36,7 @@ public class ArquivoController {
     private UsuarioFisicoVagaRepository voluntarioDaVagaRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+
     @Autowired
     private VagaMapper vagaMapper;
     @Autowired

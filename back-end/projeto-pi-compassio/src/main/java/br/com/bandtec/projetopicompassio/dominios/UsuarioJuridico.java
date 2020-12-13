@@ -2,12 +2,13 @@ package br.com.bandtec.projetopicompassio.dominios;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "usuario_juridico")
 public class UsuarioJuridico {
 
     @Id
-    @Column(name = "id_usuario_juridico")
-    private Integer idUsuarioJuridico;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(length = 90, nullable = false, name = "nome_ong")
     private String nomeOng;
@@ -18,23 +19,26 @@ public class UsuarioJuridico {
     @Column(length = 45, nullable = false)
     private String senha;
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 15)
     private String telefone;
 
-    @Column(length = 14, nullable = false)
+    @Column(length = 18, nullable = false)
     private String cnpj;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String causa;
 
-    @Column(length = 256, nullable = false, name = "descricao_ong")
-    private String descricaoOng;
+    @Column(length = 255)
+    private String foto;
+
+    @Column(length = 256, name = "descricao")
+    private String descricao;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "fk_endereco")
     private Endereco fkEndereco;
 
-    @Column(nullable = false)
+    @Column
     private Boolean logado;
 
     public Boolean getLogado() {
@@ -45,12 +49,12 @@ public class UsuarioJuridico {
         this.logado = logado;
     }
 
-    public Integer getIdUsuarioJuridico() {
-        return idUsuarioJuridico;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdUsuarioJuridico(Integer idUsuarioJuridico) {
-        this.idUsuarioJuridico = idUsuarioJuridico;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNomeOng() {
@@ -101,12 +105,20 @@ public class UsuarioJuridico {
         this.causa = causa;
     }
 
-    public String getDescricaoOng() {
-        return descricaoOng;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricaoOng(String descricaoOng) {
-        this.descricaoOng = descricaoOng;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public Endereco getFkEndereco() {

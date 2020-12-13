@@ -3,6 +3,7 @@ import './navbar.css';
 import LogoCompassio from '../../assets/images/logo.jpg'
 
 function Navbar() {
+
     return (
         <div className="navbar">
             {/* <div>
@@ -16,9 +17,10 @@ function Navbar() {
                 </a>
             </span>
             <div className="botoes">
-                <a className="link" href="www.google.com">Seja voluntário</a>
-                <a className="link" href="www.google.com">Projetos</a>
-                <a className="link" href="www.google.com">Notícias</a>
+                <a className="link" href="/signup">Seja voluntário</a>
+                {/*<button className="link" onClick={props.direciona}>Como funciona</button>*/}
+                <a className="link" href="/#comoFunciona">Como funciona</a>
+                <a className="link" href="vacancies">Vagas</a>
                 <a disabled id="entrar" href="signin" className="link botao">Entrar</a>
             </div>
         </div>

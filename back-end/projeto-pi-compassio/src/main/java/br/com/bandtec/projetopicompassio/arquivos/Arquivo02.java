@@ -7,7 +7,7 @@ import br.com.bandtec.projetopicompassio.utils.ListaObj;
 import org.springframework.data.convert.Jsr310Converters;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 
 public class Arquivo02 implements IArquivo {
@@ -134,6 +134,9 @@ public class Arquivo02 implements IArquivo {
                 LocalDate localDateInicio = Jsr310Converters.StringToLocalDateConverter.INSTANCE.convert(dataDaInscricao);
                 java.util.Date finalDateInicio = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(localDateInicio);
 
+                LocalDate localDateNascimento = Jsr310Converters.StringToLocalDateConverter.INSTANCE.convert(dataDeNascimento);
+                java.util.Date finalDateNascimento = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(localDateNascimento);
+
                 //Instancia os objetos para salvar no atributo
                 //voluntariosDeUmaOng
                 EnderecoDTO enderecoDoVoluntario = new EnderecoDTO(cidade, uf);
@@ -141,7 +144,7 @@ public class Arquivo02 implements IArquivo {
                 UsuarioFisicoDTO usuarioFisico = new UsuarioFisicoDTO(
                         nomeDoVoluntario,
                         emailDoVoluntario,
-                        Date.valueOf(dataDeNascimento),
+                        finalDateNascimento,
                         enderecoDoVoluntario
                 );
 

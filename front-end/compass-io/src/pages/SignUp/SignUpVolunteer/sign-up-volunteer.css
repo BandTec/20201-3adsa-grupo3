@@ -1,6 +1,7 @@
 .container{
     width: 100%;
     display: flex;
+    margin-bottom: 3rem;
 }
 
 .container > .loginImage{
@@ -10,6 +11,52 @@
 
 .container > .loginImage, .childrenImage{
     filter: brightness(0.8); 
+}
+
+.top-640p{
+    top: 40rem;
+}
+
+.top-560p{
+    top: 35rem;
+}
+
+.height-520p{
+    height: 32.5rem;
+}
+
+.height-500p{
+    height: 31.25rem;
+}
+
+
+.height-1056p{
+    height: 66rem;
+}
+
+
+.height-1040p{
+    height: 65rem;
+}
+
+.height-400p{
+    height: 25rem;
+}
+
+.mg-t-360{
+    margin-top: 22.5rem
+}
+
+.height-20pg{
+    height: 20%
+}
+
+.height-50pg{
+    height: 50%
+}
+
+.height-80pg{
+    height: 80%
 }
 
 .textImage{
@@ -83,26 +130,61 @@
     margin-top: 1.5rem;
 }
 
-
-#btnVoltar{
-    margin-left: 13%;
-    margin-right: 2rem;
-    width:10rem;
-    font-weight: 600;
-    height: 3rem;
-    color: black;
-    font-size: 1.0rem;
-    border: black;
-    border-radius: 0.5rem;
-    background: #E0DDDD
-}
-
 #btnCadastrar{
-    margin-left: 2%;
+    margin-left: 0.8rem;
     width:10rem;
     font-weight: 600;
     height: 3rem;
     font-size: 1.0rem;
     border-radius: 0.5rem;
     background: #1975FF
+}
+
+.genderGroup{
+    display: flex;
+}
+
+/*-----------Responsividade----------*/
+
+@media (max-width: 640px){
+
+    .container > .loginImage, .childrenImage{
+        display: none;
+    }
+
+    .formVolunteer{
+        margin-left: 0;
+    }
+
+    .signupVForm{
+        margin-left: 0;
+    }
+
+    .container > .formVolunteer > .signupVForm{
+        margin-left: 0%;
+        width: 25rem;
+        height: 35rem;
+        background-color: #FCFCFC;
+        border-radius: 1rem;
+        border: 1px solid #000;
+    } 
+
+    .container > .formVolunteer > .infContaVForm{
+        margin-top: 2%;
+        margin-left: 0%;
+        width: 25rem;
+        height: 24rem;
+        
+    } 
+
+    .formVolunteer > .checkbox{
+        margin-left: 1%;
+    }
+
+    #btnCadastrar{
+        margin-left: 4%;
+    }
+
+
+
 }

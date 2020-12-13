@@ -7,7 +7,7 @@ import './work-schedule.css';
 
 function WorkSchedule(props) {
     return (
-       <section className="workSchedule">
+       <section name={props.name} className="workSchedule">
            <div className="grayPhrase">Informações a respeito do horário de trabalho</div>
            <div className="infoWorkSchedule">
                <Icon icon={calendarOutlined} style={{fontSize: '48px'}} />

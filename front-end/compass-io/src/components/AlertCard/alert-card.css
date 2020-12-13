@@ -1,0 +1,10 @@
+#buttonCSS{
+    margin-left: 3.8rem;
+    width:10rem;
+    font-weight: 600;
+    height: 3rem;
+    font-size: 1.0rem;
+    border-radius: 0.5rem;
+    background: #1975FF;
+    color: #fff;
+}

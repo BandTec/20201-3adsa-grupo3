@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 function CardProfileOng(props) {
     const classes = useStyles();
     return (
-        <div className="cardProfileOng">
+        <div name={props.name} className="cardProfileOng">
             <div className={props.isContact ? "cardProfileOngContent display-block" : "display-none"}>
                 <h1>Contato</h1>
                 <div className="flex">
@@ -72,16 +72,16 @@ function CardProfileOng(props) {
             <div className={props.htHelp ? "cardProfileOngContent display-block" : "display-none"}>
                 <h1>Como ajudar?</h1>
                 <h2 className="blueWord">Alimentos</h2>
-                <div className="yellowWord">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi hic iure dolores. 
-                    Fugiat sapiente ab saepe optio sit, ducimus obcaecati soluta ipsa aliquid iste alias 
-                    repellat ad et veritatis delectus?
+                <div className="yellowWord txtal-justify mg-r-16 font-weight-500">
+                    Com a chegada do Covid-19, muitas pessoas se utilizaram do auxílio emergencial 
+                    oferecido pelo governo. O valor, do auxílio é mais do que bem vindo, mas sabemos que não 
+                    é o suficiente! Se puder, ajude-nos doando alimentos para oferecermos aos que precisam!
                 </div>
                 <h2 className="blueWord">Roupas</h2>
-                <div className="yellowWord">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi hic iure dolores. 
-                    Fugiat sapiente ab saepe optio sit, ducimus obcaecati soluta ipsa aliquid iste alias 
-                    repellat ad et veritatis delectus?
+                <div className="yellowWord txtal-justify mg-r-16 font-weight-500">
+                    Tem aquela camisa social guardada no seu armário que você não utiliza porque não 
+                    é do seu tamanho? Encontre centros de doação de roupas que outras pessoas podem utilizar 
+                    em entrevistas de emprego. O que é a sua sobra, pode ajudar outra pessoa!
                 </div>
                 <Button variant="outline" className={classes.outlineBtn}>Quero Doar</Button>
             </div>

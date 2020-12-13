@@ -18,8 +18,8 @@ public class EnderecoController {
 
     @PostMapping
     public ResponseEntity criar(@RequestBody Endereco novoEndereco){
-        repository.save(novoEndereco);
-        return ResponseEntity.created(null).build();
+        Endereco enderecoCriado = repository.save(novoEndereco);
+        return ResponseEntity.created(null).body(enderecoCriado);
     }
 
     @GetMapping()
@@ -28,7 +28,7 @@ public class EnderecoController {
             @RequestParam(required = false) String cep
     ){
         Endereco enderecoPesquisa = new Endereco();
-        enderecoPesquisa.setIdEndereco(id);
+        enderecoPesquisa.setId(id);
         enderecoPesquisa.setCep(cep);
 
         List<Endereco> resultado = repository.findAll(Example.of(enderecoPesquisa));
@@ -50,7 +50,7 @@ public class EnderecoController {
 
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody Endereco atualizacao){
-        atualizacao.setIdEndereco(id);
+        atualizacao.setId(id);
         repository.save(atualizacao);
         return ResponseEntity.ok().build();
     }

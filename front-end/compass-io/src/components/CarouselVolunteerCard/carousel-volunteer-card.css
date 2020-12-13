@@ -1,0 +1,39 @@
+.carouselVCard{
+    height: 15rem;
+    width: 17.8rem;
+}
+
+.cardVImg{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    height: 12rem;
+    width: 15.8rem;
+    background-color: #158723;
+}
+
+.iconStyle{
+    align-items: center;
+    margin-left: 1.8rem;
+}
+
+.cardVIcon{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    height: 12rem;
+    width: 15.8rem;
+}
+
+#contentNameVCard{
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #6a6a6a;
+    text-align: center;
+}
+
+#contentVCardDescription{
+    color: #6a6a6a;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+

@@ -3,8 +3,8 @@ import './about-ong.css';
 
 function AboutOng(props) {
     return (
-       <section className="aboutOng">
-           <div id="imgOng" width={props.width} height={props.height}></div>
+       <section name={props.name} className="aboutOng">
+           <img id="imgOng" width={props.width} height={props.height} src={props.imgSrc}/>
            <div className="infoOng">
                <div className="infoOngTitle">{ props.nameOng }</div>
                <div className="infoOngText">{ props.infoOng }</div>

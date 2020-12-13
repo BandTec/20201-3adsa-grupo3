@@ -9,9 +9,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UsuarioFisicoMapper {
 
-    @Mapping(source = "endereco", target = "fkEndereco")
+
     UsuarioFisico toUsuarioFisico(UsuarioFisicoDTO usuarioFisicoDTO);
 
-    @InheritInverseConfiguration
     UsuarioFisicoDTO toUsuarioFisicoDTO(UsuarioFisico usuarioFisico);
 }

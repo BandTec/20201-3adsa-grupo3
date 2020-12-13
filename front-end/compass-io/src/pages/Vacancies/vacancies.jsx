@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex'
   },
 
-
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -158,7 +157,6 @@ export default function Vacancies() {
 
   return (
     <section>
-      <Navbar />
       <div className="mg-b-16 border-b pd-b-16 flex justcon-sb">
         <div className="flex justcon-sb width-20pg">
           <ClickAwayListener onClickAway={handleClickAway}>
@@ -294,13 +292,12 @@ export default function Vacancies() {
       </div>
       <div className="flex justcon-sb pd-t-16 pd-b-16">
         <div className="fs-32p fw-600 gray">VAGAS</div>
-        <div className="blueWord fs-16p fw-500">Quer conhecer as ONGs parceiras? <a href="" className="yellowWord">Clique aqui</a></div>
+        <div className="blueWord fs-16p fw-500">Quer conhecer a nossa parceira doebem? <a href="https://www.doebem.org.br/" className="yellowWord">Clique aqui</a></div>
       </div>
       <div className="">
         <CardVacancy className="" />
       </div>
       <Pagination count={10} variant="outlined" shape="rounded" className="mg-v-16 center" />
-      <Footer />
     </section>
   );
 };
