@@ -70,20 +70,14 @@ fk_usuario_juridico INTEGER FOREIGN KEY REFERENCES UsuarioJuridico(id_usuario_ju
 PRIMARY KEY (id_Avaliacao)
 )-- Conferido
 
-CREATE TABLE Estado(
-id_estado INTEGER,
-sigla_uf VARCHAR(MAX),
-nome VARCHAR(MAX)
+CREATE TABLE estado(
+sigla_uf CHAR(2) PRIMARY KEY,
+nome VARCHAR(255)
 )-- Conferido
 
-CREATE TABLE Cidade(
-id_cidade INTEGER,
-nome VARCHAR(MAX),
-fk_sigla_uf VARCHAR(MAX)
+CREATE TABLE cidade(
+nome VARCHAR(255),
+fk_sigla_uf CHAR(2),
+PRIMARY KEY (fk_sigla_uf, nome),
+FOREIGN KEY (fk_sigla_uf) REFERENCES estado (sigla_uf)
 )-- Conferido
-
-BULK INSERT Estado FROM 'C:\Users\mikazevedo\Desktop\UF.txt' WITH ( ROWTERMINATOR = '\n', FIELDTERMINATOR = ';')
-
-BULK INSERT Cidade FROM 'C:\Users\mikazevedo\Desktop\cidade.txt' WITH ( ROWTERMINATOR = '\n', FIELDTERMINATOR = ';')
-
-
