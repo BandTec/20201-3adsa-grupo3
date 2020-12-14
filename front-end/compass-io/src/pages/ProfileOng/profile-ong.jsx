@@ -144,15 +144,7 @@ export default class ProfileOng extends React.Component {
           <AboutOng name="descricaoOng" nameOng="TETO Brasil"
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!"
             link="www.google.com.br"
-            width="600" />
-          <div className="flex mg-v-16 width-100pg">
-            <div className="width-40pg flex flex-column">
-              <div className="width-100pg">
-                <InputFile id="editarFoto" text="Editar foto" callBack={this.trocarFoto} />
-              </div>
-            </div>
-            
-          </div>
+            editImgOng={this.trocarFoto}/>
           <div className="width-100pg border border-rd-10 height-500pg">
             <div className="flex justcon-sb mg-b-16">
               <h1 className="width-30pg mg-l-32">Vagas Abertas</h1>

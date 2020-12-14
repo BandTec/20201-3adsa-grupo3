@@ -34,7 +34,7 @@
 .infoVolunteerText{
     margin-top: 1rem;
     font-size: 1.4rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
 
 .infoVolunteerText > span{
@@ -57,7 +57,7 @@
 
 .vagasBox{
     font-size: 1.2rem;
-    margin-left: 14rem;
+    margin-left: 9rem;
     width: 30vw;
     height: 20.5vw;
     border: 0.1rem solid #000000;
@@ -126,4 +126,12 @@
   #listItem{
       text-decoration: none;
       list-style: none;
+  }
+
+  #editarFoto{
+      margin-left: 1rem;
+  }
+
+  #btnPhotoEdit{
+      margin-left: 0.35rem;
   }

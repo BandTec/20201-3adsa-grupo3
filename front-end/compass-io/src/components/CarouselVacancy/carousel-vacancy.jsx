@@ -121,7 +121,7 @@ export default class CarouselVacancy extends React.Component {
   render() {    
     return (
 
-      <div>
+      <div style={{marginLeft:"3rem"}}>
 
         <Slider id="slider" className={this.classes.slider} {...this.settings}>
 

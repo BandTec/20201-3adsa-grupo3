@@ -28,15 +28,8 @@ const useStyles = makeStyles({
 export default function VacancyHeader(props) {
     const classes = useStyles();
     return(
-<<<<<<< HEAD
         <div className="vacancyHeader">
             <img id={props.imgId} width={props.width} height={props.height} src={props.imgSrc}/>
-=======
-        <div name={props.name} className="vacancyHeader">
-            <div id="imgVacancy">
-                <img id={props.imgId} width={props.width} height={props.height} src={props.imgSrc}/>
-            </div>
->>>>>>> 625c8cce62fb07de7d906da49225e36ba16deb9a
             <span id="headerText">
                 <div id="headerTitle">{ props.title }</div>
                 <div id="headerBtn">

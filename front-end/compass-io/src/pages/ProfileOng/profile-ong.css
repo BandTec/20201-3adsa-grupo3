@@ -29,3 +29,17 @@
 .width-95pg{
     width: 95%
 }
+
+#inputFile{
+    cursor: pointer;
+    width: 1rem;
+}
+
+#editarFoto{
+    margin-left: 1rem;
+}
+
+.btnPhoto{
+    margin-left: 0.5rem;
+    width: 100pg;
+}
