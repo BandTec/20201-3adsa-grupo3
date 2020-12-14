@@ -11,7 +11,7 @@ PRIMARY KEY (id)
 )--Conferido
 
 CREATE TABLE usuario_fisico(
-id INTEGER IDENTITY(1,1),
+id INTEGER IDENTITY(0,2),
 email VARCHAR(90) NOT NULL,
 nome VARCHAR(80) NOT NULL, 
 senha VARCHAR(45) NOT NULL,
@@ -24,7 +24,7 @@ PRIMARY KEY (id)
 )-- Conferido
 
 CREATE TABLE usuario_juridico(
-id INTEGER IDENTITY(1,1) NOT NULL,
+id INTEGER IDENTITY(1,2) NOT NULL,
 nome_ong VARCHAR(90) NOT NULL,
 email VARCHAR(80) UNIQUE NOT NULL,
 senha VARCHAR(45) NOT NULL,
@@ -57,10 +57,10 @@ fk_vaga INTEGER FOREIGN KEY REFERENCES vaga(id) NOT NULL,
 data_inscricao DATE
 ) -- Conferido
 
-CREATE TABLE avaliacao(
-id INTEGER IDENTITY(1,1),
-pontuacao INTEGER,
-relatorio VARCHAR(500),
-fk_usuario_fisico INTEGER FOREIGN KEY REFERENCES usuario_fisico(id),
-fk_usuario_juridico INTEGER FOREIGN KEY REFERENCES usuario_juridico(id)
+--CREATE TABLE avaliacao(
+--id INTEGER IDENTITY(1,1),
+--pontuacao INTEGER,
+--relatorio VARCHAR(500),
+--fk_usuario_fisico INTEGER FOREIGN KEY REFERENCES usuario_fisico(id),
+--fk_usuario_juridico INTEGER FOREIGN KEY REFERENCES usuario_juridico(id)
 )--Conferido
