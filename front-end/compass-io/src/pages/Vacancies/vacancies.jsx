@@ -80,22 +80,21 @@ export default class Vacancies extends React.Component {
   }
 
   componentDidMount() {
-    this.getVagas();
+    //this.getVagas();
+    this.getFotos();
   }
 
   setarIdvaga(id) {
-    sessionStorage.setItem("vagaId", id);
+    sessionStorage.setItem("idVaga", id);
   }
 
   renderExibicao = () => {
-    debugger
-    this.setState({ exibir: [] });
     let vagasFiltradas = [];
     if (this.state.filtro.causa != null && this.state.filtro.estado != null) {
       {
         this.state.exibir.forEach(vaga => {
           if (vaga.vaga.fkEndereco.estado == this.state.filtro.estado && vaga.vaga.causa == this.state.filtro.causa) {
-            vagasFiltradas.push(vaga.vaga);
+            vagasFiltradas.push(vaga);
           }
         })
       }
@@ -103,7 +102,7 @@ export default class Vacancies extends React.Component {
       {
         this.state.exibir.forEach(vaga => {
           if (vaga.vaga.causa == this.state.filtro.causa) {
-            vagasFiltradas.push(vaga.vaga);
+            vagasFiltradas.push(vaga);
           }
         })
       }
@@ -111,11 +110,18 @@ export default class Vacancies extends React.Component {
       {
         this.state.exibir.forEach(vaga => {
           if (vaga.vaga.fkEndereco.estado == this.state.filtro.estado) {
-            vagasFiltradas.push(vaga.vaga);
+            vagasFiltradas.push(vaga);
           }
         })
       }
-    } 
+    } else if (this.state.filtro.causa == null && this.state.filtro.estado == null) {
+      {
+        debugger
+        this.state.exibir.forEach(vaga => {
+         vagasFiltradas.push(vaga);
+        })
+      }
+    }
     this.setState({ exibir: vagasFiltradas });
     console.log(this.state.exibir);
   }
@@ -138,10 +144,6 @@ export default class Vacancies extends React.Component {
       );
     }
     this.setState({ exibir: vagasComFoto });
-  }
-
-  componentDidMount() {
-    this.getFotos();
   }
 
   render() {
@@ -319,9 +321,6 @@ export default class Vacancies extends React.Component {
       });
     };
 
-    const { animais, criancas, pcd, idosos, direitosCivis, meioAmbiente } = this.state.causas;
-    const error = [animais, criancas, pcd, idosos, direitosCivis, meioAmbiente].filter((v) => v).length !== 2;
-
     const classesLocation = makeStyles((theme) => ({
       root: {
         position: 'relative',
@@ -347,7 +346,7 @@ export default class Vacancies extends React.Component {
         border: '1px solid #fff',
         padding: theme.spacing(1),
         backgroundColor: theme.palette.background.paper,
-        width: '500%'
+        width: '100%'
       },
 
       rootForm: {
@@ -421,7 +420,7 @@ export default class Vacancies extends React.Component {
         border: '1px solid #fff',
         padding: theme.spacing(1),
         backgroundColor: theme.palette.background.paper,
-        width: '1000%'
+        width: '50%'
       },
       dropdownLocation: {
         position: 'absolute',
@@ -432,7 +431,7 @@ export default class Vacancies extends React.Component {
         border: '1px solid #fff',
         padding: theme.spacing(1),
         backgroundColor: theme.palette.background.paper,
-        width: '500%'
+        width: '50%'
       },
 
       rootForm: {
@@ -494,12 +493,10 @@ export default class Vacancies extends React.Component {
       });
     };
 
-    //const { AC,AL,AP,AM,BA,CE,DF,ES,GO,MA,MT,MS,MG,PA,PB,PR,PE,PI,RJ,RN,RS,RO,RR,SC,SP,SE,TO,DF } = this.state.stateLocation;
-    //const errorLocation = [AC,AL,AP,AM,BA,CE,DF,ES,GO,MA,MT,MS,MG,PA,PB,PR,PE,PI,RJ,RN,RS,RO,RR,SC,SP,SE,TO,DF].filter((v) => v).length !== 2;
     return (
       <section>
         <div className="mg-b-16 border-b pd-b-16 flex justcon-sb">
-          <div className="flex justcon-sb width-20pg">
+          <div className="flex justcon-sb width-100pg">
             <ClickAwayListener onClickAway={handleClickAway}>
               <div className={classes.root}>
                 <button type="button" className="bg-color-blue font-color-white border-rd-10 width-250pg height-40p fs-16p" onClick={handleClick}>
@@ -551,12 +548,11 @@ export default class Vacancies extends React.Component {
               searchText="This is initial search text"
               classNames="test-class"
             /> */}
-            <button onClick={this.renderExibicao}>teste</button>
 
 
             <ClickAwayListener onClickAway={handleClickAwayLocation}>
               <div className={classesLocation.root}>
-                <button type="button" className="bg-color-white-fc border-rd-10 width-250pg height-40p fs-16p" onClick={handleClickLocation}>
+                <button type="button" className="bg-color-white-fc border-rd-10 width-100pg height-40p fs-16p" onClick={handleClickLocation}>
                   Estado
               </button>
                 {this.state.openLocation ? (
@@ -576,8 +572,6 @@ export default class Vacancies extends React.Component {
                           control={<Checkbox color="primary" checked={this.state.stateLocation.AP} onChange={handleChangeLocation} name="AP" />}
                           label="AP"
                         />
-                      </FormGroup>
-                      <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.AM} onChange={handleChangeLocation} name="AM" />}
                           label="AM"
@@ -590,8 +584,6 @@ export default class Vacancies extends React.Component {
                           control={<Checkbox color="primary" checked={this.state.stateLocation.CE} onChange={handleChangeLocation} name="CE" />}
                           label="CE"
                         />
-                      </FormGroup>
-                      <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.ES} onChange={handleChangeLocation} name="ES" />}
                           label="ES"
@@ -604,8 +596,6 @@ export default class Vacancies extends React.Component {
                           control={<Checkbox color="primary" checked={this.state.stateLocation.MA} onChange={handleChangeLocation} name="MA" />}
                           label="MA"
                         />
-                      </FormGroup>
-                      <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.MT} onChange={handleChangeLocation} name="MT" />}
                           label="MT"
@@ -618,8 +608,6 @@ export default class Vacancies extends React.Component {
                           control={<Checkbox color="primary" checked={this.state.stateLocation.MG} onChange={handleChangeLocation} name="MG" />}
                           label="MG"
                         />
-                      </FormGroup>
-                      <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.PA} onChange={handleChangeLocation} name="PA" />}
                           label="PA"
@@ -632,8 +620,6 @@ export default class Vacancies extends React.Component {
                           control={<Checkbox color="primary" checked={this.state.stateLocation.PR} onChange={handleChangeLocation} name="PR" />}
                           label="PR"
                         />
-                      </FormGroup>
-                      <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.PE} onChange={handleChangeLocation} name="PE" />}
                           label="PE"
@@ -646,8 +632,6 @@ export default class Vacancies extends React.Component {
                           control={<Checkbox color="primary" checked={this.state.stateLocation.RJ} onChange={handleChangeLocation} name="RJ" />}
                           label="RJ"
                         />
-                      </FormGroup>
-                      <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.RN} onChange={handleChangeLocation} name="RN" />}
                           label="RN"
@@ -660,8 +644,6 @@ export default class Vacancies extends React.Component {
                           control={<Checkbox color="primary" checked={this.state.stateLocation.RO} onChange={handleChangeLocation} name="RO" />}
                           label="RO"
                         />
-                      </FormGroup>
-                      <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.RR} onChange={handleChangeLocation} name="RR" />}
                           label="RR"
@@ -674,9 +656,6 @@ export default class Vacancies extends React.Component {
                           control={<Checkbox color="primary" checked={this.state.stateLocation.SP} onChange={handleChangeLocation} name="SP" />}
                           label="SP"
                         />
-                      </FormGroup>
-
-                      <FormGroup>
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.SE} onChange={handleChangeLocation} name="SE" />}
                           label="SE"
@@ -690,12 +669,17 @@ export default class Vacancies extends React.Component {
                           label="DF"
                         />
                       </FormGroup>
-                      <FormHelperText>Be careful</FormHelperText>
                     </FormControl>
                   </div>
                 ) : null}
               </div>
             </ClickAwayListener>
+            <div>
+              <button type="button" className="bg-color-white-fc border-rd-10 width-100pg height-40p fs-16p" onClick={this.renderExibicao}>
+                    Filtrar
+                </button>
+
+            </div>
 
           </div>
 
@@ -744,7 +728,6 @@ export default class Vacancies extends React.Component {
             </div>
           ))}
         </div>
-        <Pagination count={10} variant="outlined" shape="rounded" className="mg-v-16 center" />
       </section>
     );
   };

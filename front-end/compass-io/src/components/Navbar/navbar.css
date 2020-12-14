@@ -20,6 +20,7 @@
     width: 50rem;
     height: auto;
     margin-left: auto;
+    margin-top: 1.4rem;
 }
 
 .link {
@@ -67,26 +68,64 @@ a{
     transition: 0.5s;
 }
 
-@media (max-width: 640px){
+label[for="btnMenu"]{
+    display: none;
+}
 
-    .navbar {
-        width: 100%;
-        max-width: 640px;
+#btnMenu{
+    display: none;
+}
+
+@media (max-width: 540px){
+
+    .menuResponsivo{
+        display: block;
     }
+
+    label[for="btnMenu"]{
+        display: block;
+        cursor: pointer;
+        color: #0084FE;
+        margin-top: 1rem;
+        margin-left: 35px;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 35px;
+        width: 50px;
+        height: 50px;
+    }
+
+    label[for="btnMenu"]:hover{
+        font-size: 37px;
+    }
+
+    #btnMenu:checked ~ .botoes{
+        margin-left: -85%;
+    }
+
+    .botoes{
+        text-align: center;
+        margin-top: 0.5rem;
+        margin-left: -400%;
+        transition: all .4s;
+        width: 100%;
+        display: flex;
+    }
+
+    .link{
+        margin-top: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .navbar{
+        height: 150px;
+        float: none;
+        display: flex;
+    }
+
 
     .logo{
-        width: 10vw;
-        height: 10vh;
+        height: 100px;
     }
 
-    .botoes {
-        width: 3rem;
-        height: auto;
-    }
-
-    a{
-        padding: 0.5rem;
-        padding-left: 0.1rem;
-        padding-right: 1rem;
-    }
 }

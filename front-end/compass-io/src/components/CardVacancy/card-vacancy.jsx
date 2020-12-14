@@ -9,8 +9,8 @@ import LocationScheduleInfo from '../LocationScheduleInfo/location-schedule-info
 
 function CardVacancy(props){
     return(
-        <div key={props.key} className="flex justcon-sb mg-b-16">
-            <div className="border height-280p width-45pg border-rd-10 bg-color-gray-light flex">
+        <div key={props.key} className="mg-b-16">
+            <div className="border height-280p width-100pg border-rd-10 bg-color-gray-light flex">
                 <div>
                 <img src={props.imgSrc} name="vacancyImg" className="cardImg"></img>
                 <div className="mg-l-16">

@@ -10,20 +10,7 @@ import Button from '@material-ui/core/Button';
 
 import './card-profile-ong.css';
 
-const useStyles = makeStyles({
-    outlineBtn: {
-      width: "30%",
-      border: "2.5px solid #1975FF",
-      color: "#1975FF",
-      fontWeight: 600,
-      margin: "1rem auto",
-      position: "relative",
-      left: "33%"
-    }
-  });
-
 function CardProfileOng(props) {
-    const classes = useStyles();
     return (
         <div name={props.name} className="cardProfileOng">
             <div className={props.isContact ? "cardProfileOngContent display-block" : "display-none"}>
@@ -82,8 +69,10 @@ function CardProfileOng(props) {
                     Tem aquela camisa social guardada no seu armário que você não utiliza porque não 
                     é do seu tamanho? Encontre centros de doação de roupas que outras pessoas podem utilizar 
                     em entrevistas de emprego. O que é a sua sobra, pode ajudar outra pessoa!
+                </div >
+                <div className="btnDoar">
+                <a href="https://www.doebem.org.br/">Quero Doar</a>
                 </div>
-                <Button variant="outline" className={classes.outlineBtn}>Quero Doar</Button>
             </div>
         </div>
     );

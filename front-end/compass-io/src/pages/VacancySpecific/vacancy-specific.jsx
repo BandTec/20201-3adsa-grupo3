@@ -5,62 +5,15 @@ import AboutOng from '../../components/AboutOng/about-ong';
 import WorkSchedule from '../../components/WorkSchedule/work-schedule';
 import CarouselVacancyCause from '../../components/CarouselVacancyCause/carousel-vacancy-cause';
 import Button from '@material-ui/core/Button';
-// import './vacancy-specific.css';
 import { Loader } from "@googlemaps/js-api-loader"
+import AlertCard from '../../components/AlertCard/alert-card';
 
 import './vacancy-specific.css'
 
 import VagaService from '../../services/vaga-service';
 import UsuarioFisicoService from '../../services/usuario-fisico-service';
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
-
-window.onload = () => {};
-
-async function renderVaga() {
-  let vagaService = new VagaService();
-  const resposta = await vagaService.getVagaById(sessionStorage.getItem("idVaga"));
-  let vagaInfos = resposta.data[0];
-  console.log(vagaInfos);
-  sessionStorage.setItem("causa", vagaInfos.causa);
-
-  let DescricaoVaga = document.getElementById("descricaoVaga");
-  DescricaoVaga.innerText = vagaInfos.descricao;
-  let header = document.getElementsByName("headerVaga")[0];
-  header.children.item(1).children.item(0).innerText=vagaInfos.titulo;
-
-  let ong = document.getElementsByName("ong")[0];
-  ong.children.item(1).children.item(0).innerText=vagaInfos.fkUsuarioJuridico.nomeOng;
-  ong.children.item(1).children.item(1).innerText=vagaInfos.fkUsuarioJuridico.descricao;
-  ong.children.item(1).children.item(2).innerText='www.' + vagaInfos.fkUsuarioJuridico.nomeOng + '.org';
-
-  let vaga = document.getElementsByName("vaga")[0];
-  vaga.children.item(1).children.item(1).innerText=new Date(vagaInfos.dataInicio).toLocaleDateString("pt-BR");
-  vaga.children.item(2).children.item(1).innerText=new Date(vagaInfos.dataFim).toLocaleDateString("pt-BR");
-  vaga.children.item(3).children.item(1).innerText=vagaInfos.fkEndereco.logradouro + ', ' + vagaInfos.fkEndereco.numeroEndereco + ' - ' + vagaInfos.fkEndereco.bairro + ', ' + vagaInfos.fkEndereco.cidade + ' - ' + vagaInfos.fkEndereco.estado + ', ' + vagaInfos.fkEndereco.cep;
-
-
-  //sessionStorage["currentVacancy"] = vagaInfos.titulo;
-
-  let usuarioFisicoService = new UsuarioFisicoService();
-
-  let userId = sessionStorage["userId"];
-  let userIdAsInt = parseInt(userId);
-
-  let vagaAsJson = JSON.stringify(resposta.data[0]);
-  let ultimaVagaResponse = await usuarioFisicoService.setUltimaVaga(userIdAsInt, vagaAsJson);
-  
-  let fotoResponse = await vagaService.getFoto(resposta.data[0].id);
-  let vacancyImage = document.getElementById("vacancyImage");
-  vacancyImage.src = "data:image/png;base64," + fotoResponse.data;
-}
-
-async function baixarArquivo() {
-  let userId = parseInt(sessionStorage["userId"]);
-  let usuarioAtual = await new UsuarioJuridicoService().getUsuarioJuridicoById(userId);
-  let nomeOng = usuarioAtual.data[0].nomeOng;
-
-  window.location.href=`http://localhost:8080/arquivos/arquivo02?nomeDoArquivo=VoluntariosDaVaga&nomeDaOng=${nomeOng}&nomeDaVaga=${sessionStorage["currentVacancy"]}&isCsv=false`;
-}
+import UsuarioFisicoVagaService from '../../services/usuario-fisico-vaga-service';
 
 export default class VacancySpecific extends React.Component {
 
@@ -68,9 +21,141 @@ export default class VacancySpecific extends React.Component {
     super(props)
   }
 
-  async componentDidMount() {
-    renderVaga()
+  state = {
+    message: '',
+    severity: '',
+    open: false
   }
+
+  async componentDidMount() {
+    this.renderVaga()
+  }
+
+  renderVaga = async () => {
+    let vagaService = new VagaService();
+    const resposta = await vagaService.getVagaById(sessionStorage.getItem("idVaga"));
+    let vagaInfos = resposta.data[0];
+    console.log(vagaInfos);
+    sessionStorage.setItem("causa", vagaInfos.causa);
+
+    let DescricaoVaga = document.getElementById("descricaoVaga");
+    DescricaoVaga.innerText = vagaInfos.descricao;
+    let header = document.getElementsByName("headerVaga")[0];
+    header.children.item(1).children.item(0).innerText = vagaInfos.titulo;
+
+    let ong = document.getElementsByName("ong")[0];
+    ong.children.item(1).children.item(0).innerText = vagaInfos.fkUsuarioJuridico.nomeOng;
+    ong.children.item(1).children.item(1).innerText = vagaInfos.fkUsuarioJuridico.descricao;
+    ong.children.item(1).children.item(2).innerText = 'www.' + vagaInfos.fkUsuarioJuridico.nomeOng.replace(/\s/g, '').toLowerCase() + '.org';
+
+    let img = document.getElementById("ongImg");
+    let usuarioJuridicoService = new UsuarioJuridicoService();
+    try {
+      let foto = await usuarioJuridicoService.getFoto(vagaInfos.fkUsuarioJuridico.id);
+      img.src = "data:image/png;base64," + foto.data;
+    } catch (error) {
+
+    }
+
+    let vaga = document.getElementsByName("vaga")[0];
+    vaga.children.item(1).children.item(1).innerText = "Início: " + new Date(vagaInfos.dataInicio).toLocaleDateString("pt-BR");
+    vaga.children.item(2).children.item(1).innerText = "Fim: " + new Date(vagaInfos.dataFim).toLocaleDateString("pt-BR");
+    vaga.children.item(3).children.item(1).innerText = vagaInfos.fkEndereco.logradouro + ', ' + vagaInfos.fkEndereco.numeroEndereco + ' - ' + vagaInfos.fkEndereco.bairro + ', ' + vagaInfos.fkEndereco.cidade + ' - ' + vagaInfos.fkEndereco.estado + ', ' + vagaInfos.fkEndereco.cep;
+
+    let vacancyImage = document.getElementById("vacancyImage");
+    debugger
+    try {
+      let fotoResponse = await vagaService.getFoto(resposta.data[0].id);
+      vacancyImage.src = "data:image/png;base64," + fotoResponse.data;
+    } catch (error) {
+
+    }
+
+    let usuarioFisicoService = new UsuarioFisicoService();
+
+    let userId = sessionStorage["userId"];
+    let userIdAsInt = parseInt(userId);
+    let vagaAsJson = JSON.stringify(resposta.data[0]);
+    await usuarioFisicoService.setUltimaVaga(userIdAsInt, vagaAsJson);
+  }
+  
+  baixarArquivo = async () => {
+    let userId = parseInt(sessionStorage["userId"]);
+    let usuarioAtual = await new UsuarioJuridicoService().getUsuarioJuridicoById(userId);
+    let nomeOng = usuarioAtual.data[0].nomeOng;
+  
+    window.location.href=`http://localhost:8080/arquivos/arquivo02?nomeDoArquivo=VoluntariosDaVaga&nomeDaOng=${nomeOng}&nomeDaVaga=${sessionStorage["currentVacancy"]}&isCsv=false`;
+  }
+
+  candidatar = async () => {
+    try {
+      debugger
+      let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
+
+      let userIdAsInt = parseInt(sessionStorage["userId"]);
+      let userId = userIdAsInt % 2 == 0 ? userIdAsInt : -1;
+      if (userId == -1)
+        return;
+
+      let vagaId = parseInt(sessionStorage["idVaga"]);
+      if (vagaId <= 0)
+        return;
+
+      let ufv = await usuarioFisicoVagaService.postUFVByIds(userId, vagaId);
+      await usuarioFisicoVagaService.aplicar(ufv.data);
+
+      this.setState({
+        message: "Candidatura enviada",
+        severity: "success",
+        open: true
+      });
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      });
+    }
+  }
+
+  favoritar = async () => {
+    try {
+      
+      let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
+
+      let userIdAsInt = parseInt(sessionStorage["userId"]);
+      let userId = userIdAsInt % 2 == 0 ? userIdAsInt : -1;
+      if (userId == -1)
+        return;
+
+      let vagaId = parseInt(sessionStorage["idVaga"]);
+      if (vagaId <= 0)
+        return;
+
+      let ufv = await usuarioFisicoVagaService.curtirByIds(userId, vagaId);
+
+      this.setState({
+        message: "Vaga favoritada",
+        severity: "success",
+        open: true
+      });
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      });
+    }
+  }
+
+  fecharAlerta = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ open: false })
+  };
 
   render() {
     return (
@@ -78,9 +163,13 @@ export default class VacancySpecific extends React.Component {
   
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6hOO7TuGsB5W39Y7g6oaAXWaUMnrxyeA&callback=initMap"
           type="text/javascript"></script>
-          
-        <VacancyHeader name="headerVaga" imgId="vacancyImage" title="Teste"></VacancyHeader>
-  
+        
+        <VacancyHeader  name="headerVaga" imgId="vacancyImage" title="Teste" width="520" height="300"
+                        candidatarCallBack={this.candidatar} favoritarCallBack={this.favoritar}
+        />
+
+        <AlertCard open={this.state.open} message={this.state.message} severity={this.state.severity} onClose={this.fecharAlerta} />
+
         <div className="border-b mg-t-24 height-56p font-color-gray-light fs-32p">
           <a href="#aboutVacancy" className="mg-t-8 mg-r-64 menuOptions">Sobre a vaga</a>
           <a href="#aboutOng" className="mg-t-8 mg-r-64 menuOptions">ONG</a>
@@ -91,13 +180,16 @@ export default class VacancySpecific extends React.Component {
           <div id="descricaoVaga" className="aboutVacancyText">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit doloremque illo ea earum et perferendis dolore voluptate temporibus commodi quia, officia autem. Odit fugit sint exercitationem reprehenderit eum animi delectus.
           </div>
-          <Button onClick={baixarArquivo}>Baixar arquivo da vaga TXT</Button>
+          <Button onClick={this.baixarArquivo}>Baixar arquivo da vaga TXT</Button>
         </div>
         <div id="aboutOng">
           <h1 className="fs-32p">Sobre a ONG</h1>
-          <AboutOng name="ong" nameOng="TETO Brasil"
+          <AboutOng name="ong" nameOng="TETO Brasil" imgId="ongImg"
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!"
-            link="www.google.com.br" />
+            link="www.google.com.br" 
+            width="210"
+            height="210"
+            />
           {/* <div className="aboutVacancyText">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!
           </div> */}

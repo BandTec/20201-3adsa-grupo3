@@ -16,12 +16,19 @@ function Navbar() {
                 <img src={LogoCompassio}/>
                 </a>
             </span>
+            <div className="menuResponsivo">
+
+            <input type="checkbox" id="btnMenu"></input>
+            <label for="btnMenu">&#9776;</label>
+
+
             <div className="botoes">
                 <a className="link" href="/signup">Seja voluntário</a>
                 {/*<button className="link" onClick={props.direciona}>Como funciona</button>*/}
                 <a className="link" href="/#comoFunciona">Como funciona</a>
                 <a className="link" href="vacancies">Vagas</a>
-                <a disabled id="entrar" href="signin" className="link botao">Entrar</a>
+                <a disabled id="entrar" href="http://localhost:3000/signin" className="link botao">Entrar</a>
+            </div>
             </div>
         </div>
     );

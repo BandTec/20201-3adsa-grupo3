@@ -38,16 +38,21 @@ class AboutVolunteer extends React.Component {
         let vagas = [];
 
         for (var i = 0; i < ultimasVagasAcessadas.data.length; i++) {
-            let fotoVaga = await new VagaService().getFoto(ultimasVagasAcessadas.data[i].id);
-            if (fotoVaga != null) {
-                vagas.push({
-                    dados: ultimasVagasAcessadas.data[i],
-                    foto: 'data:image/jpeg;base64,' + fotoVaga.data
-                })
+            const fotoVaga = '';
+            try {
+                fotoVaga = await new VagaService().getFoto(ultimasVagasAcessadas.data[i].id);
+            } catch (error) {
+
             }
+            vagas.push({
+                dados: ultimasVagasAcessadas.data[i],
+                foto: 'data:image/jpeg;base64,' + fotoVaga.data
+            })
         }
-        this.setState({ultimasVagas: vagas});
+        this.setState({ ultimasVagas: vagas });
     }
+
+
 
     classes = makeStyles((theme) => ({
         root: {
@@ -65,7 +70,7 @@ class AboutVolunteer extends React.Component {
             <section name={this.props.name} className="width-100pg flex ">
                 <div className="imgVolunteerBox grid width-20pg">
                     <img id={this.props.imgId} width="210" height="280" src={this.props.imgSrc}></img>
-                    <div className="mg-t-16 width-200pg">
+                    <div id="btnPhotoEdit" className="mg-t-16 width-250pg">
                         <InputFile className="" id="editarFoto" text="Editar foto" callBack={this.props.editImgVolunteer} />
                     </div>
                 </div>

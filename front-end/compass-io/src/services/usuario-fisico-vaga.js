@@ -12,7 +12,7 @@ class VagaService {
         .catch((err) => {
             return err;
         });
-    }
+    }   
 
     async getUfvByVaga(vaga) {
         return axios.get(`${this.BASE_URL}?vaga=${vaga}`)

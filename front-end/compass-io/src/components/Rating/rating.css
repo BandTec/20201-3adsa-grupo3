@@ -59,6 +59,11 @@
     width: 60%
 }
 
+.fontPosition{
+    color: #fff;
+    text-align: center;
+}
+
 .buttonProfile{
     color: #fff;
     border-radius: 0.5rem;
@@ -77,10 +82,18 @@
     font-size: 1.25rem
 }
 
+#btnAprovar{
+    margin-left: 17rem;
+}
+
 .buttonProfileOng:hover{
     background-color: #bbb;
     color: #fff;
     transition: 0.75s;
+}
+
+.buttonProfile{
+    cursor: pointer;
 }
 
 .buttonProfile:hover{
@@ -95,4 +108,8 @@
 
 .width-90pg{
     width: 90%;
+}
+
+.border-radius-05rem{
+    border-radius: 0.5rem;
 }

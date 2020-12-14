@@ -1,11 +1,9 @@
 .aboutOng{
     display: flex;
-
+    margin-bottom: 1rem;
 }
 
 #imgOng{
-    width: 10rem;
-    height: 10rem;
     background-color: #f00;
 }
 
@@ -28,4 +26,8 @@
 
 .infoOngUrl{
     margin-left: -1rem
+}
+
+#btnPhotoOngEdit{
+    margin-left: 0.5rem;
 }

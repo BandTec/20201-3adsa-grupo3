@@ -74,6 +74,11 @@
     display: flex;
 }
 
+.width-20rem{
+    width: 17.5rem;
+    margin-top: 1.4rem;
+}
+
 /* .btnPage{
     margin-top: 3rem;
 } */

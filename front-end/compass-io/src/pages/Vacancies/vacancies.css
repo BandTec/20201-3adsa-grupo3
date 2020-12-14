@@ -1,3 +1,7 @@
+button {
+    cursor: pointer;
+}
+
 .fs-48p{
     font-size: 3rem;
 }
@@ -73,6 +77,10 @@
 
 .width-1000pg{
     width: 1000%
+}
+
+.width-150pg{
+    width: 150%;
 }
 
 .width-500pg{

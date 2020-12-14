@@ -108,7 +108,7 @@ return (
     border: "1px solid black",
     borderRadius:"1rem",
     height: "17.5rem",
-    width: "72.5rem",
+    width: "76.3rem",
     backgroundColor: "#FAFAFA"
   }}>
     <Slider className={classes.slider} {...settings}>

@@ -217,7 +217,7 @@ export default class VacancyRegister extends React.Component {
               <InputLine name="titulo" title="Título da vaga" type="text" placeholder="O que você busca?" />
             </div>
             <div className="mg-t-24 mg-h-16 flex width-100pg">
-              <div className="mg-t-16 width-40pg">
+              <div className="mg-t-16 width-20rem">
                 <InputFile id="foto" className="inputFoto" text="Escolher foto" />
               </div>
               <div className="width-30pg mg-t-24 mg-l-32">

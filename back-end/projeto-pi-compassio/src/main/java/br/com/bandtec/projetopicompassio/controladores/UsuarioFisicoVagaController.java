@@ -145,7 +145,31 @@ public class UsuarioFisicoVagaController {
         }
     }
 
-    @PutMapping("/curtir")
+    @PostMapping("/curtir/byIds")
+    public ResponseEntity curtir(@RequestParam Integer idUsuario, @RequestParam Integer idVaga){
+        try {
+            Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(idUsuario);
+            if (usuarioOptional.isPresent()){
+                Optional<Vaga> vagaOptional  = vagaRepository.findById(idVaga);
+                if (vagaOptional.isPresent()){
+                    UsuarioFisico usuarioCadastrado = usuarioOptional.get();
+                    Vaga vagaCadastrada = vagaOptional.get();
+                    UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
+                    ufv.setCurtido(true);
+
+                    UsuarioFisicoVaga ufvCadastrada = this.usuarioVagaRepository.save(ufv);
+
+                    return ResponseEntity.ok(ufvCadastrada);
+                }
+                return ResponseEntity.badRequest().body("Vaga não cadastrada");
+            }
+            return ResponseEntity.badRequest().body("Usuário não cadastrado");
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/curtir/byUFV")
     public ResponseEntity curtir(@RequestBody UsuarioFisicoVaga usuarioFisicoVaga){
         try {
             Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(usuarioFisicoVaga.getFkUsuarioFisico().getId());
@@ -169,7 +193,7 @@ public class UsuarioFisicoVagaController {
         }
     }
 
-    @PutMapping("/aplicar")
+    @PostMapping("/aplicar/byUFV")
     public ResponseEntity aplicar(@RequestBody UsuarioFisicoVaga usuarioFisicoVaga){
         try {
             Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(usuarioFisicoVaga.getFkUsuarioFisico().getId());
@@ -193,7 +217,31 @@ public class UsuarioFisicoVagaController {
         }
     }
 
-    @PutMapping("/aprovar")
+    @PostMapping("/aplicar/byIds")
+    public ResponseEntity aplicar(@RequestParam Integer idUsuario, @RequestParam Integer idVaga){
+        try {
+            Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(idUsuario);
+            if (usuarioOptional.isPresent()){
+                Optional<Vaga> vagaOptional  = vagaRepository.findById(idVaga);
+                if (vagaOptional.isPresent()){
+                    UsuarioFisico usuarioCadastrado = usuarioOptional.get();
+                    Vaga vagaCadastrada = vagaOptional.get();
+                    UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
+                    ufv.setAplicado(true);
+
+                    UsuarioFisicoVaga ufvCadastrada = this.usuarioVagaRepository.save(ufv);
+
+                    return ResponseEntity.ok(ufvCadastrada);
+                }
+                return ResponseEntity.badRequest().body("Vaga não cadastrada");
+            }
+            return ResponseEntity.badRequest().body("Usuário não cadastrado");
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/aprovar/byUFV")
     public ResponseEntity aprovar(@RequestBody UsuarioFisicoVaga usuarioFisicoVaga){
         try {
             Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(usuarioFisicoVaga.getFkUsuarioFisico().getId());
@@ -204,6 +252,78 @@ public class UsuarioFisicoVagaController {
                     Vaga vagaCadastrada = vagaOptional.get();
                     UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
                     ufv.setAprovado(true);
+
+                    UsuarioFisicoVaga ufvCadastrada = this.usuarioVagaRepository.save(ufv);
+
+                    return ResponseEntity.ok(ufvCadastrada);
+                }
+                return ResponseEntity.badRequest().body("Vaga não cadastrada");
+            }
+            return ResponseEntity.badRequest().body("Usuário não cadastrado");
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/aprovar/byIds")
+    public ResponseEntity aprovar(@RequestParam Integer idUsuario, @RequestParam Integer idVaga){
+        try {
+            Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(idUsuario);
+            if (usuarioOptional.isPresent()){
+                Optional<Vaga> vagaOptional  = vagaRepository.findById(idVaga);
+                if (vagaOptional.isPresent()){
+                    UsuarioFisico usuarioCadastrado = usuarioOptional.get();
+                    Vaga vagaCadastrada = vagaOptional.get();
+                    UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
+                    ufv.setAprovado(true);
+
+                    UsuarioFisicoVaga ufvCadastrada = this.usuarioVagaRepository.save(ufv);
+
+                    return ResponseEntity.ok(ufvCadastrada);
+                }
+                return ResponseEntity.badRequest().body("Vaga não cadastrada");
+            }
+            return ResponseEntity.badRequest().body("Usuário não cadastrado");
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/recusar/byUFV")
+    public ResponseEntity recusar(@RequestBody UsuarioFisicoVaga usuarioFisicoVaga){
+        try {
+            Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(usuarioFisicoVaga.getFkUsuarioFisico().getId());
+            if (usuarioOptional.isPresent()){
+                Optional<Vaga> vagaOptional  = vagaRepository.findById(usuarioFisicoVaga.getFkVaga().getId());
+                if (vagaOptional.isPresent()){
+                    UsuarioFisico usuarioCadastrado = usuarioOptional.get();
+                    Vaga vagaCadastrada = vagaOptional.get();
+                    UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
+                    ufv.setAprovado(false);
+
+                    UsuarioFisicoVaga ufvCadastrada = this.usuarioVagaRepository.save(ufv);
+
+                    return ResponseEntity.ok(ufvCadastrada);
+                }
+                return ResponseEntity.badRequest().body("Vaga não cadastrada");
+            }
+            return ResponseEntity.badRequest().body("Usuário não cadastrado");
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/recusar/byIds")
+    public ResponseEntity recusar(@RequestParam Integer idUsuario, @RequestParam Integer idVaga){
+        try {
+            Optional<UsuarioFisico> usuarioOptional = usuarioRepository.findById(idUsuario);
+            if (usuarioOptional.isPresent()){
+                Optional<Vaga> vagaOptional  = vagaRepository.findById(idVaga);
+                if (vagaOptional.isPresent()){
+                    UsuarioFisico usuarioCadastrado = usuarioOptional.get();
+                    Vaga vagaCadastrada = vagaOptional.get();
+                    UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
+                    ufv.setAprovado(false);
 
                     UsuarioFisicoVaga ufvCadastrada = this.usuarioVagaRepository.save(ufv);
 
