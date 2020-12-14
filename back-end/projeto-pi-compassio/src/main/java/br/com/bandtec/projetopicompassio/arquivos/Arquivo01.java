@@ -1,5 +1,6 @@
 package br.com.bandtec.projetopicompassio.arquivos;
 
+import br.com.bandtec.projetopicompassio.dto.EnderecoVagaDTO;
 import br.com.bandtec.projetopicompassio.dto.VagaDTO;
 import br.com.bandtec.projetopicompassio.dto.VagasDeUmaOngDTO;
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
@@ -77,7 +78,13 @@ public class Arquivo01 implements IArquivo {
         for (int i = 0; i < vagas.getTamanho(); i++) {
             VagaDTO vaga = vagas.getElemento(i);
             registro.append(vaga.getDataInicio()+";");
+            registro.append(vaga.getDataFim()+";");
             registro.append(vaga.getTitulo()+";");
+            registro.append(vaga.getCausa()+";");
+            registro.append(vaga.getDescricao()+";");
+            registro.append(vaga.getEndereco().getCidade()+";");
+            registro.append(vaga.getEndereco().getEstado()+";");
+            registro.append(vaga.getEndereco().getBairro()+";");
             registro.append("\n");
         }
         registro.append("\r\n");
@@ -104,18 +111,39 @@ public class Arquivo01 implements IArquivo {
                 nomeDaOng = linhas.getElemento(i).substring(2, 31).trim();
             else {
                 //Parseia os dados de acordo com o arquivo de layout
-                String dia = linhas.getElemento(i).substring(0, 2);
-                String mes = linhas.getElemento(i).substring(3, 5);
-                String ano = linhas.getElemento(i).substring(6, 10);
-                String dataInicio = ano+"-"+mes+"-"+dia;
-                String titulo = linhas.getElemento(i).substring(10, 49).trim();
+                String diaInicio = linhas.getElemento(i).substring(0, 2);
+                String mesInicio = linhas.getElemento(i).substring(3, 5);
+                String anoInicio = linhas.getElemento(i).substring(6, 10);
+                String dataInicio = anoInicio+"-"+mesInicio+"-"+diaInicio;
+
+                String diaFim = linhas.getElemento(i).substring(10, 12);
+                String mesFim = linhas.getElemento(i).substring(13, 15);
+                String anoFim = linhas.getElemento(i).substring(16, 20);
+                String dataFim = anoFim+"-"+mesFim+"-"+diaFim;
+
+                String titulo = linhas.getElemento(i).substring(20, 275).trim();
+                String causa = linhas.getElemento(i).substring(275, 325).trim();
+                String descricao = linhas.getElemento(i).substring(325, 581).trim();
+                String cidade = linhas.getElemento(i).substring(581, 626).trim();
+                String estado = linhas.getElemento(i).substring(626, 628).trim();
+                String bairro = linhas.getElemento(i).substring(628, 673).trim();
 
                 LocalDate localDateInicio = Jsr310Converters.StringToLocalDateConverter.INSTANCE.convert(dataInicio);
                 Date finalDateInicio = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(localDateInicio);
 
+                LocalDate localDateFim = Jsr310Converters.StringToLocalDateConverter.INSTANCE.convert(dataFim);
+                Date finalDateFim = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(localDateFim);
+
                 //Instancia o objeto vaga para salvar no atributo
                 //vagasDeUmaOng
-                VagaDTO vaga = new VagaDTO(titulo, finalDateInicio);
+                VagaDTO vaga = new VagaDTO(
+                        titulo,
+                        dataInicio,
+                        dataFim,
+                        causa,
+                        descricao,
+                        new EnderecoVagaDTO(cidade, estado, bairro)
+                );
 
                 vagas.adiciona(vaga);
             }
