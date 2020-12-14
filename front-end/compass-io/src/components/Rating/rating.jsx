@@ -9,6 +9,7 @@ function Rating(props) {
                 "display-none"}>
                 <div className="mg-l-16">
                     <h1 >Última vaga pleiteada</h1>
+                    {/*className={props.isCandidatado ? "flex" : "display-none"}*/}
                     <div className="flex">
                         <img id={props.imgId} width="140" height="140" src={props.imgVolunteer}></img>
                         <div className="mg-l-16">
@@ -16,8 +17,8 @@ function Rating(props) {
                             <div id={props.descriptionId} className="fs-16p txtal-justify">{ props.infoVacancy }</div>
                         </div>
                         <div className="mg-l-80 width-60pg mg-t-40">
-                            <div className="height-56p mg-h-32 width-60pg font-weight-500 bg-color-blue">
-                                <span className="font-weight-500 fs-24p" id={props.isAprovadoId}>
+                            <div className="height-56p mg-h-32 width-60pg font-weight-500 bg-color-blue border-radius-05rem fontPosition">
+                                <span className="font-weight-500 fs-24p " id={props.isAprovadoId}>
                                 </span>
                             </div>
                         </div>
@@ -43,7 +44,7 @@ function Rating(props) {
                         </div>
                         <div className="mg-l-80 width-60pg mg-t-40">
 
-                            <button onClick={props.aprovar} className="height-56p mg-h-32 buttonProfileOng width-20pg bg-color-green">
+                            <button id="btnAprovar" onClick={props.aprovar} className="height-56p mg-h-32 buttonProfileOng width-20pg bg-color-green">
                                 <span className="font-weight-500 fs-24p">
                                     Aprovar
                                 </span>

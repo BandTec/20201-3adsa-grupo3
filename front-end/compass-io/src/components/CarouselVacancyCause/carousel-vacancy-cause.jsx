@@ -16,7 +16,6 @@ export default class CarouselVacancyCause extends React.Component {
   }
 
   loadVagas = async () => {
-    debugger
     let vagaService = new VagaService();
     const vagas = await vagaService.getVagasByCausa(sessionStorage.getItem("causa"));
 

@@ -250,9 +250,9 @@ export default class ProfileOng extends React.Component {
         <div className="mg-v-16 width-100pg">
           <AboutOng name="descricaoOng" nameOng="TETO Brasil" imgId="imgOng"
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!"
-            link="www.google.com.br"
             width="210"
             height="280"
+            link="www.google.com.br"
             isProfile
             editImgOng={this.trocarFoto}/>
 

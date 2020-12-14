@@ -138,8 +138,8 @@ public class Arquivo01 implements IArquivo {
                 //vagasDeUmaOng
                 VagaDTO vaga = new VagaDTO(
                         titulo,
-                        dataInicio,
-                        dataFim,
+                        finalDateInicio,
+                        finalDateFim,
                         causa,
                         descricao,
                         new EnderecoVagaDTO(cidade, estado, bairro)

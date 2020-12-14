@@ -4,8 +4,6 @@
 }
 
 #imgOng{
-    width: 10rem;
-    height: 10rem;
     background-color: #f00;
 }
 
@@ -31,5 +29,5 @@
 }
 
 #btnPhotoOngEdit{
-    margin-left: 0.35rem;
+    margin-left: 0.5rem;
 }

@@ -37,33 +37,42 @@ export default class VacancySpecific extends React.Component {
     let vagaInfos = resposta.data[0];
     console.log(vagaInfos);
     sessionStorage.setItem("causa", vagaInfos.causa);
-    
+
     let DescricaoVaga = document.getElementById("descricaoVaga");
     DescricaoVaga.innerText = vagaInfos.descricao;
     let header = document.getElementsByName("headerVaga")[0];
-    header.children.item(1).children.item(0).innerText=vagaInfos.titulo;
-  
-    let ong = document.getElementsByName("ong")[0];
-    ong.children.item(1).children.item(0).innerText=vagaInfos.fkUsuarioJuridico.nomeOng;
-    ong.children.item(1).children.item(1).innerText=vagaInfos.fkUsuarioJuridico.descricao;
-    ong.children.item(1).children.item(2).innerText='www.' + vagaInfos.fkUsuarioJuridico.nomeOng + '.org';
+    header.children.item(1).children.item(0).innerText = vagaInfos.titulo;
 
+    let ong = document.getElementsByName("ong")[0];
+    ong.children.item(1).children.item(0).innerText = vagaInfos.fkUsuarioJuridico.nomeOng;
+    ong.children.item(1).children.item(1).innerText = vagaInfos.fkUsuarioJuridico.descricao;
+    ong.children.item(1).children.item(2).innerText = 'www.' + vagaInfos.fkUsuarioJuridico.nomeOng + '.org';
+
+    debugger
     let img = document.getElementById("ongImg");
     let usuarioJuridicoService = new UsuarioJuridicoService();
-    let foto = await usuarioJuridicoService.getFoto(vagaInfos.fkUsuarioJuridico.id);
-    img.src = "data:image/png;base64," + foto.data;
-  
+    try {
+      let foto = await usuarioJuridicoService.getFoto(vagaInfos.fkUsuarioJuridico.id);
+      img.src = "data:image/png;base64," + foto.data;
+    } catch (error) {
+
+    }
+
     let vaga = document.getElementsByName("vaga")[0];
-    vaga.children.item(1).children.item(1).innerText= "Início: " + new Date(vagaInfos.dataInicio).toLocaleDateString("pt-BR");
-    vaga.children.item(2).children.item(1).innerText= "Fim: " + new Date(vagaInfos.dataFim).toLocaleDateString("pt-BR");
-    vaga.children.item(3).children.item(1).innerText=vagaInfos.fkEndereco.logradouro + ', ' + vagaInfos.fkEndereco.numeroEndereco + ' - ' + vagaInfos.fkEndereco.bairro + ', ' + vagaInfos.fkEndereco.cidade + ' - ' + vagaInfos.fkEndereco.estado + ', ' + vagaInfos.fkEndereco.cep;
-    
-    let fotoResponse = await vagaService.getFoto(resposta.data[0].id);
+    vaga.children.item(1).children.item(1).innerText = "Início: " + new Date(vagaInfos.dataInicio).toLocaleDateString("pt-BR");
+    vaga.children.item(2).children.item(1).innerText = "Fim: " + new Date(vagaInfos.dataFim).toLocaleDateString("pt-BR");
+    vaga.children.item(3).children.item(1).innerText = vagaInfos.fkEndereco.logradouro + ', ' + vagaInfos.fkEndereco.numeroEndereco + ' - ' + vagaInfos.fkEndereco.bairro + ', ' + vagaInfos.fkEndereco.cidade + ' - ' + vagaInfos.fkEndereco.estado + ', ' + vagaInfos.fkEndereco.cep;
+
     let vacancyImage = document.getElementById("vacancyImage");
-    vacancyImage.src = "data:image/png;base64," + fotoResponse.data;
-      
+    try {
+      let fotoResponse = await vagaService.getFoto(resposta.data[0].id);
+      vacancyImage.src = "data:image/png;base64," + fotoResponse.data;
+    } catch (error) {
+
+    }
+
     let usuarioFisicoService = new UsuarioFisicoService();
-  
+
     let userId = sessionStorage["userId"];
     let userIdAsInt = parseInt(userId);
     let vagaAsJson = JSON.stringify(resposta.data[0]);
@@ -155,7 +164,7 @@ export default class VacancySpecific extends React.Component {
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6hOO7TuGsB5W39Y7g6oaAXWaUMnrxyeA&callback=initMap"
           type="text/javascript"></script>
         
-        <VacancyHeader  name="headerVaga" imgId="vacancyImage" title="Teste" width="100%" height="100%"
+        <VacancyHeader  name="headerVaga" imgId="vacancyImage" title="Teste" width="520" height="300"
                         candidatarCallBack={this.candidatar} favoritarCallBack={this.favoritar}
         />
 

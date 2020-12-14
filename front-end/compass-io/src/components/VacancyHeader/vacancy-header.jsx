@@ -7,6 +7,7 @@ import heartOutlined from '@iconify/icons-ant-design/heart-outlined';
 
 const useStyles = makeStyles({
     btnFavorite:{
+        marginLeft: '2rem',
         backgroundColor: '#FFB219',
         color: '#fff',
         width: '10rem',
