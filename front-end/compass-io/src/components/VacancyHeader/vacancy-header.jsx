@@ -35,10 +35,10 @@ export default function VacancyHeader(props) {
             <span id="headerText">
                 <div id="headerTitle">{ props.title }</div>
                 <div id="headerBtn">
-                    <Button className={classes.btnFavorite}>
+                    <Button className={classes.btnFavorite} onClick={props.favoritarCallBack}>
                         <Icon icon={heartOutlined} style={{color: '#eeeeee', fontSize: '2rem'}} />Favoritar
                     </Button>
-                    <Button className={classes.btnApply}>Candidatar-se</Button>
+                    <Button className={classes.btnApply} onClick={props.candidatarCallBack}>Candidatar-se</Button>
                 </div>
             </span>
         </div>

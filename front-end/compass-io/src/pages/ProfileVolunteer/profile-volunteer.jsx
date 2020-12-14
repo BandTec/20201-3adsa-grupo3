@@ -9,8 +9,10 @@ import CarouselSkills from '../../components/CarouselSkills/carousel-skills';
 import AlertCard from '../../components/AlertCard/alert-card';
 
 import UsuarioFisicoService from '../../services/usuario-fisico-service';
+import UsuarioFisicoVagaService from '../../services/usuario-fisico-vaga-service';
 
 import './profile-volunteer.css';
+import VagaService from '../../services/vaga-service';
 
 export default class ProfileVolunteer extends React.Component {
 
@@ -27,10 +29,10 @@ export default class ProfileVolunteer extends React.Component {
   componentDidMount() {
     this.renderPerfil();
     this.getFoto();
+    this.getVagasPleiteadas();
   }
 
   async renderPerfil() {
-    debugger
     let usuarioFisico = new UsuarioFisicoService();
     let resposta = await usuarioFisico.getUsuarioFisicoById(parseInt(sessionStorage["userId"]));
     let voluntarioInfo = resposta.data[0];
@@ -92,6 +94,53 @@ export default class ProfileVolunteer extends React.Component {
     }
   }
 
+  getVagasPleiteadas = async () => {
+    try {
+      let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
+
+      let userIdAsInt = parseInt(sessionStorage["userId"]);
+      let userId = userIdAsInt % 2 == 0 ? userIdAsInt : -1;
+      if (userId == -1)
+        return;
+
+      let vagasDoUsuario = await usuarioFisicoVagaService.getUsuarioFisicoByIdUsuario(userId);
+
+      debugger
+      let contador = 0;
+      let ufv;
+      do {
+        ufv = vagasDoUsuario.data[contador]
+        contador++;
+      } while (ufv.aprovado != null)
+
+      let img = document.getElementById("vacancyImgId");
+      let title = document.getElementById("vacancyTitleId");
+      let description = document.getElementById("vacancyDescriptionId");
+      let aprovado = document.getElementById("vacancyAprovadoId");
+
+      let vagaService = new VagaService();
+      let foto = await vagaService.getFoto(ufv.fkVaga.id);
+      img.src = "data:image/png;base64," + foto.data;
+
+      title.innerText = ufv.fkVaga.titulo;
+      description.innerText = ufv.fkVaga.descricao;
+
+      if (ufv.aprovado == 1)
+        aprovado.innerText = "Aprovado";
+      else if (ufv.aprovado == 0)
+        aprovado.innerText = "Reprovado";
+      else
+        aprovado.innerText = "Em avaliação";
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      })
+    }
+  }
+
   fecharAlerta = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -122,13 +171,13 @@ export default class ProfileVolunteer extends React.Component {
           <CarouselSkills />
         </div>
         <div classname="ratingBox">
-          <Rating isVolunteerProfile
-            imgVolunteer={ImgVolunteer}
-            vacancyTitle="Marcenaria para construção de móveis"
+          <Rating isVolunteerProfile isAprovadoId="vacancyAprovadoId"
+            imgVolunteer={ImgVolunteer} imgId="vacancyImgId"
+            vacancyTitle="Marcenaria para construção de móveis" titleId="vacancyTitleId"
             infoVacancy="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                         Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, 
                         accusantium cupiditate incidunt laboriosam aspernatur. P
-                        laceat ut maxime facilis molestias pariatur!"/>
+                        laceat ut maxime facilis molestias pariatur!" descriptionId="vacancyDescriptionId" />
         </div>
       </div>
     );

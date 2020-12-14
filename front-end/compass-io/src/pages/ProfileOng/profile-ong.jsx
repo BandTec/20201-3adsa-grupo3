@@ -8,16 +8,17 @@ import CardProfileOng from '../../components/CardProfileOng/card-profile-ong';
 import InputFile from '../../components/InputFile/input-file';
 import ImgVolunteer from '../../assets/images/child-img.jpg';
 import AlertCard from '../../components/AlertCard/alert-card';
-import Footer from '../../components/Footer/footer';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import { render } from 'react-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
 import ArquivoService from '../../services/arquivo-service';
+import UsuarioFisicoVagaService from '../../services/usuario-fisico-vaga-service';
 
 import './profile-ong.css';
+import VagaService from '../../services/vaga-service';
+import UsuarioFisicoService from '../../services/usuario-fisico-service';
 
 export default class ProfileOng extends React.Component {
 
@@ -33,6 +34,7 @@ export default class ProfileOng extends React.Component {
 
   componentDidMount() {
     this.renderPerfil();
+    this.carregarVoluntarios();
   }
 
   renderPerfil = async () => {
@@ -128,7 +130,112 @@ export default class ProfileOng extends React.Component {
     }
   });
 
-  
+  carregarVoluntarios = async () => {
+    try {
+      let vagaService = new VagaService();
+
+      let userIdAsInt = parseInt(sessionStorage["userId"]);
+      let userId = userIdAsInt % 2 != 0 ? userIdAsInt : -1;
+      if (userId == -1)
+        return;
+
+      let vagas = await vagaService.getVagasByFkOng(userId);
+
+      let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
+      debugger
+      let contador = 0;
+      let ufv;
+      do {
+        ufv = await usuarioFisicoVagaService.getUsuarioFisicoByIdVaga(vagas.data[contador].id);
+        contador++;
+      } while (ufv.aprovado != null)
+
+      sessionStorage["candidato"] = ufv.data[0].fkUsuarioFisico.id;
+      sessionStorage["vaga"] = ufv.data[0].fkVaga.id;
+
+      let nome = document.getElementById("voluntarioNomeId");
+      let img = document.getElementById("voluntarioImgId");
+      let idade = document.getElementById("voluntarioIdadeId");
+
+      nome.innerText = ufv.data[0].fkUsuarioFisico.nome;
+
+      let usuarioFisicoService = new UsuarioFisicoService();
+      let foto = await usuarioFisicoService.getFoto(ufv.data[0].fkUsuarioFisico.id);
+      img.src = "data:image/png;base64," + foto.data;
+
+      let convertData = new Date(ufv.data[0].fkUsuarioFisico.dataNascimento).toLocaleDateString("pt-BR");
+      let nascimento = convertData.split('/');
+      let hoje = new Date;
+      let hojePartes = [hoje.getDate(), (hoje.getMonth() + 1), hoje.getFullYear()];
+      let idadeCalculada;
+      if (hojePartes[1] >= nascimento[1]) {
+        idadeCalculada = hojePartes[2] - nascimento[2];
+      } else if (hojePartes[0] >= nascimento[0]) {
+        idadeCalculada = hojePartes[2] - nascimento[2];
+      } else {
+        idadeCalculada = (hojePartes[2] - nascimento[2]) - 1;
+      }
+      idade.innerHTML += " " + idadeCalculada + " anos";
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      })
+    }
+  }
+
+  aprovar = async () => {
+    try {
+      let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
+
+      let idUser = parseInt(sessionStorage["candidato"]);
+      let idVaga = parseInt(sessionStorage["vaga"]);
+
+      let ufv = await usuarioFisicoVagaService.aprovarByIds(idUser, idVaga);
+      this.setState({
+        message: "Voluntário aprovado",
+        severity: "success",
+        open: true
+      });
+
+      window.location.href = "http://localhost:3000/profile/ong";
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      })
+    }
+  }
+
+  recusar = async () => {
+    try {
+      let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
+
+      let idUser = parseInt(sessionStorage["candidato"]);
+      let idVaga = parseInt(sessionStorage["vaga"]);
+
+      let ufv = await usuarioFisicoVagaService.recusarByIds(idUser, idVaga);
+      this.setState({
+        message: "Voluntário recusado",
+        severity: "success",
+        open: true
+      });
+
+      window.location.href = "http://localhost:3000/profile/ong";
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      })
+    }
+  }
+
   fecharAlerta = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -141,7 +248,7 @@ export default class ProfileOng extends React.Component {
       <section>
         <AlertCard open={this.state.open} message={this.state.message} severity={this.state.severity} onClose={this.fecharAlerta} />
         <div className="mg-v-16 width-100pg">
-          <AboutOng name="descricaoOng" nameOng="TETO Brasil"
+          <AboutOng name="descricaoOng" nameOng="TETO Brasil" imgId="imgOng"
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!"
             link="www.google.com.br"
             width="600" />
@@ -151,7 +258,7 @@ export default class ProfileOng extends React.Component {
                 <InputFile id="editarFoto" text="Editar foto" callBack={this.trocarFoto} />
               </div>
             </div>
-            
+
           </div>
           <div className="width-100pg border border-rd-10 height-500pg">
             <div className="flex justcon-sb mg-b-16">
@@ -176,10 +283,21 @@ export default class ProfileOng extends React.Component {
             <Rating isOngProfile
               imgVolunteer={ImgVolunteer}
               nameVolunteer="Iago Roani de Lima"
-              ageVolunteer="21 anos"
               professionVolunteer="Automação"
               schoolVolunteer="Cursando Superior"
-              liveInVolunteer="Suzano,SP,Brasil" />
+              liveInVolunteer="Suzano,SP,Brasil"
+
+              nomeId="voluntarioNomeId"
+              volunteerImgId="voluntarioImgId"
+              idadeId="voluntarioIdadeId"
+
+              aprovar={this.aprovar}
+              recusar={this.recusar}
+
+              profissaoId="voluntarioProfissaoId"
+              escolaridadeId="voluntarioEscolaridadeId"
+              moraEmId="voluntarioMoraEmId"
+            />
           </div>
           <div className="flex justcon-sb">
             <CardProfileOng name="ongLocation" isContact location="R. Rodrigues, 116 - Vila Zat, São Paulo - SP, 02977-025"
