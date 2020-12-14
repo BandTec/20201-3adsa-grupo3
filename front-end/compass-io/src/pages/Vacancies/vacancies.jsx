@@ -29,19 +29,41 @@ export default class Vacancies extends React.Component {
     openLocation: false,
     causas: {
       animais: false,
-      criancas: false,
+      Crianças: false,
       pcd: false,
       idosos: false,
       direitosCivis: false,
       meioAmbiente: false
     },
     stateLocation: {
-      SP: false,
-      RJ: false,
-      RS: false,
-      MG: false,
+      AC: false,
+      AL: false,
+      AP: false,
+      AM: false,
+      BA: false,
+      CE: false,
+      DF: false,
+      ES: false,
+      GO: false,
       MA: false,
-      AM: false
+      MT: false,
+      MS: false,
+      MG: false,
+      PA: false,
+      PB: false,
+      PR: false,
+      PE: false,
+      PI: false,
+      RJ: false,
+      RN: false,
+      RS: false,
+      RO: false,
+      RR: false,
+      SC: false,
+      SP: false,
+      SE: false,
+      TO: false,
+      DF: false
     },
     filtro: {
       estado: null,
@@ -61,36 +83,40 @@ export default class Vacancies extends React.Component {
     this.getVagas();
   }
 
-  setarIdvaga(id){
+  setarIdvaga(id) {
     sessionStorage.setItem("vagaId", id);
   }
 
   renderExibicao = () => {
     debugger
-    let vagasFiltradas = {};
-    if (this.state.filtro.estado != null) {
-      {this.state.exibir.forEach(vaga => {
-        if (vaga.vaga.fkEndereco.estado == this.state.filtro.estado) {
-          vagasFiltradas += vaga;
-        }
-      })}
-      this.setState({ exibir: vagasFiltradas });
+    this.setState({ exibir: [] });
+    let vagasFiltradas = [];
+    if (this.state.filtro.causa != null && this.state.filtro.estado != null) {
+      {
+        this.state.exibir.forEach(vaga => {
+          if (vaga.vaga.fkEndereco.estado == this.state.filtro.estado && vaga.vaga.causa == this.state.filtro.causa) {
+            vagasFiltradas.push(vaga.vaga);
+          }
+        })
+      }
     } else if (this.state.filtro.causa != null) {
-      {this.state.exibir.forEach(vaga => {
-        if (vaga.vaga.causa == this.state.filtro.causa) {
-          vagasFiltradas += vaga;
-        }
-      })}
-      this.setState({ exibir: vagasFiltradas });
-    }
-    else if (this.state.filtro.causa != null && this.state.filtro.estado != null) {
-      {this.state.exibir.forEach(vaga => {
-        if (vaga.vaga.fkEndereco.estado == this.state.filtro.estado && vaga.vaga.causa == this.state.filtro.causa) {
-          vagasFiltradas += vaga;
-        }
-      })} 
-      this.setState({ exibir: vagasFiltradas });
+      {
+        this.state.exibir.forEach(vaga => {
+          if (vaga.vaga.causa == this.state.filtro.causa) {
+            vagasFiltradas.push(vaga.vaga);
+          }
+        })
+      }
+    } else if (this.state.filtro.estado != null) {
+      {
+        this.state.exibir.forEach(vaga => {
+          if (vaga.vaga.fkEndereco.estado == this.state.filtro.estado) {
+            vagasFiltradas.push(vaga.vaga);
+          }
+        })
+      }
     } 
+    this.setState({ exibir: vagasFiltradas });
     console.log(this.state.exibir);
   }
 
@@ -468,15 +494,8 @@ export default class Vacancies extends React.Component {
       });
     };
 
-    const { SP, RJ, RS, MG, MA, AM } = this.state.stateLocation;
-    const errorLocation = [SP, RJ, RS, MG, MA, AM].filter((v) => v).length !== 2;
-
-
-
-    console.log(this.state.stateLocation);
-    console.log(this.state.causas);
-    console.log(this.state.filtro);
-
+    //const { AC,AL,AP,AM,BA,CE,DF,ES,GO,MA,MT,MS,MG,PA,PB,PR,PE,PI,RJ,RN,RS,RO,RR,SC,SP,SE,TO,DF } = this.state.stateLocation;
+    //const errorLocation = [AC,AL,AP,AM,BA,CE,DF,ES,GO,MA,MT,MS,MG,PA,PB,PR,PE,PI,RJ,RN,RS,RO,RR,SC,SP,SE,TO,DF].filter((v) => v).length !== 2;
     return (
       <section>
         <div className="mg-b-16 border-b pd-b-16 flex justcon-sb">
@@ -497,7 +516,7 @@ export default class Vacancies extends React.Component {
                           label="Animais"
                         />
                         <FormControlLabel
-                          control={<Checkbox color="primary" checked={this.state.causas.criancas} onChange={handleChange} name="criancas" />}
+                          control={<Checkbox color="primary" checked={this.state.causas.Crianças} onChange={handleChange} name="Crianças" />}
                           label="Crianças"
                         />
                         <FormControlLabel
@@ -543,33 +562,132 @@ export default class Vacancies extends React.Component {
                 {this.state.openLocation ? (
                   <div className={classesLocation.dropdownLocation}>
                     <FormControl component="fieldset" className={classesFormLocation.formControl}>
-                      <FormLabel component="legend">Filtrar por causa</FormLabel>
+                      <FormLabel component="legend">Filtrar por estado</FormLabel>
                       <FormGroup>
                         <FormControlLabel
-                          control={<Checkbox color="primary" color="primary" checked={this.state.stateLocation.SP} onChange={handleChangeLocation} name="SP" />}
-                          label="SP"
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.AC} onChange={handleChangeLocation} name="AC" />}
+                          label="AC"
                         />
                         <FormControlLabel
-                          control={<Checkbox color="primary" checked={this.state.stateLocation.RJ} onChange={handleChangeLocation} name="RJ" />}
-                          label="RJ"
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.AL} onChange={handleChangeLocation} name="AL" />}
+                          label="AL"
                         />
                         <FormControlLabel
-                          control={<Checkbox color="primary" checked={this.state.stateLocation.RS} onChange={handleChangeLocation} name="RS" />}
-                          label="RS"
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.AP} onChange={handleChangeLocation} name="AP" />}
+                          label="AP"
                         />
                       </FormGroup>
                       <FormGroup>
                         <FormControlLabel
-                          control={<Checkbox color="primary" checked={this.state.stateLocation.MG} onChange={handleChangeLocation} name="MG" />}
-                          label="MG"
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.AM} onChange={handleChangeLocation} name="AM" />}
+                          label="AM"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.BA} onChange={handleChangeLocation} name="BA" />}
+                          label="BA"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.CE} onChange={handleChangeLocation} name="CE" />}
+                          label="CE"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.ES} onChange={handleChangeLocation} name="ES" />}
+                          label="ES"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.GO} onChange={handleChangeLocation} name="GO" />}
+                          label="GO"
                         />
                         <FormControlLabel
                           control={<Checkbox color="primary" checked={this.state.stateLocation.MA} onChange={handleChangeLocation} name="MA" />}
                           label="MA"
                         />
+                      </FormGroup>
+                      <FormGroup>
                         <FormControlLabel
-                          control={<Checkbox color="primary" checked={this.state.stateLocation.AM} onChange={handleChangeLocation} name="AM" />}
-                          label="AM"
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.MT} onChange={handleChangeLocation} name="MT" />}
+                          label="MT"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.MS} onChange={handleChangeLocation} name="MS" />}
+                          label="MS"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.MG} onChange={handleChangeLocation} name="MG" />}
+                          label="MG"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.PA} onChange={handleChangeLocation} name="PA" />}
+                          label="PA"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.PB} onChange={handleChangeLocation} name="PB" />}
+                          label="PB"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.PR} onChange={handleChangeLocation} name="PR" />}
+                          label="PR"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.PE} onChange={handleChangeLocation} name="PE" />}
+                          label="PE"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.PI} onChange={handleChangeLocation} name="PI" />}
+                          label="PI"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.RJ} onChange={handleChangeLocation} name="RJ" />}
+                          label="RJ"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.RN} onChange={handleChangeLocation} name="RN" />}
+                          label="RN"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.RS} onChange={handleChangeLocation} name="RS" />}
+                          label="RS"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.RO} onChange={handleChangeLocation} name="RO" />}
+                          label="RO"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.RR} onChange={handleChangeLocation} name="RR" />}
+                          label="RR"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.SC} onChange={handleChangeLocation} name="SC" />}
+                          label="SC"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.SP} onChange={handleChangeLocation} name="SP" />}
+                          label="SP"
+                        />
+                      </FormGroup>
+
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.SE} onChange={handleChangeLocation} name="SE" />}
+                          label="SE"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.TO} onChange={handleChangeLocation} name="TO" />}
+                          label="TO"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox color="primary" checked={this.state.stateLocation.DF} onChange={handleChangeLocation} name="DF" />}
+                          label="DF"
                         />
                       </FormGroup>
                       <FormHelperText>Be careful</FormHelperText>
@@ -618,13 +736,13 @@ export default class Vacancies extends React.Component {
           <div className="blueWord fs-16p fw-500">Quer conhecer a nossa parceira doebem? <a href="https://www.doebem.org.br/" className="yellowWord">Clique aqui</a></div>
         </div>
         <div className="">
-        {this.state.exibir.map(vaga => (
-          <div key={vaga.vaga.id} className="">
-            <CardVacancy onClick={this.setarIdvaga(vaga.vaga.id)} className="" key={vaga.vaga.id} imgSrc={vaga.foto}
-              ongName={vaga.vaga.fkUsuarioJuridico.nomeOng} description={vaga.vaga.descricao} titulo={vaga.vaga.titulo}
-              location={`${vaga.vaga.fkEndereco.cidade} - ${vaga.vaga.fkEndereco.estado}, ${vaga.vaga.fkEndereco.bairro}`}/>
-          </div>
-        ))}
+          {this.state.exibir.map(vaga => (
+            <div key={vaga.vaga.id} className="">
+              <CardVacancy onClick={this.setarIdvaga(vaga.vaga.id)} className="" key={vaga.vaga.id} imgSrc={vaga.foto}
+                ongName={vaga.vaga.fkUsuarioJuridico.nomeOng} description={vaga.vaga.descricao} titulo={vaga.vaga.titulo}
+                location={`${vaga.vaga.fkEndereco.cidade} - ${vaga.vaga.fkEndereco.estado}, ${vaga.vaga.fkEndereco.bairro}`} />
+            </div>
+          ))}
         </div>
         <Pagination count={10} variant="outlined" shape="rounded" className="mg-v-16 center" />
       </section>

@@ -47,11 +47,15 @@ export default class ProfileOng extends React.Component {
     console.log(ong);
     ong.children.item(1).children.item(0).innerText = perfilJuridicoInfo.nomeOng;
     ong.children.item(1).children.item(1).innerText = perfilJuridicoInfo.descricao;
-    ong.children.item(1).children.item(2).innerText = "www.google.com.br";
+    ong.children.item(1).children.item(2).innerText = 'www.' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.org';
     let OngLocation = document.getElementsByName("ongLocation")[0];
-    OngLocation.children.item(0).children.item(0).innerText = perfilJuridicoInfo.email;
-    OngLocation.children.item(0).children.item(2).children.item(0).innerText = "https://www.techo.org/";
+    OngLocation.children.item(0).children.item(0).innerText = perfilJuridicoInfo.nomeOng;
+    OngLocation.children.item(0).children.item(2).children.item(1).innerText = 'contato@' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.com';
+    OngLocation.children.item(0).children.item(3).children.item(1).innerText = 'https://www.' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.org/';
     OngLocation.children.item(0).children.item(1).innerText = perfilJuridicoInfo.fkEndereco.logradouro + ', ' + perfilJuridicoInfo.fkEndereco.numeroEndereco + ' - ' + perfilJuridicoInfo.fkEndereco.bairro + ', ' + perfilJuridicoInfo.fkEndereco.cidade + ' - ' + perfilJuridicoInfo.fkEndereco.estado + ', ' + perfilJuridicoInfo.fkEndereco.cep;
+    OngLocation.children.item(0).children.item(4).children.item(1).innerText = 'https://www.facebook/' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.com/';
+    OngLocation.children.item(0).children.item(5).children.item(1).innerText = '@' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase();
+  
   }
 
   trocarFoto = async () => {
@@ -183,7 +187,7 @@ export default class ProfileOng extends React.Component {
           </div>
           <div className="flex justcon-sb">
             <CardProfileOng name="ongLocation" isContact location="R. Rodrigues, 116 - Vila Zat, São Paulo - SP, 02977-025"
-              contact="contato.teto@teto.com.br" website="https://www.techo.org/" instagram="@teto.br"
+              website="https://www.techo.org/" instagram="@teto.br"
               facebook="Ver perfil" />
             <CardProfileOng is htHelp />
           </div>
