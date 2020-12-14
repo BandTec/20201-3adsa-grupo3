@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import CardVacancy from '../../components/CardVacancy/card-vacancy';
 import Pagination from '@material-ui/lab/Pagination';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -23,9 +23,6 @@ import './vacancies.css';
 
 export default class Vacancies extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
   state = {
     resposta: [],
     open: false,
@@ -58,41 +55,68 @@ export default class Vacancies extends React.Component {
     console.log(response);
     this.setState({ resposta: response.data });
     this.setState({ exibir: response.data });
-    const oi = this.state;
   }
 
   componentDidMount() {
     this.getVagas();
   }
 
-  /*renderExibicao = () => {
-    if (this.state.filtro.causa != null && this.state.filtro.estado != null) {
-      let vagasFiltradas = {};
-      this.state.resposta.forEach(vaga => {
-        if (vaga.causa == this.state.filtro.causa[0] && vaga.fkEndereco.estado == this.state.filtro.estado[0]) {
+  setarIdvaga(id){
+    sessionStorage.setItem("vagaId", id);
+  }
+
+  renderExibicao = () => {
+    debugger
+    let vagasFiltradas = {};
+    if (this.state.filtro.estado != null) {
+      {this.state.exibir.forEach(vaga => {
+        if (vaga.vaga.fkEndereco.estado == this.state.filtro.estado) {
           vagasFiltradas += vaga;
         }
-      });
+      })}
       this.setState({ exibir: vagasFiltradas });
     } else if (this.state.filtro.causa != null) {
-      let vagasFiltradas = {};
-      this.state.resposta.forEach(vaga => {
-        if (vaga.causa == this.state.filtro.causa[0]) {
+      {this.state.exibir.forEach(vaga => {
+        if (vaga.vaga.causa == this.state.filtro.causa) {
           vagasFiltradas += vaga;
         }
-      });
-      this.setState({ exibir: vagasFiltradas });
-    } else if (this.state.filtro.estado != null) {
-      let vagasFiltradas = {};
-      this.state.resposta.forEach(vaga => {
-        if (vaga.fkEndereco.estado == this.state.filtro.estado[0]) {
-          vagasFiltradas += vaga;
-        }
-      });
+      })}
       this.setState({ exibir: vagasFiltradas });
     }
+    else if (this.state.filtro.causa != null && this.state.filtro.estado != null) {
+      {this.state.exibir.forEach(vaga => {
+        if (vaga.vaga.fkEndereco.estado == this.state.filtro.estado && vaga.vaga.causa == this.state.filtro.causa) {
+          vagasFiltradas += vaga;
+        }
+      })} 
+      this.setState({ exibir: vagasFiltradas });
+    } 
     console.log(this.state.exibir);
-  }*/
+  }
+
+  getFotos = async () => {
+    let vagaService = new VagaService()
+    let vagas = await vagaService.getVagas();
+    let vagasComFoto = [];
+    for (var i = 0; i < vagas.data.length; i++) {
+      let fotoBase64 = ''
+      try {
+        let fotoResponse = await vagaService.getFoto(vagas.data[i].id);
+        fotoBase64 = "data:image/png;base64," + fotoResponse.data;
+      } catch (error) { }
+      vagasComFoto.push(
+        {
+          vaga: vagas.data[i],
+          foto: fotoBase64
+        }
+      );
+    }
+    this.setState({ exibir: vagasComFoto });
+  }
+
+  componentDidMount() {
+    this.getFotos();
+  }
 
   render() {
 
@@ -264,10 +288,9 @@ export default class Vacancies extends React.Component {
       this.setState({
         filtro: {
           estado: this.state.filtro.estado,
-          causa: [event.target.name]
+          causa: event.target.name
         }
       });
-      this.renderExibicao();
     };
 
     const { animais, criancas, pcd, idosos, direitosCivis, meioAmbiente } = this.state.causas;
@@ -439,11 +462,10 @@ export default class Vacancies extends React.Component {
       this.setState({ stateLocation: { [event.target.name]: event.target.checked } });
       this.setState({
         filtro: {
-          estado: [event.target.name],
+          estado: event.target.name,
           causa: this.state.filtro.causa
         }
       });
-      this.renderExibicao();
     };
 
     const { SP, RJ, RS, MG, MA, AM } = this.state.stateLocation;
@@ -510,6 +532,7 @@ export default class Vacancies extends React.Component {
               searchText="This is initial search text"
               classNames="test-class"
             /> */}
+            <button onClick={this.renderExibicao}>teste</button>
 
 
             <ClickAwayListener onClickAway={handleClickAwayLocation}>
@@ -594,20 +617,20 @@ export default class Vacancies extends React.Component {
           <div className="fs-32p fw-600 gray">VAGAS</div>
           <div className="blueWord fs-16p fw-500">Quer conhecer a nossa parceira doebem? <a href="https://www.doebem.org.br/" className="yellowWord">Clique aqui</a></div>
         </div>
-
+        <div className="">
         {this.state.exibir.map(vaga => (
-          <div key={vaga.id} className="">
-            <CardVacancy className="" ongName={vaga.fkUsuarioJuridico.nomeOng} description={vaga.descricao}
-              location={`${vaga.fkEndereco.cidade} - ${vaga.fkEndereco.estado}, ${vaga.fkEndereco.bairro}`} />
+          <div key={vaga.vaga.id} className="">
+            <CardVacancy onClick={this.setarIdvaga(vaga.vaga.id)} className="" key={vaga.vaga.id} imgSrc={vaga.foto}
+              ongName={vaga.vaga.fkUsuarioJuridico.nomeOng} description={vaga.vaga.descricao} titulo={vaga.vaga.titulo}
+              location={`${vaga.vaga.fkEndereco.cidade} - ${vaga.vaga.fkEndereco.estado}, ${vaga.vaga.fkEndereco.bairro}`}/>
           </div>
         ))}
-
+        </div>
         <Pagination count={10} variant="outlined" shape="rounded" className="mg-v-16 center" />
       </section>
     );
   };
 }
-
 /*
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -826,32 +849,32 @@ Estado
 <FormControl component="fieldset" className={classesFormLocation.formControl}>
 <FormLabel component="legend">Filtrar por causa</FormLabel>
 <FormGroup>
-  <FormControlLabel
-    control={<Checkbox color="primary" color="primary" checked={SP} onChange={handleChangeLocation} name="SP" />}
-    label="SP"
-  />
-  <FormControlLabel
-    control={<Checkbox color="primary" checked={RJ} onChange={handleChangeLocation} name="RJ" />}
-    label="RJ"
-  />
-  <FormControlLabel
-    control={<Checkbox color="primary" checked={RS} onChange={handleChangeLocation} name="RS" />}
-    label="RS"
-  />
+<FormControlLabel
+control={<Checkbox color="primary" color="primary" checked={SP} onChange={handleChangeLocation} name="SP" />}
+label="SP"
+/>
+<FormControlLabel
+control={<Checkbox color="primary" checked={RJ} onChange={handleChangeLocation} name="RJ" />}
+label="RJ"
+/>
+<FormControlLabel
+control={<Checkbox color="primary" checked={RS} onChange={handleChangeLocation} name="RS" />}
+label="RS"
+/>
 </FormGroup>
 <FormGroup>
-  <FormControlLabel
-    control={<Checkbox color="primary" checked={MG} onChange={handleChangeLocation} name="MG" />}
-    label="MG"
-  />
-  <FormControlLabel
-    control={<Checkbox color="primary" checked={MA} onChange={handleChangeLocation} name="MA" />}
-    label="MA"
-  />
-  <FormControlLabel
-    control={<Checkbox color="primary" checked={AM} onChange={handleChangeLocation} name="AM" />}
-    label="AM"
-  />
+<FormControlLabel
+control={<Checkbox color="primary" checked={MG} onChange={handleChangeLocation} name="MG" />}
+label="MG"
+/>
+<FormControlLabel
+control={<Checkbox color="primary" checked={MA} onChange={handleChangeLocation} name="MA" />}
+label="MA"
+/>
+<FormControlLabel
+control={<Checkbox color="primary" checked={AM} onChange={handleChangeLocation} name="AM" />}
+label="AM"
+/>
 </FormGroup>
 <FormHelperText>Be careful</FormHelperText>
 </FormControl>

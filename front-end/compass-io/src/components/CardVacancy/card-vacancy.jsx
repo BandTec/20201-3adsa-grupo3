@@ -12,18 +12,16 @@ function CardVacancy(props){
         <div key={props.key} className="flex justcon-sb mg-b-16">
             <div className="border height-280p width-45pg border-rd-10 bg-color-gray-light flex">
                 <div>
-                    <div className="cardImg">
-
-                    </div>
-                    <div className="mg-l-16">
+                <img src={props.imgSrc} name="vacancyImg" className="cardImg"></img>
+                <div className="mg-l-16">
                         por {props.ongName}
                     </div>
                 </div>
-                <div className="pd-v-16 mg-h-16 txtal-justify">
+                <div onClick={props.onClick} className="pd-v-16 mg-h-16 txtal-justify">
                     {/* <div>{props.title}</div>
                     <div>{props.description}</div>
                     <div></div> */}
-                    <div className="fw-600 fs-32p">Título</div>
+                    <div className="fw-600 fs-32p">{props.titulo}</div>
                     <div className="gray fw-500">
                         {props.description}
                     </div>
