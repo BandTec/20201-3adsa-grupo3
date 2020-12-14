@@ -25,7 +25,7 @@ export default class CarouselVacancy extends React.Component {
   }
 
   loadVagas = async () => {
-    
+
     let vagaService = new VagaService();
     const response = await vagaService.getVagasByFkOng(parseInt(sessionStorage.getItem("userId")));
     this.setState({ resposta: response.data });
@@ -118,7 +118,7 @@ export default class CarouselVacancy extends React.Component {
     slidesToShow: 3
   };
 
-  render() {    
+  render() {
     return (
 
       <div>
@@ -126,7 +126,7 @@ export default class CarouselVacancy extends React.Component {
         <Slider id="slider" className={this.classes.slider} {...this.settings}>
 
           {this.state.resposta.map(vaga => (
-              <CarouselCard key={vaga.idVaga} nameOng={vaga.fkUsuarioJuridico.nomeOng} title={vaga.titulo}
+            <CarouselCard key={vaga.idVaga} nameOng={vaga.fkUsuarioJuridico.nomeOng} title={vaga.titulo}
               description={vaga.descricao}
               location={`${vaga.fkEndereco.cidade} - ${vaga.fkEndereco.estado}, ${vaga.fkEndereco.bairro}`} schedule="1x por semana" />
           ))}

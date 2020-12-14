@@ -9,7 +9,7 @@ import LocationScheduleInfo from '../LocationScheduleInfo/location-schedule-info
 
 function CardVacancy(props){
     return(
-        <div className="flex justcon-sb mg-b-16">
+        <div key={props.key} className="flex justcon-sb mg-b-16">
             <div className="border height-280p width-45pg border-rd-10 bg-color-gray-light flex">
                 <div>
                     <div className="cardImg">
@@ -25,12 +25,9 @@ function CardVacancy(props){
                     <div></div> */}
                     <div className="fw-600 fs-32p">Título</div>
                     <div className="gray fw-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Reprehenderit corrupti, molestias iste incidunt magnam 
-                        repudiandae dolorum facilis commodi optio excepturi officia! 
-                        Eos id voluptatem voluptatum impedit atque praesentium soluta assumenda?
+                        {props.description}
                     </div>
-                <LocationScheduleInfo location="São Paulo, SP, Grajaú" schedule="1x por semana" />
+                <LocationScheduleInfo location={props.location} schedule="1x por semana" />
                 </div>
             </div>
         
