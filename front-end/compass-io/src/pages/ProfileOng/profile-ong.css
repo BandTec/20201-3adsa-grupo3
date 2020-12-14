@@ -33,6 +33,7 @@
 #inputFile{
     cursor: pointer;
     width: 1rem;
+    height: 2rem;
 }
 
 #editarFoto{
@@ -42,4 +43,11 @@
 .btnPhoto{
     margin-left: 0.5rem;
     width: 100pg;
+}
+
+.btnUpload{
+    margin-top: 0.65rem;
+    height: 2.4rem;
+    width: 50rem;
+    color: #dfe0e2;
 }

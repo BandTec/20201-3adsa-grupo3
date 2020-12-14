@@ -29,8 +29,6 @@ export default class CarouselVacancy extends React.Component {
     let vagaService = new VagaService();
     const response = await vagaService.getVagasByFkOng(parseInt(sessionStorage.getItem("userId")));
     this.setState({ resposta: response.data });
-    console.log(response);
-    console.log(this.state.resposta);
   }
 
   SampleNextArrow = (props) => {
@@ -119,6 +117,7 @@ export default class CarouselVacancy extends React.Component {
   };
 
   render() {    
+    console.log(this.state.resposta)
     return (
 
       <div style={{marginLeft:"3rem"}}>

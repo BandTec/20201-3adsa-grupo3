@@ -125,7 +125,8 @@ export default class CarouselVacancyCause extends React.Component {
   }
 
   render() {
-    
+    console.log("respota")
+    console.log(this.state.resposta)
     return (
 
       <div>

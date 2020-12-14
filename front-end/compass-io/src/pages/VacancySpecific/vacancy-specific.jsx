@@ -97,7 +97,10 @@ export default class VacancySpecific extends React.Component {
           <h1 className="fs-32p">Sobre a ONG</h1>
           <AboutOng name="ong" nameOng="TETO Brasil"
             infoOng="Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!"
-            link="www.google.com.br" />
+            link="www.google.com.br" 
+            width="210"
+            height="210"
+            />
           {/* <div className="aboutVacancyText">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto asperiores excepturi cum dolores ipsam delectus minima nesciunt dignissimos, voluptates, accusantium cupiditate incidunt laboriosam aspernatur. Placeat ut maxime facilis molestias pariatur!
           </div> */}

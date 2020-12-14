@@ -189,7 +189,7 @@ export default class SignUp extends React.Component {
         <div className="width-100pg mg-b-64 height-1056p flex">
 
           <div className="width-50pg flex relative">
-            <Image width="100%" className="childrenImage" height="80%" src={imgOngSingup} />
+            <Image width="100%" className="childrenImage" height="90%" src={imgOngSingup} />
             <div className="bold absolute top-640p font-color-white fs-56p mg-l-16">Encontre aqui os voluntários ideais que <br />
               <span className="yellowWord">você precisa</span>.
             </div>
