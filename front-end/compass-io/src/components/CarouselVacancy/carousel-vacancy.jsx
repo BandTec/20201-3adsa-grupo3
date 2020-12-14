@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-// import Carousel from 'react-bootstrap/Carousel';
-// import { Item, Caption } from 'react-bootstrap/Carousel';
 import Slider from "react-slick";
-// import AnimalImg from '../../assets/images/animal-img.jpg';
-// import ChildImg from '../../assets/images/child-img.jpg';
-// import DisabilityImg from '../../assets/images/disability-img.jpg';
-// import ElderlyImg from '../../assets/images/elderly-img.jpg';
-// import GardeningImg from '../../assets/images/gardening-img.jpg';
-// import HumanRightsImg from '../../assets/images/human-rights-img.jpg';
-// import NatureImg from '../../assets/images/nature-img.jpg';
 import CarouselCard from '../CarouselCard/carousel-card';
 import { makeStyles } from '@material-ui/core/styles';
 import "slick-carousel/slick/slick.css";
@@ -25,10 +16,19 @@ export default class CarouselVacancy extends React.Component {
   }
 
   loadVagas = async () => {
-    
+    debugger
     let vagaService = new VagaService();
-    const response = await vagaService.getVagasByFkOng(parseInt(sessionStorage.getItem("userId")));
-    this.setState({ resposta: response.data });
+    const vagas = await vagaService.getVagasByFkOng(parseInt(sessionStorage.getItem("userId")));
+    
+    let vetorResposta = [];
+    for (var i = 0; i < vagas.data.length; i++) {
+      const fotoVaga = await vagaService.getFoto(vagas.data[i].id);
+      vetorResposta.push({
+        vaga: vagas.data[i],
+        foto: "data:image/png;base64,"+fotoVaga.data
+      })
+    }
+    this.setState({resposta: vetorResposta});
   }
 
   SampleNextArrow = (props) => {
@@ -124,10 +124,11 @@ export default class CarouselVacancy extends React.Component {
 
         <Slider id="slider" className={this.classes.slider} {...this.settings}>
 
-          {this.state.resposta.map(vaga => (
-              <CarouselCard key={vaga.idVaga} nameOng={vaga.fkUsuarioJuridico.nomeOng} title={vaga.titulo}
-              description={vaga.descricao}
-              location={`${vaga.fkEndereco.cidade} - ${vaga.fkEndereco.estado}, ${vaga.fkEndereco.bairro}`} schedule="1x por semana" />
+          {this.state.resposta.map(res => (
+              <CarouselCard key={res.vaga.idVaga} imgSrc={res.foto}
+              nameOng={res.vaga.fkUsuarioJuridico.nomeOng} title={res.vaga.titulo}
+              description={res.vaga.descricao}
+              location={`${res.vaga.fkEndereco.cidade} - ${res.vaga.fkEndereco.estado}, ${res.vaga.fkEndereco.bairro}`} schedule="1x por semana" />
           ))}
 
         </Slider>
