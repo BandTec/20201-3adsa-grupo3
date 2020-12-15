@@ -63,7 +63,6 @@ export default class VacancySpecific extends React.Component {
     vaga.children.item(3).children.item(1).innerText = vagaInfos.fkEndereco.logradouro + ', ' + vagaInfos.fkEndereco.numeroEndereco + ' - ' + vagaInfos.fkEndereco.bairro + ', ' + vagaInfos.fkEndereco.cidade + ' - ' + vagaInfos.fkEndereco.estado + ', ' + vagaInfos.fkEndereco.cep;
 
     let vacancyImage = document.getElementById("vacancyImage");
-    debugger
     try {
       let fotoResponse = await vagaService.getFoto(resposta.data[0].id);
       vacancyImage.src = "data:image/png;base64," + fotoResponse.data;
