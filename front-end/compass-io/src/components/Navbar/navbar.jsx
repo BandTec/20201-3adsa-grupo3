@@ -6,17 +6,22 @@ import profileIcon from '@iconify/icons-gg/profile';
 
 
 export default class CarouselVacancy extends React.Component {
-    state = {
-        isLogado: false,
-        message: ""
+
+    constructor(props){
+        super(props)
+        this.state = {
+            isLogado: false,
+            message: ""
+        }
     }
 
     render() {
 
-        //TROCAR IF PARA ==
         if (sessionStorage.userId == undefined) {
-            this.state.isLogado = false;
-            this.state.message = "Entrar"
+            this.setState({
+                isLogado: false,
+                message: "Entrar"
+            });
         } else {
             this.state.isLogado = true;
             this.state.message =
@@ -25,16 +30,15 @@ export default class CarouselVacancy extends React.Component {
                     <div className=" mg-l-8 fs-24p">
                         Sair
                     </div>
-                </span>
+                </span>;
+            if(window.location.pathname == "/signin"){
+                this.state.isLogado = false;
+                this.state.message = "Entrar"
+            }
         }
 
         return (
             <div className="flex width-100pg mg-v-16">
-                {/* <div>
-                    <LogoCompassio></LogoCompassio>
-                </div> */}
-                {/* <LogoCompassio></LogoCompassio> */}
-                {/* <div className="logo"></div> */}
                 <span className="width-40pg">
                     <a href="/">
                         <img src={LogoCompassio} />
