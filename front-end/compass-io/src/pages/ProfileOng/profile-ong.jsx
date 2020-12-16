@@ -57,7 +57,7 @@ export default class ProfileOng extends React.Component {
     OngLocation.children.item(0).children.item(1).innerText = perfilJuridicoInfo.fkEndereco.logradouro + ', ' + perfilJuridicoInfo.fkEndereco.numeroEndereco + ' - ' + perfilJuridicoInfo.fkEndereco.bairro + ', ' + perfilJuridicoInfo.fkEndereco.cidade + ' - ' + perfilJuridicoInfo.fkEndereco.estado + ', ' + perfilJuridicoInfo.fkEndereco.cep;
     OngLocation.children.item(0).children.item(4).children.item(1).innerText = 'https://www.facebook/' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.com/';
     OngLocation.children.item(0).children.item(5).children.item(1).innerText = '@' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase();
-  
+
   }
 
   trocarFoto = async () => {
@@ -91,13 +91,16 @@ export default class ProfileOng extends React.Component {
   }
 
   getFoto = async () => {
-    debugger
     let usuarioJuridicoService = new UsuarioJuridicoService();
     let id = parseInt(sessionStorage["userId"]);
 
-    let fotoResponse = await usuarioJuridicoService.getFoto(id);
-    let imgOng = document.getElementById("imgOng");
-    imgOng.src = "data:image/png;base64," + fotoResponse.data;
+    try {
+      let fotoResponse = await usuarioJuridicoService.getFoto(id);
+      let imgOng = document.getElementById("imgOng");
+      imgOng.src = "data:image/png;base64," + fotoResponse.data;
+    } catch (error) {
+
+    }
   }
 
   baixarArquivo = async () => {
@@ -149,37 +152,41 @@ export default class ProfileOng extends React.Component {
       let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
       let contador = 0;
       let ufv;
-      do {
-        ufv = await usuarioFisicoVagaService.getUsuarioFisicoByIdVaga(vagas.data[contador].id);
-        contador++;
-      } while (ufv.aprovado != null)
+      try {
+        do {
+          ufv = await usuarioFisicoVagaService.getUsuarioFisicoByIdVaga(vagas.data[contador].id);
+          contador++;
+        } while (ufv.aprovado != null)
 
-      sessionStorage["candidato"] = ufv.data[0].fkUsuarioFisico.id;
-      sessionStorage["vaga"] = ufv.data[0].fkVaga.id;
+        sessionStorage["candidato"] = ufv.data[0].fkUsuarioFisico.id;
+        sessionStorage["vaga"] = ufv.data[0].fkVaga.id;
 
-      let nome = document.getElementById("voluntarioNomeId");
-      let img = document.getElementById("voluntarioImgId");
-      let idade = document.getElementById("voluntarioIdadeId");
+        let nome = document.getElementById("voluntarioNomeId");
+        let img = document.getElementById("voluntarioImgId");
+        let idade = document.getElementById("voluntarioIdadeId");
 
-      nome.innerText = ufv.data[0].fkUsuarioFisico.nome;
+        nome.innerText = ufv.data[0].fkUsuarioFisico.nome;
 
-      let usuarioFisicoService = new UsuarioFisicoService();
-      let foto = await usuarioFisicoService.getFoto(ufv.data[0].fkUsuarioFisico.id);
-      img.src = "data:image/png;base64," + foto.data;
+        let usuarioFisicoService = new UsuarioFisicoService();
+        let foto = await usuarioFisicoService.getFoto(ufv.data[0].fkUsuarioFisico.id);
+        img.src = "data:image/png;base64," + foto.data;
 
-      let convertData = new Date(ufv.data[0].fkUsuarioFisico.dataNascimento).toLocaleDateString("pt-BR");
-      let nascimento = convertData.split('/');
-      let hoje = new Date;
-      let hojePartes = [hoje.getDate(), (hoje.getMonth() + 1), hoje.getFullYear()];
-      let idadeCalculada;
-      if (hojePartes[1] >= nascimento[1]) {
-        idadeCalculada = hojePartes[2] - nascimento[2];
-      } else if (hojePartes[0] >= nascimento[0]) {
-        idadeCalculada = hojePartes[2] - nascimento[2];
-      } else {
-        idadeCalculada = (hojePartes[2] - nascimento[2]) - 1;
+        let convertData = new Date(ufv.data[0].fkUsuarioFisico.dataNascimento).toLocaleDateString("pt-BR");
+        let nascimento = convertData.split('/');
+        let hoje = new Date;
+        let hojePartes = [hoje.getDate(), (hoje.getMonth() + 1), hoje.getFullYear()];
+        let idadeCalculada;
+        if (hojePartes[1] >= nascimento[1]) {
+          idadeCalculada = hojePartes[2] - nascimento[2];
+        } else if (hojePartes[0] >= nascimento[0]) {
+          idadeCalculada = hojePartes[2] - nascimento[2];
+        } else {
+          idadeCalculada = (hojePartes[2] - nascimento[2]) - 1;
+        }
+        idade.innerHTML += " " + idadeCalculada + " anos";
+      } catch (error) {
+        /*ignore*/
       }
-      idade.innerHTML += " " + idadeCalculada + " anos";
     } catch (error) {
       let errorString = `${error}`;
       this.setState({
@@ -258,7 +265,7 @@ export default class ProfileOng extends React.Component {
             height="280"
             link="www.google.com.br"
             isProfile
-            editImgOng={this.trocarFoto}/>
+            editImgOng={this.trocarFoto} />
 
           <div className="width-100pg border border-rd-10 height-500pg">
             <div className="flex justcon-sb mg-b-16">

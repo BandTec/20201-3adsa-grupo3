@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface VagaRepository extends JpaRepository<Vaga, Integer> {
 
-    @Query("SELECT v from Vaga v")
+    @Query("SELECT new br.com.bandtec.projetopicompassio.dto.VagaDTO(v.titulo, v.dataInicio, v.dataFim, v.causa, v.descricao, v.fkEndereco) FROM Vaga v WHERE v.fkUsuarioJuridico LIKE ?1")
     List<VagaDTO> findAllVagasSimplesByUsuarioJuridico(UsuarioJuridico usuarioJuridico);
 
     Vaga findIdVagaByTituloAndFkUsuarioJuridico(String titulo, UsuarioJuridico fkUsuarioJuridico);

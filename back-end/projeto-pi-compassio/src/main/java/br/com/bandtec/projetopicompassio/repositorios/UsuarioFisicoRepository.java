@@ -1,7 +1,6 @@
 package br.com.bandtec.projetopicompassio.repositorios;
 
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisico;
-import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dto.UsuarioFisicoDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
