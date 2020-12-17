@@ -5,9 +5,9 @@ import { Icon, InlineIcon } from '@iconify/react';
 import profileIcon from '@iconify/icons-gg/profile';
 
 
-export default class CarouselVacancy extends React.Component {
+export default class Navbar extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             isLogado: false,
@@ -15,9 +15,8 @@ export default class CarouselVacancy extends React.Component {
         }
     }
 
-    render() {
-
-        if (sessionStorage.userId == undefined) {
+    teste = () => {
+        if (sessionStorage.getItem("userId") == undefined) {
             this.setState({
                 isLogado: false,
                 message: "Entrar"
@@ -31,11 +30,18 @@ export default class CarouselVacancy extends React.Component {
                         Sair
                     </div>
                 </span>;
-            if(window.location.pathname == "/signin"){
+            if (window.location.pathname == "/signin") {
                 this.state.isLogado = false;
                 this.state.message = "Entrar"
             }
         }
+    }
+
+    componentDidMount() {
+        this.teste();
+    }
+
+    render() {
 
         return (
             <div className="flex width-100pg mg-v-16">

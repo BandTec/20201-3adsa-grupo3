@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import NavBar from './components/Navbar/navbar';
+import Navbar from './components/Navbar/navbar';
 import Footer from './components/Footer/footer';
 
 import './global.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <NavBar/>
+    <Navbar/>
     <App />
     <Footer/>
   </React.StrictMode>,
