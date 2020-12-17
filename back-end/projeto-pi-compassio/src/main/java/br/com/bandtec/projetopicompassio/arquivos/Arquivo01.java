@@ -1,6 +1,5 @@
 package br.com.bandtec.projetopicompassio.arquivos;
 
-import br.com.bandtec.projetopicompassio.dto.EnderecoVagaDTO;
 import br.com.bandtec.projetopicompassio.dto.VagaDTO;
 import br.com.bandtec.projetopicompassio.dto.VagasDeUmaOngDTO;
 import br.com.bandtec.projetopicompassio.utils.ArquivoHandler;
@@ -82,9 +81,12 @@ public class Arquivo01 implements IArquivo {
             registro.append(vaga.getTitulo()+";");
             registro.append(vaga.getCausa()+";");
             registro.append(vaga.getDescricao()+";");
-            registro.append(vaga.getEndereco().getCidade()+";");
-            registro.append(vaga.getEndereco().getEstado()+";");
-            registro.append(vaga.getEndereco().getBairro()+";");
+            registro.append(vaga.getLogradouro()+";");
+            registro.append(vaga.getNumeroEndereco()+";");
+            registro.append(vaga.getCep()+";");
+            registro.append(vaga.getCidade()+";");
+            registro.append(vaga.getEstado()+";");
+            registro.append(vaga.getBairro()+";");
             registro.append("\n");
         }
         registro.append("\r\n");
@@ -124,9 +126,13 @@ public class Arquivo01 implements IArquivo {
                 String titulo = linhas.getElemento(i).substring(20, 275).trim();
                 String causa = linhas.getElemento(i).substring(275, 325).trim();
                 String descricao = linhas.getElemento(i).substring(325, 581).trim();
-                String cidade = linhas.getElemento(i).substring(581, 626).trim();
-                String estado = linhas.getElemento(i).substring(626, 628).trim();
-                String bairro = linhas.getElemento(i).substring(628, 673).trim();
+
+                String logradouro = linhas.getElemento(i).substring(581, 682).trim();
+                Integer numeroEndereco = Integer.parseInt(linhas.getElemento(i).substring(682, 686).trim());
+                String cep = linhas.getElemento(i).substring(686, 695).trim();
+                String cidade = linhas.getElemento(i).substring(695, 740).trim();
+                String estado = linhas.getElemento(i).substring(740, 742).trim();
+                String bairro = linhas.getElemento(i).substring(742, 787).trim();
 
                 LocalDate localDateInicio = Jsr310Converters.StringToLocalDateConverter.INSTANCE.convert(dataInicio);
                 Date finalDateInicio = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(localDateInicio);
@@ -142,7 +148,12 @@ public class Arquivo01 implements IArquivo {
                         finalDateFim,
                         causa,
                         descricao,
-                        new EnderecoVagaDTO(cidade, estado, bairro)
+                        logradouro,
+                        numeroEndereco,
+                        cep,
+                        cidade,
+                        estado,
+                        bairro
                 );
 
                 vagas.adiciona(vaga);

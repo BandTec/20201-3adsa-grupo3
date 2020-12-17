@@ -127,6 +127,7 @@ export default class Vacancies extends React.Component {
   }
 
   getFotos = async () => {
+    debugger
     let vagaService = new VagaService()
     let vagas = await vagaService.getVagas();
     let vagasComFoto = [];

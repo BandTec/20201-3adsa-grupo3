@@ -1,6 +1,7 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
 import br.com.bandtec.projetopicompassio.arquivos.*;
+import br.com.bandtec.projetopicompassio.dominios.Endereco;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
@@ -68,6 +69,17 @@ public class ArquivoController {
             for (VagaDTO vagaDTO : vagasDeUmaOngDTO.getVagas().getAll()) {
                 Vaga vaga = vagaMapper.toVaga(vagaDTO);
                 vaga.setFkUsuarioJuridico(ong);
+
+                Endereco end = new Endereco();
+                end.setLogradouro(vagaDTO.getLogradouro());
+                end.setNumeroEndereco(vagaDTO.getNumeroEndereco());
+                end.setCep(vagaDTO.getCep());
+                end.setCidade(vagaDTO.getCidade());
+                end.setBairro(vagaDTO.getBairro());
+                end.setEstado(vagaDTO.getEstado());
+                Endereco endCadastrado = enderecoRepository.save(end);
+                vaga.setFkEndereco(endCadastrado);
+
                 vagas.add(vaga);
             }
             vagaRepository.saveAll(vagas);

@@ -20,17 +20,21 @@ export default class CarouselVacancy extends React.Component {
     const vagas = await vagaService.getVagasByFkOng(parseInt(sessionStorage.getItem("userId")));
     
     let vetorResposta = [];
-    for (var i = 0; i < vagas.data.length; i++) {
-      const fotoVaga = '';
-      try {
-        fotoVaga = await vagaService.getFoto(vagas.data[i].id);
-      } catch (error) {
-
+    try {
+      for (var i = 0; i < vagas.data.length; i++) {
+        const fotoVaga = '';
+        try {
+          fotoVaga = await vagaService.getFoto(vagas.data[i].id);
+        } catch (error) {
+  
+        }
+        vetorResposta.push({
+          vaga: vagas.data[i],
+          foto: "data:image/png;base64,"+fotoVaga.data
+        })
       }
-      vetorResposta.push({
-        vaga: vagas.data[i],
-        foto: "data:image/png;base64,"+fotoVaga.data
-      })
+    } catch (error) {
+      
     }
     this.setState({resposta: vetorResposta});
   }

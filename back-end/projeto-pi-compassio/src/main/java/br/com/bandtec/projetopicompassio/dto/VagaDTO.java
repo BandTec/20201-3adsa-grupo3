@@ -1,5 +1,7 @@
 package br.com.bandtec.projetopicompassio.dto;
 
+import br.com.bandtec.projetopicompassio.dominios.Endereco;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,15 +13,41 @@ public class VagaDTO implements Serializable {
     private Date dataFim;
     private String causa;
     private String descricao;
-    private EnderecoVagaDTO endereco;
 
-    public VagaDTO(String titulo, Date dataInicio, Date dataFim, String causa, String descricao, EnderecoVagaDTO endereco) {
+    private String logradouro;
+    private Integer numeroEndereco;
+    private String cep;
+    private String cidade;
+    private String estado;
+    private String bairro;
+
+    public VagaDTO(String titulo, Date dataInicio, Date dataFim, String causa, String descricao, String logradouro, Integer numeroEndereco, String cep, String cidade, String estado, String bairro) {
         this.titulo = titulo;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.causa = causa;
         this.descricao = descricao;
-        this.endereco = endereco;
+        this.logradouro = logradouro;
+        this.numeroEndereco = numeroEndereco;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.bairro = bairro;
+    }
+
+    public VagaDTO(String titulo, Date dataInicio, Date dataFim, String causa, String descricao, Endereco endereco) {
+        this.titulo = titulo;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.causa = causa;
+        this.descricao = descricao;
+
+        this.logradouro = endereco.getLogradouro();
+        this.numeroEndereco = endereco.getNumeroEndereco();
+        this.cep = endereco.getCep();
+        this.cidade = endereco.getCidade();
+        this.estado = endereco.getEstado();
+        this.bairro = endereco.getBairro();
     }
 
     public VagaDTO(){}
@@ -29,13 +57,19 @@ public class VagaDTO implements Serializable {
         SimpleDateFormat formatador = new SimpleDateFormat("dd-MM-yyyy");
 
         return String.format(
-                "%s%s%-256s%-50%-256%s",
+                "%s%s%-256s%-50s%-256s%-100s%04d%-9s%-45s%-2s%-45s",
                 formatador.format(this.dataInicio),
                 formatador.format(this.dataFim),
                 this.titulo,
                 this.causa,
                 this.descricao,
-                this.endereco.toString()
+
+                this.logradouro,
+                this.numeroEndereco,
+                this.cep,
+                this.cidade,
+                this.estado,
+                this.bairro
         );
     }
 
@@ -79,11 +113,51 @@ public class VagaDTO implements Serializable {
         this.descricao = descricao;
     }
 
-    public EnderecoVagaDTO getEndereco() {
-        return endereco;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setEndereco(EnderecoVagaDTO endereco) {
-        this.endereco = endereco;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public Integer getNumeroEndereco() {
+        return numeroEndereco;
+    }
+
+    public void setNumeroEndereco(Integer numeroEndereco) {
+        this.numeroEndereco = numeroEndereco;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 }

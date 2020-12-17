@@ -33,7 +33,7 @@ export default function VacancyHeader(props) {
             <img id={props.imgId} width={props.width} height={props.height} src={props.imgSrc}/>
             <span id="headerText">
                 <div id="headerTitle">{ props.title }</div>
-                <div id="headerBtn">
+                <div id="headerBtn" className={sessionStorage.getItem("userId") % 2 == 1 ? "display-none" : ""}>
                     <Button className={classes.btnFavorite} onClick={props.favoritarCallBack}>
                         <Icon icon={heartOutlined} style={{color: '#eeeeee', fontSize: '2rem'}} />Favoritar
                     </Button>
