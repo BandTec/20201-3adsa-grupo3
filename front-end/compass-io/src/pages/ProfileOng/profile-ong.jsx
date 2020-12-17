@@ -42,7 +42,9 @@ export default class ProfileOng extends React.Component {
     const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(parseInt(sessionStorage["userId"]));
     let perfilJuridicoInfo = resposta.data[0];
     console.log(perfilJuridicoInfo);
-
+    if(sessionStorage.getItem("userId") % 2 == 0){
+      sessionStorage["ong"] = perfilJuridicoInfo.nomeOng;
+    }
     this.getFoto();
 
     let ong = document.getElementsByName("descricaoOng")[0];
@@ -264,10 +266,10 @@ export default class ProfileOng extends React.Component {
             width="210"
             height="280"
             link="www.google.com.br"
-            isProfile
+            isProfile={sessionStorage.getItem("userId") % 2 == 1 ? "true" : "false"}
             editImgOng={this.trocarFoto} />
 
-          <div className="width-100pg border border-rd-10 height-500pg">
+          <div className={sessionStorage.getItem("userId") % 2 == 1 ? "width-100pg border border-rd-10 height-500pg" : "display-none"}>
             <div className="flex justcon-sb mg-b-16">
               <h1 className="width-30pg mg-l-32">Vagas Abertas</h1>
               <div className="width-60pg flex justcon-sb mg-t-8">
@@ -286,7 +288,7 @@ export default class ProfileOng extends React.Component {
               <CarouselVacancy />
             </div>
           </div>
-          <div className="ratings">
+          <div className={sessionStorage.getItem("userId") % 2 == 1 ? "ratings" : "display-none"}>
             <Rating isOngProfile
               imgVolunteer={ImgVolunteer}
               nameVolunteer="Iago Roani de Lima"
@@ -305,6 +307,10 @@ export default class ProfileOng extends React.Component {
               escolaridadeId="voluntarioEscolaridadeId"
               moraEmId="voluntarioMoraEmId"
             />
+          </div>
+          <div className={sessionStorage.getItem("userId") % 2 == 0 ? "vacancyCarousel" : "display-none"}>
+            <h1>Vagas desta ONG</h1>
+            <CarouselVacancy />
           </div>
           <div className="flex justcon-sb">
             <CardProfileOng name="ongLocation" isContact location="R. Rodrigues, 116 - Vila Zat, São Paulo - SP, 02977-025"

@@ -7,7 +7,7 @@ function AboutOng(props) {
        <section name={props.name} className="aboutOng">
             <div className="imgVolunteerBox grid width-20pg">
                 <img id={props.imgId} width={props.width} height={props.height} src={props.imgSrc}/>
-                <div id="btnPhotoOngEdit" className={props.isProfile ? "mg-t-16 width-250pg" : "display-none"}>
+                <div id="btnPhotoOngEdit" className={props.isProfile == "true" ? "mg-t-16 width-250pg" : "display-none"}>
                     <InputFile className="" id="editarFoto" text="Editar foto" callBack={props.editImgOng} />
                 </div>
             </div>

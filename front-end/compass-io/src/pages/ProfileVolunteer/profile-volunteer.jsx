@@ -105,7 +105,6 @@ export default class ProfileVolunteer extends React.Component {
 
       let vagasDoUsuario = await usuarioFisicoVagaService.getUsuarioFisicoByIdUsuario(userId);
 
-      debugger
       let contador = 0;
       let ufv;
       do {
@@ -165,7 +164,6 @@ export default class ProfileVolunteer extends React.Component {
         <div>
             </div>
         <div>
-          <h1><u>Competências</u></h1>
         </div>
         <div classname="ratingBox">
           <Rating isVolunteerProfile isAprovadoId="vacancyAprovadoId"
