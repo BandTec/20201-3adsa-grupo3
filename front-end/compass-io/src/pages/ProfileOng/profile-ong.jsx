@@ -270,9 +270,6 @@ export default class ProfileOng extends React.Component {
                 <div className="width-50pg mg-r-16 mg-t-8">
                   <Button variant="contained" onClick={this.baixarArquivo} >Download de vagas em TXT</Button>
                 </div>
-                <div className="btnUpload">
-                  <InputFile id="inputFile" text="UPLOAD DE VAGAS EM TXT" callBack={this.subirArquivo} />
-                </div>
               </div>
             </div>
             <div className="mg-b-16">

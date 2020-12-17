@@ -9,7 +9,9 @@ import ComboBox from '../../components/ComboBox/combo-box';
 import ComboBoxStateAndCities from '../../components/ComboBoxStateAndCities/combo-box-state-and-cities';
 import InputFile from '../../components/InputFile/input-file';
 import AlertCard from '../../components/AlertCard/alert-card';
-import Alerta from '../../components/Alerta/alerta'
+import Alerta from '../../components/Alerta/alerta';
+
+import ArquivoService from '../../services/arquivo-service';
 
 import VagaService from '../../services/vaga-service';
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
@@ -30,6 +32,16 @@ export default class VacancyRegister extends React.Component {
     message: '',
     severity: '',
     open: false
+  }
+
+  subirArquivo = async () => {
+
+    let arquivo = document.getElementById("inputFile").files[0];
+    let formDataFile = new FormData();
+    formDataFile.set("file", arquivo);
+
+    await new ArquivoService().subirArquivo(formDataFile);
+    window.location.href = "http://localhost:3000/profile/ong";
   }
 
   cadastrarVaga = async () => {
@@ -204,7 +216,7 @@ export default class VacancyRegister extends React.Component {
         <LabelWelcome labelTitle="Detalhes da oportunidade" labelText="Nos ajude a divulgar a sua vaga" />
         <br />
 
-        <div className="container width-100pg height-800p">
+        <div className="container width-100pg height-800p mg-bt-8rem">
           <div className="width-50pg flex relative">
             <Image width="100%" className="childrenImage" height="90%" src={GirlVolunteerImg} />
           </div>
@@ -260,11 +272,27 @@ export default class VacancyRegister extends React.Component {
                 <ComboBoxStateAndCities cidadeName="cidade" estadoName="estado" />
               </div>
             </div>
-            <div className="flex mg-t-64 mg-l-16 mg-r-16">
+
+            <div className="height-22pg mg-t-4rem mg-t--1px border border-rd-10 bg-color-gray-light width-100pg">
+
+                <div className=" mg-t-16 mg-l-16">
+                  <LabelTitleForm title="Upload de Vagas" />
+                </div>
+
+                <div className="flex mg-t-1rem mg-l-1rem">
+                  <InputFile id="inputFile" text="UPLOAD DE VAGAS EM TXT" callBack={this.subirArquivo} />
+                  <div id="fileUploadName" className="fileName">Nome do arquivo aqui</div>
+                  <Button id="btnCadastrarVagaUp" onClick={this.cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
+                </div>
+            </div>
+
+            <div className="flex mg-t-2rem mg-l-16 mg-r-16">
               <Button id="btnVoltarOng" variant="contained" href="http://localhost:3000/profile/ong">Voltar</Button>
               <Button id="btnCadastrarOng" onClick={this.cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
             </div>
+
           </span>
+
         </div>
       </React.Fragment>
     );

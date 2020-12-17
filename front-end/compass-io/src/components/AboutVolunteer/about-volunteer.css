@@ -105,7 +105,7 @@
     text-align: center;
   }
 
-  scroll-container {
+ /* scroll-container {
     margin-top: 0.5rem;
     display: block;
     width: 350px;
@@ -121,7 +121,7 @@
     justify-content: center;
     height: 100%;
     font-size: 5em;
-  }
+  } */
 
   #listItem{
       text-decoration: none;
