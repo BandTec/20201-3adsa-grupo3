@@ -34,6 +34,9 @@ export default class VacancyRegister extends React.Component {
 
   cadastrarVaga = async () => {
     try {
+      if (sessionStorage["userId"] == "undefined")
+        throw new Error("Você precisa estar logado para fazer está ação");
+
       this.getEnderecoVagaFormData()
       this.getVagaFormData()
 
@@ -44,9 +47,6 @@ export default class VacancyRegister extends React.Component {
       let formEndereco = document.getElementById("formEnderecoVagaToSubmit");
       const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
       var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
-
-      if (sessionStorage["userId"] == "undefined")
-        throw new Error("Você precisa estar logado para fazer está ação");
 
       let respUsuarioJuridico = await usuarioJuridicoService.getUsuarioJuridicoById(sessionStorage["userId"]);
       if (respUsuarioJuridico == "")
@@ -153,7 +153,7 @@ export default class VacancyRegister extends React.Component {
     try {
       let vagaService = new VagaService();
 
-      let foto = document.getElementById("adicionarFoto").files[0];
+      let foto = document.getElementById("foto").files[0];
       let formDataFoto = new FormData();
       formDataFoto.set("foto", foto);
 
@@ -221,7 +221,7 @@ export default class VacancyRegister extends React.Component {
                 <InputFile id="foto" className="inputFoto" text="Escolher foto" />
               </div>
               <div className="width-30pg mg-t-24 mg-l-32">
-                <ComboBox name="causa" labelTitle="Causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} />
+                <ComboBox name="causa" labelTitle="Causa" content={['Animais', 'Crianças', 'Deficientes', 'Meio-Ambiente', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} />
               </div>
             </div>
             <div className="flex mg-t-24 mg-l-16 mg-r-16">

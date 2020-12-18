@@ -124,9 +124,11 @@ public class VagaController {
         List<Vaga> vagas = repository.findAll();
         List<Vaga> vagasRequeridas = new ArrayList<>(50);
         for (int i = 0; i < vagas.size(); i++){
-            if (vagas.get(i).getFkUsuarioJuridico().getId() == id) vagasRequeridas.add(vagas.get(i));
+            if (vagas.get(i).getFkUsuarioJuridico().getId().equals(id))
+                vagasRequeridas.add(vagas.get(i));
         }
-        if (vagasRequeridas.isEmpty()) return ResponseEntity.notFound().build();
+        if (vagasRequeridas.isEmpty())
+            return ResponseEntity.notFound().build();
         return ResponseEntity.ok(vagasRequeridas);
     }
 }
