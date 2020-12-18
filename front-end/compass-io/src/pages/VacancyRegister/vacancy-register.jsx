@@ -221,7 +221,7 @@ export default class VacancyRegister extends React.Component {
                 <InputFile id="foto" className="inputFoto" text="Escolher foto" />
               </div>
               <div className="width-30pg mg-t-24 mg-l-32">
-                <ComboBox name="causa" labelTitle="Causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} />
+                <ComboBox name="causa" labelTitle="Causa" content={['Animais', 'Crianças', 'Deficientes', 'Meio-Ambiente', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} />
               </div>
             </div>
             <div className="flex mg-t-24 mg-l-16 mg-r-16">
