@@ -708,7 +708,7 @@ export default class Vacancies extends React.Component {
           {this.state.exibir.map(vaga => (
             <div key={vaga.vaga.id} className="">
               <CardVacancy href={`http://localhost:3000/${setUrl()}/vacancy/${vaga.vaga.id}`} hrefSeta={`http://localhost:3000/${setUrl()}/vacancy/${vaga.vaga.id}`} className="" key={vaga.vaga.id} imgSrc={vaga.foto}
-                ongName={vaga.vaga.fkUsuarioJuridico.nomeOng} description={vaga.vaga.descricao} titulo={vaga.vaga.titulo}
+                rediOng={`http://localhost:3000/${setUrl()}/profile/ong/${vaga.vaga.fkUsuarioJuridico.id}`} ongName={vaga.vaga.fkUsuarioJuridico.nomeOng} description={vaga.vaga.descricao} titulo={vaga.vaga.titulo}
                 location={`${vaga.vaga.fkEndereco.cidade} - ${vaga.vaga.fkEndereco.estado}, ${vaga.vaga.fkEndereco.bairro}`} />
             </div>
           ))}

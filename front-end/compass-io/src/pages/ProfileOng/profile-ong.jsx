@@ -272,6 +272,24 @@ export default class ProfileOng extends React.Component {
     this.setState({ open: false })
   };
 
+  function setUrl() {
+    let url = window.location.href;
+      var res = url.split('3000');
+      var parametros = res[1].split('/');
+      var idUsuario = new Array();
+      idUsuario = parametros[1];
+      if (idUsuario == undefined || idUsuario == 'undefined') {
+          return -1;
+      } else {
+          return idUsuario;
+      }
+  }
+
+  verOPerfil = () => {
+    let idUser = parseInt(sessionStorage["candidato"]);
+    window.location.href = `http://localhost:3000/${setUrl()}/profile/volunteer/${idUser}`;
+  }
+
   render() {
     return (
       <section>
@@ -316,7 +334,7 @@ export default class ProfileOng extends React.Component {
 
               aprovar={this.aprovar}
               recusar={this.recusar}
-              verPerfil="http://localhost:3000/profile/volunteer"
+              verPerfil={this.verOPerfil}
 
               profissaoId="voluntarioProfissaoId"
               escolaridadeId="voluntarioEscolaridadeId"
