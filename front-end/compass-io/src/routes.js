@@ -15,15 +15,14 @@ export default function Routes() {
   return (
     <BrowserRouter basename="/">
       <Switch>
-        <Route path="/" exact component={Home}/>
-        <Route path="/signin" component={SignIn}/>
-        <Route path="/signup" component={SignUp}/>
-        <Route path="/vacancies" component={Vacancies}/>
-        <Route path="/register" component={VacancyRegister}/>
-        <Route path="/vacancy/{id?}" component={VacancySpecific}/>
-        <Route path="/vacancy" component={VacancySpecific}/>
-        <Route path="/profile/ong" component={ProfileOng}/>
-        <Route path="/profile/volunteer" component={ProfileVolunteer}/>
+        <Route path="/:userId" exact component={Home}/>
+        <Route path="/:userId/signin" component={SignIn}/>
+        <Route path="/:userId/signup" component={SignUp}/>
+        <Route path="/:userId/vacancies/" component={Vacancies}/>
+        <Route path="/:userId/register" component={VacancyRegister}/>
+        <Route path="/:userId/vacancy/:vacancyId" component={VacancySpecific}/>
+        <Route path="/:userId/profile/ong/:profileId" component={ProfileOng}/>
+        <Route path="/:userId/profile/volunteer/:profileId" component={ProfileVolunteer}/>
       </Switch>
     </BrowserRouter>
   );

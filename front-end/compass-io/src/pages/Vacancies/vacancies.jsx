@@ -118,7 +118,7 @@ export default class Vacancies extends React.Component {
       {
         debugger
         this.state.exibir.forEach(vaga => {
-         vagasFiltradas.push(vaga);
+          vagasFiltradas.push(vaga);
         })
       }
     }
@@ -494,6 +494,23 @@ export default class Vacancies extends React.Component {
       });
     };
 
+    function setUrl() {
+      let url = window.location.href;
+        var res = url.split('3000');
+        if (res[1] === undefined) {
+            alert('página sem parâmetros.');
+        }
+        var parametros = res[1].split('/');
+        console.log('Parametros encontrados:\n' + parametros);
+        var idUsuario = new Array();
+        idUsuario = parametros[1];
+        if (idUsuario == undefined || idUsuario == 'undefined') {
+            return -1;
+        } else {
+            return idUsuario;
+        }
+    }
+
     return (
       <section>
         <div className="mg-b-16 border-b pd-b-16 flex justcon-sb">
@@ -677,7 +694,7 @@ export default class Vacancies extends React.Component {
             </ClickAwayListener>
             <div>
               <button type="button" className="bg-color-white-fc border-rd-10 width-100pg height-40p fs-16p" onClick={this.renderExibicao}>
-                    Filtrar
+                Filtrar
                 </button>
 
             </div>
@@ -723,7 +740,7 @@ export default class Vacancies extends React.Component {
         <div className="">
           {this.state.exibir.map(vaga => (
             <div key={vaga.vaga.id} className="">
-              <CardVacancy onClick={this.setarIdvaga(vaga.vaga.id)} className="" key={vaga.vaga.id} imgSrc={vaga.foto}
+              <CardVacancy href={`http://localhost:3000/${setUrl()}/vacancy/${vaga.vaga.id}`} hrefSeta={`http://localhost:3000/${setUrl()}/vacancy/${vaga.vaga.id}`} className="" key={vaga.vaga.id} imgSrc={vaga.foto}
                 ongName={vaga.vaga.fkUsuarioJuridico.nomeOng} description={vaga.vaga.descricao} titulo={vaga.vaga.titulo}
                 location={`${vaga.vaga.fkEndereco.cidade} - ${vaga.vaga.fkEndereco.estado}, ${vaga.vaga.fkEndereco.bairro}`} />
             </div>

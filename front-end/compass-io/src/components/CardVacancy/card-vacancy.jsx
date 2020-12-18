@@ -17,15 +17,15 @@ function CardVacancy(props){
                         por {props.ongName}
                     </div>
                 </div>
-                <div onClick={props.onClick} className="pd-v-16 mg-h-16 txtal-justify">
+                <div className="pd-v-16 mg-h-16 txtal-justify">
                     {/* <div>{props.title}</div>
                     <div>{props.description}</div>
                     <div></div> */}
-                    <div className="fw-600 fs-32p">{props.titulo}</div>
+                    <div className="fw-600 fs-32p"><a href={props.href}>{props.titulo}</a></div>
                     <div className="gray fw-500">
                         {props.description}
                     </div>
-                <LocationScheduleInfo location={props.location} schedule="1x por semana" />
+                <LocationScheduleInfo hreSeta={props.hrefSeta} location={props.location} schedule="1x por semana" />
                 </div>
             </div>
         

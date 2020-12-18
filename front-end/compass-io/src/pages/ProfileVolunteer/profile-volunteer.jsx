@@ -23,45 +23,69 @@ export default class ProfileVolunteer extends React.Component {
   state = {
     message: '',
     severity: '',
-    open: false
+    open: false,
+    idUsuarioDaVez: '',
+    voluntarioRequerido: ''
   }
 
   componentDidMount() {
+    let url = window.location.href;
+    var res = url.split('3000');
+    if (res[1] === undefined) {
+      alert('página sem parâmetros.');
+    }
+    var parametros = res[1].split('/');
+    console.log('Parametros encontrados:\n' + parametros);
+    var idUsuario;
+    var volunReq;
+    idUsuario = parametros[1];
+    this.setState({ idUsuarioDaVez: idUsuario });
+    volunReq = parametros[4];
+    this.setState({ voluntarioRequerido: volunReq });
     this.renderPerfil();
     this.getFoto();
     this.getVagasPleiteadas();
   }
 
   async renderPerfil() {
-    let usuarioFisico = new UsuarioFisicoService();
-    let resposta = await usuarioFisico.getUsuarioFisicoById(parseInt(sessionStorage["userId"]));
-    let voluntarioInfo = resposta.data[0];
-    let voluntario = document.getElementsByName("voluntarioCard")[0];
-    voluntario.children.item(1).children.item(0).innerText = voluntarioInfo.nome;
-    let convertData = new Date(voluntarioInfo.dataNascimento).toLocaleDateString("pt-BR");
-    let nascimento = convertData.split('/');
-    let hoje = new Date;
-    let hojePartes = [hoje.getDate(), (hoje.getMonth() + 1), hoje.getFullYear()];
-    console.log(hojePartes);
-    let idade;
-    if (hojePartes[1] >= nascimento[1]) {
-      idade = hojePartes[2] - nascimento[2];
-    } else if (hojePartes[0] >= nascimento[0]) {
-      idade = hojePartes[2] - nascimento[2];
-    } else {
-      idade = (hojePartes[2] - nascimento[2]) - 1;
+    try {
+      let usuarioFisico = new UsuarioFisicoService();
+      let inteiro = parseInt(this.state.voluntarioRequerido);
+      let resposta = await usuarioFisico.getUsuarioFisicoById(inteiro);
+      let voluntarioInfo = resposta.data[0];
+      let voluntario = document.getElementsByName("voluntarioCard")[0];
+      voluntario.children.item(1).children.item(0).innerText = voluntarioInfo.nome;
+      let convertData = new Date(voluntarioInfo.dataNascimento).toLocaleDateString("pt-BR");
+      let nascimento = convertData.split('/');
+      let hoje = new Date;
+      let hojePartes = [hoje.getDate(), (hoje.getMonth() + 1), hoje.getFullYear()];
+      console.log(hojePartes);
+      let idade;
+      if (hojePartes[1] >= nascimento[1]) {
+        idade = hojePartes[2] - nascimento[2];
+      } else if (hojePartes[0] >= nascimento[0]) {
+        idade = hojePartes[2] - nascimento[2];
+      } else {
+        idade = (hojePartes[2] - nascimento[2]) - 1;
+      }
+      voluntario.children.item(1).children.item(1).children.item(0).innerText = idade + ' anos';
+    } catch (error) {
+
     }
-    voluntario.children.item(1).children.item(1).children.item(0).innerText = idade + ' anos';
   }
 
   getFoto = async () => {
-    let usuarioFisicoService = new UsuarioFisicoService();
-    let id = parseInt(sessionStorage["userId"])
+    try {
+      let usuarioFisicoService = new UsuarioFisicoService();
+      let id = this.state.voluntarioRequerido;
 
-    let fotoResponse = await usuarioFisicoService.getFoto(id);
-    if (fotoResponse != undefined) {
-      let imgVolunteer = document.getElementById("imgVolunteer");
-      imgVolunteer.src = "data:image/png;base64," + fotoResponse.data;
+      let fotoResponse = await usuarioFisicoService.getFoto(id);
+      if (fotoResponse != undefined) {
+        let imgVolunteer = document.getElementById("imgVolunteer");
+        imgVolunteer.src = "data:image/png;base64," + fotoResponse.data;
+      }
+    } catch (error) {
+
     }
   }
 
@@ -73,7 +97,7 @@ export default class ProfileVolunteer extends React.Component {
       let formDataFoto = new FormData();
       formDataFoto.set("foto", foto);
 
-      let id = parseInt(sessionStorage["userId"])
+      let id = this.state.voluntarioRequerido;
       let response = await usuarioFisicoService.uploadFoto(id, formDataFoto);
 
       if (response.status == 201) {
@@ -96,9 +120,18 @@ export default class ProfileVolunteer extends React.Component {
 
   getVagasPleiteadas = async () => {
     try {
+      debugger
       let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
 
-      let userIdAsInt = parseInt(sessionStorage["userId"]);
+      let url = window.location.href;
+      var res = url.split('3000');
+      if (res[1] === undefined) {
+        alert('página sem parâmetros.');
+      }
+      var parametros = res[1].split('/');
+      var volunReq;
+      volunReq = parametros[4];
+      let userIdAsInt = parseInt(volunReq);
       let userId = userIdAsInt % 2 == 0 ? userIdAsInt : -1;
       if (userId == -1)
         return;
@@ -162,7 +195,7 @@ export default class ProfileVolunteer extends React.Component {
           <CommentBox />
         </div>
         <div>
-            </div>
+        </div>
         <div>
         </div>
         <div classname="ratingBox">

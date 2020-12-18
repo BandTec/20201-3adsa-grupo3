@@ -45,7 +45,7 @@ export default class SignIn extends React.Component {
         open: true
       })
 
-      window.location.href = "/";
+      window.location.href = `/${sessionStorage.getItem("userId")}`;
     } catch (error) {
       let errorString = `${error}`;
       this.setState({
@@ -90,6 +90,23 @@ export default class SignIn extends React.Component {
     this.setState({ open: false })
   };
 
+  setandoUrl = () => {
+    let url = window.location.href;
+    var res = url.split('3000');
+    if (res[1] === undefined) {
+        alert('página sem parâmetros.');
+    }
+    var parametros = res[1].split('/');
+    console.log('Parametros encontrados:\n' + parametros);
+    var idUsuario = new Array();
+    idUsuario = parametros[2];
+    if (idUsuario == undefined || idUsuario == 'undefined') {
+        return -1;
+    } else {
+        return idUsuario;
+    }
+}
+
   render() {
     return (
       <React.Fragment>
@@ -130,7 +147,7 @@ export default class SignIn extends React.Component {
               <div className="bold center">Esqueci minha senha</div>
             </div>
             <div className="blueWord mg-t-32">
-              <div className="bold center">Ainda não possui cadastro? <a href="signup" className="yellowWord">Cadastre-se aqui!</a></div>
+              <div className="bold center">Ainda não possui cadastro? <a href={`http://localhost:3000/${this.setandoUrl()}/signup`} className="yellowWord">Cadastre-se aqui!</a></div>
             </div>
           </div>
         </div>

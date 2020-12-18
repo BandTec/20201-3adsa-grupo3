@@ -29,37 +29,56 @@ export default class ProfileOng extends React.Component {
   state = {
     message: '',
     severity: '',
-    open: false
+    open: false,
+    idUsuarioDaVez: '',
+    ongRequerida: ''
   }
 
   componentDidMount() {
+    let url = window.location.href;
+    var res = url.split('3000');
+    if (res[1] === undefined) {
+      alert('página sem parâmetros.');
+    }
+    var parametros = res[1].split('/');
+    console.log('Parametros encontrados:\n' + parametros);
+    var idUsuario;
+    var ongReq;
+    idUsuario = parametros[1];
+    this.setState({ idUsuarioDaVez: idUsuario });
+    ongReq = parametros[4];
+    this.setState({ ongRequerida: ongReq });
+    sessionStorage["ong"] = ongReq;
+    console.log("usuario: " + idUsuario + ", ong: " + ongReq);
     this.renderPerfil();
     this.carregarVoluntarios();
   }
 
   renderPerfil = async () => {
-    let usuarioJuridicoService = new UsuarioJuridicoService();
-    const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(parseInt(sessionStorage["userId"]));
-    let perfilJuridicoInfo = resposta.data[0];
-    console.log(perfilJuridicoInfo);
-    if(sessionStorage.getItem("userId") % 2 == 0){
-      sessionStorage["ong"] = perfilJuridicoInfo.nomeOng;
+    try {
+      let usuarioJuridicoService = new UsuarioJuridicoService();
+      const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(this.state.ongRequerida);
+      let perfilJuridicoInfo = resposta.data[0];
+      console.log(perfilJuridicoInfo);
+
+      this.getFoto();
+
+      let ong = document.getElementsByName("descricaoOng")[0];
+      console.log(ong);
+      ong.children.item(1).children.item(0).innerText = perfilJuridicoInfo.nomeOng;
+      ong.children.item(1).children.item(1).innerText = perfilJuridicoInfo.descricao;
+      ong.children.item(1).children.item(2).innerText = 'www.' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.org';
+      let OngLocation = document.getElementsByName("ongLocation")[0];
+      OngLocation.children.item(0).children.item(0).innerText = perfilJuridicoInfo.nomeOng;
+      OngLocation.children.item(0).children.item(2).children.item(1).innerText = 'contato@' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.com';
+      OngLocation.children.item(0).children.item(3).children.item(1).innerText = 'https://www.' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.org/';
+      OngLocation.children.item(0).children.item(1).innerText = perfilJuridicoInfo.fkEndereco.logradouro + ', ' + perfilJuridicoInfo.fkEndereco.numeroEndereco + ' - ' + perfilJuridicoInfo.fkEndereco.bairro + ', ' + perfilJuridicoInfo.fkEndereco.cidade + ' - ' + perfilJuridicoInfo.fkEndereco.estado + ', ' + perfilJuridicoInfo.fkEndereco.cep;
+      OngLocation.children.item(0).children.item(4).children.item(1).innerText = 'https://www.facebook/' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.com/';
+      OngLocation.children.item(0).children.item(5).children.item(1).innerText = '@' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase();
+
+    } catch (error) {
+
     }
-    this.getFoto();
-
-    let ong = document.getElementsByName("descricaoOng")[0];
-    console.log(ong);
-    ong.children.item(1).children.item(0).innerText = perfilJuridicoInfo.nomeOng;
-    ong.children.item(1).children.item(1).innerText = perfilJuridicoInfo.descricao;
-    ong.children.item(1).children.item(2).innerText = 'www.' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.org';
-    let OngLocation = document.getElementsByName("ongLocation")[0];
-    OngLocation.children.item(0).children.item(0).innerText = perfilJuridicoInfo.nomeOng;
-    OngLocation.children.item(0).children.item(2).children.item(1).innerText = 'contato@' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.com';
-    OngLocation.children.item(0).children.item(3).children.item(1).innerText = 'https://www.' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.org/';
-    OngLocation.children.item(0).children.item(1).innerText = perfilJuridicoInfo.fkEndereco.logradouro + ', ' + perfilJuridicoInfo.fkEndereco.numeroEndereco + ' - ' + perfilJuridicoInfo.fkEndereco.bairro + ', ' + perfilJuridicoInfo.fkEndereco.cidade + ' - ' + perfilJuridicoInfo.fkEndereco.estado + ', ' + perfilJuridicoInfo.fkEndereco.cep;
-    OngLocation.children.item(0).children.item(4).children.item(1).innerText = 'https://www.facebook/' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase() + '.com/';
-    OngLocation.children.item(0).children.item(5).children.item(1).innerText = '@' + perfilJuridicoInfo.nomeOng.replace(/\s/g, '').toLowerCase();
-
   }
 
   trocarFoto = async () => {
@@ -69,10 +88,7 @@ export default class ProfileOng extends React.Component {
       let foto = document.getElementById("editarFoto").files[0];
       let formDataFoto = new FormData();
       formDataFoto.set("foto", foto);
-
-      let id = parseInt(sessionStorage["userId"])
-      let response = await usuarioJuridicoService.uploadFoto(id, formDataFoto);
-
+      let response = await usuarioJuridicoService.uploadFoto(this.state.ongRequerida, formDataFoto);
       if (response.status == 201) {
         this.getFoto();
       }
@@ -94,8 +110,7 @@ export default class ProfileOng extends React.Component {
 
   getFoto = async () => {
     let usuarioJuridicoService = new UsuarioJuridicoService();
-    let id = parseInt(sessionStorage["userId"]);
-
+    let id = parseInt(this.state.ongRequerida);
     try {
       let fotoResponse = await usuarioJuridicoService.getFoto(id);
       let imgOng = document.getElementById("imgOng");
@@ -106,8 +121,7 @@ export default class ProfileOng extends React.Component {
   }
 
   baixarArquivo = async () => {
-    let userId = parseInt(sessionStorage["userId"]);
-    let usuarioAtual = await new UsuarioJuridicoService().getUsuarioJuridicoById(userId);
+    let usuarioAtual = await new UsuarioJuridicoService().getUsuarioJuridicoById(this.state.ongRequerida);
     let nomeOng = usuarioAtual.data[0].nomeOng;
 
     window.location.href = `http://localhost:8080/arquivos/arquivo01?nomeDoArquivo=TodasAsVagas&nomeDaOng=${nomeOng}&isCsv=false`;
@@ -143,8 +157,7 @@ export default class ProfileOng extends React.Component {
   carregarVoluntarios = async () => {
     try {
       let vagaService = new VagaService();
-
-      let userIdAsInt = parseInt(sessionStorage["userId"]);
+      let userIdAsInt = this.state.ongRequerida;
       let userId = userIdAsInt % 2 != 0 ? userIdAsInt : -1;
       if (userId == -1)
         return;
@@ -266,10 +279,10 @@ export default class ProfileOng extends React.Component {
             width="210"
             height="280"
             link="www.google.com.br"
-            isProfile={sessionStorage.getItem("userId") % 2 == 1 ? "true" : "false"}
+            isProfile={this.state.idUsuarioDaVez % 2 == 1 ? "true" : "false"}
             editImgOng={this.trocarFoto} />
 
-          <div className={sessionStorage.getItem("userId") % 2 == 1 ? "width-100pg border border-rd-10 height-500pg" : "display-none"}>
+          <div className={this.state.idUsuarioDaVez % 2 == 1 ? "width-100pg border border-rd-10 height-500pg" : "display-none"}>
             <div className="flex justcon-sb mg-b-16">
               <h1 className="width-30pg mg-l-32">Vagas Abertas</h1>
               <div className="width-60pg flex justcon-sb mg-t-8">
@@ -288,7 +301,7 @@ export default class ProfileOng extends React.Component {
               <CarouselVacancy />
             </div>
           </div>
-          <div className={sessionStorage.getItem("userId") % 2 == 1 ? "ratings" : "display-none"}>
+          <div className={this.state.idUsuarioDaVez % 2 == 1 ? "ratings" : "display-none"}>
             <Rating isOngProfile
               imgVolunteer={ImgVolunteer}
               nameVolunteer="Iago Roani de Lima"
@@ -308,7 +321,7 @@ export default class ProfileOng extends React.Component {
               moraEmId="voluntarioMoraEmId"
             />
           </div>
-          <div className={sessionStorage.getItem("userId") % 2 == 0 ? "vacancyCarousel" : "display-none"}>
+          <div className={this.state.idUsuarioDaVez % 2 == 0 ? "vacancyCarousel" : "display-none"}>
             <h1>Vagas desta ONG</h1>
             <CarouselVacancy />
           </div>

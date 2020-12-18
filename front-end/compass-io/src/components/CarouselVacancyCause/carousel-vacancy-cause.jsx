@@ -16,9 +16,18 @@ export default class CarouselVacancyCause extends React.Component {
   }
 
   loadVagas = async () => {
-    
+    debugger
     let vagaService = new VagaService();
-    const vagas = await vagaService.getVagasByCausa(sessionStorage.getItem("causa"));
+    let url = window.location.href;
+    var res = url.split('3000');
+    if (res[1] === undefined) {
+      alert('página sem parâmetros.');
+    }
+    var parametros = res[1].split('/');
+    console.log('Parametros encontrados:\n' + parametros);
+    var vagaReq;
+    vagaReq = parametros[4];
+    const vagas = await vagaService.getVagasByCausa(vagaReq);
 
     let vetorResposta = [];
     for (var i = 0; i < vagas.data.length; i++) {
@@ -30,10 +39,10 @@ export default class CarouselVacancyCause extends React.Component {
       }
       vetorResposta.push({
         vaga: vagas.data[i],
-        foto: "data:image/png;base64,"+fotoVaga.data
+        foto: "data:image/png;base64," + fotoVaga.data
       })
     }
-    this.setState({resposta: vetorResposta});
+    this.setState({ resposta: vetorResposta });
   }
 
   SampleNextArrow = (props) => {

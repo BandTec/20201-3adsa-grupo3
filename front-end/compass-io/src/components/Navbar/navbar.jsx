@@ -11,11 +11,12 @@ export default class Navbar extends React.Component {
         super(props)
         this.state = {
             isLogado: false,
-            message: ""
+            message: "",
         }
     }
 
     teste = () => {
+
         if (sessionStorage.getItem("userId") == undefined) {
             this.setState({
                 isLogado: false,
@@ -37,6 +38,23 @@ export default class Navbar extends React.Component {
         }
     }
 
+    setandoUrl = () => {
+        let url = window.location.href;
+        var res = url.split('3000');
+        if (res[1] === undefined) {
+            alert('página sem parâmetros.');
+        }
+        var parametros = res[1].split('/');
+        console.log('Parametros encontrados:\n' + parametros);
+        var idUsuario = new Array();
+        idUsuario = parametros[1];
+        if (idUsuario == undefined || idUsuario == 'undefined') {
+            return -1;
+        } else {
+            return idUsuario;
+        }
+    }
+
     componentDidMount() {
         this.teste();
     }
@@ -46,16 +64,16 @@ export default class Navbar extends React.Component {
         return (
             <div className="flex width-100pg mg-v-16">
                 <span className="width-40pg">
-                    <a href="/">
+                    <a href={`http://localhost:3000/${this.setandoUrl()}`}>
                         <img src={LogoCompassio} />
                     </a>
                 </span>
 
                 <div className="flex width-80pg">
-                    <a className="link relative bold fs-24p" href="/signup">Seja voluntário</a>
-                    <a className="link relative bold fs-24p" href="/#comoFunciona">Como funciona</a>
-                    <a className="link relative bold fs-24p" href="vacancies">Vagas</a>
-                    <a disabled id="entrar" href="http://localhost:3000/signin"
+                    <a className="link relative bold fs-24p" href={`http://localhost:3000/${this.setandoUrl()}/signup`}>Seja voluntário</a>
+                    <a className="link relative bold fs-24p" href={`http://localhost:3000/${this.setandoUrl()}/#comoFunciona`}>Como funciona</a>
+                    <a className="link relative bold fs-24p" href={`http://localhost:3000/${this.setandoUrl()}/vacancies`}>Vagas</a>
+                    <a disabled id="entrar" href={`http://localhost:3000/${this.setandoUrl()}/signin`}
                         className={this.state.isLogado ? "bg-color-yellow height-32p bold mg-t-16" : "link bold fs-24p botao"}>{this.state.message}</a>
                 </div>
             </div>

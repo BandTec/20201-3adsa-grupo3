@@ -24,17 +24,32 @@ export default class VacancySpecific extends React.Component {
   state = {
     message: '',
     severity: '',
-    open: false
+    open: false,
+    idUsuarioDaVez: '',
+    vagaRequerida: ''
   }
 
   async componentDidMount() {
     this.renderVaga()
+    let url = window.location.href;
+    var res = url.split('3000');
+    if (res[1] === undefined) {
+      alert('página sem parâmetros.');
+    }
+    var parametros = res[1].split('/');
+    console.log('Parametros encontrados:\n' + parametros);
+    var idUsuario = new Array();
+    idUsuario = parametros[1];
+    this.setState({ idUsuarioDaVez: idUsuario});
+    var idVaga = new Array();
+    idVaga = parametros[3];
+    this.setState({ vagaRequerida: idVaga});
   }
 
   renderVaga = async () => {
     try {
       let vagaService = new VagaService();
-      const resposta = await vagaService.getVagaById(sessionStorage.getItem("idVaga"));
+      const resposta = await vagaService.getVagaById(this.state.vagaRequerida);
       let vagaInfos = resposta.data[0];
       console.log(vagaInfos);
       sessionStorage.setItem("causa", vagaInfos.causa);
@@ -75,7 +90,7 @@ export default class VacancySpecific extends React.Component {
 
       let usuarioFisicoService = new UsuarioFisicoService();
 
-      let userId = sessionStorage["userId"];
+      let userId = this.state.idUsuarioDaVez;
       let userIdAsInt = parseInt(userId);
       let vagaAsJson = JSON.stringify(resposta.data[0]);
       await usuarioFisicoService.setUltimaVaga(userIdAsInt, vagaAsJson);
@@ -85,7 +100,7 @@ export default class VacancySpecific extends React.Component {
   }
 
   baixarArquivo = async () => {
-    let userId = parseInt(sessionStorage["userId"]);
+    let userId = parseInt(this.state.idUsuarioDaVez);
     let usuarioAtual = await new UsuarioJuridicoService().getUsuarioJuridicoById(userId);
     let nomeOng = usuarioAtual.data[0].nomeOng;
 
@@ -97,7 +112,7 @@ export default class VacancySpecific extends React.Component {
       debugger
       let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
 
-      let userIdAsInt = parseInt(sessionStorage["userId"]);
+      let userIdAsInt = parseInt(this.state.idUsuarioDaVez);
       let userId = userIdAsInt % 2 == 0 ? userIdAsInt : -1;
       if (userId == -1)
         return;
@@ -129,12 +144,12 @@ export default class VacancySpecific extends React.Component {
 
       let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
 
-      let userIdAsInt = parseInt(sessionStorage["userId"]);
+      let userIdAsInt = parseInt(this.state.idUsuarioDaVez);
       let userId = userIdAsInt % 2 == 0 ? userIdAsInt : -1;
       if (userId == -1)
         return;
 
-      let vagaId = parseInt(sessionStorage["idVaga"]);
+      let vagaId = parseInt(this.state.idUsuarioDaVez);
       if (vagaId <= 0)
         return;
 

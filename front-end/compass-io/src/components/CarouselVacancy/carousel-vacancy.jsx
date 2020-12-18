@@ -8,8 +8,9 @@ import VagaService from '../../services/vaga-service';
 
 export default class CarouselVacancy extends React.Component {
   state = {
-    resposta: []
-  };
+    resposta: [],
+    ongRequerida: ''
+  }
 
   componentDidMount() {
     this.loadVagas();
@@ -17,7 +18,16 @@ export default class CarouselVacancy extends React.Component {
 
   loadVagas = async () => {
     let vagaService = new VagaService();
-    const vagas = await vagaService.getVagasByFkOng(parseInt(sessionStorage.getItem("userId")));
+    let url = window.location.href;
+    var res = url.split('3000');
+    if (res[1] === undefined) {
+      alert('página sem parâmetros.');
+    }
+    var parametros = res[1].split('/');
+    console.log('Parametros encontrados:\n' + parametros);
+    var ongReq;
+    ongReq = parametros[4];
+    const vagas = await vagaService.getVagasByFkOng(ongReq);
     
     let vetorResposta = [];
     try {
