@@ -55,9 +55,9 @@ function Rating(props) {
                                 </span>
                             </button>
                             <button onClick={props.verPerfil} className="height-56p mg-h-32 buttonProfileOng width-20pg font-weight-500 bg-color-blue">
-                                <span className="font-weight-500 fs-24p">
+                                <a className="font-weight-500 fs-24p">
                                     Ver Perfil
-                                </span>
+                                </a>
                             </button>
                         </div>
                     </div>

@@ -20,7 +20,9 @@ class CardVacancy extends React.Component {
                     <div>
                         <img src={this.props.imgSrc} name="vacancyImg" className="cardImg"></img>
                         <div className="mg-l-16">
-                            por {this.props.ongName}
+                            <a href={this.props.rediOng}>
+                                por {this.props.ongName}
+                            </a>
                         </div>
                     </div>
                     <div className="pd-v-16 mg-h-16 txtal-justify">
