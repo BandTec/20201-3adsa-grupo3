@@ -24,7 +24,7 @@ function LocationScheduleInfo(props) {
                 </div>
             </div>
             <div className="mg-t-24 mg-l-16">
-                <a href="/vacancy">
+                <a href={props.hrefSeta}>
                     <Icon icon={nextOutline} style={{ fontSize: '42px' }} />
                 </a>
             </div>

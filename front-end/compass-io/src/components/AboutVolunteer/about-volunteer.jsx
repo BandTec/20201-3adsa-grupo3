@@ -26,19 +26,40 @@ class AboutVolunteer extends React.Component {
 
     async componentDidMount() {
         this.getLastAccessedVacancy();
+        debugger
+        let url = window.location.href;
+        var res = url.split('3000');
+        if (res[1] === undefined) {
+            alert('página sem parâmetros.');
+        }
+        var parametros = res[1].split('/');
+        console.log('Parametros encontrados:\n' + parametros);
+        var idUsuario;
+        idUsuario = parametros[1];
+        sessionStorage["usuarioDaVez"] = idUsuario;
     }
 
     getLastAccessedVacancy = async () => {
+        debugger
         let usuarioFisicoService = new UsuarioFisicoService();
 
-        let userId = sessionStorage["userId"];
+        let url = window.location.href;
+        var res = url.split('3000');
+        if (res[1] === undefined) {
+            alert('página sem parâmetros.');
+        }
+        var parametros = res[1].split('/');
+        console.log('Parametros encontrados:\n' + parametros);
+        var idUsuario;
+        idUsuario = parametros[1];
+        let userId = idUsuario;
         let userIdAsInt = parseInt(userId);
 
         let ultimasVagasAcessadas = await usuarioFisicoService.getUltimasVagas(userIdAsInt);
         let vagas = [];
 
         for (var i = 0; i < ultimasVagasAcessadas.data.length; i++) {
-            const fotoVaga = '';
+            let fotoVaga = '';
             try {
                 fotoVaga = await new VagaService().getFoto(ultimasVagasAcessadas.data[i].id);
             } catch (error) {
@@ -71,7 +92,7 @@ class AboutVolunteer extends React.Component {
                 <div className="imgVolunteerBox grid width-20pg">
                     <img id={this.props.imgId} width="210" height="280" src={this.props.imgSrc}></img>
                     <div id="btnPhotoEdit" className="mg-t-16 width-250pg">
-                        <InputFile className="" id="editarFoto" text="Editar foto" callBack={this.props.editImgVolunteer} />
+                        <InputFile className={sessionStorage.getItem("usuarioDaVez") % 2 == 1 ? "display-none" : ""} id="editarFoto" text="Editar foto" callBack={this.props.editImgVolunteer} />
                     </div>
                 </div>
 
@@ -89,7 +110,7 @@ class AboutVolunteer extends React.Component {
                     <div className="titleBox">
                         <span><u>Vagas acessadas</u></span>
                     </div>
-                    <div className="filaDeVagas">
+                    <div className="filaDeVagas overflow-y-scroll">
                         <scroll-container className={this.classes.root}>
                             {this.state.ultimasVagas.map(vaga => (
                                 <scroll-page key={vaga.id} alignItems="flex-start">

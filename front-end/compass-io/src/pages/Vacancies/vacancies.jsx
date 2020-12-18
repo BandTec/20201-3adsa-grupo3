@@ -81,6 +81,7 @@ export default class Vacancies extends React.Component {
   }
 
   renderExibicao = () => {
+    debugger
     let vagasFiltradas = [];
     if (this.state.filtro.causa != null && this.state.filtro.estado != null) {
       {
@@ -119,7 +120,6 @@ export default class Vacancies extends React.Component {
   }
 
   getVagas = async () => {
-    debugger
     let vagaService = new VagaService()
     let vagas = await vagaService.getVagas();
     let vagasComFoto = [];
@@ -305,13 +305,16 @@ export default class Vacancies extends React.Component {
     }));
 
     const handleChange = (event) => {
+      debugger
       this.setState({ causas: { [event.target.name]: event.target.checked } });
       this.setState({
         filtro: {
           estado: this.state.filtro.estado,
           causa: event.target.name
         }
-      });
+      })
+      //this.renderExibicao();
+      console.log(this.state.filtro);
     };
 
     const classesLocation = makeStyles((theme) => ({
@@ -477,14 +480,30 @@ export default class Vacancies extends React.Component {
     }));
 
     const handleChangeLocation = (event) => {
+      debugger
       this.setState({ stateLocation: { [event.target.name]: event.target.checked } });
       this.setState({
         filtro: {
           estado: event.target.name,
           causa: this.state.filtro.causa
         }
-      });
+      })
+      //this.renderExibicao();
+      console.log(this.state.filtro);
     };
+
+    function setUrl() {
+      let url = window.location.href;
+        var res = url.split('3000');
+        var parametros = res[1].split('/');
+        var idUsuario = new Array();
+        idUsuario = parametros[1];
+        if (idUsuario == undefined || idUsuario == 'undefined') {
+            return -1;
+        } else {
+            return idUsuario;
+        }
+    }
 
     return (
       <section>
@@ -688,7 +707,7 @@ export default class Vacancies extends React.Component {
         <div className="">
           {this.state.exibir.map(vaga => (
             <div key={vaga.vaga.id} className="">
-              <CardVacancy onClick={this.setarIdvaga(vaga.vaga.id)} className="" key={vaga.vaga.id} imgSrc={vaga.foto}
+              <CardVacancy href={`http://localhost:3000/${setUrl()}/vacancy/${vaga.vaga.id}`} hrefSeta={`http://localhost:3000/${setUrl()}/vacancy/${vaga.vaga.id}`} className="" key={vaga.vaga.id} imgSrc={vaga.foto}
                 ongName={vaga.vaga.fkUsuarioJuridico.nomeOng} description={vaga.vaga.descricao} titulo={vaga.vaga.titulo}
                 location={`${vaga.vaga.fkEndereco.cidade} - ${vaga.vaga.fkEndereco.estado}, ${vaga.vaga.fkEndereco.bairro}`} />
             </div>
