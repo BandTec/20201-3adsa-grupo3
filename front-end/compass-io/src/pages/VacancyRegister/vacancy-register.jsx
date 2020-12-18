@@ -229,10 +229,10 @@ export default class VacancyRegister extends React.Component {
               <InputLine name="titulo" title="Título da vaga" type="text" placeholder="O que você busca?" />
             </div>
             <div className="mg-t-24 mg-h-16 flex width-100pg">
-              <div className="mg-t-16 width-20rem">
+              <div className="inputPosition">
                 <InputFile id="foto" className="inputFoto" text="Escolher foto" />
               </div>
-              <div className="width-30pg mg-t-24 mg-l-32">
+              <div className="width-30pg mg-t-24 mg-l-1">
                 <ComboBox name="causa" labelTitle="Causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} />
               </div>
             </div>
@@ -282,7 +282,7 @@ export default class VacancyRegister extends React.Component {
                 <div className="flex mg-t-1rem mg-l-1rem">
                   <InputFile id="inputFile" text="UPLOAD DE VAGAS EM TXT" callBack={this.subirArquivo} />
                   <div id="fileUploadName" className="fileName">Nome do arquivo aqui</div>
-                  <Button id="btnCadastrarVagaUp" onClick={this.cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
+                <InputFile id="fotoVagaUpload" className="inputFoto" text="Escolher foto" />
                 </div>
             </div>
 

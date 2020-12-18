@@ -10,6 +10,14 @@
     font-weight: 600;
   }
 
+.alg-itens{
+    align-items: center;
+}
+
+.width-45pg{
+    width: 45%;
+}
+
 .justcon-sb{
     justify-content: space-between;
 }
