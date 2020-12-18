@@ -154,7 +154,20 @@ public class UsuarioFisicoVagaController {
                 if (vagaOptional.isPresent()){
                     UsuarioFisico usuarioCadastrado = usuarioOptional.get();
                     Vaga vagaCadastrada = vagaOptional.get();
-                    UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
+                    List<UsuarioFisicoVaga> ufvs = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado);
+
+                    UsuarioFisicoVaga ufv;
+                    if (ufvs.isEmpty()) {
+                        UsuarioFisicoVaga novoUfv = new UsuarioFisicoVaga();
+                        novoUfv.setFkUsuarioFisico(usuarioCadastrado);
+                        novoUfv.setFkVaga(vagaCadastrada);
+                        novoUfv.setDataInscricao(Date.from(Instant.now()));
+
+                        ufv = this.usuarioVagaRepository.save(novoUfv);
+                    } else {
+                        ufv = ufvs.get(0);
+                    }
+
                     ufv.setCurtido(true);
 
                     UsuarioFisicoVaga ufvCadastrada = this.usuarioVagaRepository.save(ufv);
@@ -178,7 +191,20 @@ public class UsuarioFisicoVagaController {
                 if (vagaOptional.isPresent()){
                     UsuarioFisico usuarioCadastrado = usuarioOptional.get();
                     Vaga vagaCadastrada = vagaOptional.get();
-                    UsuarioFisicoVaga ufv = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado).get(0);
+                    List<UsuarioFisicoVaga> ufvs = this.usuarioVagaRepository.findAllUsuarioFisicoVagaByFkVagaAndFkUsuarioFisico(vagaCadastrada, usuarioCadastrado);
+
+                    UsuarioFisicoVaga ufv;
+                    if (ufvs.isEmpty()) {
+                        UsuarioFisicoVaga novoUfv = new UsuarioFisicoVaga();
+                        novoUfv.setFkUsuarioFisico(usuarioCadastrado);
+                        novoUfv.setFkVaga(vagaCadastrada);
+                        novoUfv.setDataInscricao(Date.from(Instant.now()));
+
+                        ufv = this.usuarioVagaRepository.save(novoUfv);
+                    } else {
+                        ufv = ufvs.get(0);
+                    }
+
                     ufv.setCurtido(true);
 
                     UsuarioFisicoVaga ufvCadastrada = this.usuarioVagaRepository.save(ufv);

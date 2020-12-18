@@ -170,8 +170,11 @@ export default class ProfileOng extends React.Component {
       try {
         do {
           ufv = await usuarioFisicoVagaService.getUsuarioFisicoByIdVaga(vagas.data[contador].id);
+          if (ufv.data[0].aprovado == null) {
+            break;
+          }
           contador++;
-        } while (ufv.aprovado != null)
+        } while (true)
 
         sessionStorage["candidato"] = ufv.data[0].fkUsuarioFisico.id;
         sessionStorage["vaga"] = ufv.data[0].fkVaga.id;
@@ -298,13 +301,14 @@ export default class ProfileOng extends React.Component {
               <CarouselVacancy />
             </div>
           </div>
-          <div className={this.state.idUsuarioDaVez % 2 == 1 ? "ratings" : "display-none"}>
+          <div className={this.state.idUsuarioDaVez % 2 == 1 ? "display-block" : "display-none"}>
             <Rating isOngProfile
               imgVolunteer={ImgVolunteer}
               nameVolunteer="Iago Roani de Lima"
               professionVolunteer="Automação"
               schoolVolunteer="Cursando Superior"
               liveInVolunteer="Suzano,SP,Brasil"
+              isVolunteerCard
 
               nomeId="voluntarioNomeId"
               volunteerImgId="voluntarioImgId"
