@@ -285,15 +285,12 @@ export default class ProfileOng extends React.Component {
           <div className={this.state.idUsuarioDaVez % 2 == 1 ? "width-100pg border border-rd-10 height-500pg" : "display-none"}>
             <div className="flex justcon-sb mg-b-16">
               <h1 className="width-30pg mg-l-32">Vagas Abertas</h1>
-              <div className="width-60pg flex justcon-sb mg-t-8">
-                <div className="width-40pg mg-r-16 mg-t-8">
-                  <Button variant="contained" className={this.classes.btnTeste} onClick={this.ClickDirection}>+ Cadastrar Vaga</Button>
+              <div className="width-45pg flex justcon-sb mg-t-8">
+                <div className="width-40pg mg-t-8">
+                  <Button variant="contained" className={this.classes.btnTeste} onClick={this.ClickDirection}>Cadastrar Vaga</Button>
                 </div>
-                <div className="width-50pg mg-r-16 mg-t-8">
+                <div className="width-50pg mg-t-8">
                   <Button variant="contained" onClick={this.baixarArquivo} >Download de vagas em TXT</Button>
-                </div>
-                <div className="btnUpload">
-                  <InputFile id="inputFile" text="UPLOAD DE VAGAS EM TXT" callBack={this.subirArquivo} />
                 </div>
               </div>
             </div>
@@ -315,6 +312,7 @@ export default class ProfileOng extends React.Component {
 
               aprovar={this.aprovar}
               recusar={this.recusar}
+              verPerfil="http://localhost:3000/profile/volunteer"
 
               profissaoId="voluntarioProfissaoId"
               escolaridadeId="voluntarioEscolaridadeId"

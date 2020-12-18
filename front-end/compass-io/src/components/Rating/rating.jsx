@@ -31,7 +31,7 @@ function Rating(props) {
                 "display-none"}>
                 <div className="mg-l-16">
                     <h1 >Candidaturas</h1>
-                    <div className="flex ">
+                    <div className={props.isVolunteerCard ? "mg-l-16" : "display-none"}>
                         <img id={props.volunteerImgId} width="140" height="180" src={props.imgVolunteer}></img>
                         <div className="mg-l-16">
                             <div className="fs-24p"><u><b id={props.nomeId}>{props.nameVolunteer}</b></u></div>
@@ -53,7 +53,12 @@ function Rating(props) {
                                 <span className="font-weight-500 fs-24p">
                                     Recusar
                                 </span>
-                             </button>
+                            </button>
+                            <button onClick={props.verPerfil} className="height-56p mg-h-32 buttonProfileOng width-20pg font-weight-500 bg-color-blue">
+                                <span className="font-weight-500 fs-24p">
+                                    Ver Perfil
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -54,14 +54,15 @@ public class ArquivoController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity importarArquivo(@RequestParam("file") MultipartFile arquivo) throws Exception {
         IArquivo arquivoImportado = ArquivoAdapter.importar(arquivo);
+        List<Vaga> v;
         if (arquivoImportado instanceof Arquivo01)
-            convertAndInsertOnDatabaseFromObjectFile(arquivoImportado.getObject());
+            v = convertAndInsertOnDatabaseFromObjectFile(arquivoImportado.getObject());
         else
             return ResponseEntity.badRequest().body("Arquivo inválido! O único modelo de arquivo aceito é o 'Arquivo01'");
-        return ResponseEntity.ok(arquivoImportado.getObject());
+        return ResponseEntity.ok(v);
     }
 
-    private void convertAndInsertOnDatabaseFromObjectFile(Object object) throws Exception {
+    private List<Vaga> convertAndInsertOnDatabaseFromObjectFile(Object object) throws Exception {
         try {
             VagasDeUmaOngDTO vagasDeUmaOngDTO = (VagasDeUmaOngDTO)object;
             UsuarioJuridico ong = usuarioJuridicoRepository.findUsuarioJuridicoByNomeOng(vagasDeUmaOngDTO.getNomeDaOng());
@@ -82,7 +83,8 @@ public class ArquivoController {
 
                 vagas.add(vaga);
             }
-            vagaRepository.saveAll(vagas);
+            List<Vaga> v = vagaRepository.saveAll(vagas);
+            return v;
         } catch (Exception ex) {
             throw new Exception("Objeto de arquivo inválido", ex);
         }
