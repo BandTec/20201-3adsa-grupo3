@@ -247,8 +247,8 @@ debugger
         severity: "success",
         open: true
       });
-
-      window.location.href = "http://localhost:3000/profile/ong";
+      let url = window.location.href;
+      window.location.href = url;
     } catch (error) {
       let errorString = `${error}`;
       this.setState({
@@ -272,8 +272,8 @@ debugger
         severity: "success",
         open: true
       });
-
-      window.location.href = "http://localhost:3000/profile/ong";
+      let url = window.location.href;
+      window.location.href = url;
     } catch (error) {
       let errorString = `${error}`;
       this.setState({
@@ -306,7 +306,7 @@ debugger
 
   verOPerfil = () => {
     let idUser = parseInt(sessionStorage["candidato"]);
-    window.location.href = `http://localhost:3000/${setUrl()}/profile/volunteer/${idUser}`;
+    window.location.href = `http://localhost:3000/${this.setUrl()}/profile/volunteer/${idUser}`;
   }
 
   render() {
