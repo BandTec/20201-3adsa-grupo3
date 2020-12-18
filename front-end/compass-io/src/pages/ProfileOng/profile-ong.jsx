@@ -272,7 +272,7 @@ export default class ProfileOng extends React.Component {
     this.setState({ open: false })
   };
 
-  function setUrl() {
+  setUrl() {
     let url = window.location.href;
       var res = url.split('3000');
       var parametros = res[1].split('/');
