@@ -289,7 +289,7 @@ export default class ProfileOng extends React.Component {
               <CarouselVacancy />
             </div>
           </div>
-          <div className={parseInt(sessionStorage.getItem("userId")) % 2 == 1 ? "ratings" : "display-none"}>
+          <div className={parseInt(sessionStorage.getItem("userId")) % 2 == 1 ? "display-block flex" : "display-none"}>
             <Rating isOngProfile
               imgVolunteer={ImgVolunteer}
               nameVolunteer="Iago Roani de Lima"
