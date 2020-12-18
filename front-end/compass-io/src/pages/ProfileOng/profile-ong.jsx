@@ -31,7 +31,8 @@ export default class ProfileOng extends React.Component {
     severity: '',
     open: false,
     idUsuarioDaVez: '',
-    ongRequerida: ''
+    ongRequerida: '',
+    voluntario: false
   }
 
   componentDidMount() {
@@ -128,7 +129,6 @@ export default class ProfileOng extends React.Component {
   }
 
   subirArquivo = async () => {
-
     let arquivo = document.getElementById("inputFile").files[0];
     let formDataFile = new FormData();
     formDataFile.set("file", arquivo);
@@ -157,7 +157,18 @@ export default class ProfileOng extends React.Component {
   carregarVoluntarios = async () => {
     try {
       let vagaService = new VagaService();
-      let userIdAsInt = this.state.ongRequerida;
+debugger
+      let url = window.location.href;
+      var res = url.split('3000');
+      if (res[1] === undefined) {
+        alert('página sem parâmetros.');
+      }
+      var parametros = res[1].split('/');
+      console.log('Parametros encontrados:\n' + parametros);
+      var idUsuario;
+      var ongReq;
+      idUsuario = parametros[1];
+      let userIdAsInt = parseInt(idUsuario);
       let userId = userIdAsInt % 2 != 0 ? userIdAsInt : -1;
       if (userId == -1)
         return;
@@ -170,11 +181,19 @@ export default class ProfileOng extends React.Component {
       try {
         do {
           ufv = await usuarioFisicoVagaService.getUsuarioFisicoByIdVaga(vagas.data[contador].id);
-          if (ufv.data[0].aprovado == null) {
-            break;
+          if (ufv.data[0] != "") {
+            try {
+              if (ufv.data[0].aprovado == null) {
+                break;
+              }
+            } catch (error) {
+
+            }
           }
           contador++;
         } while (true)
+
+        this.setState({ voluntario: true });
 
         sessionStorage["candidato"] = ufv.data[0].fkUsuarioFisico.id;
         sessionStorage["vaga"] = ufv.data[0].fkVaga.id;
@@ -319,8 +338,8 @@ export default class ProfileOng extends React.Component {
               <CarouselVacancy />
             </div>
           </div>
-          <div className={this.state.idUsuarioDaVez % 2 == 1 ? "display-block" : "display-none"}>
-            <Rating isOngProfile
+          <div>
+            <Rating isOngProfile isVolunteerCard={this.state.voluntario}
               imgVolunteer={ImgVolunteer}
               nameVolunteer="Iago Roani de Lima"
               professionVolunteer="Automação"

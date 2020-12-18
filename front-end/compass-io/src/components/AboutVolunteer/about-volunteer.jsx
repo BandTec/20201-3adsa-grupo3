@@ -40,6 +40,7 @@ class AboutVolunteer extends React.Component {
     }
 
     getLastAccessedVacancy = async () => {
+        debugger
         let usuarioFisicoService = new UsuarioFisicoService();
 
         let url = window.location.href;
@@ -50,7 +51,6 @@ class AboutVolunteer extends React.Component {
         var parametros = res[1].split('/');
         console.log('Parametros encontrados:\n' + parametros);
         var idUsuario;
-        var volunReq;
         idUsuario = parametros[1];
         let userId = idUsuario;
         let userIdAsInt = parseInt(userId);
@@ -59,7 +59,7 @@ class AboutVolunteer extends React.Component {
         let vagas = [];
 
         for (var i = 0; i < ultimasVagasAcessadas.data.length; i++) {
-            const fotoVaga = '';
+            let fotoVaga = '';
             try {
                 fotoVaga = await new VagaService().getFoto(ultimasVagasAcessadas.data[i].id);
             } catch (error) {

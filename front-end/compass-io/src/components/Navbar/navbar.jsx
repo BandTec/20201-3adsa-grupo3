@@ -25,7 +25,6 @@ export default class Navbar extends React.Component {
     }
 
     renderBotaoEntrar = () => {
-debugger
         if (sessionStorage.getItem("userId") == "undefined" || sessionStorage.getItem("userId") == undefined) {
             this.setState({
                 controle: {

@@ -25,7 +25,8 @@ export default class ProfileVolunteer extends React.Component {
     severity: '',
     open: false,
     idUsuarioDaVez: '',
-    voluntarioRequerido: ''
+    voluntarioRequerido: '',
+    candidatado: false
   }
 
   componentDidMount() {
@@ -76,10 +77,20 @@ export default class ProfileVolunteer extends React.Component {
 
   getFoto = async () => {
     try {
-      let usuarioFisicoService = new UsuarioFisicoService();
-      let id = this.state.voluntarioRequerido;
+      debugger
 
-      let fotoResponse = await usuarioFisicoService.getFoto(id);
+      let url = window.location.href;
+      var res = url.split('3000');
+      if (res[1] === undefined) {
+        alert('página sem parâmetros.');
+      }
+      var parametros = res[1].split('/');
+      console.log('Parametros encontrados:\n' + parametros);
+      var idUsuario = parametros[1];
+
+      let usuarioFisicoService = new UsuarioFisicoService();
+
+      let fotoResponse = await usuarioFisicoService.getFoto(idUsuario);
       if (fotoResponse != undefined) {
         let imgVolunteer = document.getElementById("imgVolunteer");
         imgVolunteer.src = "data:image/png;base64," + fotoResponse.data;
@@ -146,18 +157,20 @@ export default class ProfileVolunteer extends React.Component {
           contador++;
         } while (ufv.aprovado != null)
 
+        this.setState({ candidatado: true })
+
         let img = document.getElementById("vacancyImgId");
         let title = document.getElementById("vacancyTitleId");
         let description = document.getElementById("vacancyDescriptionId");
         let aprovado = document.getElementById("vacancyAprovadoId");
-  
+
         let vagaService = new VagaService();
         let foto = await vagaService.getFoto(ufv.fkVaga.id);
         img.src = "data:image/png;base64," + foto.data;
-  
+
         title.innerText = ufv.fkVaga.titulo;
         description.innerText = ufv.fkVaga.descricao;
-  
+
         if (ufv.aprovado == 1)
           aprovado.innerText = "Aprovado";
         else if (ufv.aprovado == 0)
@@ -203,7 +216,7 @@ export default class ProfileVolunteer extends React.Component {
         <div>
         </div>
         <div classname="ratingBox">
-          <Rating isVolunteerProfile isAprovadoId="vacancyAprovadoId"
+          <Rating isVolunteerProfile isAprovadoId="vacancyAprovadoId" isCandidatado={this.state.candidatado}
             imgVolunteer={ImgVolunteer} imgId="vacancyImgId"
             vacancyTitle="Marcenaria para construção de móveis" titleId="vacancyTitleId"
             infoVacancy="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
