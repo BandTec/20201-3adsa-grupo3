@@ -9,7 +9,9 @@ import ComboBox from '../../components/ComboBox/combo-box';
 import ComboBoxStateAndCities from '../../components/ComboBoxStateAndCities/combo-box-state-and-cities';
 import InputFile from '../../components/InputFile/input-file';
 import AlertCard from '../../components/AlertCard/alert-card';
-import Alerta from '../../components/Alerta/alerta'
+import Alerta from '../../components/Alerta/alerta';
+
+import ArquivoService from '../../services/arquivo-service';
 
 import VagaService from '../../services/vaga-service';
 import UsuarioJuridicoService from '../../services/usuario-juridico-service';
@@ -32,10 +34,56 @@ export default class VacancyRegister extends React.Component {
     open: false
   }
 
+  subirArquivo = async () => {
+    try {
+      let arquivo = document.getElementById("arquivoVaga").files[0];
+      let formDataFile = new FormData();
+      formDataFile.set("file", arquivo);
+  
+      return await new ArquivoService().subirArquivo(formDataFile);
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      })
+    }
+  }
+
+  subirFoto = async (vaga) => {
+    try {
+      let vagaService = new VagaService();
+
+      let foto = document.getElementById("fotoVagaUpload").files[0];
+      let formDataFoto = new FormData();
+      formDataFoto.set("foto", foto);
+
+      let id = parseInt(vaga.id);
+
+      await vagaService.uploadFoto(id, formDataFoto);
+    } catch (error) {
+      let errorString = `${error}`;
+      this.setState({
+        message: errorString,
+        severity: "error",
+        open: true
+      })
+    }
+  }
+
   cadastrarVaga = async () => {
     try {
       if (sessionStorage["userId"] == "undefined")
         throw new Error("Você precisa estar logado para fazer está ação");
+      
+      let arquivo = document.getElementById("arquivoVaga").files[0];
+      let foto = document.getElementById("fotoVagaUpload").files[0];
+      if (arquivo != undefined && foto != undefined) {
+        let vaga = await this.subirArquivo();
+        this.subirFoto(vaga.data[0]);
+        return;
+      }
 
       this.getEnderecoVagaFormData()
       this.getVagaFormData()
@@ -60,7 +108,7 @@ export default class VacancyRegister extends React.Component {
       let vagaCadastrada = await vagaService.postVaga(vagaAsJson);
 
       this.uparFoto(vagaCadastrada.data);
-      
+
       this.setState({
         message: "Vaga cadastrada com sucesso",
         severity: "success",
@@ -204,7 +252,7 @@ export default class VacancyRegister extends React.Component {
         <LabelWelcome labelTitle="Detalhes da oportunidade" labelText="Nos ajude a divulgar a sua vaga" />
         <br />
 
-        <div className="container width-100pg height-800p">
+        <div className="container width-100pg height-800p mg-bt-8rem">
           <div className="width-50pg flex relative">
             <Image width="100%" className="childrenImage" height="90%" src={GirlVolunteerImg} />
           </div>
@@ -217,11 +265,11 @@ export default class VacancyRegister extends React.Component {
               <InputLine name="titulo" title="Título da vaga" type="text" placeholder="O que você busca?" />
             </div>
             <div className="mg-t-24 mg-h-16 flex width-100pg">
-              <div className="mg-t-16 width-20rem">
+              <div className="inputPosition">
                 <InputFile id="foto" className="inputFoto" text="Escolher foto" />
               </div>
-              <div className="width-30pg mg-t-24 mg-l-32">
-                <ComboBox name="causa" labelTitle="Causa" content={['Animais', 'Crianças', 'Deficientes', 'Meio-Ambiente', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} />
+              <div className="width-30pg mg-t-24 mg-l-1">
+                <ComboBox name="causa" labelTitle="Causa" content={['Animais', 'Crianças', 'Deficientes', 'Desempregados', 'Imóveis', 'Saúde', 'Lazer', 'Idosos']} />
               </div>
             </div>
             <div className="flex mg-t-24 mg-l-16 mg-r-16">
@@ -260,11 +308,27 @@ export default class VacancyRegister extends React.Component {
                 <ComboBoxStateAndCities cidadeName="cidade" estadoName="estado" />
               </div>
             </div>
-            <div className="flex mg-t-64 mg-l-16 mg-r-16">
+
+            <div className="height-22pg mg-t-4rem mg-t--1px border border-rd-10 bg-color-gray-light width-100pg">
+
+              <div className=" mg-t-16 mg-l-16">
+                <LabelTitleForm title="Upload de Vagas" />
+              </div>
+
+              <div className="flex mg-t-1rem mg-l-1rem">
+                <InputFile id="arquivoVaga" text="Dados da vaga em txt"/>
+                <div id="fileUploadName" className="fileName">Nome do arquivo aqui</div>
+                <InputFile id="fotoVagaUpload" className="inputFoto" text="Foto da vaga" />
+              </div>
+            </div>
+
+            <div className="flex mg-t-2rem mg-l-16 mg-r-16">
               <Button id="btnVoltarOng" variant="contained" href="http://localhost:3000/profile/ong">Voltar</Button>
               <Button id="btnCadastrarOng" onClick={this.cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
             </div>
+
           </span>
+
         </div>
       </React.Fragment>
     );

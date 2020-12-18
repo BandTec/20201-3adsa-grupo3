@@ -1,3 +1,24 @@
+.height-22pg{
+    height: 22%;
+}
+
+.fileName{
+    margin-top: 1rem;
+    width: 40%;
+    text-align: left;
+    align-items: center;
+}
+
+
+#btnCadastrarVagaUp{
+    width: 10rem;
+    font-weight: 600;
+    height: 3rem;
+    font-size: 1.0rem;
+    border-radius: 0.5rem;
+    background: #1975FF;
+}
+
 .width-50pg{
     width: 50%
 }
@@ -77,6 +98,39 @@
 .width-20rem{
     width: 17.5rem;
     margin-top: 1.4rem;
+}
+
+.mg-t-4rem{
+    margin-top: 4rem;
+}
+
+.mg-t-1rem{
+    margin-top: 0.8rem;
+}
+
+.mg-l-1rem{
+    margin-left: 0.8rem;
+}
+
+.mg-t--1px{
+    margin-left: -1px;
+}
+
+.mg-t-2rem{
+    margin-top: 2rem;
+}
+
+.mg-bt-8rem{
+    margin-bottom: 8rem;
+}
+
+.inputPosition{
+    margin-top: 1.6rem;
+    width: 350px;
+}
+
+.mg-l-1{
+    margin-left: -2.5rem;
 }
 
 /* .btnPage{
