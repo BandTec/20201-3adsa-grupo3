@@ -105,31 +105,35 @@ export default class ProfileVolunteer extends React.Component {
 
       let vagasDoUsuario = await usuarioFisicoVagaService.getUsuarioFisicoByIdUsuario(userId);
 
-      let contador = 0;
-      let ufv;
-      do {
-        ufv = vagasDoUsuario.data[contador]
-        contador++;
-      } while (ufv.aprovado != null)
+      try {
+        let contador = 0;
+        let ufv;
+        do {
+          ufv = vagasDoUsuario.data[contador]
+          contador++;
+        } while (ufv.aprovado != null)
 
-      let img = document.getElementById("vacancyImgId");
-      let title = document.getElementById("vacancyTitleId");
-      let description = document.getElementById("vacancyDescriptionId");
-      let aprovado = document.getElementById("vacancyAprovadoId");
-
-      let vagaService = new VagaService();
-      let foto = await vagaService.getFoto(ufv.fkVaga.id);
-      img.src = "data:image/png;base64," + foto.data;
-
-      title.innerText = ufv.fkVaga.titulo;
-      description.innerText = ufv.fkVaga.descricao;
-
-      if (ufv.aprovado == 1)
-        aprovado.innerText = "Aprovado";
-      else if (ufv.aprovado == 0)
-        aprovado.innerText = "Reprovado";
-      else
-        aprovado.innerText = "Em avaliação";
+        let img = document.getElementById("vacancyImgId");
+        let title = document.getElementById("vacancyTitleId");
+        let description = document.getElementById("vacancyDescriptionId");
+        let aprovado = document.getElementById("vacancyAprovadoId");
+  
+        let vagaService = new VagaService();
+        let foto = await vagaService.getFoto(ufv.fkVaga.id);
+        img.src = "data:image/png;base64," + foto.data;
+  
+        title.innerText = ufv.fkVaga.titulo;
+        description.innerText = ufv.fkVaga.descricao;
+  
+        if (ufv.aprovado == 1)
+          aprovado.innerText = "Aprovado";
+        else if (ufv.aprovado == 0)
+          aprovado.innerText = "Reprovado";
+        else
+          aprovado.innerText = "Em avaliação";
+      } catch (error) {
+        /*ignore*/
+      }
     } catch (error) {
       let errorString = `${error}`;
       this.setState({

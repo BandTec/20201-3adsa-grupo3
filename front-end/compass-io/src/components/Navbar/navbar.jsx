@@ -4,47 +4,81 @@ import LogoCompassio from '../../assets/images/logo.jpg';
 import { Icon, InlineIcon } from '@iconify/react';
 import profileIcon from '@iconify/icons-gg/profile';
 
+import AlertCard from '../../components/AlertCard/alert-card';
+import AuthService from '../../services/auth-service';
 
 export default class Navbar extends React.Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            isLogado: false,
-            message: ""
-        }
+            controle: {
+                isLogado: false,
+                message: ""
+            },
+            alerta: {
+                message: '',
+                severity: '',
+                open: false
+            }
+        };
     }
 
-    teste = () => {
-        if (sessionStorage.getItem("userId") == undefined) {
+    renderBotaoEntrar = () => {
+        if (sessionStorage.getItem("userId") == "undefined" || sessionStorage.getItem("userId") == undefined) {
             this.setState({
-                isLogado: false,
-                message: "Entrar"
+                controle: {
+                    isLogado: false,
+                    message: "Entrar"
+                }
             });
         } else {
-            this.state.isLogado = true;
-            this.state.message =
-                <span className="flex txtal-vertical-center">
-                    <Icon className="" icon={profileIcon} style={{ fontSize: '32px' }} />
-                    <div className=" mg-l-8 fs-24p">
-                        Sair
-                    </div>
-                </span>;
+            this.state.controle.isLogado = true;
+            this.state.controle.message = "Sair";
             if (window.location.pathname == "/signin") {
-                this.state.isLogado = false;
-                this.state.message = "Entrar"
+                this.state.controle.isLogado = false;
+                this.state.controle.message = "Entrar"
             }
         }
     }
 
-    componentDidMount() {
-        this.teste();
+    sair = async () => {
+        try {
+            await new AuthService().logout();
+        } catch (error) {
+            let errorString = `${error}`;
+            this.setState({
+                message: errorString,
+                severity: "error",
+                open: true
+            })
+        }
     }
+
+    componentDidMount() {
+        this.renderBotaoEntrar();
+    }
+
+    fecharAlerta = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        this.setState({
+            alerta: {
+                message: '',
+                severity: '',
+                open: false
+            }
+        })
+    };
 
     render() {
 
         return (
             <div className="flex width-100pg mg-v-16">
+
+                <AlertCard open={this.state.alerta.open} message={this.state.alerta.message} severity={this.state.alerta.severity} onClose={this.fecharAlerta} />
+
                 <span className="width-40pg">
                     <a href="/">
                         <img src={LogoCompassio} />
@@ -56,10 +90,19 @@ export default class Navbar extends React.Component {
                     <a className="link relative bold fs-24p" href="/#comoFunciona">Como funciona</a>
                     <a className="link relative bold fs-24p" href="vacancies">Vagas</a>
                     <a disabled id="entrar" href="http://localhost:3000/signin"
-                        className={this.state.isLogado ? "bg-color-yellow height-32p bold mg-t-16" : "link bold fs-24p botao"}>{this.state.message}</a>
+                        className={this.state.isLogado ? "bg-color-yellow height-32p bold mg-t-16" : "link bold fs-24p botao"}>
+
+                        {this.state.controle.message == "Entrar" ? "Entrar" :
+                            <span onClick={this.sair} className="flex txtal-vertical-center">
+                                <Icon className="" icon={profileIcon} style={{ fontSize: '32px' }} />
+                                <div className=" mg-l-8 fs-24p">
+                                    Sair
+                                </div>
+                            </span>
+                        }
+                    </a>
                 </div>
             </div>
         );
     }
 }
-

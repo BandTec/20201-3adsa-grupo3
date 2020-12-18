@@ -34,6 +34,9 @@ export default class VacancyRegister extends React.Component {
 
   cadastrarVaga = async () => {
     try {
+      if (sessionStorage["userId"] == "undefined")
+        throw new Error("Você precisa estar logado para fazer está ação");
+
       this.getEnderecoVagaFormData()
       this.getVagaFormData()
 
@@ -44,9 +47,6 @@ export default class VacancyRegister extends React.Component {
       let formEndereco = document.getElementById("formEnderecoVagaToSubmit");
       const enderecoAsJson = CommomFunctions.convertFormToJson(formEndereco);
       var respEndereco = await enderecoService.postEndereco(enderecoAsJson);
-
-      if (sessionStorage["userId"] == "undefined")
-        throw new Error("Você precisa estar logado para fazer está ação");
 
       let respUsuarioJuridico = await usuarioJuridicoService.getUsuarioJuridicoById(sessionStorage["userId"]);
       if (respUsuarioJuridico == "")
@@ -153,7 +153,7 @@ export default class VacancyRegister extends React.Component {
     try {
       let vagaService = new VagaService();
 
-      let foto = document.getElementById("adicionarFoto").files[0];
+      let foto = document.getElementById("foto").files[0];
       let formDataFoto = new FormData();
       formDataFoto.set("foto", foto);
 
