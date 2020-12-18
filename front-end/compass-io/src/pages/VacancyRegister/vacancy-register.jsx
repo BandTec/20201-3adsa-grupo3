@@ -34,12 +34,25 @@ export default class VacancyRegister extends React.Component {
     open: false
   }
 
+  voltar = () => {
+    let url = window.location.href;
+      var res = url.split('3000');
+      if (res[1] === undefined) {
+        alert('página sem parâmetros.');
+      }
+      var parametros = res[1].split('/');
+      console.log('Parametros encontrados:\n' + parametros);
+      var idUsuario = parametros[1];
+
+      window.location.href = `http://localhost:3000/${idUsuario}/profile/ong/${idUsuario}`;
+  }
+
   subirArquivo = async () => {
     try {
       let arquivo = document.getElementById("arquivoVaga").files[0];
       let formDataFile = new FormData();
       formDataFile.set("file", arquivo);
-  
+
       return await new ArquivoService().subirArquivo(formDataFile);
     } catch (error) {
       let errorString = `${error}`;
@@ -74,15 +87,28 @@ export default class VacancyRegister extends React.Component {
 
   cadastrarVaga = async () => {
     try {
-      if (sessionStorage["userId"] == "undefined")
+      debugger
+      let url = window.location.href;
+      var res = url.split('3000');
+      if (res[1] === undefined) {
+        alert('página sem parâmetros.');
+      }
+      var parametros = res[1].split('/');
+      console.log('Parametros encontrados:\n' + parametros);
+      var idUsuario = parametros[1];
+
+      if (idUsuario == undefined)
         throw new Error("Você precisa estar logado para fazer está ação");
-      
+
+      if (idUsuario % 2 == 0)
+        throw new Error("Você não tem permissão para realizar essa operação");
+
       let arquivo = document.getElementById("arquivoVaga").files[0];
       let foto = document.getElementById("fotoVagaUpload").files[0];
       if (arquivo != undefined && foto != undefined) {
         let vaga = await this.subirArquivo();
         this.subirFoto(vaga.data[0]);
-        return;
+        window.location.href = `http://localhost:3000/${idUsuario}/profile/ong/${idUsuario}`;
       }
 
       this.getEnderecoVagaFormData()
@@ -316,14 +342,14 @@ export default class VacancyRegister extends React.Component {
               </div>
 
               <div className="flex mg-t-1rem mg-l-1rem">
-                <InputFile id="arquivoVaga" text="Dados da vaga em txt"/>
+                <InputFile id="arquivoVaga" text="Dados da vaga em txt" />
                 <div id="fileUploadName" className="fileName">Nome do arquivo aqui</div>
                 <InputFile id="fotoVagaUpload" className="inputFoto" text="Foto da vaga" />
               </div>
             </div>
 
             <div className="flex mg-t-2rem mg-l-16 mg-r-16">
-              <Button id="btnVoltarOng" variant="contained" href="http://localhost:3000/profile/ong">Voltar</Button>
+              <Button id="btnVoltarOng" variant="contained" onClick={this.voltar}>Voltar</Button>
               <Button id="btnCadastrarOng" onClick={this.cadastrarVaga} variant="contained" color="primary">Cadastrar</Button>
             </div>
 

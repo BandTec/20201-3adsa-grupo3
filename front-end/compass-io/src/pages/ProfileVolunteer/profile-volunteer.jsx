@@ -86,7 +86,7 @@ export default class ProfileVolunteer extends React.Component {
       }
       var parametros = res[1].split('/');
       console.log('Parametros encontrados:\n' + parametros);
-      var idUsuario = parametros[1];
+      var idUsuario = parametros[4];
 
       let usuarioFisicoService = new UsuarioFisicoService();
 

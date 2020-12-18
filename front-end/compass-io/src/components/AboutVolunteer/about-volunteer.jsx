@@ -51,7 +51,7 @@ class AboutVolunteer extends React.Component {
         var parametros = res[1].split('/');
         console.log('Parametros encontrados:\n' + parametros);
         var idUsuario;
-        idUsuario = parametros[1];
+        idUsuario = parametros[4];
         let userId = idUsuario;
         let userIdAsInt = parseInt(userId);
 
@@ -72,8 +72,6 @@ class AboutVolunteer extends React.Component {
         }
         this.setState({ ultimasVagas: vagas });
     }
-
-
 
     classes = makeStyles((theme) => ({
         root: {

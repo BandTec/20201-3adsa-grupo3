@@ -58,7 +58,8 @@ export default class ProfileOng extends React.Component {
   renderPerfil = async () => {
     try {
       let usuarioJuridicoService = new UsuarioJuridicoService();
-      const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(this.state.ongRequerida);
+      const id = parseInt(sessionStorage["ong"]);
+      const resposta = await usuarioJuridicoService.getUsuarioJuridicoById(id);
       let perfilJuridicoInfo = resposta.data[0];
       console.log(perfilJuridicoInfo);
 
@@ -138,7 +139,17 @@ export default class ProfileOng extends React.Component {
   }
 
   ClickDirection = () => {
-    window.location.href = "/register";
+    let vagaService = new VagaService();
+    let url = window.location.href;
+    var res = url.split('3000');
+    if (res[1] === undefined) {
+      alert('página sem parâmetros.');
+    }
+    var parametros = res[1].split('/');
+    console.log('Parametros encontrados:\n' + parametros);
+    var idUsuario = parametros[1];
+
+    window.location.href = `http://localhost:3000/${idUsuario}/register/${idUsuario}`;
   }
 
   classes = makeStyles({
@@ -157,7 +168,6 @@ export default class ProfileOng extends React.Component {
   carregarVoluntarios = async () => {
     try {
       let vagaService = new VagaService();
-debugger
       let url = window.location.href;
       var res = url.split('3000');
       if (res[1] === undefined) {
@@ -165,13 +175,13 @@ debugger
       }
       var parametros = res[1].split('/');
       console.log('Parametros encontrados:\n' + parametros);
-      var idUsuario;
-      var ongReq;
-      idUsuario = parametros[1];
+      var idUsuario = parametros[1];
       let userIdAsInt = parseInt(idUsuario);
       let userId = userIdAsInt % 2 != 0 ? userIdAsInt : -1;
-      if (userId == -1)
+      if (userId == -1) {
+        this.setState({ voluntario: false })
         return;
+      }
 
       let vagas = await vagaService.getVagasByFkOng(userId);
 
@@ -293,19 +303,19 @@ debugger
 
   setUrl() {
     let url = window.location.href;
-      var res = url.split('3000');
-      var parametros = res[1].split('/');
-      var idUsuario = new Array();
-      idUsuario = parametros[1];
-      if (idUsuario == undefined || idUsuario == 'undefined') {
-          return -1;
-      } else {
-          return idUsuario;
-      }
+    var res = url.split('3000');
+    var parametros = res[1].split('/');
+    var idUsuario = new Array();
+    idUsuario = parametros[1];
+    if (idUsuario == undefined || idUsuario == 'undefined') {
+      return -1;
+    } else {
+      return idUsuario;
+    }
   }
 
   verOPerfil = () => {
-    let idUser = parseInt(sessionStorage["candidato"]);
+    let idUser = parseInt(sessionStorage["usuarioDaVez"]);
     window.location.href = `http://localhost:3000/${this.setUrl()}/profile/volunteer/${idUser}`;
   }
 

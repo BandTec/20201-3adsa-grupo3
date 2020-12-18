@@ -128,7 +128,7 @@ export default class VacancySpecific extends React.Component {
       if (userId == -1)
         return;
 
-      let vagaId = parseInt(sessionStorage["idVaga"]);
+      let vagaId = parseInt(this.state.vagaRequerida);
       if (vagaId <= 0)
         return;
 
@@ -160,7 +160,7 @@ export default class VacancySpecific extends React.Component {
       if (userId == -1)
         return;
 
-      let vagaId = parseInt(this.state.idUsuarioDaVez);
+      let vagaId = parseInt(this.state.vagaRequerida);
       if (vagaId <= 0)
         return;
 
