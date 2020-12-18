@@ -40,16 +40,27 @@ export default class VacancySpecific extends React.Component {
     console.log('Parametros encontrados:\n' + parametros);
     var idUsuario = new Array();
     idUsuario = parametros[1];
-    this.setState({ idUsuarioDaVez: idUsuario});
+    this.setState({ idUsuarioDaVez: idUsuario });
     var idVaga = new Array();
     idVaga = parametros[3];
-    this.setState({ vagaRequerida: idVaga});
+    this.setState({ vagaRequerida: idVaga });
   }
 
   renderVaga = async () => {
     try {
+      debugger
       let vagaService = new VagaService();
-      const resposta = await vagaService.getVagaById(this.state.vagaRequerida);
+      let url = window.location.href;
+      var res = url.split('3000');
+      if (res[1] === undefined) {
+        alert('página sem parâmetros.');
+      }
+      var parametros = res[1].split('/');
+      console.log('Parametros encontrados:\n' + parametros);
+      var idUsuario = new Array();
+      idUsuario = parametros[3];
+      let inteiro = parseInt(idUsuario);
+      const resposta = await vagaService.getVagaById(inteiro);
       let vagaInfos = resposta.data[0];
       console.log(vagaInfos);
       sessionStorage.setItem("causa", vagaInfos.causa);

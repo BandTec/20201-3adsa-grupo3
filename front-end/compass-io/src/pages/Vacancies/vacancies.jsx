@@ -81,6 +81,7 @@ export default class Vacancies extends React.Component {
   }
 
   renderExibicao = () => {
+    debugger
     let vagasFiltradas = [];
     if (this.state.filtro.causa != null && this.state.filtro.estado != null) {
       {
@@ -119,7 +120,6 @@ export default class Vacancies extends React.Component {
   }
 
   getVagas = async () => {
-    debugger
     let vagaService = new VagaService()
     let vagas = await vagaService.getVagas();
     let vagasComFoto = [];
@@ -305,13 +305,16 @@ export default class Vacancies extends React.Component {
     }));
 
     const handleChange = (event) => {
+      debugger
       this.setState({ causas: { [event.target.name]: event.target.checked } });
       this.setState({
         filtro: {
           estado: this.state.filtro.estado,
           causa: event.target.name
         }
-      });
+      })
+      //this.renderExibicao();
+      console.log(this.state.filtro);
     };
 
     const classesLocation = makeStyles((theme) => ({
@@ -477,23 +480,22 @@ export default class Vacancies extends React.Component {
     }));
 
     const handleChangeLocation = (event) => {
+      debugger
       this.setState({ stateLocation: { [event.target.name]: event.target.checked } });
       this.setState({
         filtro: {
           estado: event.target.name,
           causa: this.state.filtro.causa
         }
-      });
+      })
+      //this.renderExibicao();
+      console.log(this.state.filtro);
     };
 
     function setUrl() {
       let url = window.location.href;
         var res = url.split('3000');
-        if (res[1] === undefined) {
-            alert('página sem parâmetros.');
-        }
         var parametros = res[1].split('/');
-        console.log('Parametros encontrados:\n' + parametros);
         var idUsuario = new Array();
         idUsuario = parametros[1];
         if (idUsuario == undefined || idUsuario == 'undefined') {

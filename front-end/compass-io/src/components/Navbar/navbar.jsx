@@ -25,6 +25,7 @@ export default class Navbar extends React.Component {
     }
 
     renderBotaoEntrar = () => {
+debugger
         if (sessionStorage.getItem("userId") == "undefined" || sessionStorage.getItem("userId") == undefined) {
             this.setState({
                 controle: {
@@ -45,11 +46,7 @@ export default class Navbar extends React.Component {
     setandoUrl = () => {
         let url = window.location.href;
         var res = url.split('3000');
-        if (res[1] === undefined) {
-            alert('página sem parâmetros.');
-        }
         var parametros = res[1].split('/');
-        console.log('Parametros encontrados:\n' + parametros);
         var idUsuario = new Array();
         idUsuario = parametros[1];
         if (idUsuario == undefined || idUsuario == 'undefined') {
@@ -60,6 +57,7 @@ export default class Navbar extends React.Component {
     }
 
     sair = async () => {
+        debugger
         try {
             await new AuthService().logout();
         } catch (error) {
@@ -70,6 +68,8 @@ export default class Navbar extends React.Component {
                 open: true
             })
         }
+        this.setState({ controle: {isLogado: false, message: ""} });
+        window.location.href = "http://localhost:3000/-1";
     }
 
     componentDidMount() {
@@ -89,6 +89,11 @@ export default class Navbar extends React.Component {
         })
     };
 
+    verifica = () => {
+        if (this.state.controle.isLogado == false) {
+            window.location.href = `http://localhost:3000/${this.setandoUrl()}/signin`;
+        }
+    }
     render() {
 
         return (
@@ -106,7 +111,7 @@ export default class Navbar extends React.Component {
                     <a className="link relative bold fs-24p" href={`http://localhost:3000/${this.setandoUrl()}/signup`}>Seja voluntário</a>
                     <a className="link relative bold fs-24p" href={`http://localhost:3000/${this.setandoUrl()}/#comoFunciona`}>Como funciona</a>
                     <a className="link relative bold fs-24p" href={`http://localhost:3000/${this.setandoUrl()}/vacancies`}>Vagas</a>
-                    <a disabled id="entrar" href={`http://localhost:3000/${this.setandoUrl()}/signin`}
+                    <a disabled id="entrar" onClick={this.verifica}
                         className={this.state.isLogado ? "bg-color-yellow height-32p bold mg-t-16" : "link bold fs-24p botao"}>
 
                         {this.state.controle.message == "Entrar" ? "Entrar" :

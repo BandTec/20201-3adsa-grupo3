@@ -110,7 +110,7 @@ class AboutVolunteer extends React.Component {
                     <div className="titleBox">
                         <span><u>Vagas acessadas</u></span>
                     </div>
-                    <div className="filaDeVagas">
+                    <div className="filaDeVagas overflow-y-scroll">
                         <scroll-container className={this.classes.root}>
                             {this.state.ultimasVagas.map(vaga => (
                                 <scroll-page key={vaga.id} alignItems="flex-start">

@@ -16,7 +16,6 @@ export default class CarouselVacancyCause extends React.Component {
   }
 
   loadVagas = async () => {
-    debugger
     let vagaService = new VagaService();
     let url = window.location.href;
     var res = url.split('3000');
