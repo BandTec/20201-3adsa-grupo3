@@ -142,6 +142,7 @@ export default class ProfileOng extends React.Component {
 
   carregarVoluntarios = async () => {
     try {
+      debugger
       let vagaService = new VagaService();
 
       let userIdAsInt = parseInt(sessionStorage["userId"]);
@@ -157,8 +158,11 @@ export default class ProfileOng extends React.Component {
       try {
         do {
           ufv = await usuarioFisicoVagaService.getUsuarioFisicoByIdVaga(vagas.data[contador].id);
+          if (ufv.data[0].aprovado == null) {
+            break;
+          }
           contador++;
-        } while (ufv.aprovado != null)
+        } while (true)
 
         sessionStorage["candidato"] = ufv.data[0].fkUsuarioFisico.id;
         sessionStorage["vaga"] = ufv.data[0].fkVaga.id;
@@ -285,7 +289,7 @@ export default class ProfileOng extends React.Component {
               <CarouselVacancy />
             </div>
           </div>
-          <div className={sessionStorage.getItem("userId") % 2 == 1 ? "ratings" : "display-none"}>
+          <div className={parseInt(sessionStorage.getItem("userId")) % 2 == 1 ? "ratings" : "display-none"}>
             <Rating isOngProfile
               imgVolunteer={ImgVolunteer}
               nameVolunteer="Iago Roani de Lima"

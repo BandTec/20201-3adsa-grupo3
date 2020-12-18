@@ -96,6 +96,7 @@ export default class ProfileVolunteer extends React.Component {
 
   getVagasPleiteadas = async () => {
     try {
+      debugger
       let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
 
       let userIdAsInt = parseInt(sessionStorage["userId"]);

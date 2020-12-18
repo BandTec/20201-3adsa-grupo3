@@ -94,6 +94,7 @@ export default class VacancySpecific extends React.Component {
 
   candidatar = async () => {
     try {
+      debugger
       let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
 
       let userIdAsInt = parseInt(sessionStorage["userId"]);
@@ -125,6 +126,7 @@ export default class VacancySpecific extends React.Component {
 
   favoritar = async () => {
     try {
+      debugger
       let usuarioFisicoVagaService = new UsuarioFisicoVagaService();
 
       let userIdAsInt = parseInt(sessionStorage["userId"]);
