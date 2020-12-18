@@ -14,7 +14,6 @@ class CarouselCard extends React.Component {
     }
     
     redirectToVacancy = () => {
-        debugger
         sessionStorage["idVaga"] = this.props.idVaga;
         window.location.href = "http://localhost:3000/vacancy";
     }
