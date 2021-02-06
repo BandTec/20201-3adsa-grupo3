@@ -6,36 +6,34 @@ import javax.persistence.*;
 public class Endereco {
 
     @Id
-    @Column(name = "id_endereco")
-    private Integer idEndereco;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(nullable = false)
     private String logradouro;
 
-    @Column(nullable = false, name = "numero_endereco")
+    @Column(name = "numero_endereco")
     private Integer numeroEndereco;
 
-    @Column(nullable = false)
-    private String complemento;
-
-    @Column(name = "CEP", length = 9, nullable = false)
+    @Column(name = "CEP", length = 9)
     private String cep;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 45)
     private String bairro;
 
-    @Column(length = 2, nullable = false)
+    @Column(length = 2)
     private String estado;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 45)
     private String cidade;
 
-    public Integer getIdEndereco() {
-        return idEndereco;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdEndereco(Integer idEndereco) {
-        this.idEndereco = idEndereco;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLogradouro() {
@@ -52,14 +50,6 @@ public class Endereco {
 
     public void setNumeroEndereco(Integer numeroEndereco) {
         this.numeroEndereco = numeroEndereco;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
     }
 
     public String getCep() {

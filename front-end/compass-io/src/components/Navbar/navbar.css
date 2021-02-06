@@ -1,16 +1,21 @@
 .navbar {
     display: flex;
     width: 100%;
+    max-width: 1366px;
     height: 5rem;
     margin-bottom: 1rem;
     background-color: white;
+}
+
+.height-10pg{
+    height: 10%
 }
 
 .logo {
     /* background-color: blue; */
     width: 30rem;
     height: auto;
-
+    /* margin-top: 1.4rem; */
 }
 
 .botoes {
@@ -19,25 +24,32 @@
     width: 50rem;
     height: auto;
     margin-left: auto;
+    /* margin-top: 1rem; */
 }
 
 .link {
+    cursor: pointer;
     color: #0084FE;
-    position: relative;
+    /* position: relative; */
     margin: auto;
     font-family: Tahoma, sans-serif;
-    font-weight: bold;
-    font-size: 1.5rem;
+    /* font-weight: bold; */
+    /* font-size: 1.5rem; */
+}
+
+.bg-color-yellow{
+    background-color: #FFB219
 }
 
 .botao {
     background-size: auto;
     background-color: #FFB219;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 0.3rem;
 }
+
 
 #entrar {
     color: white;
@@ -63,4 +75,66 @@ a{
     padding: 0.5rem 1rem 0.5rem 1rem;
     border-radius: 0.3rem;
     transition: 0.5s;
+}
+
+label[for="btnMenu"]{
+    display: none;
+}
+
+#btnMenu{
+    display: none;
+}
+
+@media (max-width: 540px){
+
+    .menuResponsivo{
+        display: block;
+    }
+
+    label[for="btnMenu"]{
+        display: block;
+        cursor: pointer;
+        color: #0084FE;
+        margin-top: 1rem;
+        margin-left: 35px;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 35px;
+        width: 50px;
+        height: 50px;
+    }
+
+    label[for="btnMenu"]:hover{
+        font-size: 37px;
+    }
+
+    #btnMenu:checked ~ .botoes{
+        margin-left: -85%;
+    }
+
+    .botoes{
+        text-align: center;
+        /* margin-top: 0.5rem; */
+        margin-left: -400%;
+        transition: all .4s;
+        width: 100%;
+        display: flex;
+    }
+
+    .link{
+        margin-top: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .navbar{
+        height: 150px;
+        float: none;
+        display: flex;
+    }
+
+
+    .logo{
+        height: 100px;
+    }
+
 }

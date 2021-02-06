@@ -2,8 +2,12 @@ import React from 'react';
 import { Icon, InlineIcon } from '@iconify/react';
 import phoneCallFill from '@iconify/icons-eva/phone-call-fill';
 import mailOutlined from '@iconify/icons-ant-design/mail-outlined';
-import './footer.css';
+import locationIcon from '@iconify/icons-carbon/location';
+import LogoCompassio from '../../assets/images/compassio-logo-footer-img.png'
+import facebookFilled from '@iconify/icons-ant-design/facebook-filled';
+import instagramOutlined from '@iconify/icons-ant-design/instagram-outlined';
 
+import './footer.css';
 
 function Footer() {
     return (
@@ -40,39 +44,58 @@ function Footer() {
         <div>
 
             <div className="footerInfo">
+
                 <div id="footerInfoContainer">
-                    <div className="footerInfoText">
-                        <span className="footerInfoTitle    ">Nos conheça</span>
-                        <a className="footerInfoContent">Quem somos</a>
-                        <a className="footerInfoContent">Nossos objetivos</a>
-                        <a className="footerInfoContent">Seja volutário</a>
-                        <a className="footerInfoContent">Projetos</a>
-                        <a className="footerInfoContent">Notícias</a>
+
+                    <div className="logoFooter">
+                        <img src={LogoCompassio}/>
+                        <div className="positionIcons">
+                            <div className="footerIconSocialMidia">
+                                <Icon icon={facebookFilled} style={{
+                                    fontSize: '35px',
+                                    borderRadius: "0.5rem"
+                                    }} />
+                                <span className="footerInstaFace">Compass.io</span>
+                            </div>
+                            <div className="footerIconSocialMidia">
+                                <Icon icon={instagramOutlined} style={{
+                                    fontSize: '35px',
+                                    borderRadius: "0.5rem"
+                                    }} />
+                                <span className="footerInstaFace">@Compass.io</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="footerInfoText">
+                        <span className="footerInfoTitle">Navegue pelo site</span>
+                        <a href="/signUp" className="footerInfoContent">Seja voluntario</a>
+                        <a href="/#comoFunciona" className="footerInfoContent">Como funciona</a>
+                        <a href="/vacancies" className="footerInfoContent">Vagas</a>
+                    </div>
 
+                    <div className="footerInfoText">
                         <span className="footerInfoTitle">Contato</span>
-
-                        <div className="footerContact">
-
-                            <div className="footerIconText"><Icon icon={phoneCallFill} style={{ fontSize: '29px' }} /><div className="footerEmailPhone">(11) 5555-0000</div></div>
-                            <div className="footerIconText"><Icon icon={mailOutlined} style={{ fontSize: '29px' }} /><div className="footerEmailPhone">compass.io@gmail.com</div></div>
+                        <div className="footerIconText">
+                                <Icon icon={phoneCallFill} style={{ fontSize: '29px' }} />
+                                <div className="footerEmailPhone">(11) 5555-0000</div>
+                            </div>
+                        <div className="footerIconText">
+                                <Icon icon={mailOutlined} style={{ fontSize: '29px' }} />
+                                <div className="footerEmailPhone">contato.compass.io@gmail.com</div>
                         </div>
 
-                    </div>
-
-                    <div className="footerInfoText">
-                        <span className="footerInfoTitle">Localização</span>
-
-                        <div className="footerAddress">Rua Haddock Lobo - Cerqueira César, <br />São Paulo - SP</div>
+                        <div className="footerIconText">
+                            <Icon icon={locationIcon} style={{ fontSize: '35px' }} />
+                            <div>Rua Haddock Lobo - Cerqueira César, <br />São Paulo - SP</div>
+                        </div>
 
                     </div>
 
                 </div>
             </div>
 
-            <div className="footerCopy"><span id="footerCopyText">Copyright 2020 Compass.io. Todos os direitos reservados.</span></div>
+            <div className="footerCopy"><span id="footerCopyText">Copyright 2020 <b>Compass.io</b>. Todos os direitos reservados.</span></div>
 
         </div>
 

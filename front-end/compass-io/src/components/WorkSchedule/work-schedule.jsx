@@ -1,22 +1,22 @@
 import React from 'react';
 import { Icon, InlineIcon } from '@iconify/react';
-import calendarOutlined from '@iconify/icons-ant-design/calendar-outlined';
-import clockCircleOutlined from '@iconify/icons-ant-design/clock-circle-outlined';
+import bxCalendarX from '@iconify/icons-bx/bx-calendar-x';
+import bxCalendarCheck from '@iconify/icons-bx/bx-calendar-check';
 import locationIcon from '@iconify/icons-carbon/location';
 import './work-schedule.css';
 
 function WorkSchedule(props) {
     return (
-       <section className="workSchedule">
+       <section name={props.name} className="workSchedule">
            <div className="grayPhrase">Informações a respeito do horário de trabalho</div>
            <div className="infoWorkSchedule">
-               <Icon icon={calendarOutlined} style={{fontSize: '48px'}} />
+               <Icon icon={bxCalendarCheck} style={{fontSize: '48px'}} />
                <div className="boldText">
                     { props.schedule }
                 </div>            
             </div>
            <div className="infoWorkSchedule">
-                <Icon icon={clockCircleOutlined} style={{fontSize: '48px'}} />
+                <Icon icon={bxCalendarX} style={{fontSize: '48px'}} />
                 <div className="boldText">
                     { props.hour }
                 </div>

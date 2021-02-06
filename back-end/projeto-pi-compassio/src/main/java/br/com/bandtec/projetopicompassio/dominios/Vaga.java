@@ -1,7 +1,5 @@
 package br.com.bandtec.projetopicompassio.dominios;
 
-import br.com.bandtec.projetopicompassio.dto.VagaDTO;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,18 +7,18 @@ import java.util.Date;
 public class Vaga {
 
     @Id
-    @Column(name = "id_vaga")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idVaga;
+    private Integer id;
 
     @Column(length = 256, nullable = false)
     private String titulo;
 
-    @Column(length = 256, name = "descricao_vaga")
-    private String descricaoVaga;
-
     @Column(length = 50)
     private String causa;
+
+    @Column(length = 256, name = "descricao")
+    private String descricao;
 
     @Column(nullable = false, name = "data_inicio")
     @Temporal(value = TemporalType.DATE)
@@ -30,17 +28,8 @@ public class Vaga {
     @Temporal(value = TemporalType.DATE)
     private Date dataFim;
 
-    @Column(length = 256, name = "descricao_completa")
-    private String descricaoCompleta;
-
-    @Column(length = 100, name = "area_atuacao")
-    private String areaAtuacao;
-
-    @Column(length = 256, name = "descricao_area")
-    private String descricaoArea;
-
-    @Column(length = 256, name = "descricao_requisitos")
-    private String descricaoRequisitos;
+    @Column(length = 255)
+    private String foto;
 
     @OneToOne
     @JoinColumn(name = "fk_endereco")
@@ -50,16 +39,14 @@ public class Vaga {
     @JoinColumn(nullable = false, name = "fk_usuario_juridico")
     private UsuarioJuridico fkUsuarioJuridico;
 
-    public Vaga() {
+    public Vaga() { }
 
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getIdVaga() {
-        return idVaga;
-    }
-
-    public void setIdVaga(Integer idVaga) {
-        this.idVaga = idVaga;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -70,12 +57,12 @@ public class Vaga {
         this.titulo = titulo;
     }
 
-    public String getDescricaoVaga() {
-        return descricaoVaga;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricaoVaga(String descricaoVaga) {
-        this.descricaoVaga = descricaoVaga;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getCausa() {
@@ -102,36 +89,12 @@ public class Vaga {
         this.dataFim = dataFim;
     }
 
-    public String getDescricaoCompleta() {
-        return descricaoCompleta;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setDescricaoCompleta(String descricaoCompleta) {
-        this.descricaoCompleta = descricaoCompleta;
-    }
-
-    public String getAreaAtuacao() {
-        return areaAtuacao;
-    }
-
-    public void setAreaAtuacao(String areaAtuacao) {
-        this.areaAtuacao = areaAtuacao;
-    }
-
-    public String getDescricaoArea() {
-        return descricaoArea;
-    }
-
-    public void setDescricaoArea(String descricaoArea) {
-        this.descricaoArea = descricaoArea;
-    }
-
-    public String getDescricaoRequisitos() {
-        return descricaoRequisitos;
-    }
-
-    public void setDescricaoRequisitos(String descricaoRequisitos) {
-        this.descricaoRequisitos = descricaoRequisitos;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public Endereco getFkEndereco() {

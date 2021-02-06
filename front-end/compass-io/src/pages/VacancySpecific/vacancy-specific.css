@@ -9,8 +9,21 @@
     font-weight: 500
 }
 
-.menuOptions{
-    margin: auto 15rem auto -1rem;
+.border-t{
+    border-top: 1px solid #6A6A6A
+}
+
+.border-v{
+    border-top: 2px solid #6a6a6a;
+    border-bottom: 2px solid #6A6A6A;
+}
+
+.mg-v-auto{
+    margin-top: auto;
+    margin-bottom: auto
+}
+
+.font-color-gray-light{
     color: #6a6a6a
 }
 
@@ -18,16 +31,20 @@
     color: #000;
     transition: 0.5s;
     text-decoration: underline;
-    text-decoration-color: #1975FF
+    text-decoration-color: #1975FF;
 }
 
 h1{
     font-size: 2rem
 }
 
-#aboutVacancy{
+/* #aboutVacancy{
     width: 60%;
     margin-bottom: 1rem;
+} */
+
+.width-70pg{
+    width: 70%
 }
 
 #aboutOng{
@@ -53,10 +70,11 @@ h1{
 .vacancyCarousel{
     border: 1px solid black;
     border-radius: 10px;
-    height: 42rem
+    height: 42rem;
+    margin-bottom: 3rem;
 }
 
 .vacancyCarousel > h1{
     margin-left: 1rem;
-    background-color: #FCFCFC
+    background-color: #FCFCFC;
 }

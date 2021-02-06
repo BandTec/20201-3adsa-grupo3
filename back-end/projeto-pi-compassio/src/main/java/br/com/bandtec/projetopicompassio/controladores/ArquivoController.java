@@ -1,6 +1,7 @@
 package br.com.bandtec.projetopicompassio.controladores;
 
 import br.com.bandtec.projetopicompassio.arquivos.*;
+import br.com.bandtec.projetopicompassio.dominios.Endereco;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioFisicoVaga;
 import br.com.bandtec.projetopicompassio.dominios.UsuarioJuridico;
 import br.com.bandtec.projetopicompassio.dominios.Vaga;
@@ -36,6 +37,7 @@ public class ArquivoController {
     private UsuarioFisicoVagaRepository voluntarioDaVagaRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+
     @Autowired
     private VagaMapper vagaMapper;
     @Autowired
@@ -52,14 +54,15 @@ public class ArquivoController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity importarArquivo(@RequestParam("file") MultipartFile arquivo) throws Exception {
         IArquivo arquivoImportado = ArquivoAdapter.importar(arquivo);
+        List<Vaga> v;
         if (arquivoImportado instanceof Arquivo01)
-            convertAndInsertOnDatabaseFromObjectFile(arquivoImportado.getObject());
+            v = convertAndInsertOnDatabaseFromObjectFile(arquivoImportado.getObject());
         else
             return ResponseEntity.badRequest().body("Arquivo inválido! O único modelo de arquivo aceito é o 'Arquivo01'");
-        return ResponseEntity.ok(arquivoImportado.getObject());
+        return ResponseEntity.ok(v);
     }
 
-    private void convertAndInsertOnDatabaseFromObjectFile(Object object) throws Exception {
+    private List<Vaga> convertAndInsertOnDatabaseFromObjectFile(Object object) throws Exception {
         try {
             VagasDeUmaOngDTO vagasDeUmaOngDTO = (VagasDeUmaOngDTO)object;
             UsuarioJuridico ong = usuarioJuridicoRepository.findUsuarioJuridicoByNomeOng(vagasDeUmaOngDTO.getNomeDaOng());
@@ -67,9 +70,21 @@ public class ArquivoController {
             for (VagaDTO vagaDTO : vagasDeUmaOngDTO.getVagas().getAll()) {
                 Vaga vaga = vagaMapper.toVaga(vagaDTO);
                 vaga.setFkUsuarioJuridico(ong);
+
+                Endereco end = new Endereco();
+                end.setLogradouro(vagaDTO.getLogradouro());
+                end.setNumeroEndereco(vagaDTO.getNumeroEndereco());
+                end.setCep(vagaDTO.getCep());
+                end.setCidade(vagaDTO.getCidade());
+                end.setBairro(vagaDTO.getBairro());
+                end.setEstado(vagaDTO.getEstado());
+                Endereco endCadastrado = enderecoRepository.save(end);
+                vaga.setFkEndereco(endCadastrado);
+
                 vagas.add(vaga);
             }
-            vagaRepository.saveAll(vagas);
+            List<Vaga> v = vagaRepository.saveAll(vagas);
+            return v;
         } catch (Exception ex) {
             throw new Exception("Objeto de arquivo inválido", ex);
         }

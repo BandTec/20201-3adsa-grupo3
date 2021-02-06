@@ -1,7 +1,7 @@
-.containerProfileOng{
+/* .containerProfileOng{
     margin-top: 1rem;
     margin-bottom: 1rem;
-}
+} */
 
 .btnCadastrar {
     width: 15%;
@@ -10,6 +10,52 @@
     font-weight: 600;
   }
 
+.alg-itens{
+    align-items: center;
+}
+
+.width-45pg{
+    width: 45%;
+}
+
 .justcon-sb{
     justify-content: space-between;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.width-75pg{
+    width: 75%
+}
+
+.width-95pg{
+    width: 95%
+}
+
+#inputFile{
+    cursor: pointer;
+    width: 1rem;
+    height: 2rem;
+}
+
+#editarFoto{
+    margin-left: 1rem;
+}
+
+.btnPhoto{
+    margin-left: 0.5rem;
+    width: 100pg;
+}
+
+.btnUpload{
+    margin-top: 0.65rem;
+    height: 2.4rem;
+    width: 50rem;
+    color: #dfe0e2;
 }

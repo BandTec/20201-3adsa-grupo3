@@ -42,6 +42,22 @@
     display: none;
 }
 
-.display-block{
-    
+.btnDoar{
+    width: 25%;
+    margin-right: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    border: 2.5px solid #1975FF;
+    text-align: center;
+    color: #1975FF;
+    font-weight: 600;
+    font-size: 14px;
+    position: relative;
+    left: 33%;
+}
+
+.btnDoar:hover{
+    transition-duration: .3s;
+    background-color: #FFB219;
 }
