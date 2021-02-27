@@ -1,7 +1,9 @@
 package br.com.bandtec.projetopicompassio.utils;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Multipart;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Base64;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FotoHandler {
@@ -63,6 +66,51 @@ public class FotoHandler {
             throw new IOException("Erro na leitura do arquivo");
         } catch (Exception ex) {
             throw new Exception("Erro ao tentar exportar foto");
+        }
+    }
+
+    public static byte[] validateAndGetBytesFromFile(MultipartFile arquivo) throws Exception {
+        try {
+            if (arquivo.isEmpty())
+                throw new IllegalArgumentException();
+
+            String fileMimeType = arquivo.getContentType();
+            String tipoDeArquivo = fileMimeType.substring(fileMimeType.indexOf('/') + 1);
+            if (!tipoDeArquivo.equals("png") &&
+                    !tipoDeArquivo.equals("jpeg") &&
+                    !tipoDeArquivo.equals("jpg")) {
+                throw new IllegalArgumentException();
+            }
+            else {
+                byte[] conteudo;
+                try {
+                    return arquivo.getBytes();
+                } catch (IOException ioEx){
+                    throw new IllegalArgumentException();
+                }
+            }
+        } catch (IllegalArgumentException ilEx) {
+            throw new IllegalArgumentException("Arquivo inválido");
+        } catch (Exception ex){
+            throw new Exception("Erro ao tentar importar foto");
+        }
+    }
+
+    public static byte[] convertToBase64(MultipartFile arquivo) throws Exception {
+        try {
+            byte[] conteudo = validateAndGetBytesFromFile(arquivo);
+            return Base64.getEncoder().encode(conteudo);
+        } catch (Exception ex){
+            throw ex;
+        }
+    }
+
+    public static String convertToBase64String(MultipartFile arquivo) throws Exception {
+        try {
+            byte[] conteudo = validateAndGetBytesFromFile(arquivo);
+            return Base64.getEncoder().encodeToString(conteudo);
+        } catch (Exception ex){
+            throw ex;
         }
     }
 }
