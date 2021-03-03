@@ -4,8 +4,11 @@ import br.com.bandtec.projetopicompassio.dominios.Publicacao;
 import br.com.bandtec.projetopicompassio.repositorios.PublicacaoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioFisicoRepository;
 import br.com.bandtec.projetopicompassio.repositorios.UsuarioJuridicoRepository;
+import br.com.bandtec.projetopicompassio.services.ImgurClient;
 import br.com.bandtec.projetopicompassio.utils.FotoHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 @RestController
 @RequestMapping("/feed")
@@ -100,8 +104,14 @@ public class FeedController {
         }
     }
 
-    @PostMapping(value = "/foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity uploadFoto(@RequestParam Integer idPublicacao, @RequestBody MultipartFile foto)  {
+    @Autowired
+    private ImgurClient imgurClient;
+
+    @Value("${imgur.client-id}")
+    private String clientId;
+
+    @PostMapping(value = "/post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity uploadFoto(@RequestParam Integer idPublicacao, @RequestBody MultipartFile imagem)  {
         try {
             Publicacao publicacao = null;
             Optional<Publicacao> optionalPublicacao = publicacaoRepository.findById(idPublicacao);
@@ -110,16 +120,23 @@ public class FeedController {
             else
                 throw new IllegalArgumentException("ID de publicação inválido");
 
-            String imageAsBase64 = FotoHandler.convertToBase64String(foto);
-            publicacao.setImagem(imageAsBase64);
+            String response = imgurClient.postImage(imagem.getBytes(), "Client-ID "+clientId);
+            Map<String, Object> jsonResponse = JsonParserFactory.getJsonParser().parseMap(response);
+
+            Integer responseStatus = (Integer)jsonResponse.get("status");
+            if (!responseStatus.equals(200))
+                return ResponseEntity.status(responseStatus).body("Error on trying to save image");
+
+            Map<String, Object> responseData = (Map<String, Object>)jsonResponse.get("data");
+            String link = (String)responseData.get("link");
+
+            publicacao.setImagem(link);
             publicacaoRepository.save(publicacao);
 
             return ResponseEntity.ok().build();
         } catch (IllegalArgumentException ilEx) {
             return ResponseEntity.badRequest().body(ilEx.getMessage());
-        } catch (IOException ioEx) {
-            return ResponseEntity.status(500).body(ioEx.getMessage());
-        } catch (Exception ex){
+        } catch (Exception ex) {
             return ResponseEntity.status(500).body(ex.getMessage());
         }
     }
