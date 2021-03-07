@@ -31,8 +31,8 @@ public class UsuarioFisicoController {
     @Autowired
     private UsuarioFisicoRepository usuarioRepository;
 
-    @Autowired
-    private JavaMailSender mailSender;
+    //@Autowired
+    //private JavaMailSender mailSender;
 
     private FilaObj<UsuarioFisico> usuariosPendentes = new FilaObj<>(20);
     private List<UsuarioFisico> usuariosNovos = new ArrayList();
@@ -153,7 +153,8 @@ public class UsuarioFisicoController {
             UsuarioFisico novoUsuario = usuariosPendentes.poll();
             if (novoUsuario != null) {
 
-                MimeMessage mimeMessage = mailSender.createMimeMessage();
+                //MimeMessage mimeMessage = mailSender.createMimeMessage();
+                MimeMessage mimeMessage = null;
 
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
                 helper.setSubject("Confirmação de cadastro");
@@ -166,7 +167,7 @@ public class UsuarioFisicoController {
                         "<a href='//google.com'>Nosso site</a></div>", true);
                 helper.setTo(novoUsuario.getEmail());
 
-                mailSender.send(mimeMessage);
+                //mailSender.send(mimeMessage);
                 usuariosNovos.add(novoUsuario);
                 return ResponseEntity.ok().build();
             }

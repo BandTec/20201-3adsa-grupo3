@@ -35,8 +35,8 @@ public class UsuarioJuridicoController {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    @Autowired
-    private JavaMailSender mailSender;
+    //@Autowired
+    //private JavaMailSender mailSender;
 
     private FilaObj<UsuarioJuridico> usuariosPendentes = new FilaObj<>(20);
     private List<UsuarioJuridico> usuariosNovos = new ArrayList();
@@ -154,7 +154,8 @@ public class UsuarioJuridicoController {
             UsuarioJuridico novoUsuario = usuariosPendentes.poll();
             if (novoUsuario != null) {
 
-                MimeMessage mimeMessage = mailSender.createMimeMessage();
+                MimeMessage mimeMessage = null;
+                //MimeMessage mimeMessage = mailSender.createMimeMessage();
 
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
                 helper.setSubject("Confirmação de cadastro");
@@ -167,7 +168,7 @@ public class UsuarioJuridicoController {
                         "<a href='//google.com'>Nosso site</a></div>", true);
                 helper.setTo(novoUsuario.getEmail());
 
-                mailSender.send(mimeMessage);
+                //mailSender.send(mimeMessage);
                 usuariosNovos.add(novoUsuario);
                 return ResponseEntity.ok().build();
             }
